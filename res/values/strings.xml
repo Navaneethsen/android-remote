@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="app_name">iCeeNee</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="menu_config">Options</string>
+	<string name="menu_devices">Device List</string>
+    <string name="menu_songs">Song Book</string>
+	<string name="menu_control">Home</string>
+    
+    <string name="title_activity_main">iCeeNee</string>
+    <string name="title_activity_device">Device List</string>
+    
+    <string name="title_activity_song">Song Book</string><string name="title_activity_option">Configuration</string><string name="button_ok">OK</string>
+    
+   
+</resources>

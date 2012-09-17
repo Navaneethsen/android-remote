@@ -1,4 +1,5 @@
 android-remote
 ==============
 
-android app for internal using
+An internal app to remote control an embedded Linux system
+
