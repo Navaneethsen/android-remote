@@ -1,9 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menu_config"
         android:title="@string/menu_config"
-      	android:orderInCategory="100"/>
-    <item android:id="@+id/menu_song" android:title="@string/menu_songs" >
+      	android:orderInCategory="100" android:icon="@drawable/glyphicons_019_cogwheel"/>
+    <item android:id="@+id/menu_song" android:title="@string/menu_songs" android:icon="@drawable/glyphicons_169_albums">
     </item>
-    <item android:title="@string/menu_devices" android:id="@+id/menu_device"></item>
-    <item android:id="@+id/menu_remote" android:title="@string/menu_control"></item>
+    <item android:title="@string/menu_devices" android:id="@+id/menu_device" android:icon="@drawable/glyphicons_327_sampler"></item>
+    <item android:id="@+id/menu_remote" android:title="@string/menu_control" android:icon="@drawable/glyphicons_139_phone"></item>
+    <item android:id="@+id/menu_about" android:title="@string/menu_about" android:icon="@drawable/glyphicons_195_circle_info"></item>
 </menu>

@@ -1,14 +1,100 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:columnCount="1" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/cmd_power"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/glyphicons_063_power" />
+
+    <ImageButton
+        android:id="@+id/cmd_mute"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@id/cmd_power"
+        android:src="@drawable/glyphicons_063_power" />
+
+    <ImageButton
+        android:id="@+id/cmd_eject"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/glyphicons_063_power" />
+
+    <ImageButton
+        android:id="@+id/cmd_album"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_toLeftOf="@+id/cmd_eject"
+        android:src="@drawable/glyphicons_063_power" />
+
+    <EditText
+        android:id="@+id/cmd_keyboard"
+        android:layout_width="160dp"
+        android:layout_height="36dp"
+        android:layout_alignTop="@id/cmd_album"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".MainActivity" />
+        android:ems="10" >
 
+        <requestFocus  />
+    </EditText>
+    
+    
+    <!--  Player button -->
+
+    
+    <!-- Colour button -->
+    <ImageButton
+        style="@style/remoteButton"
+        android:id="@+id/cmd_red"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"   
+        android:src="@drawable/ceenee_11_red" />
+
+    <ImageButton
+        style="@style/remoteButton"
+        android:id="@+id/cmd_green"
+        android:layout_toRightOf="@id/cmd_red"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ceenee_14_green" />
+
+    <ImageButton
+        style="@style/remoteButton"
+        android:id="@+id/cmd_yellow"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/cmd_green"
+        android:src="@drawable/ceenee_13_yellow" />
+
+    <ImageButton
+        style="@style/remoteButton"
+        android:id="@+id/cmd_blue"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/cmd_yellow"
+        android:src="@drawable/ceenee_12_blue" />
+
+    <ImageButton
+        android:id="@+id/cmd_font"
+        style="@style/remoteButton"
+        android:layout_above="@+id/cmd_red"
+        android:layout_alignLeft="@+id/cmd_power"
+        android:layout_marginBottom="19dp"
+        android:src="@drawable/glyphicons_100_font" />
+          
 </RelativeLayout>
