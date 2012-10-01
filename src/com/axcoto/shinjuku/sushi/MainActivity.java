@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends RootActivity {
-
+	public String remote;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,4 +22,11 @@ public class MainActivity extends RootActivity {
 //        }});
     }
 
+    public void setRemote(String remote) {
+    	this.remote = remote;
+    }
+    
+    public boolean execute(String command) {
+    	return true;
+    }
 }

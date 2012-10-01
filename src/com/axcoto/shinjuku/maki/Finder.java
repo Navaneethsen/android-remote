@@ -15,7 +15,25 @@ public class Finder {
 	protected Integer _from;
 	protected Integer _to;
 	protected String _maskIp;
+	protected static Finder instance = null;
+	
+	public void setFrom(int from) {
+		this._from = from;
+	}
+	
 
+	public void setTo(int from) {
+		this._from = from;
+	}
+	
+	
+	public static Finder singleton() {
+		return Finder.instance;
+	}
+	public Finder() {
+		
+	}
+	
 	public void execute() {
 //		int startPortRange = 0;
 //		int stopPortRange = 0;
@@ -57,6 +75,23 @@ public class Finder {
 		}
 		
 	}
+	
+	public boolean isPortOpen(String ip, int port) {
+		int timeout = 500;
+		boolean found = false;
+		try {
+			Socket socket = new Socket();
+			socket.connect(new InetSocketAddress(ip, port), timeout);
+	        socket.close();
+			Log.e("MAKI::FINDER", "Horay. We found out the board at: " + ip);				
+			found = true;
+		} catch (IOException e) {
+			Log.e("MAKI::FINDER", "Badly. No board at " + ip);			
+		} catch (Exception e) {
+			Log.e("MAKI::FINDER", "Horay. No board at " + ip);		
+		}
+		return found;
+	}
 
 	public String myIp() {
 		String ip = "";
@@ -73,6 +108,11 @@ public class Finder {
 	    } catch (SocketException ex) {
 	        Log.e("MAKI: FIND IP", ex.toString());
 	    }
+		return ip;
+	}
+	
+	public String maskIp() {
+		String ip = myIp();
 		return ip;
 	}
 	
