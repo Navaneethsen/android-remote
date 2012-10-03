@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/device_padding_top"
         android:onClick="scanDevice"
         android:text="@string/scan" />
 

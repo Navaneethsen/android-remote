@@ -14,7 +14,8 @@ public class Finder {
 
 	protected Integer _from;
 	protected Integer _to;
-	protected String _maskIp;
+	protected String _maskIpAddress;
+	protected String _ipAddress;
 	protected static Finder instance = null;
 	
 	public void setFrom(int from) {
@@ -26,12 +27,19 @@ public class Finder {
 		this._from = from;
 	}
 	
-	
-	public static Finder singleton() {
-		return Finder.instance;
+	public static Finder getInstance() {
+		if (instance == null) {
+            synchronized (Finder.class) {
+                    if (instance == null) {
+                            instance = new Finder();
+                    }
+            }
+		}
+		return instance;		
 	}
+	
 	public Finder() {
-		
+		//this.resolve();
 	}
 	
 	public void execute() {
@@ -53,23 +61,23 @@ public class Finder {
 //			System.out.println("Port not in use: " + i);
 //		}
 		
-		this._from = 179;
-		this._to = 200;
-		this._maskIp = "192.168.0.";
-		String myIp=this.myIp();
+		this._from = 148;
+		this._to = 152;
+		this._maskIpAddress = "192.168.0.";
+		String myIp= _ipAddress;
 		Log.e("MAKI:", "My IP is" + myIp);
 		
 		for (int i = _from; i<=_to; i++) {
 			try {
 				Socket socket = new Socket();
-				socket.connect(new InetSocketAddress(_maskIp + i, 80), 10000);
+				socket.connect(new InetSocketAddress(_maskIpAddress + i, Remote.TCP_PORT), 10000);
 		        socket.close();
-				Log.e("MAKI::FINDER", "Horay. We found out the board at: " + _maskIp +  i);				
+				Log.e("MAKI::FINDER", "Horay. We found out the board at: " + _maskIpAddress +  i);				
 				socket.close();
 			} catch (IOException e) {
-				Log.e("MAKI::FINDER", "Badly. No board at " + _maskIp +  i);				
+				Log.e("MAKI::FINDER", "Badly. No board at " + _maskIpAddress +  i);				
 			} catch (Exception e) {
-				Log.e("MAKI::FINDER", "Horay. No board at " + _maskIp +  i);
+				Log.e("MAKI::FINDER", "Horay. No board at " + _maskIpAddress +  i);
 				
 			}
 		}
@@ -92,28 +100,31 @@ public class Finder {
 		}
 		return found;
 	}
-
-	public String myIp() {
-		String ip = "";
+	
+	/*
+	 * Get phone ip and mask address
+	 * @return void
+	 */
+	public void resolve() {
 		try {
 	        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
 	            NetworkInterface intf = en.nextElement();
 	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
 	                InetAddress inetAddress = enumIpAddr.nextElement();
 	                if (!inetAddress.isLoopbackAddress()) {
-	                   ip = inetAddress.getHostAddress().toString();
+	                   _ipAddress = inetAddress.getHostAddress().toString();
+	                   String[] part = _ipAddress.split(".");
+	                   _maskIpAddress = part[0] + "." + part[1] + "." + part[2];
 	                }
 	            }
 	        }
 	    } catch (SocketException ex) {
 	        Log.e("MAKI: FIND IP", ex.toString());
 	    }
-		return ip;
 	}
 	
-	public String maskIp() {
-		String ip = myIp();
-		return ip;
+	public String getMaskIpAddress() {
+		return _maskIpAddress;
 	}
 	
 

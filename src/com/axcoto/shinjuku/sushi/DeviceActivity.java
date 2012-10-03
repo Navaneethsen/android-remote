@@ -1,8 +1,6 @@
 package com.axcoto.shinjuku.sushi;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.util.ArrayList;
 
 import android.app.Dialog;
@@ -18,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.axcoto.shinjuku.maki.Finder;
+import com.axcoto.shinjuku.maki.Remote;
 
 public class DeviceActivity extends RootActivity {
 
@@ -42,37 +41,55 @@ public class DeviceActivity extends RootActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Log.e("DEVICE: CLICKED", "Click ListItem Number " + position);
-				Toast.makeText(getApplicationContext(),
+				DeviceItem d = deviceAdapter.getItem(position);
+				Log.e("SUSHI::DEVICE", "About to connect to " + d.getIp());
+				try {
+					Remote r = d.connect();					
+					Toast.makeText(getApplicationContext(),
 						"Click ListItem Number " + position, Toast.LENGTH_LONG)
 						.show();
+					r.execute("power up");
+				} catch (IOException e) {
+					
+				} catch (Exception e) {
+					
+				}
 			}
+			
 		});
 
-		String[] arrs = { "192.168.1.111", "192.168.1.112", "192.168.1.113",
-				"192.168.1.114", "192.168.1.115" };
 		devices = new ArrayList<DeviceItem>();
-		devices.add(new DeviceItem("19"));
-		devices.add(new DeviceItem("20"));
-		devices.add(new DeviceItem("21"));
-		devices.add(new DeviceItem("22"));
-
 		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
-		// this.deviceAdapter = new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_1, android.R.id.text1, devices);
 		deviceAdapter.notifyDataSetChanged();
-
 		listDevice.setAdapter(deviceAdapter);
+	}
+	
+	public void doTest(View view) {
+		Remote r = Remote.getInstance();
+		if (r.getConnected()) {
+			try {
+				r.execute("DOWN");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void scanDevice(View view) {
 		//devices = new ArrayList<DeviceItem>();
-		deviceAdapter.clear();
-		deviceAdapter.add(new DeviceItem("101"));
-		deviceAdapter.add(new DeviceItem("102"));
-		deviceAdapter.notifyDataSetChanged();
+		//deviceAdapter.clear();
+//		deviceAdapter.add(new DeviceItem("101"));
+//		deviceAdapter.add(new DeviceItem("102"));
+//		deviceAdapter.notifyDataSetChanged();
 		showDialog(PROGRESS_DIALOG);
 	}
 
+	public void refresh() {
+		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
+		deviceAdapter.notifyDataSetChanged();
+	}
+	
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case PROGRESS_DIALOG:
@@ -85,17 +102,13 @@ public class DeviceActivity extends RootActivity {
 		}
 	}
 	
-	public void refresh() {
-		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
-		deviceAdapter.notifyDataSetChanged();
-	}
-
 	@Override
 	protected void onPrepareDialog(int id, Dialog dialog) {
 		switch (id) {
 		case PROGRESS_DIALOG:
 			progressDialog.setProgress(0);
 			progressThread = new ProgressThread(handler);
+			deviceAdapter.clear();
 			progressThread.start();
 		}
 	}
@@ -105,16 +118,14 @@ public class DeviceActivity extends RootActivity {
 
 			int total = msg.arg1;
 			progressDialog.setProgress(total);
+			if (msg.arg2>0) {
+				String ip = "192.168.0." + Integer.toString(msg.arg2);
+				deviceAdapter.add(new DeviceItem(ip));				
+			}
 			if (total >= 100) {
+				progressDialog.setProgress(0); //clear the value to avoid cache for next appearance.
 				dismissDialog(PROGRESS_DIALOG);
-				progressThread.setState(ProgressThread.STATE_DONE);
-				
-				deviceAdapter.clear();
-				deviceAdapter.add(new DeviceItem("111"));
-				deviceAdapter.add(new DeviceItem("122"));
-				deviceAdapter.notifyDataSetChanged();
-
-				
+				progressThread.setState(ProgressThread.STATE_DONE);				
 			}
 		}
 	};
@@ -125,9 +136,8 @@ public class DeviceActivity extends RootActivity {
 		final static int STATE_DONE = 0;
 		final static int STATE_RUNNING = 1;
 		int mState;
-		int total;
-
-		int from = 180, to = 200, checkIp = 180;
+		
+		int from = 148, to = 154, checkIp = from;
 		String maskIp;
 
 		ProgressThread(Handler h) {
@@ -135,6 +145,7 @@ public class DeviceActivity extends RootActivity {
 		}
 
 		public void run() {
+			
 			Finder f = new Finder();
 			mState = STATE_RUNNING;
 
@@ -144,16 +155,14 @@ public class DeviceActivity extends RootActivity {
 			while (mState == STATE_RUNNING) {
 				
 				try {
-					if (checkIp==from) {
-						deviceAdapter.clear();
-					}
-					if (f.isPortOpen(maskIp + checkIp, 80)) {
-						deviceAdapter.add(new DeviceItem(Integer.toString(checkIp)));
-						//devices.add(new DeviceItem(Integer.toString(checkIp)));
+					Message msg = mHandler.obtainMessage();
+					msg.arg2 = 0;
+					if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT)) {
+						msg.arg2 = checkIp;
 						Log.e("MAKI::FINDER", "Okay. We added the board to listview " + checkIp);
 					}
-					Message msg = mHandler.obtainMessage();
-					msg.arg1 = total = Math.round((checkIp - from) * 100
+					
+					msg.arg1 = Math.round((checkIp - from) * 100
 							/ (to - from));// (int)100 * ((i - from) /
 											// (to-from));
 					Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
@@ -174,7 +183,7 @@ public class DeviceActivity extends RootActivity {
 		public void setState(int state) {
 			mState = state;
 			if (state == STATE_DONE ) {
-				deviceAdapter.notifyDataSetChanged();
+				//deviceAdapter.notifyDataSetChanged();
 			}
 		}
 	}

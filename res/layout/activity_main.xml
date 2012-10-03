@@ -1,4 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    
+    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
+    
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
@@ -6,6 +9,7 @@
     android:columnCount="1" >
 
     <ImageButton
+        remotecontrol:remote_key_name="up"
         android:id="@+id/cmd_power"
         android:layout_width="36dp"
         android:layout_height="36dp"
@@ -13,6 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
+        android:onClick="onRemoteClick"
         android:src="@drawable/glyphicons_063_power" />
 
     <ImageButton
