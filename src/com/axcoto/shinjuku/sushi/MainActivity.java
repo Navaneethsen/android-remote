@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -19,8 +20,9 @@ public class MainActivity extends RootActivity {
         
         Resources res = getResources();
         
-        ImageButton b = (ImageButton) this.findViewById(R.id.cmd_power);
-       
+        RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
+        Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS " .concat(b.keyName));
+        
 //
 //        b.setOnClickListener(new OnClickListener(){ public void onClick(View arg0) {        	
 //        	Finder f = new Finder();
@@ -45,6 +47,9 @@ public class MainActivity extends RootActivity {
     }
     
     public void onRemoteClick(View v) {
+    	
+    	//Log.e("THU CU KOI");
+    	
     	this.execute("test");
     }
     

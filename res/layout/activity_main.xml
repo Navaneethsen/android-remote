@@ -8,8 +8,9 @@
     android:layout_height="match_parent"
     android:columnCount="1" >
 
-    <ImageButton
+    <com.axcoto.shinjuku.sushi.RemoteKeyButton
         remotecontrol:remote_key_name="up"
+        
         android:id="@+id/cmd_power"
         android:layout_width="36dp"
         android:layout_height="36dp"
