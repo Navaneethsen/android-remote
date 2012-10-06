@@ -1,7 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    
     xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
-    
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
@@ -9,45 +7,39 @@
     android:columnCount="1" >
 
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
-        remotecontrol:remote_key_name="up"
-        
         android:id="@+id/cmd_power"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+style="@style/RemoteButtonLeft"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="2dp"
+
         android:onClick="onRemoteClick"
-        android:src="@drawable/glyphicons_063_power" />
+        android:src="@drawable/glyphicons_063_power"
+        remotecontrol:remote_key_name="up" />
 
-    <ImageButton
+    <com.axcoto.shinjuku.sushi.RemoteKeyButton
         android:id="@+id/cmd_mute"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="2dp"
+style="@style/RemoteButton"
         android:layout_toRightOf="@id/cmd_power"
-        android:src="@drawable/glyphicons_063_power" />
+        android:onClick="onRemoteClick"
+        android:src="@drawable/glyphicons_182_mute"
+        remotecontrol:remote_key_name="left" />
 
-    <ImageButton
+    <com.axcoto.shinjuku.sushi.RemoteKeyButton
         android:id="@+id/cmd_eject"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+style="@style/RemoteButtonRight"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="2dp"
-        android:src="@drawable/glyphicons_063_power" />
 
-    <ImageButton
+        android:onClick="onRemoteClick"
+        android:src="@drawable/glyphicons_179_eject"
+        remotecontrol:remote_key_name="eject" />
+
+    <com.axcoto.shinjuku.sushi.RemoteKeyButton
         android:id="@+id/cmd_album"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="2dp"
+style="@style/RemoteButton"
         android:layout_toLeftOf="@+id/cmd_eject"
-        android:src="@drawable/glyphicons_063_power" />
+        android:src="@drawable/glyphicons_169_albums"
+        remotecontrol:remote_key_name="album" />
 
     <EditText
         android:id="@+id/cmd_keyboard"
@@ -57,50 +49,45 @@
         android:layout_centerHorizontal="true"
         android:ems="10" >
 
-        <requestFocus  />
+        <requestFocus />
     </EditText>
-    
-    
-    <!--  Player button -->
 
-    
-    <!-- Colour button -->
-    <ImageButton
-        style="@style/remoteButton"
-        android:id="@+id/cmd_red"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"   
-        android:src="@drawable/ceenee_11_red" />
+    <!-- Player button -->
 
-    <ImageButton
-        style="@style/remoteButton"
-        android:id="@+id/cmd_green"
-        android:layout_toRightOf="@id/cmd_red"
-        android:layout_alignParentBottom="true"
-        android:src="@drawable/ceenee_14_green" />
-
-    <ImageButton
-        style="@style/remoteButton"
-        android:id="@+id/cmd_yellow"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/cmd_green"
-        android:src="@drawable/ceenee_13_yellow" />
-
-    <ImageButton
-        style="@style/remoteButton"
-        android:id="@+id/cmd_blue"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/cmd_yellow"
-        android:src="@drawable/ceenee_12_blue" />
-
-    <ImageButton
-        android:id="@+id/cmd_font"
-        style="@style/remoteButton"
-        android:layout_above="@+id/cmd_red"
+    <include
+        android:id="@+id/include2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/cmd_power"
-        android:layout_marginBottom="19dp"
-        android:src="@drawable/glyphicons_100_font" />
-          
+        android:layout_below="@+id/cmd_power"
+        android:layout_marginLeft="1dp"
+        layout="@layout/left_button" />
+
+    <include
+        android:id="@+id/include1"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="2dp"
+        layout="@layout/player_button" />
+
+    <include
+        android:id="@+id/include3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/include2"
+        android:layout_toRightOf="@+id/include2"
+        layout="@layout/nav_touchpad" />
+
+    <include
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/include3"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="5dp"
+        layout="@layout/right_button" />
+
 </RelativeLayout>

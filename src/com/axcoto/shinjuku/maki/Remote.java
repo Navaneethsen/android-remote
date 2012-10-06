@@ -243,12 +243,21 @@ public class Remote {
 			remoteKeyCode.put(KEYNAME[i], this.KEY_CODE_GENESIS[i]);
 		}
 		Log.e("MAKI:: REMOTE", "Key code of volup" + remoteKeyCode.get("volup"));
-		Log.e("MAKI:: REMOTE", "Key code of volup" + remoteKeyCode.get("voldown"));
+		Log.e("MAKI:: REMOTE", "Key code of voldown" + remoteKeyCode.get("voldown"));
+		Log.e("MAKI:: REMOTE", "Key code of up" + remoteKeyCode.get("up"));
+		Log.e("MAKI:: REMOTE", "Key code of down" + remoteKeyCode.get("down"));
 	}
 
-	public void execute(String command) throws IOException {		
-		outToServer.writeBytes("R"); 
-		//outToServer.writeBytes("U");
+	public void execute(String command) throws IOException, Exception {		
+		if (!remoteKeyCode.containsKey(command)) {
+			throw new Exception("Key not found");
+		}
+		String k = remoteKeyCode.get(command);
+
+		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
+		Log.e("MAKI:: REMOTE", "Key code of volup" + remoteKeyCode.get(command));
+		String[] part = k.split(",");
+		outToServer.writeBytes(part[1]);
 	}
 
 	public Socket connect(String ip) throws IOException {

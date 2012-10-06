@@ -25,21 +25,25 @@ public class RootActivity extends Activity {
             	/* Create an Intent to start * MySecondActivity. */ 
             	i = new Intent( this, DeviceActivity.class); 
             	/* Send intent to the OS to make * it aware that we want to start * MySecondActivity as a SubActivity. */ 
+            	finish();
             	startActivityForResult(i, 0x1337);
             	
                 break;
 
             case R.id.menu_config:
-            	i = new Intent( this, ConfigActivity.class); 
+            	i = new Intent( this, ConfigActivity.class);
+            	finish();
             	startActivityForResult(i, 0x1339);
 				break;
             case R.id.menu_song:
             	i = new Intent( this, SongActivity.class); 
+            	finish();
             	startActivityForResult(i, 0x13341);
             	break;	
             case R.id.menu_remote:	
             default:    
             	i = new Intent( this, MainActivity.class); 
+            	finish();
             	startActivityForResult(i, 0x13343);
             	break;
         }

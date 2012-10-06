@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ImageButton
+        style="@style/RemoteButtonRight"
+        android:id="@+id/imageButton1"
+
+        android:src="@drawable/glyphicons_197_remove" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+         style="@style/RemoteButtonRight"
+        android:src="@drawable/glyphicons_171_fast_backward" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+ style="@style/RemoteButtonRight"
+         android:src="@drawable/glyphicons_177_fast_forward" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+  style="@style/RemoteButtonRight"
+        android:src="@drawable/glyphicons_221_unshare" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+ style="@style/RemoteButtonRight"
+        android:src="@drawable/glyphicons_027_search" />
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="left"
+    android:orientation="vertical" >
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+ style="@style/RemoteButtonLeft"
+        android:src="@drawable/glyphicons_351_book_open" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+ style="@style/RemoteButtonLeft"
+        android:src="@drawable/glyphicons_184_volume_up" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+ style="@style/RemoteButtonLeft"
+        android:src="@drawable/glyphicons_183_volume_down" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+ style="@style/RemoteButtonLeft"
+        android:src="@drawable/glyphicons_020_home" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+ style="@style/RemoteButtonLeft"
+        android:src="@drawable/ceenee_2_info" />
+
+</LinearLayout>

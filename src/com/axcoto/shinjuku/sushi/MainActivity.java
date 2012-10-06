@@ -21,7 +21,7 @@ public class MainActivity extends RootActivity {
         Resources res = getResources();
         
         RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
-        Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS " .concat(b.keyName));
+        Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS " .concat(b.getKeyName()));
         
 //
 //        b.setOnClickListener(new OnClickListener(){ public void onClick(View arg0) {        	
@@ -38,19 +38,23 @@ public class MainActivity extends RootActivity {
 		Remote r = Remote.getInstance();
 		if (r.getConnected()) {
 			try {
-				r.execute("DOWN");
+				r.execute(command);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (Exception e) {
+				Log.e("SUSHI: REMOTE", "Key not found: " + command);
 			}
+			
 		}
     }
     
     public void onRemoteClick(View v) {
-    	
-    	//Log.e("THU CU KOI");
-    	
-    	this.execute("test");
+    	String key = "";
+    	RemoteKeyButton b = (RemoteKeyButton)v;
+    	key = b.getKeyName();
+        Log.e("SUSHI:: REMOTE", "PRESS " + key);
+    	this.execute(key);
     }
     
 }

@@ -10,27 +10,32 @@ import android.widget.ImageButton;
  */
 public class RemoteKeyButton extends ImageButton {
 	protected String keyName;
-	
-	 public RemoteKeyButton(Context context) {
-	  super(context);
-	  // TODO Auto-generated constructor stub
-	 }
 
-	 public RemoteKeyButton(Context context, AttributeSet attrs) {
-	  super(context, attrs);
-	  // TODO Auto-generated constructor stub
-	  initRemoteButton(attrs);
-	 }
+	public String getKeyName() {
+		return keyName;
+	}
 
-	 public RemoteKeyButton(Context context, AttributeSet attrs, int defStyle) {
-	  super(context, attrs, defStyle);
-	  // TODO Auto-generated constructor stub
-	  initRemoteButton(attrs);
-	 }
-	 
-	 private void initRemoteButton(AttributeSet attrs){
-	  TypedArray a = getContext().obtainStyledAttributes(attrs,R.styleable.remote_button);
-	  this.keyName = a.getString(R.styleable.remote_button_remote_key_name);
-	  a.recycle();
-	 }   
+	public RemoteKeyButton(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+	}
+
+	public RemoteKeyButton(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+		initRemoteButton(attrs);
+	}
+
+	public RemoteKeyButton(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		// TODO Auto-generated constructor stub
+		initRemoteButton(attrs);
+	}
+
+	private void initRemoteButton(AttributeSet attrs) {
+		TypedArray a = getContext().obtainStyledAttributes(attrs,
+				R.styleable.remote_button);
+		this.keyName = a.getString(R.styleable.remote_button_remote_key_name);
+		a.recycle();
+	}
 }

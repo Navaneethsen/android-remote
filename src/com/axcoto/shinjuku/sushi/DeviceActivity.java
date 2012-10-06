@@ -25,45 +25,68 @@ public class DeviceActivity extends RootActivity {
 	private ListView listDevice;
 	private ItemAdapter deviceAdapter;
 	public ArrayList<DeviceItem> devices;
+	public ArrayList<String> deviceIp=null;
 	public ProgressDialog progressDialog;
 	public ProgressThread progressThread;
-	
+
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+	  // Save UI state changes to the savedInstanceState.
+	  // This bundle will be passed to onCreate if the process is
+	  // killed and restarted.
+	savedInstanceState.putSerializable("deviceIp", deviceIp);
+	  // etc.
+	  super.onSaveInstanceState(savedInstanceState);
+	}
+
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+	  super.onRestoreInstanceState(savedInstanceState);
+	  // Restore UI state from the savedInstanceState.
+	  // This bundle has also been passed to onCreate.
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_device);
-
+				
 		listDevice = (ListView) findViewById(R.id.list_device);
 
 		listDevice.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Log.e("DEVICE: CLICKED", "Click ListItem Number " + position);
 				DeviceItem d = deviceAdapter.getItem(position);
 				Log.e("SUSHI::DEVICE", "About to connect to " + d.getIp());
 				try {
-					Remote r = d.connect();					
+					Remote r = d.connect();
 					Toast.makeText(getApplicationContext(),
-						"Click ListItem Number " + position, Toast.LENGTH_LONG)
-						.show();
+							"Click ListItem Number " + position,
+							Toast.LENGTH_LONG).show();
 					r.execute("power up");
 				} catch (IOException e) {
-					
+
 				} catch (Exception e) {
-					
+
 				}
 			}
-			
-		});
 
+		});
+		
+		//deviceIp = (ArrayList<String>)savedInstanceState.getSerializable("deviceIp");
+			
 		devices = new ArrayList<DeviceItem>();
+//		if (deviceIp != null) {
+//			for (int i=0; i<deviceIp.size(); i++) {
+//				devices.add(new DeviceItem(deviceIp.get(i)));
+//			}
+//		}
 		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
 		deviceAdapter.notifyDataSetChanged();
 		listDevice.setAdapter(deviceAdapter);
 	}
-	
+
 	public void doTest(View view) {
 		Remote r = Remote.getInstance();
 		if (r.getConnected()) {
@@ -72,16 +95,19 @@ public class DeviceActivity extends RootActivity {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
 
 	public void scanDevice(View view) {
-		//devices = new ArrayList<DeviceItem>();
-		//deviceAdapter.clear();
-//		deviceAdapter.add(new DeviceItem("101"));
-//		deviceAdapter.add(new DeviceItem("102"));
-//		deviceAdapter.notifyDataSetChanged();
+		// devices = new ArrayList<DeviceItem>();
+		// deviceAdapter.clear();
+		// deviceAdapter.add(new DeviceItem("101"));
+		// deviceAdapter.add(new DeviceItem("102"));
+		// deviceAdapter.notifyDataSetChanged();
 		showDialog(PROGRESS_DIALOG);
 	}
 
@@ -89,7 +115,7 @@ public class DeviceActivity extends RootActivity {
 		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
 		deviceAdapter.notifyDataSetChanged();
 	}
-	
+
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case PROGRESS_DIALOG:
@@ -101,7 +127,7 @@ public class DeviceActivity extends RootActivity {
 			return null;
 		}
 	}
-	
+
 	@Override
 	protected void onPrepareDialog(int id, Dialog dialog) {
 		switch (id) {
@@ -109,6 +135,7 @@ public class DeviceActivity extends RootActivity {
 			progressDialog.setProgress(0);
 			progressThread = new ProgressThread(handler);
 			deviceAdapter.clear();
+			//deviceIp.clear();
 			progressThread.start();
 		}
 	}
@@ -118,14 +145,16 @@ public class DeviceActivity extends RootActivity {
 
 			int total = msg.arg1;
 			progressDialog.setProgress(total);
-			if (msg.arg2>0) {
+			if (msg.arg2 > 0) {
 				String ip = "192.168.0." + Integer.toString(msg.arg2);
-				deviceAdapter.add(new DeviceItem(ip));				
+				deviceAdapter.add(new DeviceItem(ip));
+				deviceIp.add(ip);
 			}
 			if (total >= 100) {
-				progressDialog.setProgress(0); //clear the value to avoid cache for next appearance.
+				progressDialog.setProgress(0); // clear the value to avoid cache
+												// for next appearance.
 				dismissDialog(PROGRESS_DIALOG);
-				progressThread.setState(ProgressThread.STATE_DONE);				
+				progressThread.setState(ProgressThread.STATE_DONE);
 			}
 		}
 	};
@@ -136,8 +165,8 @@ public class DeviceActivity extends RootActivity {
 		final static int STATE_DONE = 0;
 		final static int STATE_RUNNING = 1;
 		int mState;
-		
-		int from = 148, to = 154, checkIp = from;
+
+		int from = 147, to = 150, checkIp = from;
 		String maskIp;
 
 		ProgressThread(Handler h) {
@@ -145,26 +174,32 @@ public class DeviceActivity extends RootActivity {
 		}
 
 		public void run() {
-			
+
 			Finder f = new Finder();
 			mState = STATE_RUNNING;
 
 			// while (mState == STATE_RUNNING) {
 			maskIp = "192.168.0.";
-			
+
 			while (mState == STATE_RUNNING) {
-				
+
 				try {
 					Message msg = mHandler.obtainMessage();
 					msg.arg2 = 0;
 					if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT)) {
 						msg.arg2 = checkIp;
-						Log.e("MAKI::FINDER", "Okay. We added the board to listview " + checkIp);
+						Log.e("MAKI::FINDER",
+								"Okay. We added the board to listview "
+										+ checkIp);
 					}
-					
-					msg.arg1 = Math.round((checkIp - from) * 100
-							/ (to - from));// (int)100 * ((i - from) /
-											// (to-from));
+
+					msg.arg1 = Math.round((checkIp - from) * 100 / (to - from));// (int)100
+																				// *
+																				// ((i
+																				// -
+																				// from)
+																				// /
+																				// (to-from));
 					Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
 					mHandler.sendMessage(msg);
 					checkIp++;
@@ -182,8 +217,8 @@ public class DeviceActivity extends RootActivity {
 		 */
 		public void setState(int state) {
 			mState = state;
-			if (state == STATE_DONE ) {
-				//deviceAdapter.notifyDataSetChanged();
+			if (state == STATE_DONE) {
+				// deviceAdapter.notifyDataSetChanged();
 			}
 		}
 	}
