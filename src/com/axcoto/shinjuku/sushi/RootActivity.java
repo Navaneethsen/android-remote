@@ -23,7 +23,7 @@ public class RootActivity extends Activity {
             	// Place code to handle Button-Click here. 
             	//Log.e(Log.VERBOSE, "Lolz. Test event listenr");
             	/* Create an Intent to start * MySecondActivity. */ 
-            	i = new Intent( this, DeviceActivity.class); 
+            	i = new Intent( this, DeviceActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); 
             	/* Send intent to the OS to make * it aware that we want to start * MySecondActivity as a SubActivity. */ 
             	finish();
             	startActivityForResult(i, 0x1337);
@@ -31,18 +31,18 @@ public class RootActivity extends Activity {
                 break;
 
             case R.id.menu_config:
-            	i = new Intent( this, ConfigActivity.class);
+            	i = new Intent( this, ConfigActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);;
             	finish();
             	startActivityForResult(i, 0x1339);
 				break;
             case R.id.menu_song:
-            	i = new Intent( this, SongActivity.class); 
+            	i = new Intent( this, SongActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);; 
             	finish();
             	startActivityForResult(i, 0x13341);
             	break;	
             case R.id.menu_remote:	
             default:    
-            	i = new Intent( this, MainActivity.class); 
+            	i = new Intent( this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);; 
             	finish();
             	startActivityForResult(i, 0x13343);
             	break;

@@ -1,10 +1,19 @@
-package com.axcoto.shinjuku.sushi;
+	package com.axcoto.shinjuku.sushi;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,13 +28,14 @@ import com.axcoto.shinjuku.maki.Finder;
 import com.axcoto.shinjuku.maki.Remote;
 
 public class DeviceActivity extends RootActivity {
-
+	final public String DEVICE_FILENAME = "device";
+	
 	static final int PROGRESS_DIALOG = 0;
-
+	
 	private ListView listDevice;
 	private ItemAdapter deviceAdapter;
 	public ArrayList<DeviceItem> devices;
-	public ArrayList<String> deviceIp=null;
+	public ArrayList<String> deviceIp;
 	public ProgressDialog progressDialog;
 	public ProgressThread progressThread;
 
@@ -34,8 +44,10 @@ public class DeviceActivity extends RootActivity {
 	  // Save UI state changes to the savedInstanceState.
 	  // This bundle will be passed to onCreate if the process is
 	  // killed and restarted.
-	savedInstanceState.putSerializable("deviceIp", deviceIp);
-	  // etc.
+		savedInstanceState.putStringArray("deviceIp", (String[])deviceIp.toArray());
+		//savedInstanceState.put
+		// etc.
+		Log.e("SUSHI: SAVED", "Saved Device Ip");
 	  super.onSaveInstanceState(savedInstanceState);
 	}
 
@@ -44,15 +56,56 @@ public class DeviceActivity extends RootActivity {
 	  super.onRestoreInstanceState(savedInstanceState);
 	  // Restore UI state from the savedInstanceState.
 	  // This bundle has also been passed to onCreate.
+	  String[] ip = savedInstanceState.getStringArray("deviceIp");
+	  Log.e("SUSHI:: RESTORE", "From Restore. We had devices: " + ip.length);
+	  
+	  deviceIp = new ArrayList<String>();
+		devices = new ArrayList<DeviceItem>();
+		if (ip.length>0) {
+			for (int i=0; i<ip.length; i++) {
+				deviceIp.add(ip[i]);
+				devices.add(new DeviceItem(ip[i]));
+			}
+
+			deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
+			deviceAdapter.notifyDataSetChanged();
+			listDevice.setAdapter(deviceAdapter);
+		}	  
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		Log.e("SUSHI:: DEVICE", "Puase activity");
+		
+		String ip;
+		try {
+			FileOutputStream fos = openFileOutput(this.DEVICE_FILENAME, Context.MODE_PRIVATE);
+			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(fos));
+			for (int i=0; i < deviceIp.size(); i++) {
+				ip = deviceIp.get(i) + "\n";				
+				//fos.write(ip.getBytes());
+				br.write(ip);
+			}			
+			br.flush();
+			br.close();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			Log.e("SUSHI:: DEVICE", "Cannot find the file ");
+		} catch (IOException e) {
+			Log.e("SUSHI:: DEVICE", "Cannot write data to the file ");			
+		}
+		
 	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_device);
-				
 		listDevice = (ListView) findViewById(R.id.list_device);
-
+		
+		Log.e("SUSHI:: DEVICE", "Create activity");
+		
 		listDevice.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -74,14 +127,39 @@ public class DeviceActivity extends RootActivity {
 
 		});
 		
-		//deviceIp = (ArrayList<String>)savedInstanceState.getSerializable("deviceIp");
-			
-		devices = new ArrayList<DeviceItem>();
-//		if (deviceIp != null) {
-//			for (int i=0; i<deviceIp.size(); i++) {
-//				devices.add(new DeviceItem(deviceIp.get(i)));
+		deviceIp = new ArrayList<String>();
+		devices = new ArrayList<DeviceItem>();		
+//		if (savedInstanceState.containsKey("deviceIp")) {
+//			
+//			String[] ip = savedInstanceState.getStringArray("deviceIp");
+//			Log.e("SUSHI:: RESTORE", " From create. We had devices: " + ip.length);
+//			  
+//			if (ip.length>0) {
+//				for (int i=0; i<ip.length; i++) {
+//					deviceIp.add(ip[i]);
+//					devices.add(new DeviceItem(ip[i]));
+//				}
 //			}
 //		}
+		try {
+			
+			//FileInputStream fis = new FileInputStream(this.DEVICE_FILENAME);
+			FileInputStream fis = openFileInput(this.DEVICE_FILENAME);
+			DataInputStream in = new DataInputStream(fis);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String ip;
+			while ((ip = br.readLine()) != null)   {
+				  // Print the content on the console
+				  deviceIp.add(ip);
+				  devices.add(new DeviceItem(ip));
+			}
+			
+			fis.close();
+		} catch (FileNotFoundException e) {
+			Log.e("SUSHI:: DEVICE", "Cannot find the file for reading data");
+		} catch (IOException e) {
+			Log.e("SUSHI:: DEVICE", "Cannot read file data ");			
+		}
 		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
 		deviceAdapter.notifyDataSetChanged();
 		listDevice.setAdapter(deviceAdapter);
@@ -135,7 +213,7 @@ public class DeviceActivity extends RootActivity {
 			progressDialog.setProgress(0);
 			progressThread = new ProgressThread(handler);
 			deviceAdapter.clear();
-			//deviceIp.clear();
+			deviceIp.clear();
 			progressThread.start();
 		}
 	}
