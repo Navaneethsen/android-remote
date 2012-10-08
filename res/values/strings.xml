@@ -22,6 +22,9 @@
    	<string name="scan">Scan</string>
    	<color name="device_separator">#FF0000</color>
    	<dimen name="device_separator_height">2dip</dimen>
+   	<string name="label_config_ip_intro">Select a range to scan for CeeNee unit. By default, it scans from 2-&gt;253</string>
+   	<string name="label_config_ip_start">Start to scan at: 192.168.x.</string><string name="label_config_ip_end">Stop to scan at: 192.168.x.</string>
+   	<string name="label_config_ip_timeout">How long we will try to detect a device (in millisecond)</string>
    	
    	
 </resources>

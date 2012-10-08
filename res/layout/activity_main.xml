@@ -86,8 +86,6 @@ style="@style/RemoteButton"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/include3"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="5dp"
         layout="@layout/right_button" />
 
 </RelativeLayout>
