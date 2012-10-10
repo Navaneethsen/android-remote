@@ -8,44 +8,42 @@
 
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
         android:id="@+id/cmd_power"
-style="@style/RemoteButtonLeft"
+        style="@style/RemoteButtonLeft"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-
         android:onClick="onRemoteClick"
         android:src="@drawable/glyphicons_063_power"
         remotecontrol:remote_key_name="up" />
 
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
         android:id="@+id/cmd_mute"
-style="@style/RemoteButton"
+        style="@style/RemoteButton"
         android:layout_toRightOf="@id/cmd_power"
         android:onClick="onRemoteClick"
         android:src="@drawable/glyphicons_182_mute"
-        remotecontrol:remote_key_name="left" />
+        remotecontrol:remote_key_name="mute" />
 
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
         android:id="@+id/cmd_eject"
-style="@style/RemoteButtonRight"
+        style="@style/RemoteButtonRight"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-
         android:onClick="onRemoteClick"
         android:src="@drawable/glyphicons_179_eject"
         remotecontrol:remote_key_name="eject" />
 
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
-        android:id="@+id/cmd_album"
-style="@style/RemoteButton"
+        android:id="@+id/cmd_audio"
+        style="@style/RemoteButton"
         android:layout_toLeftOf="@+id/cmd_eject"
         android:src="@drawable/glyphicons_169_albums"
-        remotecontrol:remote_key_name="album" />
+        remotecontrol:remote_key_name="menu" />
 
     <EditText
         android:id="@+id/cmd_keyboard"
         android:layout_width="160dp"
         android:layout_height="36dp"
-        android:layout_alignTop="@id/cmd_album"
+        android:layout_alignTop="@id/cmd_mute"
         android:layout_centerHorizontal="true"
         android:ems="10" >
 
@@ -53,15 +51,6 @@ style="@style/RemoteButton"
     </EditText>
 
     <!-- Player button -->
-
-    <include
-        android:id="@+id/include2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cmd_power"
-        android:layout_below="@+id/cmd_power"
-        android:layout_marginLeft="1dp"
-        layout="@layout/left_button" />
 
     <include
         android:id="@+id/include1"
@@ -74,11 +63,19 @@ style="@style/RemoteButton"
         layout="@layout/player_button" />
 
     <include
+        android:id="@+id/include2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/cmd_power"
+        layout="@layout/left_button" />
+
+    <include
         android:id="@+id/include3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/include2"
-        android:layout_toRightOf="@+id/include2"
+        android:layout_centerHorizontal="true"
         layout="@layout/nav_touchpad" />
 
     <include

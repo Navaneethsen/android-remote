@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:robobunny="http://robobunny.com" 
+        android:title="Settings">
+ 
+     <com.robobunny.SeekBarPreference 
+            android:key="ip_from" 
+            android:title="Scan From" 
+            android:summary="" 
+            android:defaultValue="2" 
+            android:max="253" 
+            robobunny:min="2" 
+            robobunny:unitsLeft="" 
+            robobunny:unitsRight="" />
+        
+        <com.robobunny.SeekBarPreference 
+            android:key="ip_end" 
+            android:title="Scan To" 
+            android:summary="" 
+            android:defaultValue="253" 
+            android:max="253" 
+            robobunny:min="2" 
+            robobunny:unitsLeft="" 
+            robobunny:unitsRight="" />
+        
+        <com.robobunny.SeekBarPreference 
+            android:key="ping_time" 
+            android:title="Retry ping per IP within" 
+            android:summary="" 
+            android:defaultValue="500" 
+            android:max="10000" 
+            robobunny:min="500" 
+            robobunny:unitsLeft="" 
+            robobunny:unitsRight="micro seconds" />
+        
+        <CheckBoxPreference android:summary="Orchid compatible mode" android:title="Orchid Device"
+         android:key="orchid_device" android:defaultValue="false"></CheckBoxPreference>
+ 
+        
+        <CheckBoxPreference android:summary="Orchid compatible mode" android:title="Sync Server"
+         android:key="sync_server_status" android:defaultValue="true"></CheckBoxPreference>
+        
+         
+       
+</PreferenceScreen>

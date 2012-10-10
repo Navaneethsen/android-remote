@@ -1,4 +1,4 @@
-	package com.axcoto.shinjuku.sushi;
+package com.axcoto.shinjuku.sushi;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,6 +18,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,7 +30,7 @@ import android.widget.Toast;
 import com.axcoto.shinjuku.maki.Finder;
 import com.axcoto.shinjuku.maki.Remote;
 
-public class DeviceActivity extends RootActivity {
+public class DeviceActivity extends RootActivity implements OnGestureListener{
 	final public String DEVICE_FILENAME = "device";
 	
 	static final int PROGRESS_DIALOG = 0;
@@ -39,6 +42,10 @@ public class DeviceActivity extends RootActivity {
 	public ProgressDialog progressDialog;
 	public ProgressThread progressThread;
 
+	
+	private GestureDetector gestureScanner;
+	
+	
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 	  // Save UI state changes to the savedInstanceState.
@@ -163,6 +170,9 @@ public class DeviceActivity extends RootActivity {
 		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
 		deviceAdapter.notifyDataSetChanged();
 		listDevice.setAdapter(deviceAdapter);
+		
+
+		gestureScanner = new GestureDetector(this);
 	}
 
 	public void doTest(View view) {
@@ -301,4 +311,95 @@ public class DeviceActivity extends RootActivity {
 		}
 	}
 
+	
+	@Override
+	 
+    public boolean onTouchEvent(MotionEvent me)
+ 
+    {
+ 
+        return gestureScanner.onTouchEvent(me);
+ 
+    }
+ 
+   
+ 
+    @Override
+ 
+    public boolean onDown(MotionEvent e)
+ 
+    {
+ 
+        Log.e("SUSHI:: DEVICE", "-" + "DOWN" + "-");
+ 
+        return true;
+ 
+    }
+ 
+   
+ 
+    @Override
+ 
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+ 
+    {
+ 
+        Log.e("SUSHI:: DEVICE", "-" + "FLING" + "-");
+ 
+        return true;
+ 
+    }
+ 
+   
+ 
+    @Override
+ 
+    public void onLongPress(MotionEvent e)
+ 
+    {
+ 
+        Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
+ 
+    }
+ 
+   
+ 
+    @Override
+ 
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+ 
+    {
+ 
+        Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
+ 
+        return true;
+ 
+    }
+ 
+   
+ 
+    @Override
+ 
+    public void onShowPress(MotionEvent e)
+ 
+    {
+ 
+        Log.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
+ 
+    }    
+ 
+   
+ 
+    @Override  
+ 
+    public boolean onSingleTapUp(MotionEvent e)    
+ 
+    {
+ 
+        Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
+ 
+        return true;
+ 
+    }
+	
 }

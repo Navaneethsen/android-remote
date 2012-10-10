@@ -1,22 +1,17 @@
 package com.axcoto.shinjuku.sushi;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
-public class ConfigActivity extends RootActivity {
-
+public class ConfigActivity extends PreferenceActivity{
+	 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_config);
-       
+    protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);            
+            addPreferencesFromResource(R.xml.setting);
     }
-
+ 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);

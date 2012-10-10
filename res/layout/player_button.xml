@@ -12,26 +12,26 @@
         android:layout_height="wrap_content" >
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/cmd_rev"
             style="@style/RemoteButtonLeft"
             android:onClick="onRemoteClick"
             android:src="@drawable/glyphicons_172_rewind"
             remotecontrol:remote_key_name="test cu" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/cmd_play"
             style="@style/RemoteButton"
             android:onClick="onRemoteClick"
             android:src="@drawable/glyphicons_173_play"
             remotecontrol:remote_key_name="cu hai" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/cmd_stop"
             style="@style/RemoteButton"
             android:src="@drawable/glyphicons_175_stop" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/cmd_forward"
             style="@style/RemoteButtonRight"
             android:src="@drawable/glyphicons_176_forward" />
     </TableRow>
@@ -39,25 +39,26 @@
     <TableRow
         android:id="@+id/tableRow3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        >
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/cmd_subtittle"
             style="@style/RemoteButtonLeft"
             android:src="@drawable/glyphicons_100_font" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/cmd_slow"
             style="@style/RemoteButton"
             android:src="@drawable/ceenee_10_slow" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton7"
+            android:id="@+id/cmd_repeat"
             style="@style/RemoteButton"
             android:src="@drawable/glyphicons_085_repeat" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton8"
+            android:id="@+id/cmd_bookmark"
             style="@style/RemoteButtonRight"
             android:src="@drawable/glyphicons_049_star" />
     </TableRow>
@@ -68,22 +69,22 @@
         android:layout_height="wrap_content" >
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton9"
+            android:id="@+id/cmd_zoom"
             style="@style/RemoteButtonLeft"
             android:src="@drawable/glyphicons_349_fullscreen" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton10"
+            android:id="@+id/cmd_169"
             style="@style/RemoteButton"
             android:src="@drawable/glyphicons_279_tablet" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton11"
+            android:id="@+id/cmd_setup"
             style="@style/RemoteButton"
             android:src="@drawable/glyphicons_280_settings" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton12"
+            android:id="@+id/cmd_tvmode"
             style="@style/RemoteButtonRight"
             android:src="@drawable/glyphicons_180_facetime_video" />
     </TableRow>
@@ -94,22 +95,22 @@
         android:layout_height="wrap_content" >
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton14"
+            android:id="@+id/cmd_red"
             style="@style/RemoteButtonLeft"
             android:src="@drawable/ceenee_11_red" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton13"
+            android:id="@+id/cmd_green"
             style="@style/RemoteButton"
             android:src="@drawable/ceenee_14_green" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton15"
+            android:id="@+id/cmd_yellow"
             style="@style/RemoteButton"
             android:src="@drawable/ceenee_13_yellow" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
-            android:id="@+id/imageButton16"
+            android:id="@+id/cmd_blue"
             style="@style/RemoteButtonRight"
             android:src="@drawable/ceenee_12_blue" />
     </TableRow>

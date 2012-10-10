@@ -5,29 +5,28 @@
     android:orientation="vertical" >
 
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+        android:id="@+id/cmd_delete"
         style="@style/RemoteButtonRight"
-        android:id="@+id/imageButton1"
-
         android:src="@drawable/glyphicons_197_remove" />
 
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
-        android:id="@+id/imageButton2"
-         style="@style/RemoteButtonRight"
+        android:id="@+id/cmd_fast_backward"
+        style="@style/RemoteButtonRight"
         android:src="@drawable/glyphicons_171_fast_backward" />
 
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
-        android:id="@+id/imageButton3"
- style="@style/RemoteButtonRight"
-         android:src="@drawable/glyphicons_177_fast_forward" />
+        android:id="@+id/cmd_fast_forward"
+        style="@style/RemoteButtonRight"
+        android:src="@drawable/glyphicons_177_fast_forward" />
 
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
-        android:id="@+id/imageButton4"
-  style="@style/RemoteButtonRight"
+        android:id="@+id/cmd_return"
+      style="@style/RemoteButtonRight"
         android:src="@drawable/glyphicons_221_unshare" />
 
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
-        android:id="@+id/imageButton5"
- style="@style/RemoteButtonRight"
+        android:id="@+id/cmd_timeseek"
+       style="@style/RemoteButtonRight"
         android:src="@drawable/glyphicons_027_search" />
 
 </LinearLayout>
