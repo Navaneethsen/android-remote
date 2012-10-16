@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-dfsd
 public class ItemAdapter extends ArrayAdapter<DeviceItem> {
 	// declaring our ArrayList of items
 		private ArrayList<DeviceItem> objects;
