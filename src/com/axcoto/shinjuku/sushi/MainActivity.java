@@ -10,11 +10,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.GestureDetector.OnGestureListener;
 
+import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
 
 public class MainActivity extends RootActivity implements OnGestureListener{
 	public String remote;
-
+	
+	
 	private GestureDetector gestureScanner;
 	
     @Override
@@ -28,6 +30,12 @@ public class MainActivity extends RootActivity implements OnGestureListener{
         Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS " .concat(b.getKeyName()));
   
 		gestureScanner = new GestureDetector(this);
+		
+		try {
+			MyHttpServer ht = MyHttpServer.getInstance();
+		} catch (Exception e) {
+			
+		}
 		
     }
 
@@ -174,7 +182,7 @@ public class MainActivity extends RootActivity implements OnGestureListener{
     {
  
         Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
- 
+        this.execute("ok");
         return true;
  
     }

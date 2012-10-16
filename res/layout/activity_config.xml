@@ -1,68 +1,46 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/label_config_ip_intro"
-        tools:context=".MainActivity" />
-
-    <ToggleButton
-        android:id="@+id/toggleButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_marginBottom="16dp"
-        android:text="ToggleButton" />
-
-    <ToggleButton
-        android:id="@+id/toggleButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/toggleButton2"
-        android:layout_alignLeft="@+id/toggleButton2"
-        android:layout_marginBottom="40dp"
-        android:text="ToggleButton" />
-
-    <SeekBar
-        android:id="@+id/seekBar3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/toggleButton1"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="45dp" />
-
-    <SeekBar
-        android:id="@+id/seekBar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/seekBar3"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="33dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="35dp"
-        android:text="@string/label_config_ip_start"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <SeekBar
-        android:id="@+id/seekBar1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="17dp" />
-
-</RelativeLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:robobunny="http://robobunny.com" 
+        android:title="Settings">
+ 
+     <com.robobunny.SeekBarPreference 
+            android:key="ip_from" 
+            android:title="Ip Range" 
+            android:summary="Start here" 
+            android:defaultValue="2" 
+            android:max="253" 
+            robobunny:min="2" 
+            robobunny:unitsLeft="" 
+            robobunny:unitsRight="p" />
+        
+        <com.robobunny.SeekBarPreference 
+            android:key="ip_end" 
+            android:title="Ip Range" 
+            android:summary="Stop here" 
+            android:defaultValue="253" 
+            android:max="253" 
+            robobunny:min="2" 
+            robobunny:unitsLeft="" 
+            robobunny:unitsRight="" />
+        
+        <com.robobunny.SeekBarPreference 
+            android:key="ping_time" 
+            android:title="Retry connecting to an IP within" 
+            android:summary="dsa" 
+            android:defaultValue="500" 
+            android:max="10000" 
+            robobunny:min="500" 
+            robobunny:unitsLeft="" 
+            robobunny:unitsRight=" micro seconds" />
+        
+        <CheckBoxPreference android:summary="Orchid compatible mode" android:title="Orchid Device"
+         android:key="orchid_device" android:defaultValue="false"></CheckBoxPreference>
+ 
+        
+        <CheckBoxPreference android:summary="Orchid compatible mode" android:title="Sync Server"
+         android:key="sync_server_status" android:defaultValue="true"></CheckBoxPreference>
+        
+         
+       
+</PreferenceScreen>
