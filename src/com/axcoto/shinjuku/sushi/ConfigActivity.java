@@ -33,8 +33,7 @@ public class ConfigActivity extends PreferenceActivity{
             	i = new Intent( this, DeviceActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); 
             	/* Send intent to the OS to make * it aware that we want to start * MySecondActivity as a SubActivity. */ 
             	finish();
-            	startActivityForResult(i, 0x1337);
-            	
+            	startActivityForResult(i, 0x1337);            	
                 break;
 
             case R.id.menu_config:
@@ -49,7 +48,7 @@ public class ConfigActivity extends PreferenceActivity{
             	break;	
             case R.id.menu_remote:	
             default:    
-            	i = new Intent( this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);; 
+            	i = new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);; 
             	finish();
             	startActivityForResult(i, 0x13343);
             	break;

@@ -2,10 +2,10 @@ package com.axcoto.shinjuku.maki;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Properties;
 
-import android.content.ContextWrapper;
-import android.os.Environment;
+import android.util.Log;
 
 
 interface SongBookUploader {
@@ -19,6 +19,7 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 	
 	public static MyHttpServer getInstance(int port, File docRoot) throws IOException{
 		if (instance==null) {
+			Log.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
 			instance = new MyHttpServer(port, docRoot);
 		}
 		return instance;		
@@ -34,24 +35,52 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 	
 	public Response serve( String uri, String method, Properties header, Properties parms, Properties files )
 	{
-		if (uri=="upload.html") {
-			
-		} else {
-			
+	
+		Log.e("MAKI", method + " '" + uri + "' " );
+
+		if (uri=="info.html") {
+
+			String msg = "<html><body><h1>Hello server</h1>\n";
+			if ( parms.getProperty("username") == null )
+				msg +=
+					"<form action='?' method='get'>\n" +
+					"  <p>Your name: <input type='text' name='username'></p>\n" +
+					"</form>\n";
+			else
+				msg += "<p>Hello, " + parms.getProperty("username") + "!</p>";
+
+			msg += "</body></html>\n";
+			return new NanoHTTPD.Response( HTTP_OK, MIME_HTML, msg );
 		}
 		
-		System.out.println( method + " '" + uri + "' " );
-		String msg = "<html><body><h1>Hello server</h1>\n";
-		if ( parms.getProperty("username") == null )
-			msg +=
-				"<form action='?' method='get'>\n" +
-				"  <p>Your name: <input type='text' name='username'></p>\n" +
-				"</form>\n";
-		else
-			msg += "<p>Hello, " + parms.getProperty("username") + "!</p>";
+		if (uri=="upload.html") {
+			
+		}
 
-		msg += "</body></html>\n";
-		return new NanoHTTPD.Response( HTTP_OK, MIME_HTML, msg );
+		Enumeration e = header.propertyNames();
+		while ( e.hasMoreElements())
+		{
+			String value = (String)e.nextElement();
+			myOut.println( "  HDR: '" + value + "' = '" +
+								header.getProperty( value ) + "'" );
+		}
+		e = parms.propertyNames();
+		while ( e.hasMoreElements())
+		{
+			String value = (String)e.nextElement();
+			myOut.println( "  PRM: '" + value + "' = '" +
+								parms.getProperty( value ) + "'" );
+		}
+		e = files.propertyNames();
+		while ( e.hasMoreElements())
+		{
+			String value = (String)e.nextElement();
+			myOut.println( "  UPLOADED: '" + value + "' = '" +
+								files.getProperty( value ) + "'" );
+		}
+
+		return serveFile( uri, header, myRootDir, true );
+		
 	}
 
 
