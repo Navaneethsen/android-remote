@@ -1,21 +1,23 @@
-package com.axcoto.shinjuku.sushi;
+	package com.axcoto.shinjuku.sushi;
 
+import java.io.File;
 import java.io.IOException;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.GestureDetector.OnGestureListener;
 
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
 
 public class MainActivity extends RootActivity implements OnGestureListener{
 	public String remote;
-	
+	final int PORT=5320;
 	
 	private GestureDetector gestureScanner;
 	
@@ -32,7 +34,20 @@ public class MainActivity extends RootActivity implements OnGestureListener{
 		gestureScanner = new GestureDetector(this);
 		
 		try {
-			MyHttpServer ht = MyHttpServer.getInstance();
+			File homeDir = this.getFilesDir();			
+			boolean mExternalStorageAvailable = false;
+			boolean mExternalStorageWriteable = false;
+			String state = Environment.getExternalStorageState();
+
+			if (Environment.MEDIA_MOUNTED.equals(state)) {
+			    // We can read and write the media
+			    mExternalStorageAvailable = mExternalStorageWriteable = true;
+			    homeDir = this.getExternalFilesDir(null);
+			};
+			
+			MyHttpServer ht = MyHttpServer.getInstance(PORT, homeDir);
+		} catch (IOException e) {
+			Log.e("MAKI:: SERVER", "The docroot is not valid");
 		} catch (Exception e) {
 			
 		}

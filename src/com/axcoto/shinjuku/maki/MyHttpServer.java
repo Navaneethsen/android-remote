@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
+import android.content.ContextWrapper;
+import android.os.Environment;
+
 
 interface SongBookUploader {
 	public void upload();
@@ -14,13 +17,17 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 	protected static MyHttpServer instance=null;
 	protected final int SERVER_PORT = 5320;
 	
-	public static MyHttpServer getInstance() throws IOException{
+	public static MyHttpServer getInstance(int port, File docRoot) throws IOException{
 		if (instance==null) {
-			instance = new MyHttpServer();
+			instance = new MyHttpServer(port, docRoot);
 		}
-		return instance;
-		
+		return instance;		
 	}
+	
+	public MyHttpServer(int port, File wwwroot) throws IOException {
+		super(port, wwwroot);
+	}
+	
 	public MyHttpServer() throws IOException {
 		super(5320, new File("."));
 	}
