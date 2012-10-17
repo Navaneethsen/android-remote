@@ -46,25 +46,7 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 	{
 	
 		Log.e("MAKI: HTTP SERVER", method + " '" + uri + "' " );
-
-		if (uri=="/info.html") {
-
-			String msg = "<html><body><h1>Hello server</h1>\n";
-			if ( parms.getProperty("username") == null )
-				msg +=
-					"<form action='?' method='get'>\n" +
-					"  <p>Your name: <input type='text' name='username'></p>\n" +
-					"</form>\n";
-			else
-				msg += "<p>Hello, " + parms.getProperty("username") + "!</p>";
-
-			msg += "</body></html>\n";
-			return new NanoHTTPD.Response( HTTP_OK, MIME_HTML, msg );
-		}
 		
-		if (uri=="/upload.html") {
-			return new NanoHTTPD.Response(HTTP_OK, MIME_JSON, "{result:1,msg:'File uploaded successfully'}");
-		}
 
 		Enumeration e = header.propertyNames();
 		while ( e.hasMoreElements())
@@ -86,11 +68,11 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 			String value = (String)e.nextElement();
 			myOut.println( "  UPLOADED: '" + value + "' = '" +
 								files.getProperty( value ) + "'" );
-			Log.e("MAKI: MYHTTP", "Copy temp file to correct location");
+			Log.e("MAKI: START_COPY_UPLOADED_FILE", "Copy temp file to correct location");
 			
 			try {
 				InputStream in = new FileInputStream(new File(files.getProperty(value).toString()));
-				OutputStream out = new FileOutputStream(docRoot.getAbsoluteFile() + files.getProperty("datafile").toString());
+				OutputStream out = new FileOutputStream(docRoot.getAbsoluteFile() + "/" +  parms.getProperty("upload1").toString());
 				
 				byte[] buffer = new byte[1024];
 				int read;
@@ -104,13 +86,32 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 				out.close();
 				out = null;
 			} catch (FileNotFoundException fnfe) {
-				Log.e("MAKI: SERVER", "File location is in correct. Error:" + fnfe.getMessage());
+				Log.e("MAKI: SERVER", "File location is incorrect. Error:" + fnfe.getMessage());
 			} catch (IOException ioe) {
 				Log.e("MAKI: SERVER", "Cannot read/write to file. Error:" + ioe.getMessage());
 			} catch (Exception ex) {
 				Log.e("MAKI: SERVER", "Unknow error when copying temp uploader file to correct location in docroot " + ex.getMessage());
 			}
 		}
+		
+		if (uri.equalsIgnoreCase("/info.html")) {
+
+			String msg = "<html><body><h1>Hello server</h1>\n";
+			if ( parms.getProperty("username") == null )
+				msg +=
+					"<form action='?' method='get'>\n" +
+					"  <p>Your name: <input type='text' name='username'></p>\n" +
+					"</form>\n";
+			else
+				msg += "<p>Hello, " + parms.getProperty("username") + "!</p>";
+
+			msg += "</body></html>\n";
+			return new NanoHTTPD.Response( HTTP_OK, MIME_HTML, msg );
+		} else if (uri.equalsIgnoreCase("upload.html")) {
+			return new NanoHTTPD.Response(HTTP_OK, MIME_JSON, "{result:1,msg:'File uploaded successfully'}");
+		} else {
+		}
+		
 
 		return serveFile( uri, header, this.docRoot, true );
 		

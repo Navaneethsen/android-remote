@@ -256,10 +256,9 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	}
 	
-	
 	public void openkeyboard(View v) {
     	InputMethodManager inputMgr = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     	inputMgr.toggleSoftInput(0, 0);
-//    	Log.d("MAGIC: ", inputMgr.toString());
+    	Log.d("MAGIC: ", inputMgr.toString());    	
     }
 }
