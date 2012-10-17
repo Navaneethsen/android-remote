@@ -16,6 +16,7 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
@@ -207,31 +208,31 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			float distanceY)
 
 	{
-		// if (distanceX>0) {
-		// this.execute("right");
-		// return true;
-		// }
-		//
-		// if (distanceX<0) {
-		// this.execute("left");
-		// return true;
-		// }
-		//
-		String direction = "";
-		if (distanceY > 0) {
-			direction = "down";
-			this.execute("down");
-			return true;
-		}
-		if (distanceY < 00) {
-			direction = "up";
-			this.execute("up");
-			return true;
-		}
-		Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
-
+//		// if (distanceX>0) {
+//		// this.execute("right");
+//		// return true;
+//		// }
+//		//
+//		// if (distanceX<0) {
+//		// this.execute("left");
+//		// return true;
+//		// }
+//		//
+//		String direction = "";
+//		if (distanceY > 0) {
+//			direction = "down";
+//			this.execute("down");
+//			return true;
+//		}
+//		if (distanceY < 00) {
+//			direction = "up";
+//			this.execute("up");
+//			return true;
+//		}
+//		Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
+//
+//		return false;
 		return false;
-
 	}
 
 	@Override
@@ -245,12 +246,20 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	@Override
 	public boolean onSingleTapUp(MotionEvent e)
-
+	
 	{
 
-		Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
-		this.execute("ok");
-		return true;
+//		Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
+//		this.execute("ok");
+//		return true;
+		return false;
 
 	}
+	
+	
+	public void openkeyboard(View v) {
+    	InputMethodManager inputMgr = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+    	inputMgr.toggleSoftInput(0, 0);
+//    	Log.d("MAGIC: ", inputMgr.toString());
+    }
 }

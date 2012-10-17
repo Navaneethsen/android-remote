@@ -83,7 +83,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	@Override
 	public void onPause() {
 		super.onPause();
-		Log.e("SUSHI:: DEVICE", "Puase activity");
+		Log.e("SUSHI:: DEVICE", "Pause activity");
 		
 		String ip;
 		try {

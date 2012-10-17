@@ -13,8 +13,9 @@
         android:layout_alignParentTop="true"
         android:onClick="onRemoteClick"
         android:src="@drawable/glyphicons_063_power"
-        remotecontrol:remote_key_name="up" />
+        remotecontrol:remote_key_name="power" />
 
+    
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
         android:id="@+id/cmd_mute"
         style="@style/RemoteButton"
@@ -35,20 +36,18 @@
     <com.axcoto.shinjuku.sushi.RemoteKeyButton
         android:id="@+id/cmd_audio"
         style="@style/RemoteButton"
-        android:layout_toLeftOf="@+id/cmd_eject"
+        android:layout_toLeftOf="@id/cmd_eject"
         android:src="@drawable/glyphicons_169_albums"
-        remotecontrol:remote_key_name="menu" />
+        android:onClick="onRemoteClick"
+        remotecontrol:remote_key_name="audio" />
 
-    <EditText
-        android:id="@+id/cmd_keyboard"
-        android:layout_width="160dp"
-        android:layout_height="36dp"
-        android:layout_alignTop="@id/cmd_mute"
-        android:layout_centerHorizontal="true"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
+    <Button
+    android:id="@+id/search_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/button_key"
+    android:layout_centerHorizontal="true"
+    android:onClick="openkeyboard" />
 
     <!-- Player button -->
 
@@ -67,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/cmd_power"
+        android:layout_below="@id/cmd_power"
         layout="@layout/left_button" />
 
     <include
