@@ -39,16 +39,12 @@
         android:src="@drawable/glyphicons_169_albums"
         remotecontrol:remote_key_name="menu" />
 
-    <EditText
-        android:id="@+id/cmd_keyboard"
-        android:layout_width="160dp"
-        android:layout_height="36dp"
-        android:layout_alignTop="@id/cmd_mute"
-        android:layout_centerHorizontal="true"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
+    <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/button_key"
+    android:layout_centerHorizontal="true"
+    android:onClick="openkeyboard" />
 
     <!-- Player button -->
 

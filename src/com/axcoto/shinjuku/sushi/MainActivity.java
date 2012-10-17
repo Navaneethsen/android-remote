@@ -16,6 +16,7 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
@@ -152,7 +153,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	}
 
-	@Override
+//	@Override
 	public boolean onDown(MotionEvent e)
 
 	{
@@ -167,7 +168,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	private static final int SWIPE_MAX_OFF_PATH = 250;
 	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
 
-	@Override
+//	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 			float velocityY) {
 		try {
@@ -187,7 +188,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		return false;
 	}
 
-	@Override
+//	@Override
 	public void onLongPress(MotionEvent e)
 
 	{
@@ -196,7 +197,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	}
 
-	@Override
+//	@Override
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
 			float distanceY)
 
@@ -228,7 +229,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	}
 
-	@Override
+//	@Override
 	public void onShowPress(MotionEvent e)
 
 	{
@@ -237,7 +238,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	}
 
-	@Override
+//	@Override
 	public boolean onSingleTapUp(MotionEvent e)
 
 	{
@@ -247,4 +248,11 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		return true;
 
 	}
+	
+	
+	public void openkeyboard(View v) {
+    	InputMethodManager inputMgr = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+    	inputMgr.toggleSoftInput(0, 0);
+//    	Log.d("MAGIC: ", inputMgr.toString());
+    }
 }

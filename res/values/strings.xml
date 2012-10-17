@@ -26,5 +26,6 @@
    	<string name="label_config_ip_start">Start to scan at: 192.168.x.</string><string name="label_config_ip_end">Stop to scan at: 192.168.x.</string>
    	<string name="label_config_ip_timeout">How long we will try to detect a device (in millisecond)</string>
    	<color name="config_title_text_color">#000000</color>
+   	<string name="button_key">SEARCH</string>
    	
 </resources>

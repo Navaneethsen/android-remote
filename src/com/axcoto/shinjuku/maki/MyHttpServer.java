@@ -33,55 +33,55 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 		super(5320, new File("."));
 	}
 	
-	public Response serve( String uri, String method, Properties header, Properties parms, Properties files )
-	{
-	
-		Log.e("MAKI", method + " '" + uri + "' " );
-
-		if (uri=="info.html") {
-
-			String msg = "<html><body><h1>Hello server</h1>\n";
-			if ( parms.getProperty("username") == null )
-				msg +=
-					"<form action='?' method='get'>\n" +
-					"  <p>Your name: <input type='text' name='username'></p>\n" +
-					"</form>\n";
-			else
-				msg += "<p>Hello, " + parms.getProperty("username") + "!</p>";
-
-			msg += "</body></html>\n";
-			return new NanoHTTPD.Response( HTTP_OK, MIME_HTML, msg );
-		}
-		
-		if (uri=="upload.html") {
-			
-		}
-
-		Enumeration e = header.propertyNames();
-		while ( e.hasMoreElements())
-		{
-			String value = (String)e.nextElement();
-			myOut.println( "  HDR: '" + value + "' = '" +
-								header.getProperty( value ) + "'" );
-		}
-		e = parms.propertyNames();
-		while ( e.hasMoreElements())
-		{
-			String value = (String)e.nextElement();
-			myOut.println( "  PRM: '" + value + "' = '" +
-								parms.getProperty( value ) + "'" );
-		}
-		e = files.propertyNames();
-		while ( e.hasMoreElements())
-		{
-			String value = (String)e.nextElement();
-			myOut.println( "  UPLOADED: '" + value + "' = '" +
-								files.getProperty( value ) + "'" );
-		}
-
-		return serveFile( uri, header, myRootDir, true );
-		
-	}
+//	public Response serve( String uri, String method, Properties header, Properties parms, Properties files )
+//	{
+//	
+//		Log.e("MAKI", method + " '" + uri + "' " );
+//
+//		if (uri=="info.html") {
+//
+//			String msg = "<html><body><h1>Hello server</h1>\n";
+//			if ( parms.getProperty("username") == null )
+//				msg +=
+//					"<form action='?' method='get'>\n" +
+//					"  <p>Your name: <input type='text' name='username'></p>\n" +
+//					"</form>\n";
+//			else
+//				msg += "<p>Hello, " + parms.getProperty("username") + "!</p>";
+//
+//			msg += "</body></html>\n";
+//			return new NanoHTTPD.Response( HTTP_OK, MIME_HTML, msg );
+//		}
+//		
+//		if (uri=="upload.html") {
+//			
+//		}
+//
+//		Enumeration e = header.propertyNames();
+//		while ( e.hasMoreElements())
+//		{
+//			String value = (String)e.nextElement();
+//			myOut.println( "  HDR: '" + value + "' = '" +
+//								header.getProperty( value ) + "'" );
+//		}
+//		e = parms.propertyNames();
+//		while ( e.hasMoreElements())
+//		{
+//			String value = (String)e.nextElement();
+//			myOut.println( "  PRM: '" + value + "' = '" +
+//								parms.getProperty( value ) + "'" );
+//		}
+//		e = files.propertyNames();
+//		while ( e.hasMoreElements())
+//		{
+//			String value = (String)e.nextElement();
+//			myOut.println( "  UPLOADED: '" + value + "' = '" +
+//								files.getProperty( value ) + "'" );
+//		}
+//
+//		return serveFile( uri, header, myRootDir, true );
+//		
+//	}
 
 
 	public static void start( String[] args )
