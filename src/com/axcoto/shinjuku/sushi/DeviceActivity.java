@@ -46,7 +46,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	private GestureDetector gestureScanner;
 	
 	
-//	@Override
+	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 	  // Save UI state changes to the savedInstanceState.
 	  // This bundle will be passed to onCreate if the process is
@@ -83,7 +83,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	@Override
 	public void onPause() {
 		super.onPause();
-		Log.e("SUSHI:: DEVICE", "Puase activity");
+		Log.e("SUSHI:: DEVICE", "Pause activity");
 		
 		String ip;
 		try {
@@ -114,7 +114,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		Log.e("SUSHI:: DEVICE", "Create activity");
 		
 		listDevice.setOnItemClickListener(new OnItemClickListener() {
-//			@Override
+			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Log.e("DEVICE: CLICKED", "Click ListItem Number " + position);
 				DeviceItem d = deviceAdapter.getItem(position);
@@ -324,7 +324,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
    
  
-//    @Override
+    @Override
  
     public boolean onDown(MotionEvent e)
  
@@ -338,7 +338,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
    
  
-//    @Override
+    @Override
  
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
  
@@ -352,7 +352,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
    
  
-//    @Override
+    @Override
  
     public void onLongPress(MotionEvent e)
  
@@ -364,7 +364,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
    
  
-//    @Override
+    @Override
  
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
  
@@ -378,7 +378,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
    
  
-//    @Override
+    @Override
  
     public void onShowPress(MotionEvent e)
  
@@ -390,7 +390,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
    
  
-//    @Override  
+    @Override  
  
     public boolean onSingleTapUp(MotionEvent e)    
  

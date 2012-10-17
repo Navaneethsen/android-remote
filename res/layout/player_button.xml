@@ -16,24 +16,28 @@
             style="@style/RemoteButtonLeft"
             android:onClick="onRemoteClick"
             android:src="@drawable/glyphicons_172_rewind"
-            remotecontrol:remote_key_name="test cu" />
+            remotecontrol:remote_key_name="rewind" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_play"
             style="@style/RemoteButton"
             android:onClick="onRemoteClick"
             android:src="@drawable/glyphicons_173_play"
-            remotecontrol:remote_key_name="cu hai" />
+            remotecontrol:remote_key_name="play" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_stop"
             style="@style/RemoteButton"
-            android:src="@drawable/glyphicons_175_stop" />
-
+            android:onClick="onRemoteClick"
+            android:src="@drawable/glyphicons_175_stop" 
+            remotecontrol:remote_key_name="stop" />
+        
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_forward"
             style="@style/RemoteButtonRight"
-            android:src="@drawable/glyphicons_176_forward" />
+            android:onClick="onRemoteClick"            
+            android:src="@drawable/glyphicons_176_forward" 
+            remotecontrol:remote_key_name="forward" />
     </TableRow>
 
     <TableRow
@@ -45,22 +49,30 @@
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_subtittle"
             style="@style/RemoteButtonLeft"
-            android:src="@drawable/glyphicons_100_font" />
+            android:src="@drawable/glyphicons_100_font" 
+            android:onClick="onRemoteClick"            
+            remotecontrol:remote_key_name="subtitle" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_slow"
             style="@style/RemoteButton"
-            android:src="@drawable/ceenee_10_slow" />
+            android:src="@drawable/ceenee_10_slow" 
+            android:onClick="onRemoteClick"
+			remotecontrol:remote_key_name="slow" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_repeat"
             style="@style/RemoteButton"
-            android:src="@drawable/glyphicons_085_repeat" />
-
+            android:src="@drawable/glyphicons_085_repeat" 
+            android:onClick="onRemoteClick"
+			remotecontrol:remote_key_name="repeat" />
+        
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_bookmark"
             style="@style/RemoteButtonRight"
-            android:src="@drawable/glyphicons_049_star" />
+            android:src="@drawable/glyphicons_049_star" 
+            android:onClick="onRemoteClick"
+            remotecontrol:remote_key_name="bookmark" />
     </TableRow>
 
     <TableRow
@@ -71,22 +83,30 @@
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_zoom"
             style="@style/RemoteButtonLeft"
-            android:src="@drawable/glyphicons_349_fullscreen" />
+            android:onClick="onRemoteClick"
+            android:src="@drawable/glyphicons_349_fullscreen" 
+            remotecontrol:remote_key_name="zoom" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_169"
             style="@style/RemoteButton"
-            android:src="@drawable/glyphicons_279_tablet" />
+            android:onClick="onRemoteClick"
+            android:src="@drawable/glyphicons_279_tablet" 
+            remotecontrol:remote_key_name="angle" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_setup"
             style="@style/RemoteButton"
-            android:src="@drawable/glyphicons_280_settings" />
+            android:onClick="onRemoteClick"
+            android:src="@drawable/glyphicons_280_settings" 
+            remotecontrol:remote_key_name="setup" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_tvmode"
             style="@style/RemoteButtonRight"
-            android:src="@drawable/glyphicons_180_facetime_video" />
+            android:onClick="onRemoteClick"
+            android:src="@drawable/glyphicons_180_facetime_video" 
+            remotecontrol:remote_key_name="tvmode" />
     </TableRow>
 
     <TableRow
@@ -97,22 +117,30 @@
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_red"
             style="@style/RemoteButtonLeft"
-            android:src="@drawable/ceenee_11_red" />
+            android:src="@drawable/ceenee_11_red" 
+            android:onClick="onRemoteClick"
+            remotecontrol:remote_key_name="red" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_green"
             style="@style/RemoteButton"
-            android:src="@drawable/ceenee_14_green" />
+            android:src="@drawable/ceenee_14_green" 
+            android:onClick="onRemoteClick"
+            remotecontrol:remote_key_name="green" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_yellow"
             style="@style/RemoteButton"
-            android:src="@drawable/ceenee_13_yellow" />
+            android:src="@drawable/ceenee_13_yellow"
+            android:onClick="onRemoteClick" 
+            remotecontrol:remote_key_name="yellow" />
 
         <com.axcoto.shinjuku.sushi.RemoteKeyButton
             android:id="@+id/cmd_blue"
             style="@style/RemoteButtonRight"
-            android:src="@drawable/ceenee_12_blue" />
+            android:src="@drawable/ceenee_12_blue"
+			android:onClick="onRemoteClick"
+            remotecontrol:remote_key_name="blue" />
     </TableRow>
 
 </TableLayout>

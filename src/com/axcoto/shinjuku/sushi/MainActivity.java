@@ -153,7 +153,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	}
 
-//	@Override
+	@Override
 	public boolean onDown(MotionEvent e)
 
 	{
@@ -168,7 +168,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	private static final int SWIPE_MAX_OFF_PATH = 250;
 	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
 
-//	@Override
+	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 			float velocityY) {
 		try {
@@ -188,7 +188,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		return false;
 	}
 
-//	@Override
+	@Override
 	public void onLongPress(MotionEvent e)
 
 	{
@@ -197,39 +197,39 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	}
 
-//	@Override
+	@Override
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
 			float distanceY)
 
 	{
-		// if (distanceX>0) {
-		// this.execute("right");
-		// return true;
-		// }
-		//
-		// if (distanceX<0) {
-		// this.execute("left");
-		// return true;
-		// }
-		//
-		String direction = "";
-		if (distanceY > 0) {
-			direction = "down";
-			this.execute("down");
-			return true;
-		}
-		if (distanceY < 00) {
-			direction = "up";
-			this.execute("up");
-			return true;
-		}
-		Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
-
+//		// if (distanceX>0) {
+//		// this.execute("right");
+//		// return true;
+//		// }
+//		//
+//		// if (distanceX<0) {
+//		// this.execute("left");
+//		// return true;
+//		// }
+//		//
+//		String direction = "";
+//		if (distanceY > 0) {
+//			direction = "down";
+//			this.execute("down");
+//			return true;
+//		}
+//		if (distanceY < 00) {
+//			direction = "up";
+//			this.execute("up");
+//			return true;
+//		}
+//		Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
+//
+//		return false;
 		return false;
-
 	}
 
-//	@Override
+	@Override
 	public void onShowPress(MotionEvent e)
 
 	{
@@ -238,14 +238,15 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	}
 
-//	@Override
+	@Override
 	public boolean onSingleTapUp(MotionEvent e)
 	
 	{
 
-		Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
-		this.execute("ok");
-		return true;
+//		Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
+//		this.execute("ok");
+//		return true;
+		return false;
 
 	}
 	
