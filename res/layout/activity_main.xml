@@ -40,6 +40,7 @@
         remotecontrol:remote_key_name="menu" />
 
     <Button
+    android:id="@+id/search_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/button_key"

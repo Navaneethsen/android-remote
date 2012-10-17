@@ -240,7 +240,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 //	@Override
 	public boolean onSingleTapUp(MotionEvent e)
-
+	
 	{
 
 		Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
