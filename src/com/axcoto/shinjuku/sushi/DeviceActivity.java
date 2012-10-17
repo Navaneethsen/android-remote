@@ -163,9 +163,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 			
 			fis.close();
 		} catch (FileNotFoundException e) {
-			Log.e("SUSHI:: DEVICE", "Cannot find the file for reading data");
+			Log.e("SUSHI:: DEVICE", "Device file has not existed yet.");
 		} catch (IOException e) {
-			Log.e("SUSHI:: DEVICE", "Cannot read file data ");			
+			Log.e("SUSHI:: DEVICE", "Cannot read device file");			
 		}
 		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
 		deviceAdapter.notifyDataSetChanged();
@@ -254,11 +254,17 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		final static int STATE_RUNNING = 1;
 		int mState;
 
-		int from = 147, to = 150, checkIp = from;
+		int from = 2, to = 253, checkIp = from;
+		
 		String maskIp;
 
 		ProgressThread(Handler h) {
 			mHandler = h;
+			if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
+				from = 147;
+				to = 150;
+				checkIp = from;
+			}
 		}
 
 		public void run() {

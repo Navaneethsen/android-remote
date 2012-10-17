@@ -21,6 +21,12 @@ import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
 
 public class MainActivity extends RootActivity implements OnGestureListener {
+	final static int PHASE_DEVELOPMENT = 1;
+	final static int PHASE_TESTING = 2;
+	final static int PHASE_PRODUCTION = 3;
+	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
+	final static int VIRGIN = 1;
+	final static String VERSION = "0.1-dev-1017";  
 	public String remote;
 	final int PORT = 5320;
 	protected File homeDir;
