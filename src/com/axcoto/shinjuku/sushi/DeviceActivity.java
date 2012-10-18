@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -112,7 +113,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		listDevice = (ListView) findViewById(R.id.list_device);
 		
 		Log.e("SUSHI:: DEVICE", "Create activity");
-		
+		final DeviceActivity t = this;		
 		listDevice.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -122,9 +123,12 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 				try {
 					Remote r = d.connect();
 					Toast.makeText(getApplicationContext(),
-							"Click ListItem Number " + position,
+							"Connected to " + d.getIp(),
 							Toast.LENGTH_LONG).show();
-					r.execute("power up");
+					Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);;
+					r.execute("home");							
+					finish();
+	            	startActivityForResult(i, 0x13343);
 				} catch (IOException e) {
 
 				} catch (Exception e) {
@@ -350,8 +354,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
     {
  
-        Log.e("SUSHI:: DEVICE", "-" + "FLING" + "-");
- 
+//        Log.e("SUSHI:: DEVICE", "-" + "FLING" + "-");
         return true;
  
     }
@@ -364,7 +367,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
     {
  
-        Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
+//        Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
  
     }
  
@@ -376,10 +379,10 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
     {
  
-        Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
- 
-        return true;
- 
+//        Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
+// 
+//        return true;
+    	  return false;
     }
  
    
@@ -390,7 +393,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
     {
  
-        Log.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
+//        Log.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
  
     }    
  
@@ -402,10 +405,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
     {
  
-        Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
- 
-        return true;
- 
+//        Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
+//        return true;
+    	  return false;
     }
 	
 }
