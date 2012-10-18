@@ -102,7 +102,8 @@ public class Finder {
 	}
 	
 	/*
-	 * Get phone ip and mask address
+	 * Get phone ip and mask address.
+	 * maskIpAddress is without "." notation
 	 * @return void
 	 */
 	public void resolve() {
