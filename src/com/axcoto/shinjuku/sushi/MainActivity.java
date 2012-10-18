@@ -40,7 +40,10 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	protected File homeDir;
 
 	private GestureDetector gestureScanner;
-
+	
+	private long lastTouchedTime = 0;
+	private long doubleTapDistance = 350000000;
+	
 	public File getHomeDir() {
 		return homeDir;
 	}
@@ -277,14 +280,16 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	@Override
 	public boolean onSingleTapUp(MotionEvent e)
-	
 	{
-
-		Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
-		this.execute("ok");
+		long t = System.nanoTime();
+		Log.e("SUSHI:: MAIN", "Touched at: " + t);		
+		if (this.lastTouchedTime>1000 && (t-this.lastTouchedTime)<this.doubleTapDistance) {
+			Log.e("SUSHI:: MAIN", "Double tap at: " + t);		
+			this.execute("enter");				
+		}
+		this.lastTouchedTime = t;
+		
 		return true;
-//		return false;
-
 	}
 	
 	
