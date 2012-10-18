@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
@@ -51,7 +52,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS ".concat(b.getKeyName()));
 
 		gestureScanner = new GestureDetector(this);
-
+		
 		try {
 			homeDir = this.getFilesDir();
 			boolean mExternalStorageAvailable = false;
@@ -156,9 +157,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public boolean onTouchEvent(MotionEvent me)
 
 	{
-
-		return gestureScanner.onTouchEvent(me);
-
+		gestureScanner.onTouchEvent(me);
+		return true;
 	}
 
 	@Override
@@ -172,38 +172,55 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	}
 
-	private static final int SWIPE_MIN_DISTANCE = 120;
-	private static final int SWIPE_MAX_OFF_PATH = 250;
-	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+	private static final int SWIPE_MIN_DISTANCE = 50;
+	private static final int SWIPE_MAX_OFF_PATH = 150;
+	private static final int SWIPE_THRESHOLD_VELOCITY = 50;
 
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 			float velocityY) {
-//		try {
-//			if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
-//				return false;
-//			// right to left swipe
-//			if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
-//					&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-//				Log.e("SUSHI: FLING", "Left Swipe");
-//			} else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
-//					&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-//				Log.e("SUSHI: FLING", "Right Swipe");
-//			}
-//		} catch (Exception e) {
-//			// nothing
-//		}
-		 if (velocityX>0) {
-			 this.execute("right");
-			 return true;
-			 }
-			
-			 if (velocityX<0) {
-			 this.execute("left");
-			 return true;
-			 }
-			 else return false;
+		
+		float dX = e2.getX()-e1.getX();
+		float dY = e1.getY()-e2.getY();
+		if (Math.abs(dY)<SWIPE_MAX_OFF_PATH && 
+			Math.abs(velocityX)>=SWIPE_THRESHOLD_VELOCITY &&
+			Math.abs(dX)>=SWIPE_MIN_DISTANCE ) {
+			if (dX>0) {
+//				Toast.makeText(getApplicationContext(), "Right Swipe", Toast.LENGTH_SHORT).show();
+				this.execute("right");
+			} else {
+//				Toast.makeText(getApplicationContext(), "Left Swipe", Toast.LENGTH_SHORT).show();
+				this.execute("left");
+			}
+			return true;
+		} 
+		else if (Math.abs(dX)<SWIPE_MAX_OFF_PATH &&
+				Math.abs(velocityY)>=SWIPE_THRESHOLD_VELOCITY &&
+				Math.abs(dY)>=SWIPE_MIN_DISTANCE ) {
+			if (dY>0) {
+//				Toast.makeText(getApplicationContext(), "Up Swipe", Toast.LENGTH_SHORT).show();
+				this.execute("up");
+			} else {
+//				Toast.makeText(getApplicationContext(), "Down Swipe", Toast.LENGTH_SHORT).show();
+				this.execute("down");
+			}
+		return true;
+		}
+		return false;
 	}
+
+
+//		 if (velocityX>0) {
+//			 this.execute("right");
+//			 return true;
+//			 }
+//			
+//			 if (velocityX<0) {
+//			 this.execute("left");
+//			 return true;
+//			 }
+//			 else return false;
+
 
 	@Override
 	public void onLongPress(MotionEvent e)
@@ -237,7 +254,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 //		}
 //		if (distanceY >0) {
 //			direction = "up";
-//			this.execute("up");
 //			return true;
 //		}
 //		Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");

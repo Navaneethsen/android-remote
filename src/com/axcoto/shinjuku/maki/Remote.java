@@ -250,8 +250,8 @@ public class Remote {
 		}
 		String k = remoteKeyCode.get(command);
 
-		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
-		Log.e("MAKI:: REMOTE", "Key code of volup" + remoteKeyCode.get(command));
+//		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
+//		Log.e("MAKI:: REMOTE", "Key code of volup" + remoteKeyCode.get(command));
 		String[] part = k.split(",");
 		outToServer.writeBytes(part[1]);
 	}
