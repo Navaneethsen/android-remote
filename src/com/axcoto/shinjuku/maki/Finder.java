@@ -86,8 +86,7 @@ public class Finder {
 		
 	}
 	
-	public boolean isPortOpen(String ip, int port) {
-		int timeout = 500;
+	public boolean isPortOpen(String ip, int port, int timeout) {
 		boolean found = false;
 		try {
 			Socket socket = new Socket();
@@ -101,6 +100,10 @@ public class Finder {
 			Log.e("MAKI::FINDER", "Horay. No board at " + ip);		
 		}
 		return found;
+	}
+	
+	public boolean isPortOpen(String ip, int port) {
+		return this.isPortOpen(ip, port, 500);
 	}
 	
 	/*

@@ -15,9 +15,11 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
@@ -44,6 +46,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	public ProgressDialog progressDialog;
 	public ProgressThread progressThread;
 
+	static int ipScanFrom = 2;
+	static int ipScanTo = 253;	
+	static int ipTimeoutPing = 400;
 	
 	private GestureDetector gestureScanner;
 	
@@ -116,6 +121,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		//We need to keep this on during device scanning
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
+		
 		setContentView(R.layout.activity_device);
 		listDevice = (ListView) findViewById(R.id.list_device);
 		
@@ -146,18 +152,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		
 		deviceIp = new ArrayList<String>();
 		devices = new ArrayList<DeviceItem>();		
-//		if (savedInstanceState.containsKey("deviceIp")) {
-//			
-//			String[] ip = savedInstanceState.getStringArray("deviceIp");
-//			Log.e("SUSHI:: RESTORE", " From create. We had devices: " + ip.length);
-//			  
-//			if (ip.length>0) {
-//				for (int i=0; i<ip.length; i++) {
-//					deviceIp.add(ip[i]);
-//					devices.add(new DeviceItem(ip[i]));
-//				}
-//			}
-//		}
+
 		try {
 			
 			//FileInputStream fis = new FileInputStream(this.DEVICE_FILENAME);
@@ -181,8 +176,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		deviceAdapter.notifyDataSetChanged();
 		listDevice.setAdapter(deviceAdapter);
 		
-
 		gestureScanner = new GestureDetector(this);
+		
 	}
 
 	public void doTest(View view) {
@@ -201,11 +196,13 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	}
 
 	public void scanDevice(View view) {
-		// devices = new ArrayList<DeviceItem>();
-		// deviceAdapter.clear();
-		// deviceAdapter.add(new DeviceItem("101"));
-		// deviceAdapter.add(new DeviceItem("102"));
-		// deviceAdapter.notifyDataSetChanged();
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		this.ipScanFrom = sharedPref.getInt("ip_from", 2);
+		this.ipScanTo = sharedPref.getInt("ip_end", 253);		
+		this.ipTimeoutPing = sharedPref.getInt("ping_time", 400);	
+		
+		Log.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanFrom);
+		Log.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanTo);
 		showDialog(PROGRESS_DIALOG);
 	}
 
@@ -274,7 +271,10 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 				from = 147;
 				to = 150;
 				checkIp = from;
-			}
+			} 
+			from = DeviceActivity.ipScanFrom;
+			to = DeviceActivity.ipScanTo;
+			checkIp = from;
 		}
 
 		public void run() {
@@ -294,20 +294,14 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 				try {
 					Message msg = mHandler.obtainMessage();
 					msg.arg2 = 0;
-					if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT)) {
+					if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT, DeviceActivity.ipTimeoutPing)) {
 						msg.arg2 = checkIp;
 						Log.e("MAKI::FINDER",
 								"Okay. We added the board to listview "
 										+ checkIp);
 					}
 
-					msg.arg1 = Math.round((checkIp - from) * 100 / (to - from));// (int)100
-																				// *
-																				// ((i
-																				// -
-																				// from)
-																				// /
-																				// (to-from));
+					msg.arg1 = Math.round((checkIp - from) * 100 / (to - from));
 					Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
 					mHandler.sendMessage(msg);
 					checkIp++;
