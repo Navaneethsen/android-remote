@@ -14,9 +14,11 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
@@ -177,21 +179,30 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 			float velocityY) {
-		try {
-			if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
-				return false;
-			// right to left swipe
-			if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
-					&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-				Log.e("SUSHI: FLING", "Left Swipe");
-			} else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
-					&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-				Log.e("SUSHI: FLING", "Right Swipe");
-			}
-		} catch (Exception e) {
-			// nothing
-		}
-		return false;
+//		try {
+//			if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
+//				return false;
+//			// right to left swipe
+//			if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
+//					&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+//				Log.e("SUSHI: FLING", "Left Swipe");
+//			} else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
+//					&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+//				Log.e("SUSHI: FLING", "Right Swipe");
+//			}
+//		} catch (Exception e) {
+//			// nothing
+//		}
+		 if (velocityX>0) {
+			 this.execute("right");
+			 return true;
+			 }
+			
+			 if (velocityX<0) {
+			 this.execute("left");
+			 return true;
+			 }
+			 else return false;
 	}
 
 	@Override
@@ -208,31 +219,31 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			float distanceY)
 
 	{
-//		// if (distanceX>0) {
-//		// this.execute("right");
-//		// return true;
-//		// }
-//		//
-//		// if (distanceX<0) {
-//		// this.execute("left");
-//		// return true;
-//		// }
-//		//
+//		 if (distanceX>0) {
+//		 this.execute("right");
+//		 return true;
+//		 }
+//		
+//		 if (distanceX<0) {
+//		 this.execute("left");
+//		 return true;
+//		 }
+		
 //		String direction = "";
-//		if (distanceY > 0) {
+//		if (distanceY < 0) {
 //			direction = "down";
 //			this.execute("down");
 //			return true;
 //		}
-//		if (distanceY < 00) {
+//		if (distanceY >0) {
 //			direction = "up";
 //			this.execute("up");
 //			return true;
 //		}
 //		Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
-//
-//		return false;
+
 		return false;
+//		return false;
 	}
 
 	@Override
@@ -249,17 +260,16 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	
 	{
 
-//		Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
-//		this.execute("ok");
-//		return true;
-		return false;
+		Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
+		this.execute("ok");
+		return true;
+//		return false;
 
 	}
 	
 	
-	public void openkeyboard(View v) {
+	public void openKeyboard(View v) {
     	InputMethodManager inputMgr = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     	inputMgr.toggleSoftInput(0, 0);
-//    	Log.d("MAGIC: ", inputMgr.toString());
     }
 }

@@ -242,10 +242,6 @@ public class Remote {
 		for (int i=0; i<this.KEYNAME.length; i++) {
 			remoteKeyCode.put(KEYNAME[i], this.KEY_CODE_GENESIS[i]);
 		}
-		Log.e("MAKI:: REMOTE", "Key code of volup" + remoteKeyCode.get("volup"));
-		Log.e("MAKI:: REMOTE", "Key code of voldown" + remoteKeyCode.get("voldown"));
-		Log.e("MAKI:: REMOTE", "Key code of up" + remoteKeyCode.get("up"));
-		Log.e("MAKI:: REMOTE", "Key code of down" + remoteKeyCode.get("down"));
 	}
 
 	public void execute(String command) throws IOException, Exception {		

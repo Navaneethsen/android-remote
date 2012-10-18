@@ -47,7 +47,7 @@
     android:layout_height="wrap_content"
     android:text="@string/button_key"
     android:layout_centerHorizontal="true"
-    android:onClick="openkeyboard" />
+    android:onClick="openKeyboard" />
 
     <!-- Player button -->
 
