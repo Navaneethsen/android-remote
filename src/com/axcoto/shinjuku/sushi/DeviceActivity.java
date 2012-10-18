@@ -126,7 +126,6 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 							"Connected to " + d.getIp(),
 							Toast.LENGTH_LONG).show();
 					Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);;
-					r.execute("home");							
 					finish();
 	            	startActivityForResult(i, 0x13343);
 				} catch (IOException e) {
