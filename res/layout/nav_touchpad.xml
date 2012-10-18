@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="208dp"
-        android:layout_height="201dp"
+        android:layout_height="230dp"
         android:layout_weight="0.40"
         android:src="@drawable/nav_arrow" />
 
