@@ -6,7 +6,7 @@
  
      <com.robobunny.SeekBarPreference 
             android:key="ip_from" 
-            android:title="Ip Range" 
+            android:title="Ip Range Begin" 
             android:summary="Start here" 
             android:defaultValue="2" 
             android:max="253" 
@@ -16,7 +16,7 @@
         
         <com.robobunny.SeekBarPreference 
             android:key="ip_end" 
-            android:title="Ip Range" 
+            android:title="Ip Range End" 
             android:summary="Stop here" 
             android:defaultValue="253" 
             android:max="253" 
