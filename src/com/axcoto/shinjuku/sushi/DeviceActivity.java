@@ -272,12 +272,16 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 
 		public void run() {
 
-			Finder f = new Finder();
+			Finder f = Finder.getInstance();
+			f.resolve();
 			mState = STATE_RUNNING;
 
-			// while (mState == STATE_RUNNING) {
-			maskIp = "192.168.0.";
-
+			if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
+				maskIp = "192.168.0.";
+			} else {
+				maskIp = f.getMaskIpAddress() + ".";
+			}
+			
 			while (mState == STATE_RUNNING) {
 
 				try {
