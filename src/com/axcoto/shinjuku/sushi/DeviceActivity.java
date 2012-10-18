@@ -23,6 +23,7 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -85,6 +86,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	public void onPause() {
 		super.onPause();
 		Log.e("SUSHI:: DEVICE", "Pause activity");
+
+		//Okay, now we done we can skip it
+		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
 		String ip;
 		try {
@@ -109,6 +113,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//We need to keep this on during device scanning
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		
 		setContentView(R.layout.activity_device);
 		listDevice = (ListView) findViewById(R.id.list_device);
 		
