@@ -11,13 +11,23 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.ResultReceiver;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.InputType;
+import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.BaseInputConnection;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,11 +48,14 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public String remote;
 	final int PORT = 5320;
 	protected File homeDir;
-
+	int count = 0;
+	private EditText edt;
 	private GestureDetector gestureScanner;
 	
 	private long lastTouchedTime = 0;
 	private long doubleTapDistance = 350000000;
+	
+	private String currentText = "";
 	
 	public File getHomeDir() {
 		return homeDir;
@@ -52,12 +65,11 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		Resources res = getResources();
-
+		setTextListener();
 		RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
 		Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS ".concat(b.getKeyName()));
-
+		
 		gestureScanner = new GestureDetector(this);
 		
 		try {
@@ -165,7 +177,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	{
 		gestureScanner.onTouchEvent(me);
-		return true;
+	   return true;
 	}
 
 	@Override
@@ -274,7 +286,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		Log.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
+//		Log.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
 
 	}
 
@@ -293,8 +305,44 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	}
 	
 	
-	public void openKeyboard(View v) {
-    	InputMethodManager inputMgr = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-    	inputMgr.toggleSoftInput(0, 0);
-    }
+	public void setTextListener() {
+		EditText t = (EditText) findViewById(R.id.cmd_keyboard);
+		final MainActivity xyz = this;
+		t.addTextChangedListener(new TextWatcher() {              
+			@Override
+			public void  onTextChanged  (CharSequence s, int start, int before,
+	        		int count) 	{ 
+	        }
+	    	@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+			@Override   
+			public void afterTextChanged(Editable s) {
+				String newText = s.toString();				
+				if (newText.length()-currentText.length() == 1)  {
+					String last = newText.substring(newText.length()-1);
+					xyz.execute(last);
+//					Log.e("Keyboard: ", last);
+//					count = 1;
+				}
+				if (newText.length()-currentText.length() == -1) {
+					xyz.execute("delete");
+//					Log.e("Keyboard: ", "delete");
+//					count = 0;
+				}
+//				if (newText.length() - currentText.length() == 0 && count == 0)  {
+//					xyz.execute("delete");
+//					String last = newText.substring(newText.length()-1);
+//					xyz.execute(last);
+//					Log.e("Keyboard: ", "delete");
+//					Log.e("Keyboard: ", last);
+//					count = 0;
+//				}
+				currentText = newText;
+			}
+		});
+	}
 }
+
+
