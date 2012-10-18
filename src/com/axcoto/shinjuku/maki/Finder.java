@@ -1,11 +1,13 @@
 package com.axcoto.shinjuku.maki;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Arrays;
 import java.util.Enumeration;
 
 import android.util.Log;
@@ -114,7 +116,9 @@ public class Finder {
 	                InetAddress inetAddress = enumIpAddr.nextElement();
 	                if (!inetAddress.isLoopbackAddress()) {
 	                   _ipAddress = inetAddress.getHostAddress().toString();
-	                   String[] part = _ipAddress.split(".");
+	                   String[] part = _ipAddress.split("\\.");
+	                   Log.e("MAKI", "Current IP of Device is " + _ipAddress);
+	                   Log.e("MAKI: Finder", "Ip Part is " + Arrays.toString(part));
 	                   _maskIpAddress = part[0] + "." + part[1] + "." + part[2];
 	                }
 	            }
