@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -55,37 +56,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Resources res = getResources();
-//		setButtonHoldListener(findViewById(R.id.cmd_169));
-//		setButtonHoldListener(findViewById(R.id.cmd_audio));
-//		setButtonHoldListener(findViewById(R.id.cmd_blue));
-//		setButtonHoldListener(findViewById(R.id.cmd_bookmark));
-//		setButtonHoldListener(findViewById(R.id.cmd_delete));
-//		setButtonHoldListener(findViewById(R.id.cmd_delete));
-//		setButtonHoldListener(findViewById(R.id.cmd_eject));
-//		setButtonHoldListener(findViewById(R.id.cmd_fast_backward));
-//		setButtonHoldListener(findViewById(R.id.cmd_fast_forward));
-//		setButtonHoldListener(findViewById(R.id.cmd_green));
-//		setButtonHoldListener(findViewById(R.id.cmd_home));
-//		setButtonHoldListener(findViewById(R.id.cmd_info));
-//		setButtonHoldListener(findViewById(R.id.cmd_keyboard));
-//		setButtonHoldListener(findViewById(R.id.cmd_menu));
-//		setButtonHoldListener(findViewById(R.id.cmd_mute));
-//		setButtonHoldListener(findViewById(R.id.cmd_play));
-//		setButtonHoldListener(findViewById(R.id.cmd_power));
-//		setButtonHoldListener(findViewById(R.id.cmd_red));
-//		setButtonHoldListener(findViewById(R.id.cmd_repeat));
-//		setButtonHoldListener(findViewById(R.id.cmd_return));
-//		setButtonHoldListener(findViewById(R.id.cmd_rev));
-//		setButtonHoldListener(findViewById(R.id.cmd_setup));
-//		setButtonHoldListener(findViewById(R.id.cmd_slow));
-//		setButtonHoldListener(findViewById(R.id.cmd_stop));
-//		setButtonHoldListener(findViewById(R.id.cmd_subtittle));
-//		setButtonHoldListener(findViewById(R.id.cmd_timeseek));
-//		setButtonHoldListener(findViewById(R.id.cmd_tvmode));
-//		setButtonHoldListener(findViewById(R.id.cmd_voldown));
-//		setButtonHoldListener(findViewById(R.id.cmd_volup));
-//		setButtonHoldListener(findViewById(R.id.cmd_yellow));
-//		setButtonHoldListener(findViewById(R.id.cmd_zoom));
 		setTextListener();
 		RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
 		Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS ".concat(b.getKeyName()));
@@ -118,17 +88,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			Log.e("MAKI:: SERVER", e.getMessage());
 		}
 	}
-
-//	private void setButtonHoldListener(View v) {
-//		    final RemoteKeyButton b = (RemoteKeyButton) v;
-//			b.setOnLongClickListener(new OnLongClickListener() {
-//				@Override
-//				public boolean onLongClick(View v) {
-//				Toast.makeText(getApplicationContext(), b.getKeyName(), Toast.LENGTH_SHORT).show();
-//	            return true;
-//				}
-//			});
-//		}
 
 	private void copyAssets() {
 		Log.e("MAKI: ASSET COPY",
@@ -347,10 +306,26 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		return true;
 	}
 	
+	public boolean inSameGroup(String a, String b)
+	{
+		Remote r = Remote.getInstance();
+		String first = r.remoteKeyCode.get(a);
+		String second = r.remoteKeyCode.get(b);
+		String[] part1 = first.split(",");
+		String[] part2 = second.split(",");
+		if (part1[1].equals(part2[1])) return true;
+		else return false;
+	}
+	
+	
 	public void setTextListener() {
 		EditText t = (EditText) findViewById(R.id.cmd_keyboard);
 		final MainActivity xyz = this;
-		t.addTextChangedListener(new TextWatcher() {              
+		t.addTextChangedListener(new TextWatcher() {      
+			private long lastKeyTouchedTime = 0;
+			private int keyDistance = 850000000;
+			private String old = "";
+			private String last = "";
 			@Override
 			public void  onTextChanged  (CharSequence s, int start, int before,
 	        		int count) 	{ 
@@ -361,28 +336,46 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			}
 			@Override   
 			public void afterTextChanged(Editable s) {
-				String newText = s.toString();				
+				String newText = s.toString();	
+				if (newText.length()>= 1)
+					last = newText.substring(newText.length()-1);
+					else last = "";
+				long tz = System.nanoTime();
+				long zz = tz - this.lastKeyTouchedTime;
+				Log.e("Time: ",Long.toString(zz));
+				
+				if (currentText.length() >= 1){
+					old = currentText.substring(currentText.length()-1);
+				}
+				else old = "";
+				
 				if (newText.length()-currentText.length() == 1)  {
-					String last = newText.substring(newText.length()-1);
-					xyz.execute(last);
+					if (zz<this.keyDistance && inSameGroup(old,last)==true){
+					new CountDownTimer(1000,1000) {
+			            @Override
+			            public void onTick(long arg0) {}
+			            @Override
+			            public void onFinish() {
+			            	xyz.execute(last);  
+			            }
+			        }.start();			        
+			        this.lastKeyTouchedTime = tz;
+				}
+					else 
+						{
+						this.lastKeyTouchedTime = tz;
+						xyz.execute(last);}								
 					Log.e("Keyboard: ", last);
-//					count = 1;
 				}
 				if (newText.length()-currentText.length() == -1) {
-					xyz.execute("delete");
-					Log.e("Keyboard: ", "delete");
-//					count = 0;
+						xyz.execute("delete");
+						Log.e("Keyboard: ", "delete");				
 				}
-//				if (newText.length() - currentText.length() == 0 && count == 0)  {
-//					xyz.execute("delete");
-//					String last = newText.substring(newText.length()-1);
-//					xyz.execute(last);
-//					Log.e("Keyboard: ", "delete");
-//					Log.e("Keyboard: ", last);
-//					count = 0;
-//				}
-				currentText = newText;
-			}
+				else {}
+				
+            	currentText = newText;
+				old = last;
+			}			
 		});
 	}
 }
