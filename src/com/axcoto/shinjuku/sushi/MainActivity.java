@@ -6,31 +6,21 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.ResultReceiver;
 import android.text.Editable;
-import android.text.TextWatcher;
-import android.text.InputType;
-import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.BaseInputConnection;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputConnection;
+import android.view.View.OnLongClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
 
@@ -39,8 +29,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_TESTING = 2;
 	final static int PHASE_PRODUCTION = 3;
 	
-	//final static int ENVIRONMENT = PHASE_DEVELOPMENT;
-	final static int ENVIRONMENT = PHASE_PRODUCTION;
+	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
+//	final static int ENVIRONMENT = PHASE_PRODUCTION;
 	//final static int ENVIRONMENT = PHASE_TESTING;
 		
 	final static int VIRGIN = 1;
@@ -49,7 +39,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	final int PORT = 5320;
 	protected File homeDir;
 	int count = 0;
-	private EditText edt;
 	private GestureDetector gestureScanner;
 	
 	private long lastTouchedTime = 0;
@@ -60,12 +49,43 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public File getHomeDir() {
 		return homeDir;
 	}
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Resources res = getResources();
+//		setButtonHoldListener(findViewById(R.id.cmd_169));
+//		setButtonHoldListener(findViewById(R.id.cmd_audio));
+//		setButtonHoldListener(findViewById(R.id.cmd_blue));
+//		setButtonHoldListener(findViewById(R.id.cmd_bookmark));
+//		setButtonHoldListener(findViewById(R.id.cmd_delete));
+//		setButtonHoldListener(findViewById(R.id.cmd_delete));
+//		setButtonHoldListener(findViewById(R.id.cmd_eject));
+//		setButtonHoldListener(findViewById(R.id.cmd_fast_backward));
+//		setButtonHoldListener(findViewById(R.id.cmd_fast_forward));
+//		setButtonHoldListener(findViewById(R.id.cmd_green));
+//		setButtonHoldListener(findViewById(R.id.cmd_home));
+//		setButtonHoldListener(findViewById(R.id.cmd_info));
+//		setButtonHoldListener(findViewById(R.id.cmd_keyboard));
+//		setButtonHoldListener(findViewById(R.id.cmd_menu));
+//		setButtonHoldListener(findViewById(R.id.cmd_mute));
+//		setButtonHoldListener(findViewById(R.id.cmd_play));
+//		setButtonHoldListener(findViewById(R.id.cmd_power));
+//		setButtonHoldListener(findViewById(R.id.cmd_red));
+//		setButtonHoldListener(findViewById(R.id.cmd_repeat));
+//		setButtonHoldListener(findViewById(R.id.cmd_return));
+//		setButtonHoldListener(findViewById(R.id.cmd_rev));
+//		setButtonHoldListener(findViewById(R.id.cmd_setup));
+//		setButtonHoldListener(findViewById(R.id.cmd_slow));
+//		setButtonHoldListener(findViewById(R.id.cmd_stop));
+//		setButtonHoldListener(findViewById(R.id.cmd_subtittle));
+//		setButtonHoldListener(findViewById(R.id.cmd_timeseek));
+//		setButtonHoldListener(findViewById(R.id.cmd_tvmode));
+//		setButtonHoldListener(findViewById(R.id.cmd_voldown));
+//		setButtonHoldListener(findViewById(R.id.cmd_volup));
+//		setButtonHoldListener(findViewById(R.id.cmd_yellow));
+//		setButtonHoldListener(findViewById(R.id.cmd_zoom));
 		setTextListener();
 		RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
 		Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS ".concat(b.getKeyName()));
@@ -97,8 +117,18 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		} catch (Exception e) {
 			Log.e("MAKI:: SERVER", e.getMessage());
 		}
-
 	}
+
+//	private void setButtonHoldListener(View v) {
+//		    final RemoteKeyButton b = (RemoteKeyButton) v;
+//			b.setOnLongClickListener(new OnLongClickListener() {
+//				@Override
+//				public boolean onLongClick(View v) {
+//				Toast.makeText(getApplicationContext(), b.getKeyName(), Toast.LENGTH_SHORT).show();
+//	            return true;
+//				}
+//			});
+//		}
 
 	private void copyAssets() {
 		Log.e("MAKI: ASSET COPY",
@@ -158,16 +188,24 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (Exception e) {
-				Log.e("SUSHI: REMOTE", "Key not found: " + command);
+//				Log.e("SUSHI: REMOTE", "Key not found: " + command);
 			}
-
 		}
 	}
 
 	public void onRemoteClick(View v) {
+//		setButtonHoldListener(v);
 		String key = "";
 		RemoteKeyButton b = (RemoteKeyButton) v;
 		key = b.getKeyName();
+		Toast.makeText(getApplicationContext(),b.getKeyName(), Toast.LENGTH_SHORT).show();
+//		b.setOnLongClickListener(new OnLongClickListener() {
+//			@Override
+//			public boolean onLongClick(View v) {
+//			Toast.makeText(getApplicationContext(),b.getKeyName(), Toast.LENGTH_SHORT).show();
+//            return true;
+//			}
+//		});
 		Log.e("SUSHI:: REMOTE", "PRESS " + key);
 		this.execute(key);
 	}
@@ -178,7 +216,10 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	{
 		gestureScanner.onTouchEvent(me);
 		InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-		im.toggleSoftInput(1, 0);
+//		im.toggleSoftInput(1, 0);
+		EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
+		im.hideSoftInputFromWindow(edt.getWindowToken(),0);
+
 		return true;
 	}
 
@@ -247,7 +288,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public void onLongPress(MotionEvent e)
 
 	{
-
+		
 		Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
 
 	}
@@ -305,7 +346,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		
 		return true;
 	}
-	
 	
 	public void setTextListener() {
 		EditText t = (EditText) findViewById(R.id.cmd_keyboard);
