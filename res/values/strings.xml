@@ -27,5 +27,8 @@
    	<string name="label_config_ip_timeout">How long we will try to detect a device (in millisecond)</string>
    	<color name="config_title_text_color">#000000</color>
    	<string name="button_key">SEARCH</string>
+   	<string name="label_mp3">MP3</string>
+   	<string name="label_hd">HD</string>
+   	<string name="label_sync">Sync</string>
    	
 </resources>

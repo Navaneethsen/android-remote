@@ -3,22 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <FrameLayout
-        android:id="@+id/frameLayout1"
+    <ToggleButton
+        android:id="@+id/karaoke_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="75dp"
-        android:layout_marginTop="58dp" >
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:text="Coming soon"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="ToggleButton"
+        android:textOff="@string/label_mp3"
+        android:textOn="@string/label_hd" />
+
+    <Button
+        android:id="@+id/cmd_sync"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="14dp"
+        android:text="Button" />
 
 </RelativeLayout>
