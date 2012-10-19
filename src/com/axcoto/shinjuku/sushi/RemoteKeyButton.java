@@ -3,7 +3,10 @@ package com.axcoto.shinjuku.sushi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 /**
  * TODO: document your custom view class.
@@ -16,8 +19,7 @@ public class RemoteKeyButton extends ImageButton {
 	}
 
 	public RemoteKeyButton(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
+		super(context);		
 	}
 
 	public RemoteKeyButton(Context context, AttributeSet attrs) {
@@ -31,7 +33,8 @@ public class RemoteKeyButton extends ImageButton {
 		// TODO Auto-generated constructor stub
 		initRemoteButton(attrs);
 	}
-
+	
+	
 	private void initRemoteButton(AttributeSet attrs) {
 		TypedArray a = getContext().obtainStyledAttributes(attrs,
 				R.styleable.remote_button);
