@@ -177,7 +177,9 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	{
 		gestureScanner.onTouchEvent(me);
-	   return true;
+		InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+		im.toggleSoftInput(1, 0);
+		return true;
 	}
 
 	@Override
@@ -323,12 +325,12 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 				if (newText.length()-currentText.length() == 1)  {
 					String last = newText.substring(newText.length()-1);
 					xyz.execute(last);
-//					Log.e("Keyboard: ", last);
+					Log.e("Keyboard: ", last);
 //					count = 1;
 				}
 				if (newText.length()-currentText.length() == -1) {
 					xyz.execute("delete");
-//					Log.e("Keyboard: ", "delete");
+					Log.e("Keyboard: ", "delete");
 //					count = 0;
 				}
 //				if (newText.length() - currentText.length() == 0 && count == 0)  {

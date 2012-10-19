@@ -252,8 +252,12 @@ public class Remote {
 
 //		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
 //		Log.e("MAKI:: REMOTE", "Key code of volup" + remoteKeyCode.get(command));
+		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
 		String[] part = k.split(",");
-		outToServer.writeBytes(part[1]);
+		for (int count=0; count<Integer.parseInt(part[0]); count++) {
+			Log.e("MAKI:: REMOTE", "Send key " + part[0]);
+			outToServer.writeBytes(part[1]);
+		}
 	}
 
 	public Socket connect(String ip) throws IOException {
