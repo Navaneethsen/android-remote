@@ -8,10 +8,22 @@ import android.database.sqlite.SQLiteDatabase;
 public class Db {
 	private MySQLiteHelper dbHelper;
 	private SQLiteDatabase database=null;
+	private static Db instance=null;
 	
-	public Db(Context c) {
-		dbHelper = new MySQLiteHelper(c);
+	public static Db getInstance(Context c) {
+		if (instance==null) {
+			instance = new Db();
+		}
+		instance.init(c);
+		return instance;
+	}
+	
+	protected Db() {
 		
+	}
+	
+	public void init(Context c) {
+		dbHelper = new MySQLiteHelper(c);
 	}
 
 	public void open(boolean readonly) throws SQLException {
