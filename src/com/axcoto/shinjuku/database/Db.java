@@ -12,7 +12,11 @@ public class Db {
 	
 	public static Db getInstance(Context c) {
 		if (instance==null) {
-			instance = new Db();
+			 synchronized (Db.class){
+                 if (instance == null) {
+                         instance = new Db ();
+                 }
+			 }			
 		}
 		instance.init(c);
 		return instance;
