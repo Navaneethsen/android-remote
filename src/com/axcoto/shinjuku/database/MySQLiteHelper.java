@@ -17,7 +17,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
   public static final String TABLE_HD = "hd";
   public static final String TABLE_MP3 = "mp3";
   
-  public static final String COLUMN_ID = "_id";
+  public static final String COLUMN_ID = "id";
   public static final String COLUMN_TITLE = "title";
 
   private static final String DATABASE_NAME = "song.db";
@@ -26,11 +26,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
   // Database creation sql statement
   private static final String DATABASE_CREATE = "create table "
       + TABLE_HD + "(" + COLUMN_ID
-      + " integer primary key autoincrement, " + COLUMN_TITLE
+      + " integer primary key," + COLUMN_TITLE
       + " text not null);"
       +"create table "
       + TABLE_MP3 + "(" + COLUMN_ID
-      + " integer primary key autoincrement, " + COLUMN_TITLE
+      + " integer primary key , " + COLUMN_TITLE
       + " text not null);"
       ;
 

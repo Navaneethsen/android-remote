@@ -8,13 +8,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class SongActivity extends RootActivity {
+import com.axcoto.shinjuku.database.*;
 
+public class SongActivity extends RootActivity {
+	Db db;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song);
-       
+        db = new  Db(this);
     }
 
 }
