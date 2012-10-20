@@ -10,7 +10,6 @@ public class Db {
 	
 	public Db(Context c) {
 		dbHelper = new MySQLiteHelper(c);
-
 	}
 
 	public void open(boolean readonly) throws SQLException {
