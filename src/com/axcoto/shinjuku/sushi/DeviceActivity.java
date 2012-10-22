@@ -49,6 +49,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	static int ipScanFrom = 2;
 	static int ipScanTo = 253;	
 	static int ipTimeoutPing = 400;
+	static String ipMaskAdd = "";
 	
 	private GestureDetector gestureScanner;
 	
@@ -241,7 +242,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 			int total = msg.arg1;
 			progressDialog.setProgress(total);
 			if (msg.arg2 > 0) {
-				String ip = "192.168.0." + Integer.toString(msg.arg2);
+				
+				String ip = DeviceActivity.ipMaskAdd + Integer.toString(msg.arg2);
 				deviceAdapter.add(new DeviceItem(ip));
 				deviceIp.add(ip);
 			}
@@ -288,6 +290,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 			} else {
 				maskIp = f.getMaskIpAddress() + ".";
 			}
+			DeviceActivity.ipMaskAdd = maskIp;
 			
 			while (mState == STATE_RUNNING) {
 
