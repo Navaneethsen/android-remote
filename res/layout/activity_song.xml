@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="14dp"
-        android:text="Button" />
+        android:layout_marginRight="1dp"
+        android:onClick="onSync"
+        android:text="@string/label_sync" />
 
 </RelativeLayout>

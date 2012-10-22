@@ -61,13 +61,12 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS ".concat(b.getKeyName()));
 		
 		gestureScanner = new GestureDetector(this);
-		
 		try {
 			homeDir = this.getFilesDir();
 			boolean mExternalStorageAvailable = false;
 			boolean mExternalStorageWriteable = false;
 			String state = Environment.getExternalStorageState();
-
+			
 			// For simplicity. use internal storage for now
 //			if (Environment.MEDIA_MOUNTED.equals(state)) {
 //				// We can read and write the media
