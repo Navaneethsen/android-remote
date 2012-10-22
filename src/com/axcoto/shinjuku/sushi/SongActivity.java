@@ -30,33 +30,27 @@ public class SongActivity extends RootActivity {
     	db = Db.getInstance(this);
     	db.open();
     }
-    
-    public void runTest() {    	
-    	SQLiteDatabase conn = db.getDatabase();
-        ContentValues v = new ContentValues();
-        Random r = new Random();
-        v.put("id", r.nextInt());
-        v.put("title", "test");
-        v.put("id", 2);
-        
-        v.put("title", "dada ");
-        v.put("id", 4);
-        v.put("title","fdisf ds");
-        conn.insert("HD", null, v);
-    }
-    
-    public void dump() {
-    	try {
-    		Log.i("SUSHI", "Location of db is" + this.getFilesDir().toString());
-    		XMLParser parser = new XMLParser("HD", db, this.getFilesDir().toString());
-    	} catch (Exception e) {
-    		Log.i("SUSHI", e.getMessage());
+
+    public void dump(String name) {
+    	SQLiteDatabase s = db.getDatabase();
+    	String location = "";
+    	s.execSQL("DELETE FROM hd");
+    	s.execSQL("DELETE FROM mp3");
+    	if (name.equals("hd")){
+    		location = this.getFilesDir().toString()+"/TestDB.xml";
     	}
+    	else if (name.equals("mp3")) {
+    		location = this.getFilesDir().toString()+"/MP3KaraokeDB.xml";
+    	}    		
+    	Log.i("SUSHI", "Location of db is" + location);
+   		XMLParser parser = new XMLParser(name, db, location);
     }
     
     public void onSync(View v) {
     	ToggleButton t = (ToggleButton) this.findViewById(R.id.karaoke_switch);
-		dump();
+    	if(t.isChecked()) dump("hd");
+    	else dump("mp3");
+    	
     }
 //    
 //    protected Dialog onCreateDialog(int id) {
