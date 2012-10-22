@@ -1,14 +1,12 @@
 package com.axcoto.shinjuku.sushi;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import java.util.Random;
 
-import com.axcoto.shinjuku.database.*;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+
+import com.axcoto.shinjuku.database.Db;
 
 public class SongActivity extends RootActivity {
 	Db db;
@@ -17,7 +15,22 @@ public class SongActivity extends RootActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song);
-        db = new  Db(this);
+        this.initDb(); 
+        this.runTest();
+    }
+    
+    public void initDb() {
+    	db = Db.getInstance(this);
+    	db.open();
+    }
+    
+    public void runTest() {    	
+    	SQLiteDatabase conn = db.getDatabase();
+        ContentValues v = new ContentValues();
+        Random r = new Random();
+        v.put("id", r.nextInt());
+        v.put("title", "test");
+        conn.insert("HD", null, v);
     }
 
 }

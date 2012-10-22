@@ -1,5 +1,7 @@
 package com.axcoto.shinjuku.database;
 
+import java.util.Arrays;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -21,13 +23,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
   public static final String COLUMN_TITLE = "title";
 
   private static final String DATABASE_NAME = "song.db";
-  private static final int DATABASE_VERSION = 5;
+  private static final int DATABASE_VERSION = 6;
 
   // Database creation sql statement
   private static final String[] DATABASE_CREATE = { "create table "
       + TABLE_HD + "(" + COLUMN_ID
       + " integer primary key," + COLUMN_TITLE
-      + " text not null);",  "create table "
+      + " text not null);"
+      
+      ,  
+      
+      "create table "
       + TABLE_MP3 + "(" + COLUMN_ID
       + " integer primary key , " + COLUMN_TITLE
       + " text not null);"
@@ -39,6 +45,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
   @Override
   public void onCreate(SQLiteDatabase database) {
+	  Log.i("MAKI:: DATA", "DEBUG " + Arrays.toString(DATABASE_CREATE));
 	  for (int run=0, total=DATABASE_CREATE.length; run<total; run++) {
 		  database.execSQL(DATABASE_CREATE[run]);
 	  }
