@@ -8,12 +8,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ToggleButton;
 
 import com.axcoto.shinjuku.database.Db;
 import com.axcoto.shinjuku.database.XMLParser;
 
-public class SongActivity extends RootActivity {
+public class SongActivity extends RootActivity implements OnClickListener{
 	Db db;
 	public ProgressDialog progressDialog;
 	//public ProgressThread progressThread;
@@ -168,5 +169,11 @@ public class SongActivity extends RootActivity {
 //			}
 //		}
 //	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
