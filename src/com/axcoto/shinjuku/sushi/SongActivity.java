@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -63,18 +64,20 @@ public class SongActivity extends RootActivity{
 	public static final int SYNC_INITIALIZE_DB = 3;
 	public static final int SYNC_DRAW_UI = 4;
 	public static final int SYNC_DONE = 5;
+	public static SongActivity t;
 	
 	public void getSong(String location)
 	{
         songs = new XMLParser(location).get(); 
 	}	
-	
-    @Override
+
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song);
+        SongActivity.t = this;
         final Remote r = Remote.getInstance();
-        getSong(this.getFilesDir().toString()+"/Mp3KaraokeDB.xml");       
+//        getSong(this.getFilesDir().toString()+"/Mp3KaraokeDB.xml");       
 //		We need to keep this on during device scanning--REMOVED FOR CRASH TEST
 //		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		songList = (ListView) findViewById(R.id.song_list);
@@ -103,12 +106,15 @@ public class SongActivity extends RootActivity{
 				}				
 			}
 		});
-
+		songs = new ArrayList<Song>();
 		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
 		songAdapter.notifyDataSetChanged();
 		songList.setAdapter(songAdapter);
     }
       
+	public String getLocation() {
+		return t.getFilesDir() + "/MP3KaraokeDB.xml";
+	}
     public void dump(String name) {
 //    	SQLiteDatabase s = db.getDatabase();
     	songs = new ArrayList<Song>();
@@ -131,19 +137,19 @@ public class SongActivity extends RootActivity{
 		db.open();
 	}
 
-	public void runTest() {
-		SQLiteDatabase conn = db.getDatabase();
-		ContentValues v = new ContentValues();
-		Random r = new Random();
-		v.put("id", r.nextInt());
-		v.put("title", "test");
-		v.put("id", 2);
-
-		v.put("title", "dada ");
-		v.put("id", 4);
-		v.put("title", "fdisf ds");
-		conn.insert("HD", null, v);
-	}
+//	public void runTest() {
+//		SQLiteDatabase conn = db.getDatabase();
+//		ContentValues v = new ContentValues();
+//		Random r = new Random();
+//		v.put("id", r.nextInt());
+//		v.put("title", "test");
+//		v.put("id", 2);
+//
+//		v.put("title", "dada ");
+//		v.put("id", 4);
+//		v.put("title", "fdisf ds");
+//		conn.insert("HD", null, v);
+//	}
 
 	public void dump() {
 		this.syncStatus = this.SYNC_DONE;
@@ -202,7 +208,7 @@ public class SongActivity extends RootActivity{
 
 	/** Nested class that performs progress syncing song book */
 	private class ProgressThread extends Thread {
-		Handler mHandler;
+		Handler mHandler;		
 		final static int STATE_DONE = 0;
 		final static int STATE_RUNNING = 1;
 		int mState;
@@ -212,13 +218,16 @@ public class SongActivity extends RootActivity{
 		}
 
 		public void run() {
-			mState = STATE_RUNNING;
-			while (mState == STATE_RUNNING) {
+			mState = STATE_RUNNING;			
+			while (mState == STATE_RUNNING) {				
 				try {
+					songs = new XMLParser(SongActivity.t.getLocation()).get();	
+					SongActivity.syncStatus = STATE_DONE;					
+					
 					Message msg = mHandler.obtainMessage();
 					msg.arg1 = SongActivity.syncStatus;
 					if (SongActivity.syncStatus == SongActivity.SYNC_PROCESS_SONGBOOK) {
-						dump();
+					//	dump();
 					}
 					mHandler.sendMessage(msg);
 				} catch (Exception e) {
@@ -234,7 +243,8 @@ public class SongActivity extends RootActivity{
 		public void setState(int state) {
 			mState = state;
 			if (state == STATE_DONE) {
-				// deviceAdapter.notifyDataSetChanged();
+				songAdapter = new SongAdapter(t, R.layout.song_item, songs);
+				songAdapter.notifyDataSetChanged();
 			}
 		}
 	}
