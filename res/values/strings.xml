@@ -30,5 +30,6 @@
    	<string name="label_mp3">MP3</string>
    	<string name="label_hd">HD</string>
    	<string name="label_sync">Sync</string>
+   	<string name="song_search">Search for songs</string>
    	
 </resources>

@@ -1,25 +1,51 @@
 package com.axcoto.shinjuku.sushi;
 
+//import java.util.Random;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Random;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+//import android.content.ContentValues;
+//import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.axcoto.shinjuku.database.Db;
+import com.axcoto.shinjuku.database.Song;
+//import com.axcoto.shinjuku.database.Db;
 import com.axcoto.shinjuku.database.XMLParser;
-import com.axcoto.shinjuku.maki.Finder;
 import com.axcoto.shinjuku.maki.Remote;
 
-public class SongActivity extends RootActivity {
-	Db db;
+public class SongActivity extends RootActivity{
+	private Db db;
+	private ListView songList;
+	private SongAdapter songAdapter;
+	public ArrayList<Song> songs = new ArrayList<Song>();
+	public ArrayList<String> songId;
+	public ArrayList<String> songTitle;
+	
+	
 	public ProgressDialog progressDialog;
 	public ProgressThread progressThread;
 
@@ -38,14 +64,68 @@ public class SongActivity extends RootActivity {
 	public static final int SYNC_DRAW_UI = 4;
 	public static final int SYNC_DONE = 5;
 	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_song);
-		this.initDb();
-		// this.runTest();
-	}
+	public void getSong(String location)
+	{
+        songs = new XMLParser(location).get(); 
+	}	
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_song);
+        final Remote r = Remote.getInstance();
+        getSong(this.getFilesDir().toString()+"/Mp3KaraokeDB.xml");       
+//		We need to keep this on during device scanning--REMOVED FOR CRASH TEST
+//		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		songList = (ListView) findViewById(R.id.song_list);
+		
+		Log.e("SUSHI:: DEVICE", "Create activity");
+		final SongActivity t = this;		
+		
+		songList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				Log.e("DEVICE: CLICKED", "Click ListItem Number " + position);
+				Song s = songAdapter.getItem(position);
+//				Log.e("SUSHI::SONG", "About to open " + s.getTitle());
+				String songid = s.getId();
+				for (int i = 0; i < songid.length()-1;i++)
+				{
+					try {
+						r.execute(songid.substring(0+i,1+i));
+					} catch (IOException e) {
+						Log.e("IOException: ","I0Exception");
+						e.printStackTrace();
+					} catch (Exception e) {
+						Log.e("Exception: ","Exception");
+						e.printStackTrace();
+					}
+				}				
+			}
+		});
 
+		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
+		songAdapter.notifyDataSetChanged();
+		songList.setAdapter(songAdapter);
+    }
+      
+    public void dump(String name) {
+//    	SQLiteDatabase s = db.getDatabase();
+    	songs = new ArrayList<Song>();
+    	String location = "";
+//    	s.execSQL("DELETE FROM hd");
+//    	s.execSQL("DELETE FROM mp3");
+    	if (name.equals("hd")){
+    		location = this.getFilesDir().toString()+"/KaraokeDB.xml";
+    	}
+    	else if (name.equals("mp3")) {
+    		location = this.getFilesDir().toString()+"/MP3KaraokeDB.xml";
+    	}    		
+//    	Log.i("SUSHI", "Location of db is" + location);
+//   		XMLParser parser = new XMLParser(name, db, location);
+    	songs = new XMLParser(location).get();    	
+    }
+    
 	public void initDb() {
 		db = Db.getInstance(this);
 		db.open();
@@ -66,13 +146,6 @@ public class SongActivity extends RootActivity {
 	}
 
 	public void dump() {
-		try {
-			Log.i("SUSHI", "Location of db is" + this.getFilesDir().toString());
-			XMLParser parser = new XMLParser("HD", db, this.getFilesDir()
-					.toString());
-		} catch (Exception e) {
-			Log.i("SUSHI", e.getMessage());
-		}
 		this.syncStatus = this.SYNC_DONE;
 	}
 

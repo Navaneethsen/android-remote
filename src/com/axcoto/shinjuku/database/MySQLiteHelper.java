@@ -23,19 +23,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
   public static final String COLUMN_TITLE = "title";
 
   private static final String DATABASE_NAME = "song.db";
-  private static final int DATABASE_VERSION = 6;
+  private static final int DATABASE_VERSION = 7;
 
   // Database creation sql statement
   private static final String[] DATABASE_CREATE = { "create table "
       + TABLE_HD + "(" + COLUMN_ID
-      + " integer primary key," + COLUMN_TITLE
+      + " integer," + COLUMN_TITLE
       + " text not null);"
       
       ,  
       
       "create table "
       + TABLE_MP3 + "(" + COLUMN_ID
-      + " integer primary key , " + COLUMN_TITLE
+      + " integer, " + COLUMN_TITLE
       + " text not null);"
   	};
 

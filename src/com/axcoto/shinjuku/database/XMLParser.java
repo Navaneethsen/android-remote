@@ -3,60 +3,58 @@
  */
 package com.axcoto.shinjuku.database;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+//import android.content.ContentValues;
+//import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class XMLParser {
 	Scanner sc;
-	String location;
 	static int count = 0;
-	SQLiteDatabase conn;
-	 //TESTED IN WARMUP SECTION
-	public XMLParser(String dbName, Db db, String location) throws IOException{
-		conn = db.getDatabase();
-        ContentValues v = new ContentValues();
-//		if (dbName.equals("HD")) location = "...HD location";
-//		else if (dbName.equals("MP3")) location = "...MP3 location";
-        String location2 = location + "/KaraokeDB.xml";
-		sc = new Scanner(location2);
-		StringBuilder output = new StringBuilder();
-		Log.i("DATABASE", "Start to process " + location + "/KaraokeDB.xml");
-		
+	static String id = "";
+	static ArrayList<Song> list = new ArrayList<Song>();
+	
+	public XMLParser(String location) {
+		long t = System.currentTimeMillis();
+//		SQLiteDatabase conn = db.getDatabase();
+//        ContentValues v = new ContentValues();
+
+		try {
+			sc = new Scanner(new File(location));
+		} catch (FileNotFoundException e) {
+			Log.e("ERROR: ", "File not found exception");
+		}
+
 		sc.nextLine();
 		sc.useDelimiter("\"");
 		while (sc.hasNext())
 		{
-			Log.i("DATABASE", "Start to process a new line");
-			
 			String data = sc.next();
 			count ++;
 			if (count%4==0)
 			{
 				String title = data.toString().substring(0,data.toString().lastIndexOf("."));
-				output.append(title + "\n");		        
-		        v.put("Title", title);
-		        Log.i("DATABASE", "Found song. Start to insert");
-		        conn.insert(dbName, null,v);
+				list.add(new Song(id,title));
+//		        v.put("title", title);
+//		        conn.insert(dbName, null,v);
 			}
 			else if (count%2==0) { 
-				output.append(data + "::");
-				v.put("ID", data);
+				id = data;
+//				v.put("id", data);
 			}
 		}
+		sc.close();
+		long t2 = System.currentTimeMillis();
 		
-		String newLocation = location.substring(0,location2.lastIndexOf("/"));
-		File f = new File(newLocation+"/output.txt");
-		BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-		writer.write(output.toString());
+		Log.i("TIME ELAPSED: ",""+(t2-t));
 	}
-
 	
-	
+	public ArrayList<Song> get()
+	{
+		return list;
+	}
 }
