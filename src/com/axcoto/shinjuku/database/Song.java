@@ -2,14 +2,19 @@ package com.axcoto.shinjuku.database;
 
 public class Song {
 
-	private long id;
+	private String id;
 	private String title;
 
-	public long getId() {
+	public Song(String id, String title) {
+		this.id = id;
+		this.title = title;
+	}
+	
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

@@ -23,11 +23,21 @@
         android:onClick="onSync"
         android:text="@string/label_sync" />
 
+    <EditText
+        android:id="@+id/cmd_keyboard"
+        android:layout_width="150dp" 
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/song_search"
+        android:textStyle="italic"
+        android:textSize="15sp" >
+        </EditText>
+        
     <ListView
-        android:id="@+id/mylist"
+        android:id="@+id/song_list"
         android:layout_below="@id/karaoke_switch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" >        
     </ListView>
     
 </RelativeLayout>
