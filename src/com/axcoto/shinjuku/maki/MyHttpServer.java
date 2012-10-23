@@ -10,6 +10,8 @@ import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.Properties;
 
+import com.axcoto.shinjuku.sushi.SongActivity;
+
 import android.util.Log;
 
 
@@ -68,9 +70,12 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 			String value = (String)e.nextElement();
 			myOut.println( "  UPLOADED: '" + value + "' = '" +
 								files.getProperty( value ) + "'" );
+			
 			Log.e("MAKI: START_COPY_UPLOADED_FILE", "Copy temp file to correct location");
 			
 			try {
+				SongActivity.syncStatus = SongActivity.SYNC_RECEIVE_SONGBOOK;
+				
 				InputStream in = new FileInputStream(new File(files.getProperty(value).toString()));
 				OutputStream out = new FileOutputStream(docRoot.getAbsoluteFile() + "/" +  parms.getProperty("upload1").toString());
 				
@@ -85,6 +90,8 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 				out.flush();
 				out.close();
 				out = null;
+				
+				SongActivity.syncStatus = SongActivity.SYNC_PROCESS_SONGBOOK;				
 			} catch (FileNotFoundException fnfe) {
 				Log.e("MAKI: SERVER", "File location is incorrect. Error:" + fnfe.getMessage());
 			} catch (IOException ioe) {
