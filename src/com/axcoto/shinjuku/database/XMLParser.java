@@ -39,6 +39,7 @@ public class XMLParser {
 			{
 				String title = data.toString().substring(0,data.toString().lastIndexOf("."));
 				list.add(new Song(id,title));
+				Log.i("Added values: ", id+". "+title);
 //		        v.put("title", title);
 //		        conn.insert(dbName, null,v);
 			}

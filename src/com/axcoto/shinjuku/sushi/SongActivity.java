@@ -113,7 +113,7 @@ public class SongActivity extends RootActivity{
     }
       
 	public String getLocation() {
-		return t.getFilesDir() + "/MP3KaraokeDB.xml";
+		return t.getFilesDir() + "/KaraokeDB.xml";
 	}
     public void dump(String name) {
 //    	SQLiteDatabase s = db.getDatabase();
@@ -130,6 +130,24 @@ public class SongActivity extends RootActivity{
 //    	Log.i("SUSHI", "Location of db is" + location);
 //   		XMLParser parser = new XMLParser(name, db, location);
     	songs = new XMLParser(location).get();    	
+    }
+    
+    public void testButton(View v)
+    {    	
+    	new Thread(new Runnable() {
+    		String state = "RUNNING";
+    		public void run() {    			
+    			songs = new XMLParser(SongActivity.t.getLocation()).get();	
+    			state = "DONE";
+    			for (int i = 0; i < 100; i++)
+    			{
+    				Log.e("DONE: ", "DONE");
+    			}
+    				
+    		}    		
+    	}).start();    	
+    	Toast.makeText(SongActivity.t, "Done processing", Toast.LENGTH_LONG).show();
+    	
     }
     
 	public void initDb() {
@@ -223,7 +241,7 @@ public class SongActivity extends RootActivity{
 				try {
 					songs = new XMLParser(SongActivity.t.getLocation()).get();	
 					SongActivity.syncStatus = STATE_DONE;					
-					
+					Log.i("DONE: ", "Status done");
 					Message msg = mHandler.obtainMessage();
 					msg.arg1 = SongActivity.syncStatus;
 					if (SongActivity.syncStatus == SongActivity.SYNC_PROCESS_SONGBOOK) {

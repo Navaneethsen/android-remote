@@ -22,16 +22,6 @@
         android:layout_marginRight="1dp"
         android:onClick="onSync"
         android:text="@string/label_sync" />
-
-    <EditText
-        android:id="@+id/cmd_keyboard"
-        android:layout_width="150dp" 
-        android:layout_height="48dp"
-        android:layout_centerHorizontal="true"
-        android:hint="@string/song_search"
-        android:textStyle="italic"
-        android:textSize="15sp" >
-        </EditText>
         
     <ListView
         android:id="@+id/song_list"
@@ -39,5 +29,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >        
     </ListView>
+
+    <Button
+        android:id="@+id/cmd_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/cmd_sync"
+        android:onClick="testButton"
+        android:text="Test" />
+
+    <EditText
+        android:id="@+id/cmd_songsearch"
+        android:layout_width="130dp"
+        android:layout_height="48dp"
+        android:layout_alignBaseline="@+id/cmd_test"
+        android:layout_alignBottom="@+id/cmd_test"
+        android:layout_toLeftOf="@+id/cmd_test"
+        android:ems="10"
+        android:hint="@string/song_search"
+        android:textSize="12sp"
+        android:onClick="testButton"
+        android:textStyle="italic" >
+
+        <requestFocus />
+    </EditText>
     
 </RelativeLayout>
