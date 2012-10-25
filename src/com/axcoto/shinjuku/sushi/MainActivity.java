@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.concurrent.CountDownLatch;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -24,6 +25,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
+import com.axcoto.shinjuku.sushi.R.color;
 
 public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_DEVELOPMENT = 1;
@@ -157,15 +159,12 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		RemoteKeyButton b = (RemoteKeyButton) v;
 		key = b.getKeyName();
 		Toast.makeText(getApplicationContext(),b.getKeyName(), Toast.LENGTH_SHORT).show();
-//		b.setOnLongClickListener(new OnLongClickListener() {
-//			@Override
-//			public boolean onLongClick(View v) {
-//			Toast.makeText(getApplicationContext(),b.getKeyName(), Toast.LENGTH_SHORT).show();
-//            return true;
-//			}
-//		});
+		b.setAlpha(0.5f);
+		new CountDownLatch(1).countDown();
+		b.setAlpha(1f);
 		Log.e("SUSHI:: REMOTE", "PRESS " + key);
-		this.execute(key);
+		
+		this.execute(key);		
 	}
 
 	@Override
