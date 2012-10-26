@@ -159,9 +159,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		RemoteKeyButton b = (RemoteKeyButton) v;
 		key = b.getKeyName();
 		Toast.makeText(getApplicationContext(),b.getKeyName(), Toast.LENGTH_SHORT).show();
-		b.setAlpha(0.5f);
 		new CountDownLatch(1).countDown();
-		b.setAlpha(1f);
 		Log.e("SUSHI:: REMOTE", "PRESS " + key);
 		
 		this.execute(key);		
