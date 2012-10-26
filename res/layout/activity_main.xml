@@ -16,8 +16,10 @@
 	        android:id="@+id/cmd_keyboard"
 	        android:layout_width="40dp"
 	        android:layout_height="35dp"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="200dp"
+	        android:layout_alignParentLeft="true"
+	        android:alpha="0"
+	        android:layout_marginLeft="7dp"
+	        android:layout_marginTop="215dp"
 	        android:ems="1"
 	        android:visibility="visible" >
 	
@@ -26,14 +28,14 @@
 	
 	    <com.axcoto.shinjuku.sushi.RemoteKeyButton
 	        android:id="@+id/search_button"
-	        style="@style/RemoteButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="200dp"
+			android:layout_alignParentLeft="true"
+			android:layout_marginLeft="7dp"
+	        android:layout_marginTop="209dp"
 	        android:background="@drawable/new_button"
 	        android:clickable="false"
-	        android:src="@drawable/normal_keyboard" />
+	        android:src="@drawable/ldpi_keyboard" />
 	
 	    <com.axcoto.shinjuku.sushi.RemoteKeyButton
 	        android:id="@+id/cmd_power"
@@ -96,6 +98,17 @@
 	        android:onClick="onRemoteClick"
 	        android:src="@drawable/normal_eject"
 	        remotecontrol:remote_key_name="eject" />
+	     
+	     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	        android:id="@+id/audio_control"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="192dp"
+	        android:layout_toRightOf="@id/search_button"
+	        android:background="@drawable/new_button"
+	        android:clickable="false"
+	        android:src="@drawable/normal_audio" />
 	
 	     
 	</RelativeLayout>
