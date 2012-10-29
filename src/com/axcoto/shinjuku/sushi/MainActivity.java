@@ -17,15 +17,14 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
-import com.axcoto.shinjuku.sushi.R.color;
 
 public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_DEVELOPMENT = 1;
@@ -57,6 +56,9 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		//Adding extra stuff to test	
+		
+		//End of test
 		Resources res = getResources();
 		setTextListener();
 		RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
@@ -158,11 +160,50 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		String key = "";
 		RemoteKeyButton b = (RemoteKeyButton) v;
 		key = b.getKeyName();
-		Toast.makeText(getApplicationContext(),b.getKeyName(), Toast.LENGTH_SHORT).show();
+		if(key.equals("playback") || key.equals("audio_control") || key.equals("settings") || key.equals("extra")) {
+			findViewById(R.id.include_playback).setVisibility(View.GONE);
+			findViewById(R.id.include_nothing).setVisibility(View.GONE);
+			findViewById(R.id.include_settings).setVisibility(View.GONE);
+			findViewById(R.id.include_audio_control).setVisibility(View.GONE);
+			findViewById(R.id.include_extra).setVisibility(View.GONE);
+		}
+		if(key.equals("playback")) {
+			Log.e("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			View x =findViewById(R.id.include_playback);
+			if (x.isShown()== false) {
+				x.setVisibility(View.VISIBLE);
+			}
+		}
+		else if (key.equals("audio_control")) {		
+			Log.e("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			View x =findViewById(R.id.include_audio_control);
+			if (x.isShown()== false) {
+				x.setVisibility(View.VISIBLE);
+			}
+		}
+		else if (key.equals("settings")) {		
+			Log.e("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			View x =findViewById(R.id.include_settings);
+			if (x.isShown()== false) {
+				x.setVisibility(View.VISIBLE);
+			}
+		}
+		else if (key.equals("extra")) {		
+			Log.e("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			View x =findViewById(R.id.include_extra);
+			if (x.isShown()== false) {
+				x.setVisibility(View.VISIBLE);
+			}
+		}		
+		else
+		{		
+		Toast toast = Toast.makeText(getApplicationContext(),b.getKeyName(), Toast.LENGTH_SHORT);
+		toast.setGravity(Gravity.TOP|Gravity.LEFT, 400,700);
+		toast.show();
 		new CountDownLatch(1).countDown();
-		Log.e("SUSHI:: REMOTE", "PRESS " + key);
-		
+		Log.e("SUSHI:: REMOTE", "PRESS " + key);		
 		this.execute(key);		
+		}
 	}
 
 	@Override
