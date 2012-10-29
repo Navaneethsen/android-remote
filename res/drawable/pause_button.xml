@@ -2,6 +2,6 @@
 <selector
   xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true"
-        android:drawable="@color/AntiqueWhite" />
-    <item android:drawable="@android:color/transparent" />
+        android:drawable="@drawable/xpause" />
+    <item android:drawable="@drawable/pause_icon" />
 </selector>
