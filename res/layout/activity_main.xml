@@ -5,13 +5,13 @@
 	android:background="@color/Goldenrod"
 	android:padding="10dp"
 	xmlns:android="http://schemas.android.com/apk/res/android">
+	
 	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:background="@drawable/screen_background"
 	    android:orientation="horizontal" >
-	
 	    <EditText
 	        android:id="@+id/cmd_keyboard"
 	        android:layout_width="40dp"
@@ -192,6 +192,5 @@
 	         android:layout_height="150dp"	         
 	         android:layout_below="@+id/cmd_return"	         	        
 	         layout="@layout/extra" />
-	     
 	</RelativeLayout>
 </LinearLayout>

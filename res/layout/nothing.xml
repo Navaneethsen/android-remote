@@ -11,7 +11,15 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="48dp"
 	        android:background="@android:color/transparent"
-	        android:src="@drawable/nothing_title" />         
+	        android:src="@drawable/nothing_title" />   
+	        
+     <ImageView
+	        android:id="@+id/ceenee_icon"
+	        android:layout_below="@id/nothing_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="90dp"
+	        android:background="@android:color/transparent"
+	        android:src="@drawable/cee_nee2" />  
      
      <ImageView
          android:id="@+id/include_background" 

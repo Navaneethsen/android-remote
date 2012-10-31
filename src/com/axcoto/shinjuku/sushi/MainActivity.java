@@ -144,6 +144,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public void execute(String command) {
 		Remote r = Remote.getInstance();
 		if (r.getConnected()) {
+//			Log.e("Text: ", Boolean.toString(r.getConnection().getReuseAddress()));
 			try {
 				r.execute(command);
 			} catch (IOException e) {
@@ -212,9 +213,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	{
 		gestureScanner.onTouchEvent(me);
 		InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-//		im.toggleSoftInput(1, 0);
-		EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
-		im.hideSoftInputFromWindow(edt.getWindowToken(),0);
+//		EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
+//		im.hideSoftInputFromWindow(edt.getWindowToken(),0);
 
 		return true;
 	}
@@ -357,7 +357,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	
 	public void setTextListener() {
 		EditText t = (EditText) findViewById(R.id.cmd_keyboard);
-		final MainActivity xyz = this;
+		final MainActivity xyz = this;		
 		t.addTextChangedListener(new TextWatcher() {      
 			private long lastKeyTouchedTime = 0;
 			private int keyDistance = 850000000;
@@ -365,11 +365,16 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			private String last = "";
 			@Override
 			public void  onTextChanged  (CharSequence s, int start, int before,
-	        		int count) 	{ 
+	        		int count) 	{				
 	        }
+				
 	    	@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
+	    		InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+				if (im.isAcceptingText()) {
+					Log.e("YEA", "TESTING");
+				}
 			}
 			@Override   
 			public void afterTextChanged(Editable s) {

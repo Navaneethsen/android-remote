@@ -252,7 +252,7 @@ public class Remote {
 
 //		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
 //		Log.e("MAKI:: REMOTE", "Key code of volup" + remoteKeyCode.get(command));
-		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
+//		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
 		String[] part = k.split(",");
 		for (int count=0; count<Integer.parseInt(part[0]); count++) {
 			Log.e("MAKI:: REMOTE", "Send key " + part[0]);
@@ -264,7 +264,7 @@ public class Remote {
 		this.ip = ip;
 		connected = false;
 		try {
-			clientSocket = new Socket(this.ip, Remote.TCP_PORT);
+			clientSocket = new Socket(this.ip, Remote.TCP_PORT);			
 			outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			connected = true;
 		} catch (IOException io) {
@@ -276,8 +276,8 @@ public class Remote {
 	public Socket getConnection() {
 		return clientSocket;
 	}
-
-	public boolean getConnected() {
+	
+	public boolean getConnected() {		
 		return this.connected;
 	}
 	
