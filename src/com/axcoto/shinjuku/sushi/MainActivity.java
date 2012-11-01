@@ -18,8 +18,10 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -30,7 +32,7 @@ import android.widget.ToggleButton;
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
 
-public class MainActivity extends RootActivity implements OnGestureListener{
+public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_DEVELOPMENT = 1;
 	final static int PHASE_TESTING = 2;
 	final static int PHASE_PRODUCTION = 3;
@@ -160,21 +162,21 @@ public class MainActivity extends RootActivity implements OnGestureListener{
 		}
 	}
 
-	public void toggle(View v)
-	{
-		ScrollView x = (ScrollView) findViewById(R.id.ScrollView01);
-		LinearLayout y = (LinearLayout) findViewById(R.id.LinearLayout01);
-		ToggleButton t = (ToggleButton) v;
-		if (t.isChecked()) {
-			setContentView(R.layout.activity_main2);
-			ToggleButton z = (ToggleButton) findViewById(R.id.toggle2);
-			z.setChecked(true);
-			}
-		else 
-		{
-			setContentView(R.layout.activity_main);			
-		}
-	}
+//	public void toggle(View v)
+//	{
+//		ScrollView x = (ScrollView) findViewById(R.id.ScrollView01);
+//		LinearLayout y = (LinearLayout) findViewById(R.id.LinearLayout01);
+//		ToggleButton t = (ToggleButton) v;
+//		if (t.isChecked()) {
+//			setContentView(R.layout.activity_main2);
+//			ToggleButton z = (ToggleButton) findViewById(R.id.toggle2);
+//			z.setChecked(true);
+//			}
+//		else 
+//		{
+//			setContentView(R.layout.activity_main);			
+//		}
+//	}
 	
 	public void onRemoteClick(View v) {
 //		setButtonHoldListener(v);
@@ -394,10 +396,10 @@ public class MainActivity extends RootActivity implements OnGestureListener{
 	    	@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-	    		InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-				if (im.isAcceptingText()) {
-					Log.e("YEA", "TESTING");
-				}
+//	    		InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//				if (im.isAcceptingText()) {
+//					Log.e("YEA", "TESTING");
+//				}
 			}
 			@Override   
 			public void afterTextChanged(Editable s) {
@@ -416,7 +418,7 @@ public class MainActivity extends RootActivity implements OnGestureListener{
 				
 				if (newText.length()-currentText.length() == 1)  {
 					if (zz<this.keyDistance && inSameGroup(old,last)==true){
-					new CountDownTimer(1000,1000) {
+					new CountDownTimer(500,1000) {
 			            @Override
 			            public void onTick(long arg0) {}
 			            @Override
@@ -442,6 +444,31 @@ public class MainActivity extends RootActivity implements OnGestureListener{
 				old = last;
 			}			
 		});
+	}
+	
+//	public void setOnKeyListener(View v) {
+//		EditText edt = (EditText) v;
+//		edt.setOnKeyListener(new OnKeyListener() {
+//
+//			@Override
+//			public boolean onKey(View arg0, int arg1, KeyEvent arg2) {
+//				// TODO Auto-generated method stub
+//				return false;
+//			}
+//			
+//		});
+//	}
+
+	public void onKeyboardTouch(View v) {
+		findViewById(R.id.hide_button).setVisibility(View.VISIBLE);
+	}
+	
+	public void onHideTouch(View v) {
+		EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
+		InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+		if (im.isAcceptingText()) im.hideSoftInputFromWindow(edt.getWindowToken(),0);
+		v.setVisibility(View.GONE);
+		
 	}
 }
 

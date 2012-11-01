@@ -113,7 +113,7 @@
 	         android:src="@drawable/blue_button" />
      
      <ImageView
-         android:id="@+id/include_background_extra" 
+         android:id="@+id/include_background" 
          android:layout_below="@id/extra_title"
          android:layout_width="wrap_content"
          android:layout_height="105dp"
