@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>    
+<LinearLayout	    
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
+	    android:id="@+id/LinearLayout01"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:background="@color/Goldenrod"
+		android:padding="10dp">       
+		<RelativeLayout			    
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+			    android:background="@drawable/screen_background"
+			    android:orientation="horizontal" >	    
+		
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/cmd_power"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="7dp"
+			        android:layout_marginTop="7dp"
+			        android:background="@drawable/power_button"
+			        android:onClick="onRemoteClick"
+			        android:src="@android:color/transparent"
+			        remotecontrol:remote_key_name="power" />
+		
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/cmd_menu"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="7dp"
+			        android:layout_toRightOf="@id/cmd_power"
+			        android:background="@drawable/menu_button"
+			        android:onClick="onRemoteClick"
+			        android:src="@android:color/transparent"
+			        remotecontrol:remote_key_name="menu" />
+		
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/cmd_home"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="7dp"
+			        android:layout_toRightOf="@id/cmd_menu"
+			        android:background="@drawable/home_button"
+			        android:onClick="onRemoteClick"
+			        android:src="@android:color/transparent"
+			        remotecontrol:remote_key_name="home" />
+		
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/cmd_return"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="7dp"
+			        android:layout_toRightOf="@id/cmd_home"
+			        android:background="@drawable/return_button"
+			        android:onClick="onRemoteClick"
+			        android:src="@android:color/transparent"
+			        remotecontrol:remote_key_name="return" />
+		
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/cmd_eject"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="7dp"
+			        android:layout_toRightOf="@id/cmd_return"
+			        android:background="@drawable/eject_button"
+			        android:onClick="onRemoteClick"
+			        android:src="@android:color/transparent"
+			        remotecontrol:remote_key_name="eject" />
+		
+			    <ImageView
+			        android:id="@+id/base"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_centerHorizontal="true"
+			        android:src="@drawable/normal_base"
+			        android:visibility="invisible" />
+		
+			    <include
+			        android:id="@+id/include_nothing"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@id/cmd_return"
+			        android:layout_marginTop="20dp"
+			        layout="@layout/nothing" />
+		
+			    <include
+			        android:id="@+id/include_playback"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@id/cmd_return"
+			        android:layout_marginTop="20dp"
+			        layout="@layout/playback" />
+		
+			    <include
+			        android:id="@+id/include_audio_control"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@id/cmd_return"
+			        android:layout_marginTop="20dp"
+			        layout="@layout/audio_control" />
+		
+			    <include
+			        android:id="@+id/include_settings"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@id/cmd_return"
+			        android:layout_marginTop="20dp"
+			        layout="@layout/settings" />
+		
+			    <include
+			        android:id="@+id/include_extra"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@id/cmd_return"
+			        android:layout_marginTop="20dp"
+			        layout="@layout/extra" />
+		
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/enter"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_alignRight="@+id/cmd_return"
+			        android:background="@android:color/transparent"
+			        android:onClick="onRemoteClick"
+			        android:src="@drawable/enter_button"
+			        android:visibility="visible"
+			        remotecontrol:remote_key_name="enter" />
+		
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/audio_control"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_alignParentRight="true"
+			        android:layout_marginTop="205dp"
+			        android:background="@drawable/new_button"
+			        android:onClick="onRemoteClick"
+			        android:src="@drawable/normal_audio"
+			        remotecontrol:remote_key_name="audio_control" />
+		
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/playback"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_alignParentRight="true"
+			        android:layout_below="@id/audio_control"
+			        android:layout_marginTop="7dp"
+			        android:background="@drawable/new_button"
+			        android:onClick="onRemoteClick"
+			        android:src="@drawable/normal_playback"
+			        remotecontrol:remote_key_name="playback" />			    			   
+		
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/search_button"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@id/playback"
+			        android:layout_marginTop="25dp"
+					android:layout_marginRight="2dp"
+			        android:layout_alignParentRight="true"
+			        android:clickable="false"
+			        android:background="@drawable/new_button"
+			        android:src="@drawable/normal_keyboard" />
+			    
+			    <EditText
+			        android:id="@+id/cmd_keyboard"
+			        android:layout_width="40dp"
+			        android:layout_height="30dp"
+			        android:layout_below="@id/playback"
+			        android:layout_toLeftOf="@id/search_button"
+			        android:layout_marginRight="3dp"			        
+			        android:visibility="visible" >
+		
+			        <requestFocus />
+			    </EditText>
+			    
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/settings"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@id/search_button"
+			        android:layout_marginTop="13dp"
+			        android:layout_alignParentRight="true"
+			        android:background="@drawable/new_button"
+			        android:onClick="onRemoteClick"
+			        android:src="@drawable/normal_settings"
+			        remotecontrol:remote_key_name="settings" />
+			    
+			    
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/etc"
+			        android:layout_width="50dp"
+			        android:layout_height="50dp"
+			        android:layout_alignParentRight="true"
+			        android:layout_below="@id/settings"
+			        android:background="@drawable/new_button"
+			        android:onClick="onRemoteClick"
+			        android:src="@drawable/normal_extra"
+			        android:layout_marginTop="7dp"
+			        remotecontrol:remote_key_name="extra" />			   
+
+			</RelativeLayout>	
+	</LinearLayout>

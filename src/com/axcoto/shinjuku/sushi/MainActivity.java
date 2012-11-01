@@ -22,11 +22,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
 
-public class MainActivity extends RootActivity implements OnGestureListener {
+public class MainActivity extends RootActivity implements OnGestureListener{
 	final static int PHASE_DEVELOPMENT = 1;
 	final static int PHASE_TESTING = 2;
 	final static int PHASE_PRODUCTION = 3;
@@ -57,7 +61,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		//Adding extra stuff to test	
-		
+//		this.findViewById(R.id.ScrollView01).setVisibility(View.VISIBLE);
 		//End of test
 		Resources res = getResources();
 		setTextListener();
@@ -156,6 +160,22 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		}
 	}
 
+	public void toggle(View v)
+	{
+		ScrollView x = (ScrollView) findViewById(R.id.ScrollView01);
+		LinearLayout y = (LinearLayout) findViewById(R.id.LinearLayout01);
+		ToggleButton t = (ToggleButton) v;
+		if (t.isChecked()) {
+			setContentView(R.layout.activity_main2);
+			ToggleButton z = (ToggleButton) findViewById(R.id.toggle2);
+			z.setChecked(true);
+			}
+		else 
+		{
+			setContentView(R.layout.activity_main);			
+		}
+	}
+	
 	public void onRemoteClick(View v) {
 //		setButtonHoldListener(v);
 		String key = "";
@@ -169,28 +189,28 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			findViewById(R.id.include_extra).setVisibility(View.GONE);
 		}
 		if(key.equals("playback")) {
-			Log.e("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			Log.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
 			View x =findViewById(R.id.include_playback);
 			if (x.isShown()== false) {
 				x.setVisibility(View.VISIBLE);
 			}
 		}
 		else if (key.equals("audio_control")) {		
-			Log.e("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			Log.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
 			View x =findViewById(R.id.include_audio_control);
 			if (x.isShown()== false) {
 				x.setVisibility(View.VISIBLE);
 			}
 		}
 		else if (key.equals("settings")) {		
-			Log.e("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			Log.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
 			View x =findViewById(R.id.include_settings);
 			if (x.isShown()== false) {
 				x.setVisibility(View.VISIBLE);
 			}
 		}
 		else if (key.equals("extra")) {		
-			Log.e("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			Log.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
 			View x =findViewById(R.id.include_extra);
 			if (x.isShown()== false) {
 				x.setVisibility(View.VISIBLE);
@@ -198,11 +218,11 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		}		
 		else
 		{		
-		Toast toast = Toast.makeText(getApplicationContext(),b.getKeyName(), Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.TOP|Gravity.LEFT, 400,700);
-		toast.show();
-		new CountDownLatch(1).countDown();
-		Log.e("SUSHI:: REMOTE", "PRESS " + key);		
+//		Toast toast = Toast.makeText(getApplicationContext(),b.getKeyName(), Toast.LENGTH_SHORT);
+//		toast.setGravity(Gravity.TOP|Gravity.LEFT, 400,700);
+//		toast.show();
+//		new CountDownLatch(1).countDown();
+		Log.i("SUSHI:: REMOTE", "PRESS " + key);		
 		this.execute(key);		
 		}
 	}
@@ -211,8 +231,12 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public boolean onTouchEvent(MotionEvent me)
 
 	{
-		gestureScanner.onTouchEvent(me);
-		InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+		gestureScanner.onTouchEvent(me);		
+				
+//		if (im.isAcceptingText()) 
+//			this.findViewById(R.id.ScrollView01).setVisibility(View.VISIBLE);
+//		else
+//			this.findViewById(R.id.ScrollView01).setVisibility(View.GONE);
 //		EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
 //		im.hideSoftInputFromWindow(edt.getWindowToken(),0);
 
@@ -236,35 +260,34 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-			float velocityY) {
-		
-		float dX = e2.getX()-e1.getX();
-		float dY = e1.getY()-e2.getY();
-		if (Math.abs(dY)<SWIPE_MAX_OFF_PATH && 
-			Math.abs(velocityX)>=SWIPE_THRESHOLD_VELOCITY &&
-			Math.abs(dX)>=SWIPE_MIN_DISTANCE ) {
-			if (dX>0) {
-//				Toast.makeText(getApplicationContext(), "Right Swipe", Toast.LENGTH_SHORT).show();
-				this.execute("right");
-			} else {
-//				Toast.makeText(getApplicationContext(), "Left Swipe", Toast.LENGTH_SHORT).show();
-				this.execute("left");
-			}
+			float velocityY) {	
+			float dX = e2.getX()-e1.getX();
+			float dY = e1.getY()-e2.getY();
+			if (Math.abs(dY)<SWIPE_MAX_OFF_PATH && 
+				Math.abs(velocityX)>=SWIPE_THRESHOLD_VELOCITY &&
+				Math.abs(dX)>=SWIPE_MIN_DISTANCE ) {
+				if (dX>0) {
+	//				Toast.makeText(getApplicationContext(), "Right Swipe", Toast.LENGTH_SHORT).show();
+					this.execute("right");
+				} else {
+	//				Toast.makeText(getApplicationContext(), "Left Swipe", Toast.LENGTH_SHORT).show();
+					this.execute("left");
+				}
+				return true;
+			} 
+			else if (Math.abs(dX)<SWIPE_MAX_OFF_PATH &&
+					Math.abs(velocityY)>=SWIPE_THRESHOLD_VELOCITY &&
+					Math.abs(dY)>=SWIPE_MIN_DISTANCE ) {
+				if (dY>0) {
+	//				Toast.makeText(getApplicationContext(), "Up Swipe", Toast.LENGTH_SHORT).show();
+					this.execute("up");
+				} else {
+	//				Toast.makeText(getApplicationContext(), "Down Swipe", Toast.LENGTH_SHORT).show();
+					this.execute("down");
+				}
 			return true;
-		} 
-		else if (Math.abs(dX)<SWIPE_MAX_OFF_PATH &&
-				Math.abs(velocityY)>=SWIPE_THRESHOLD_VELOCITY &&
-				Math.abs(dY)>=SWIPE_MIN_DISTANCE ) {
-			if (dY>0) {
-//				Toast.makeText(getApplicationContext(), "Up Swipe", Toast.LENGTH_SHORT).show();
-				this.execute("up");
-			} else {
-//				Toast.makeText(getApplicationContext(), "Down Swipe", Toast.LENGTH_SHORT).show();
-				this.execute("down");
 			}
-		return true;
-		}
-		return false;
+			return false;		
 	}
 
 

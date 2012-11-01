@@ -10,7 +10,7 @@
      <ImageView
 	        android:id="@+id/extra_title"
 	        android:layout_width="wrap_content"
-	        android:layout_height="48dp"
+	        android:layout_height="wrap_content"
 	        android:background="@android:color/transparent"
 	        android:src="@drawable/extra_title" />  
 	        
@@ -111,12 +111,12 @@
 	         remotecontrol:remote_key_name="blue"  
 	         android:onClick="onRemoteClick"
 	         android:src="@drawable/blue_button" />
+     
      <ImageView
-         android:id="@+id/include_background" 
-         android:layout_alignParentBottom="true"
-         android:layout_marginTop="42dp"
+         android:id="@+id/include_background_extra" 
+         android:layout_below="@id/extra_title"
          android:layout_width="wrap_content"
-         android:layout_height="220dp"
+         android:layout_height="105dp"
          android:src="@drawable/background" 
          android:clickable="false"    />
          

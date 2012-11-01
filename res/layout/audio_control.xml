@@ -10,13 +10,13 @@
      <ImageView
 	        android:id="@+id/audio_control_title"
 	        android:layout_width="wrap_content"
-	        android:layout_height="48dp"
-	        android:background="@android:color/transparent"
+	        android:layout_height="wrap_content"	        
 	        android:src="@drawable/audio_control_title" />      
 	        
      <com.axcoto.shinjuku.sushi.RemoteKeyButton
 	         android:id="@+id/cmd_voldown"
-	         android:layout_marginTop="46dp"
+	         android:layout_below="@id/audio_control_title"
+	         android:layout_marginTop="2dp"
 	         android:layout_marginLeft="2dp"
 	         android:layout_width="146dp"
 	         android:layout_height="48dp"	         
@@ -27,7 +27,8 @@
      
      <com.axcoto.shinjuku.sushi.RemoteKeyButton
 	         android:id="@+id/cmd_volup"
-	         android:layout_marginTop="46dp"
+	         android:layout_marginTop="2dp"
+	         android:layout_below="@id/audio_control_title"
 	         android:layout_width="146dp"
 	         android:layout_height="48dp"
 	         android:layout_toRightOf="@id/cmd_voldown"
@@ -63,11 +64,10 @@
 	         android:src="@android:color/transparent" />
      
      <ImageView
-         android:id="@+id/include_background" 
-         android:layout_alignParentBottom="true"
-         android:layout_marginTop="42dp"
+         android:id="@+id/include_background_audio" 
+         android:layout_below="@id/audio_control_title"         
          android:layout_width="wrap_content"
-         android:layout_height="220dp"
+         android:layout_height="105dp"
          android:src="@drawable/background" 
          android:clickable="false"    />
          

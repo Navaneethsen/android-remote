@@ -10,19 +10,9 @@
      <ImageView
 	        android:id="@+id/settings_title"
 	        android:layout_width="wrap_content"
-	        android:layout_height="48dp"
+	        android:layout_height="wrap_content"
 	        android:background="@android:color/transparent"
-	        android:src="@drawable/settings_title" /> 
-	        
-     <ImageView
-         android:id="@+id/include_background" 
-         android:layout_alignParentBottom="true"
-         android:layout_marginTop="42dp"
-         android:layout_width="match_parent"
-         android:layout_height="220dp"
-         android:src="@android:color/transparent"
-         android:background="@drawable/blue_background"
-         android:clickable="false"    />
+	        android:src="@drawable/settings_title" /> 	       
      
      <com.axcoto.shinjuku.sushi.RemoteKeyButton
 	         android:id="@+id/cmd_subtitle"
@@ -93,4 +83,13 @@
 	         android:onClick="onRemoteClick"	
 	         android:src="@drawable/setup_button" />                  
      
+      <ImageView
+         android:id="@+id/include_background" 
+         android:layout_below="@id/settings_title"         
+         android:layout_width="match_parent"
+         android:layout_height="105dp"
+         android:src="@android:color/transparent"
+         android:background="@drawable/blue_background"
+         android:clickable="false"    />
+      
 </RelativeLayout>
