@@ -263,32 +263,32 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 			float velocityY) {	
-			float dX = e2.getX()-e1.getX();
-			float dY = e1.getY()-e2.getY();
-			if (Math.abs(dY)<SWIPE_MAX_OFF_PATH && 
-				Math.abs(velocityX)>=SWIPE_THRESHOLD_VELOCITY &&
-				Math.abs(dX)>=SWIPE_MIN_DISTANCE ) {
-				if (dX>0) {
-	//				Toast.makeText(getApplicationContext(), "Right Swipe", Toast.LENGTH_SHORT).show();
-					this.execute("right");
-				} else {
-	//				Toast.makeText(getApplicationContext(), "Left Swipe", Toast.LENGTH_SHORT).show();
-					this.execute("left");
-				}
-				return true;
-			} 
-			else if (Math.abs(dX)<SWIPE_MAX_OFF_PATH &&
-					Math.abs(velocityY)>=SWIPE_THRESHOLD_VELOCITY &&
-					Math.abs(dY)>=SWIPE_MIN_DISTANCE ) {
-				if (dY>0) {
-	//				Toast.makeText(getApplicationContext(), "Up Swipe", Toast.LENGTH_SHORT).show();
-					this.execute("up");
-				} else {
-	//				Toast.makeText(getApplicationContext(), "Down Swipe", Toast.LENGTH_SHORT).show();
-					this.execute("down");
-				}
-			return true;
-			}
+//			float dX = e2.getX()-e1.getX();
+//			float dY = e1.getY()-e2.getY();
+//			if (Math.abs(dY)<SWIPE_MAX_OFF_PATH && 
+//				Math.abs(velocityX)>=SWIPE_THRESHOLD_VELOCITY &&
+//				Math.abs(dX)>=SWIPE_MIN_DISTANCE ) {
+//				if (dX>0) {
+//	//				Toast.makeText(getApplicationContext(), "Right Swipe", Toast.LENGTH_SHORT).show();
+//					this.execute("right");
+//				} else {
+//	//				Toast.makeText(getApplicationContext(), "Left Swipe", Toast.LENGTH_SHORT).show();
+//					this.execute("left");
+//				}
+//				return true;
+//			} 
+//			else if (Math.abs(dX)<SWIPE_MAX_OFF_PATH &&
+//					Math.abs(velocityY)>=SWIPE_THRESHOLD_VELOCITY &&
+//					Math.abs(dY)>=SWIPE_MIN_DISTANCE ) {
+//				if (dY>0) {
+//	//				Toast.makeText(getApplicationContext(), "Up Swipe", Toast.LENGTH_SHORT).show();
+//					this.execute("up");
+//				} else {
+//	//				Toast.makeText(getApplicationContext(), "Down Swipe", Toast.LENGTH_SHORT).show();
+//					this.execute("down");
+//				}
+//			return true;
+//			}
 			return false;		
 	}
 

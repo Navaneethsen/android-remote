@@ -113,7 +113,7 @@ public class SongActivity extends RootActivity{
     }
       
 	public String getLocation() {
-		return t.getFilesDir() + "/KaraokeDB.xml";
+		return t.getFilesDir() + "/MP3KaraokeDB.xml";
 	}
     public void dump(String name) {
 //    	SQLiteDatabase s = db.getDatabase();
@@ -133,17 +133,15 @@ public class SongActivity extends RootActivity{
     }
     
     public void testButton(View v)
-    {    	
+    {    	    	
     	new Thread(new Runnable() {
     		String state = "RUNNING";
     		public void run() {    			
     			songs = new XMLParser(SongActivity.t.getLocation()).get();	
-    			state = "DONE";
-    			for (int i = 0; i < 100; i++)
-    			{
-    				Log.e("DONE: ", "DONE");
-    			}
-    				
+    			songAdapter = new SongAdapter(SongActivity.t, R.layout.song_item, songs);
+    			songAdapter.notifyDataSetChanged();
+    			songList.setAdapter(songAdapter);
+    			state = "DONE";    				
     		}    		
     	}).start();    	
     	Toast.makeText(SongActivity.t, "Done processing", Toast.LENGTH_LONG).show();
