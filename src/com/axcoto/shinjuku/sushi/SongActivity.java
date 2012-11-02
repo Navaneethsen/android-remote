@@ -4,11 +4,14 @@ package com.axcoto.shinjuku.sushi;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Random;
@@ -84,16 +87,11 @@ public class SongActivity extends RootActivity{
         XMLReader xr = sp.getXMLReader();
         XMLParser myXMLHandler = new XMLParser();
         xr.setContentHandler(myXMLHandler);
-        BufferedReader reader = new BufferedReader( new FileReader (location),2048);
-        String current = reader.readLine();
-        StringBuilder s = new StringBuilder();
-        while( ( current = reader.readLine() ) != null ) {
-        	s.append(current);        	
-        }                
-        reader.close();
-        InputSource inStream = new InputSource();
-        inStream.setCharacterStream(new StringReader(s.toString()));        
-        xr.parse(inStream);
+        InputStream inStream = new FileInputStream(new File(location));
+        Reader reader = new InputStreamReader(inStream,"UTF-8");        
+        InputSource is = new InputSource(reader);
+        is.setEncoding("UTF-8");
+        xr.parse(is);
         Log.i("DONE: ", "DONE");
 //        songs = myXMLHandler.getSongs();        
 //        songs = new XMLParser(location).get();
@@ -143,7 +141,7 @@ public class SongActivity extends RootActivity{
       
 	public String getLocation() {
 //		return t.getFilesDir() + "/KaraokeDB.xml";
-		return "/sdcard/4mbKaraokeDB.xml";
+		return "/sdcard/2mbKaraokeDB.xml";
 	}
 	
     public void dump(String name) {
