@@ -6,16 +6,27 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 //import android.content.ContentValues;
 //import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -66,9 +77,22 @@ public class SongActivity extends RootActivity{
 	public static final int SYNC_DONE = 5;
 	public static SongActivity t;
 	
-	public void getSong(String location)
+	public ArrayList<Song> getSong(String location) throws ParserConfigurationException, SAXException, IOException
 	{
-        songs = new XMLParser(location).get(); 
+		SAXParserFactory spf = SAXParserFactory.newInstance();
+        SAXParser sp = spf.newSAXParser();
+        XMLReader xr = sp.getXMLReader();
+        XMLParser myXMLHandler = new XMLParser();
+        xr.setContentHandler(myXMLHandler);
+        BufferedReader reader = new BufferedReader( new FileReader (location));
+        String current = reader.readLine();
+        current = reader.readLine();
+        InputSource inStream = new InputSource();
+        inStream.setCharacterStream(new StringReader(current));
+        xr.parse(inStream);
+        songs = myXMLHandler.getSongs();        
+//        songs = new XMLParser(location).get();
+        return songs;
 	}	
 
 	@Override
@@ -77,7 +101,6 @@ public class SongActivity extends RootActivity{
         setContentView(R.layout.activity_song);
         SongActivity.t = this;
         final Remote r = Remote.getInstance();
-//        getSong(this.getFilesDir().toString()+"/Mp3KaraokeDB.xml");       
 //		We need to keep this on during device scanning--REMOVED FOR CRASH TEST
 //		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		songList = (ListView) findViewById(R.id.song_list);
@@ -107,13 +130,14 @@ public class SongActivity extends RootActivity{
 			}
 		});
 		songs = new ArrayList<Song>();
+//		getSong(this.getLocation());
 		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
 		songAdapter.notifyDataSetChanged();
 		songList.setAdapter(songAdapter);
     }
       
 	public String getLocation() {
-		return t.getFilesDir() + "/MP3KaraokeDB.xml";
+		return t.getFilesDir() + "/KaraokeDB.xml";
 	}
     public void dump(String name) {
 //    	SQLiteDatabase s = db.getDatabase();
@@ -129,24 +153,37 @@ public class SongActivity extends RootActivity{
     	}    		
 //    	Log.i("SUSHI", "Location of db is" + location);
 //   		XMLParser parser = new XMLParser(name, db, location);
-    	songs = new XMLParser(location).get();    	
     }
     
-    public void testButton(View v)
+    public void refresh() throws ParserConfigurationException, SAXException, IOException {
+    	
+    	songs = getSong(this.getLocation());
+//    	Log.i("TOTAL AMOUNT: ", Integer.toString(songs.size()));
+    	songAdapter = new SongAdapter(this, R.layout.song_item, songs);
+		songAdapter.notifyDataSetChanged();
+		songList.setAdapter(songAdapter);
+		
+	}
+
+    public void testButton(View v) throws ParserConfigurationException, SAXException, IOException
     {    	    	
-    	new Thread(new Runnable() {
-    		String state = "RUNNING";
-    		public void run() {    			
-    			songs = new XMLParser(SongActivity.t.getLocation()).get();	
-    			songAdapter = new SongAdapter(SongActivity.t, R.layout.song_item, songs);
-    			songAdapter.notifyDataSetChanged();
-    			songList.setAdapter(songAdapter);
-    			state = "DONE";    				
-    		}    		
-    	}).start();    	
-    	Toast.makeText(SongActivity.t, "Done processing", Toast.LENGTH_LONG).show();
+       refresh();     
+        
+//    	Toast.makeText(SongActivity.t, "Done processing", Toast.LENGTH_LONG).show();
     	
     }
+    
+    private class UpdateSongBookTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String...params) {        	
+//        	songAdapter = new SongAdapter(SongActivity.t, R.layout.song_item, getSong(SongActivity.t.getLocation()));
+        	return "DONE BACKGROUND WORK";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+//          songList.setAdapter(songAdapter);
+        }	
+      }
     
 	public void initDb() {
 		db = Db.getInstance(this);
@@ -237,7 +274,7 @@ public class SongActivity extends RootActivity{
 			mState = STATE_RUNNING;			
 			while (mState == STATE_RUNNING) {				
 				try {
-					songs = new XMLParser(SongActivity.t.getLocation()).get();	
+//					songs = new XMLParser(SongActivity.t.getLocation()).get();	
 					SongActivity.syncStatus = STATE_DONE;					
 					Log.i("DONE: ", "Status done");
 					Message msg = mHandler.obtainMessage();
