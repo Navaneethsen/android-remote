@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import com.axcoto.shinjuku.sushi.SongActivity;
+
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class XMLParser extends DefaultHandler{
@@ -15,10 +20,15 @@ public class XMLParser extends DefaultHandler{
 	String currentName= "";
 	String currentValue= "";
 	Song song = null;
-	private ArrayList<Song> list = new ArrayList<Song>();
+	Db db = SongActivity.t.getDb();
 	
-	public ArrayList<Song> getSongs() {
-		return list;
+	public XMLParser() {
+		SQLiteDatabase conn = db.getDatabase();	  
+    	conn.execSQL("DELETE FROM hd");
+    	conn.execSQL("DELETE FROM mp3");
+	}
+	public Db getSongs() {
+		return db;
 	}
 	
 	 @Override
@@ -44,8 +54,11 @@ public class XMLParser extends DefaultHandler{
 	 
 	        /** set value */
 	        if (qName.equalsIgnoreCase("item")) {
-	        	song = new Song(currentId,currentName);
-	            list.add(song);
+	        	SQLiteDatabase conn = db.getDatabase();	
+	        	ContentValues v = new ContentValues();
+	        	v.put("id", currentId);
+	        	v.put("title", currentName);
+	        	conn.insert("hd", null, v);
 	        }
 	        else
 	            {}

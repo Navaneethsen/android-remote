@@ -17,16 +17,15 @@
 	        android:id="@+id/ceenee_icon"
 	        android:layout_below="@id/nothing_title"
 	        android:layout_width="wrap_content"
-	        android:layout_height="90dp"
-	        android:background="@android:color/transparent"
-	        android:src="@drawable/cee_nee2" />  
+	        android:layout_height="wrap_content"
+	        android:background="@android:color/black"
+	        android:src="@drawable/ceenee" />  
      
      <ImageView
          android:id="@+id/include_background" 
-         android:layout_alignParentBottom="true"
-         android:layout_marginTop="42dp"
+         android:layout_below="@id/nothing_title"         
          android:layout_width="wrap_content"
-         android:layout_height="220dp"
+         android:layout_height="107dp"
          android:src="@drawable/background" 
          android:clickable="false"    />
          

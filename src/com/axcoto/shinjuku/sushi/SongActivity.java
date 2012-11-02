@@ -84,13 +84,18 @@ public class SongActivity extends RootActivity{
         XMLReader xr = sp.getXMLReader();
         XMLParser myXMLHandler = new XMLParser();
         xr.setContentHandler(myXMLHandler);
-        BufferedReader reader = new BufferedReader( new FileReader (location));
+        BufferedReader reader = new BufferedReader( new FileReader (location),2048);
         String current = reader.readLine();
-        current = reader.readLine();
+        StringBuilder s = new StringBuilder();
+        while( ( current = reader.readLine() ) != null ) {
+        	s.append(current);        	
+        }                
+        reader.close();
         InputSource inStream = new InputSource();
-        inStream.setCharacterStream(new StringReader(current));
+        inStream.setCharacterStream(new StringReader(s.toString()));        
         xr.parse(inStream);
-        songs = myXMLHandler.getSongs();        
+        Log.i("DONE: ", "DONE");
+//        songs = myXMLHandler.getSongs();        
 //        songs = new XMLParser(location).get();
         return songs;
 	}	
@@ -104,7 +109,7 @@ public class SongActivity extends RootActivity{
 //		We need to keep this on during device scanning--REMOVED FOR CRASH TEST
 //		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		songList = (ListView) findViewById(R.id.song_list);
-		
+		initDb();
 		Log.e("SUSHI:: DEVICE", "Create activity");
 		final SongActivity t = this;		
 		
@@ -137,8 +142,10 @@ public class SongActivity extends RootActivity{
     }
       
 	public String getLocation() {
-		return t.getFilesDir() + "/KaraokeDB.xml";
+//		return t.getFilesDir() + "/KaraokeDB.xml";
+		return "/sdcard/4mbKaraokeDB.xml";
 	}
+	
     public void dump(String name) {
 //    	SQLiteDatabase s = db.getDatabase();
     	songs = new ArrayList<Song>();
@@ -156,12 +163,14 @@ public class SongActivity extends RootActivity{
     }
     
     public void refresh() throws ParserConfigurationException, SAXException, IOException {
-    	
+    	long t = System.currentTimeMillis();
     	songs = getSong(this.getLocation());
+    	long t2 = System.currentTimeMillis();
+    	Log.i("Total TIME: ", Long.toString(t2-t));
 //    	Log.i("TOTAL AMOUNT: ", Integer.toString(songs.size()));
-    	songAdapter = new SongAdapter(this, R.layout.song_item, songs);
-		songAdapter.notifyDataSetChanged();
-		songList.setAdapter(songAdapter);
+//    	songAdapter = new SongAdapter(this, R.layout.song_item, songs);
+//		songAdapter.notifyDataSetChanged();
+//		songList.setAdapter(songAdapter);
 		
 	}
 
@@ -188,6 +197,10 @@ public class SongActivity extends RootActivity{
 	public void initDb() {
 		db = Db.getInstance(this);
 		db.open();
+	}
+	
+	public Db getDb() {
+		return db;
 	}
 
 //	public void runTest() {
