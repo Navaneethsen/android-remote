@@ -93,7 +93,7 @@ public class SongActivity extends RootActivity{
         is.setEncoding("UTF-8");
         xr.parse(is);
         Log.i("DONE: ", "DONE");
-//        songs = myXMLHandler.getSongs();        
+        songs = myXMLHandler.getSongs();        
 //        songs = new XMLParser(location).get();
         return songs;
 	}	
@@ -135,13 +135,13 @@ public class SongActivity extends RootActivity{
 		songs = new ArrayList<Song>();
 //		getSong(this.getLocation());
 		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
-		songAdapter.notifyDataSetChanged();
+//		songAdapter.notifyDataSetChanged();
 		songList.setAdapter(songAdapter);
     }
       
 	public String getLocation() {
 //		return t.getFilesDir() + "/KaraokeDB.xml";
-		return "/sdcard/2mbKaraokeDB.xml";
+		return "/sdcard/4mbKaraokeDB.xml";
 	}
 	
     public void dump(String name) {
@@ -166,9 +166,9 @@ public class SongActivity extends RootActivity{
     	long t2 = System.currentTimeMillis();
     	Log.i("Total TIME: ", Long.toString(t2-t));
 //    	Log.i("TOTAL AMOUNT: ", Integer.toString(songs.size()));
-//    	songAdapter = new SongAdapter(this, R.layout.song_item, songs);
+    	songAdapter = new SongAdapter(this, R.layout.song_item, songs);
 //		songAdapter.notifyDataSetChanged();
-//		songList.setAdapter(songAdapter);
+		songList.setAdapter(songAdapter);
 		
 	}
 

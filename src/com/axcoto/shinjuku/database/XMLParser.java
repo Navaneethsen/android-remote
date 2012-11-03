@@ -20,15 +20,21 @@ public class XMLParser extends DefaultHandler{
 	String currentName= "";
 	String currentValue= "";
 	Song song = null;
+	ArrayList<Song> list;
 	Db db = SongActivity.t.getDb();
 	
 	public XMLParser() {
-		SQLiteDatabase conn = db.getDatabase();	  
-    	conn.execSQL("DELETE FROM hd");
-    	conn.execSQL("DELETE FROM mp3");
+//		SQLiteDatabase conn = db.getDatabase();	  
+//    	conn.execSQL("DELETE FROM hd");
+//    	conn.execSQL("DELETE FROM mp3");
+		list = new ArrayList<Song>();
 	}
-	public Db getSongs() {
-		return db;
+//	public Db getSongs() {
+//		return db;
+//	}
+	
+	public ArrayList<Song> getSongs() {
+		return list;
 	}
 	
 	 @Override
@@ -41,7 +47,7 @@ public class XMLParser extends DefaultHandler{
 	        currentName = attributes.getValue("name");
 	        if (qName.equals("Karaoke")) {}
 	        if (qName.equals("item")) {
-	            song = new Song();
+//	            song = new Song();
 	        } 
 	 
 	    }
@@ -54,11 +60,12 @@ public class XMLParser extends DefaultHandler{
 	 
 	        /** set value */
 	        if (qName.equalsIgnoreCase("item")) {
-	        	SQLiteDatabase conn = db.getDatabase();	
-	        	ContentValues v = new ContentValues();
-	        	v.put("id", currentId);
-	        	v.put("title", currentName);
-	        	conn.insert("hd", null, v);
+//	        	SQLiteDatabase conn = db.getDatabase();	
+//	        	ContentValues v = new ContentValues();
+//	        	v.put("id", currentId);
+//	        	v.put("title", currentName);
+//	        	conn.insert("hd", null, v);
+	        	list.add(new Song(currentId,currentName));
 	        }
 	        else
 	            {}
