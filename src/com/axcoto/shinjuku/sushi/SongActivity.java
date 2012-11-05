@@ -129,18 +129,22 @@ public class SongActivity extends RootActivity{
 					 InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 					 if (im.isAcceptingText()) im.hideSoftInputFromWindow(ed.getWindowToken(),0);
 			    	 if (autosearch==false) {
-			    	 textlength=ed.getText().length();
-						arr_sort.clear();
-						for(int i=0;i<songs.size();i++)
-						{
-						if(textlength<=songs.get(i).getTitle().length())
-						{
-						if(ed.getText().toString().equalsIgnoreCase((String) songs.get(i).getTitle().subSequence(0, textlength)))
-						{
-						arr_sort.add(songs.get(i));
-						}
-						}
-						}						
+			    		 textlength=ed.getText().length();
+							arr_sort.clear();
+							for(int i=0;i<songs.size();i++)
+							{				
+								String[] wordArray =  songs.get(i).getTitle().split(" ");
+								for (int j=0; j < wordArray.length; j++) {
+									if(textlength<=wordArray[j].length())
+									{
+										if(ed.getText().toString().equalsIgnoreCase((String) wordArray[j].subSequence(0, textlength)))
+										{
+											arr_sort.add(songs.get(i));
+											break;
+										}
+									}
+								}
+							}			
 						songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
 						songList.setAdapter(songAdapter);
 			    	 }
@@ -167,14 +171,18 @@ public class SongActivity extends RootActivity{
 				textlength=ed.getText().length();
 				arr_sort.clear();
 				for(int i=0;i<songs.size();i++)
-				{
-				if(textlength<=songs.get(i).getTitle().length())
-				{
-				if(ed.getText().toString().equalsIgnoreCase((String) songs.get(i).getTitle().subSequence(0, textlength)))
-				{
-				arr_sort.add(songs.get(i));
-				}
-				}
+				{				
+					String[] wordArray =  songs.get(i).getTitle().split(" ");
+					for (int j=0; j < wordArray.length; j++) {
+						if(textlength<=wordArray[j].length())
+						{
+							if(ed.getText().toString().equalsIgnoreCase((String) wordArray[j].subSequence(0, textlength)))
+							{
+								arr_sort.add(songs.get(i));
+								break;
+							}
+						}
+					}
 				}
 				songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
 				songList.setAdapter(songAdapter);
@@ -241,14 +249,18 @@ public class SongActivity extends RootActivity{
 		textlength=ed.getText().length();
 		arr_sort.clear();
 		for(int i=0;i<songs.size();i++)
-		{
-		if(textlength<=songs.get(i).getTitle().length())
-		{
-		if(ed.getText().toString().equalsIgnoreCase((String) songs.get(i).getTitle().subSequence(0, textlength)))
-		{
-		arr_sort.add(songs.get(i));
-		}
-		}
+		{				
+			String[] wordArray =  songs.get(i).getTitle().split(" ");
+			for (int j=0; j < wordArray.length; j++) {
+				if(textlength<=wordArray[j].length())
+				{
+					if(ed.getText().toString().equalsIgnoreCase((String) wordArray[j].subSequence(0, textlength)))
+					{
+						arr_sort.add(songs.get(i));
+						break;
+					}
+				}
+			}
 		}
 		songList.setAdapter(new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort));
 	}
