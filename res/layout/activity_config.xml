@@ -41,6 +41,8 @@
         <CheckBoxPreference android:summary="Orchid compatible mode" android:title="Sync Server"
          android:key="sync_server_status" android:defaultValue="true"></CheckBoxPreference>
         
+        <CheckBoxPreference android:summary="Song Autosearch" android:title="Auto-search mode"
+         android:key="auto_search" android:defaultValue="true"></CheckBoxPreference>
          
        
 </PreferenceScreen>

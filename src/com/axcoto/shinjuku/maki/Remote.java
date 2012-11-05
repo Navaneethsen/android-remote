@@ -255,8 +255,8 @@ public class Remote {
 //		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
 		String[] part = k.split(",");
 		for (int count=0; count<Integer.parseInt(part[0]); count++) {
-			Log.e("MAKI:: REMOTE", "Send key " + part[0]);
-			outToServer.writeBytes(part[1]);
+//			Log.i("MAKI:: REMOTE", "Send key " + part[0]);
+			outToServer.writeBytes(part[1]);			
 		}
 	}
 

@@ -41,18 +41,15 @@
 
     <EditText
         android:id="@+id/cmd_songsearch"
-        android:layout_width="130dp"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_alignBaseline="@+id/cmd_test"
         android:layout_alignBottom="@+id/cmd_test"
-        android:layout_toLeftOf="@+id/cmd_test"
+        android:layout_toRightOf="@+id/karaoke_switch"
         android:ems="10"
         android:hint="@string/song_search"
         android:textSize="12sp"
-        android:onClick="testButton"
         android:textStyle="italic" >
-
         <requestFocus />
     </EditText>
-    
 </RelativeLayout>

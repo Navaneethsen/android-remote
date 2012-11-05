@@ -177,20 +177,7 @@
 			        android:textColor="@android:color/transparent" >
 		
 			        <requestFocus />
-			    </EditText>
-			    
-			    			    
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
-			        android:id="@+id/hide_button"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_above="@id/cmd_keyboard"			        
-					android:layout_marginRight="7dp"
-					android:onClick="onHideTouch"
-			        android:layout_alignParentRight="true"
-			        android:visibility="gone"			        
-			        android:background="@drawable/new_button"
-			        android:src="@drawable/hide" />
+			    </EditText>			    			    			   
 			    
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
 			        android:id="@+id/settings"
@@ -216,8 +203,34 @@
 			        android:onClick="onRemoteClick"
 			        android:src="@drawable/normal_extra"
 			        android:layout_marginTop="7dp"
-			        remotecontrol:remote_key_name="extra" />			   
+			        remotecontrol:remote_key_name="extra" />
+			    
+			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/delete"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_alignBottom="@id/audio_control"
+			        android:layout_toRightOf="@id/etc"
+			        android:background="@drawable/new_button"
+			        android:layout_marginLeft="10dp"
+			        android:onClick="onRemoteClick"
+			        android:src="@drawable/delete"
+			        android:layout_marginTop="7dp"
+			        remotecontrol:remote_key_name="delete" />					   
 
+			   <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			        android:id="@+id/hide_button"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@id/delete"	
+			        android:layout_marginTop="5dp"		        
+					android:layout_marginRight="7dp"
+					android:onClick="onHideTouch"
+			        android:layout_alignParentRight="true"
+			        android:visibility="gone"			        
+			        android:background="@drawable/new_button"
+			        android:src="@drawable/hide" />
+			    			    
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
 			        android:id="@+id/up"
 			        android:layout_width="wrap_content"

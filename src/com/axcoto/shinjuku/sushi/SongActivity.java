@@ -28,6 +28,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 //import android.content.ContentValues;
@@ -35,12 +36,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -55,14 +63,18 @@ import com.axcoto.shinjuku.maki.Remote;
 public class SongActivity extends RootActivity{
 	private Db db;
 	private ListView songList;
+	private EditText ed;
+	int textlength=0;
 	private SongAdapter songAdapter;
-	public ArrayList<Song> songs = new ArrayList<Song>();
+	public static ArrayList<Song> songs = new ArrayList<Song>();
 	public ArrayList<String> songId;
 	public ArrayList<String> songTitle;
+	private static ArrayList<Song> arr_sort= new ArrayList<Song>();
 	
 	
 	public ProgressDialog progressDialog;
 	public ProgressThread progressThread;
+	private boolean autosearch;
 
 	static final int PROGRESS_DIALOG = 0;
 
@@ -107,6 +119,79 @@ public class SongActivity extends RootActivity{
 //		We need to keep this on during device scanning--REMOVED FOR CRASH TEST
 //		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		songList = (ListView) findViewById(R.id.song_list);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		this.autosearch = sharedPref.getBoolean("auto_search",true);
+        ed=(EditText)findViewById(R.id.cmd_songsearch);
+        ed.setOnKeyListener(new OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+			     if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+					 InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+					 if (im.isAcceptingText()) im.hideSoftInputFromWindow(ed.getWindowToken(),0);
+			    	 if (autosearch==false) {
+			    	 textlength=ed.getText().length();
+						arr_sort.clear();
+						for(int i=0;i<songs.size();i++)
+						{
+						if(textlength<=songs.get(i).getTitle().length())
+						{
+						if(ed.getText().toString().equalsIgnoreCase((String) songs.get(i).getTitle().subSequence(0, textlength)))
+						{
+						arr_sort.add(songs.get(i));
+						}
+						}
+						}						
+						songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
+						songList.setAdapter(songAdapter);
+			    	 }
+			    	 try {
+							r.execute("enter");
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+			          return true;
+			     }
+			     return false;
+			}
+        	
+        });
+        
+		if (autosearch == true) {			
+			ed.addTextChangedListener(new TextWatcher(){
+
+			public void afterTextChanged(Editable arg0) {
+				textlength=ed.getText().length();
+				arr_sort.clear();
+				for(int i=0;i<songs.size();i++)
+				{
+				if(textlength<=songs.get(i).getTitle().length())
+				{
+				if(ed.getText().toString().equalsIgnoreCase((String) songs.get(i).getTitle().subSequence(0, textlength)))
+				{
+				arr_sort.add(songs.get(i));
+				}
+				}
+				}
+				songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
+				songList.setAdapter(songAdapter);
+			}
+
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {				
+			}
+        	
+        });
+		}
+		
 		initDb();
 		Log.e("SUSHI:: DEVICE", "Create activity");
 		final SongActivity t = this;		
@@ -116,32 +201,60 @@ public class SongActivity extends RootActivity{
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //				Log.e("DEVICE: CLICKED", "Click ListItem Number " + position);
 				Song s = songAdapter.getItem(position);
-//				Log.e("SUSHI::SONG", "About to open " + s.getTitle());
+				Log.i("SUSHI::SONG", "About to open " + s.getId() + " , name: " + s.getTitle());
 				String songid = s.getId();
-				for (int i = 0; i < songid.length()-1;i++)
+				if (songid.length() == 0) throw new NullPointerException("empty id");
+				for (int i = 0; i < songid.length();i++)
 				{
 					try {
+						Log.i("Pressed: ",songid.substring(0+i,1+i));
 						r.execute(songid.substring(0+i,1+i));
 					} catch (IOException e) {
 						Log.e("IOException: ","I0Exception");
 						e.printStackTrace();
+					}
+						catch (NullPointerException e) {
+						Log.e("Weird NullPointException: ", songid.substring(0+i,1+i));					
 					} catch (Exception e) {
 						Log.e("Exception: ","Exception");
 						e.printStackTrace();
 					}
-				}				
+				}
+				try {
+					r.execute("enter");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
-		songs = new ArrayList<Song>();
 //		getSong(this.getLocation());
 		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
 //		songAdapter.notifyDataSetChanged();
 		songList.setAdapter(songAdapter);
     }
-      
+     
+	public void search(View v) {
+		textlength=ed.getText().length();
+		arr_sort.clear();
+		for(int i=0;i<songs.size();i++)
+		{
+		if(textlength<=songs.get(i).getTitle().length())
+		{
+		if(ed.getText().toString().equalsIgnoreCase((String) songs.get(i).getTitle().subSequence(0, textlength)))
+		{
+		arr_sort.add(songs.get(i));
+		}
+		}
+		}
+		songList.setAdapter(new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort));
+	}
 	public String getLocation() {
-//		return t.getFilesDir() + "/KaraokeDB.xml";
-		return "/sdcard/4mbKaraokeDB.xml";
+		return t.getFilesDir() + "/KaraokeDB.xml";
+//		return "/data/data/com.axcoto.shinjuku.sushi/files/2mbKaraokeDB.xml";
 	}
 	
     public void dump(String name) {
