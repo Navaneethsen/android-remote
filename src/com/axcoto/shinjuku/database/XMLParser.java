@@ -44,7 +44,9 @@ public class XMLParser extends DefaultHandler{
 	        currentElement = true;
 	        currentValue = "";
 	        currentId = attributes.getValue("id");
-	        currentName = attributes.getValue("name");
+	        String temp = attributes.getValue("name");
+	        if ((temp != null) && temp.contains("."))
+	        currentName = temp.substring(0,temp.lastIndexOf("."));
 //	        currentName = temp.substring(0,temp.lastIndexOf("."));
 	        if (qName.equals("Karaoke")) {}
 	        if (qName.equals("item")) {

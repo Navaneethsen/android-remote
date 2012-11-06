@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    xmlns:tools="http://schemas.android.com/tools" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <ToggleButton
+    <ToggleButton        
         android:id="@+id/karaoke_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,13 +21,21 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="1dp"
         android:onClick="onSync"
-        android:text="@string/label_sync" />
+        android:text="n/a" />
         
     <ListView
         android:id="@+id/song_list"
         android:layout_below="@id/karaoke_switch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >        
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:fastScrollEnabled="true"
+        android:divider="@color/WhiteSmoke"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:smoothScrollbar="true"
+        android:cacheColorHint="@color/Black"        
+        android:scrollbarStyle="insideInset">        
     </ListView>
 
     <Button
@@ -37,7 +45,7 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/cmd_sync"
         android:onClick="testButton"
-        android:text="Test" />
+        android:text="SYNC" />
 
     <EditText
         android:id="@+id/cmd_songsearch"

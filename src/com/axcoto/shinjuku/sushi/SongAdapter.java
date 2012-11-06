@@ -7,7 +7,10 @@ import com.axcoto.shinjuku.database.Song;
 import android.content.ClipData.Item;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -21,8 +24,8 @@ public class SongAdapter extends ArrayAdapter<Song> {
 		* because it is the list of objects we want to display.
 		*/
 		public SongAdapter(Context context, int textViewResourceId, ArrayList<Song> objects) {
-			super(context, textViewResourceId, objects);
-			this.objects = objects;
+			super(context, textViewResourceId, objects);			
+			this.objects = objects;			
 		}
 
 		/*
@@ -41,6 +44,12 @@ public class SongAdapter extends ArrayAdapter<Song> {
 //				v = inflater.inflate(R.layout.song_item, null);
 				v = inflater.inflate(R.layout.song_item,parent, false);
 			}
+			if (position % 2 == 0) {
+				v.setBackgroundResource(R.drawable.list_selector1);
+			} 
+			else {
+				v.setBackgroundResource(R.drawable.list_selector2);
+			}				
 
 			/*
 			 * Recall that the variable position is sent in as an argument to this method.
@@ -50,7 +59,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
 			 * Therefore, i refers to the current Item object.
 			 */
 			Song i = objects.get(position);
-
+			
 			if (i != null) {
 
 				// This is how you obtain a reference to the TextViews.
@@ -64,7 +73,17 @@ public class SongAdapter extends ArrayAdapter<Song> {
 				TextView title = (TextView) v.findViewById(R.id.songTitle);
 				if (title != null){
 					title.setText(i.getTitle());
-				}
+//					title.setSelected(true);
+
+//					title.setOnLongClickListener(new OnLongClickListener() {
+//						
+//						@Override
+//						public boolean onLongClick(View v) {
+//							v.setSelected(true);
+//							return false;
+//						}
+//					});								
+				}		
 			}
 			// the view must be returned to our activity
 			return v;			

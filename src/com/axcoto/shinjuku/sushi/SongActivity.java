@@ -1,7 +1,7 @@
 package com.axcoto.shinjuku.sushi;
 
 //import java.util.Random;
-
+import android.view.*;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
@@ -15,6 +15,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -26,31 +27,26 @@ import org.xml.sax.XMLReader;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 //import android.content.ContentValues;
 //import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
-import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -192,10 +188,36 @@ public class SongActivity extends RootActivity{
         });
 		}
 		
-		initDb();
+//		initDb();
 		Log.e("SUSHI:: DEVICE", "Create activity");
 		final SongActivity t = this;		
-		
+		songList.setOnItemLongClickListener(new OnItemLongClickListener() {
+			public View v;					
+			
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				v = arg1;				
+				arg1.setFocusable(true);
+				arg1.setFocusableInTouchMode(true);
+				arg1.setSelected(true);	
+				new CountDownTimer(3000,3000) {
+					
+					@Override
+					public void onTick(long millisUntilFinished) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void onFinish() {
+						v.setSelected(false);					
+					}
+				};
+				return true;
+			}
+			
+		});
 		songList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -252,8 +274,9 @@ public class SongActivity extends RootActivity{
 		}
 		songList.setAdapter(new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort));
 	}
-	public String getLocation() {
-		return t.getFilesDir() + "/KaraokeDB.xml";
+	public String getLocation(String databaseName) {
+		if (databaseName.equals("hd")) return t.getFilesDir() + "/KaraokeDB.xml";
+		else return t.getFilesDir() + "/MP3KaraokeDB.xml";
 //		return "/data/data/com.axcoto.shinjuku.sushi/files/2mbKaraokeDB.xml";
 	}
 	
@@ -274,8 +297,10 @@ public class SongActivity extends RootActivity{
     }
     
     public void refresh() throws ParserConfigurationException, SAXException, IOException {
-    	long t = System.currentTimeMillis();
-    	songs = getSong(this.getLocation());
+    	long t = System.currentTimeMillis();   
+    	ToggleButton tb = (ToggleButton) findViewById(R.id.karaoke_switch);
+    	if (tb.isChecked())	songs = getSong(this.getLocation("hd"));
+    	else songs = getSong(this.getLocation("mp3"));
     	long t2 = System.currentTimeMillis();
     	Log.i("Total TIME: ", Long.toString(t2-t));
 //    	Log.i("TOTAL AMOUNT: ", Integer.toString(songs.size()));
@@ -295,7 +320,6 @@ public class SongActivity extends RootActivity{
     
     private class UpdateSongBookTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String...params) {        	
-//        	songAdapter = new SongAdapter(SongActivity.t, R.layout.song_item, getSong(SongActivity.t.getLocation()));
         	return "DONE BACKGROUND WORK";
         }
 
