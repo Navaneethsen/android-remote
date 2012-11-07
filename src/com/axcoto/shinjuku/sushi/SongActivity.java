@@ -47,6 +47,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -86,6 +87,7 @@ public class SongActivity extends RootActivity{
 	public static final int SYNC_INITIALIZE_DB = 3;
 	public static final int SYNC_DRAW_UI = 4;
 	public static final int SYNC_DONE = 5;
+	public static final int SYNC_ERROR = 6;
 	public static SongActivity t;
 	
 	public ArrayList<Song> getSong(String location) throws ParserConfigurationException, SAXException, IOException
@@ -112,12 +114,17 @@ public class SongActivity extends RootActivity{
         setContentView(R.layout.activity_song);
         SongActivity.t = this;
         final Remote r = Remote.getInstance();
+        if (songs == null) songs = new ArrayList<Song>();
+        if (arr_sort == null) arr_sort = new ArrayList<Song>();
 //		We need to keep this on during device scanning--REMOVED FOR CRASH TEST
 //		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		songList = (ListView) findViewById(R.id.song_list);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		this.autosearch = sharedPref.getBoolean("auto_search",true);
         ed=(EditText)findViewById(R.id.cmd_songsearch);
+        int AndroidVersion = android.os.Build.VERSION.SDK_INT;
+        if (AndroidVersion < 16)
+        {
         ed.setOnKeyListener(new OnKeyListener() {
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -155,12 +162,43 @@ public class SongActivity extends RootActivity{
 			}
         	
         });
+        }
         
 		if (autosearch == true) {			
 			ed.addTextChangedListener(new TextWatcher(){
+			long rLast = 0;
+			long lastTimeTextChanged = 0;
+			long currentTime;
+			long time1;
+			long time2;
 
-			public void afterTextChanged(Editable arg0) {
+			@Override
+			public void afterTextChanged(Editable s) {
 				textlength=ed.getText().length();
+				if (textlength == 0)
+				{
+					songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, songs);
+					songList.setAdapter(songAdapter);
+					rLast = currentTime;
+				}
+//				else if (ed.getText().toString().substring(textlength-1).equals(" "))
+//				{
+//					arr_sort.clear();
+//					for(int i=0;i<songs.size();i++)
+//					{
+//						if(textlength<=songs.get(i).getTitle().length())
+//						{
+//							if (songs.get(i).getTitle().toLowerCase().contains(ed.getText().toString().toLowerCase()))
+//							{
+//							arr_sort.add(songs.get(i));
+//							}
+//						}
+//					}
+//					songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
+//					songList.setAdapter(songAdapter);
+//					rLast = currentTime;
+//				}
+				else if (time1 > 2000) {
 				arr_sort.clear();
 				for(int i=0;i<songs.size();i++)
 				{
@@ -174,46 +212,57 @@ public class SongActivity extends RootActivity{
 				}
 				songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
 				songList.setAdapter(songAdapter);
+				rLast = currentTime;
+				}
+				else if (time2 > 4000) {
+					arr_sort.clear();
+					for(int i=0;i<songs.size();i++)
+					{
+						if(textlength<=songs.get(i).getTitle().length())
+						{
+							if (songs.get(i).getTitle().toLowerCase().contains(ed.getText().toString().toLowerCase()))
+							{
+							arr_sort.add(songs.get(i));
+							}
+						}
+					}
+					songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
+					songList.setAdapter(songAdapter);
+					rLast = currentTime;
+				}
+				lastTimeTextChanged = currentTime;
 			}
 
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
+				currentTime = System.currentTimeMillis();
+				time1 = currentTime - lastTimeTextChanged;
+				time2 = currentTime - rLast;
 			}
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {				
 			}
+
+			
         	
         });
 		}
 		
-//		initDb();
+//		initDb();		
 		Log.e("SUSHI:: DEVICE", "Create activity");
-		final SongActivity t = this;		
+		final SongActivity t = this;			
 		songList.setOnItemLongClickListener(new OnItemLongClickListener() {
 			public View v;					
 			
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				v = arg1;				
-				arg1.setFocusable(true);
-				arg1.setFocusableInTouchMode(true);
-				arg1.setSelected(true);	
-				new CountDownTimer(3000,3000) {
-					
-					@Override
-					public void onTick(long millisUntilFinished) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void onFinish() {
-						v.setSelected(false);					
-					}
-				};
+				
+				Toast.makeText(getApplicationContext(),
+						songAdapter.getItem(arg2).getTitle(),
+						Toast.LENGTH_LONG).show();
 				return true;
 			}
 			
@@ -258,8 +307,9 @@ public class SongActivity extends RootActivity{
 //		songAdapter.notifyDataSetChanged();
 		songList.setAdapter(songAdapter);
     }
-     
-	public void search(View v) {
+
+
+	public void search(View v) {		
 		textlength=ed.getText().length();
 		arr_sort.clear();
 		for(int i=0;i<songs.size();i++)
@@ -275,8 +325,11 @@ public class SongActivity extends RootActivity{
 		songList.setAdapter(new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort));
 	}
 	public String getLocation(String databaseName) {
-		if (databaseName.equals("hd")) return t.getFilesDir() + "/KaraokeDB.xml";
+		if (databaseName.equals("hd")) 
+			return t.getFilesDir() + "/KaraokeDB.xml";
+//			return "/storage/sdcard0/Ceenee/KaraokeDB.xml";
 		else return t.getFilesDir() + "/MP3KaraokeDB.xml";
+//		else return "/storage/sdcard0/Ceenee/MP3KaraokeDB.xml";
 //		return "/data/data/com.axcoto.shinjuku.sushi/files/2mbKaraokeDB.xml";
 	}
 	
@@ -296,38 +349,92 @@ public class SongActivity extends RootActivity{
 //   		XMLParser parser = new XMLParser(name, db, location);
     }
     
-    public void refresh() throws ParserConfigurationException, SAXException, IOException {
-    	long t = System.currentTimeMillis();   
-    	ToggleButton tb = (ToggleButton) findViewById(R.id.karaoke_switch);
-    	if (tb.isChecked())	songs = getSong(this.getLocation("hd"));
-    	else songs = getSong(this.getLocation("mp3"));
-    	long t2 = System.currentTimeMillis();
-    	Log.i("Total TIME: ", Long.toString(t2-t));
-//    	Log.i("TOTAL AMOUNT: ", Integer.toString(songs.size()));
-    	songAdapter = new SongAdapter(this, R.layout.song_item, songs);
-//		songAdapter.notifyDataSetChanged();
-		songList.setAdapter(songAdapter);
-		
-	}
-
     public void testButton(View v) throws ParserConfigurationException, SAXException, IOException
     {    	    	
-       refresh();     
+    	new ProgressTask().execute();      
+       
         
 //    	Toast.makeText(SongActivity.t, "Done processing", Toast.LENGTH_LONG).show();
     	
     }
     
-    private class UpdateSongBookTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String...params) {        	
-        	return "DONE BACKGROUND WORK";
+    private class ProgressTask extends AsyncTask<String, Void, Boolean> {
+    	private ProgressDialog dialog = new ProgressDialog(SongActivity.this);
+    	
+    	@Override
+    	 protected void onPreExecute() {
+    		 dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+             dialog.setMessage("SYNCING");
+             dialog.show();
+             syncStatus = SYNC_WAIT_UPLOAD;
+         }
+    	 
+    	@Override
+        protected void onPostExecute(final Boolean success) {
+    		if (dialog.isShowing()) {
+            	dialog.dismiss();
+            }
+    		songAdapter = new SongAdapter(t, R.layout.song_item, songs);
+			songList.setAdapter(songAdapter);          
+			
+            if (success) {
+//                Toast.makeText(t, "DONE", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(t, "Error, XML file not found", Toast.LENGTH_LONG).show();
+            }
         }
-
-        @Override
-        protected void onPostExecute(String result) {
-//          songList.setAdapter(songAdapter);
-        }	
-      }
+		@Override
+		protected Boolean doInBackground(String... params) {
+			Remote r = Remote.getInstance();
+			String locationType;
+			Log.i("Sync Status : ", Integer.toString(syncStatus));
+			ToggleButton tb = (ToggleButton) findViewById(R.id.karaoke_switch);
+			try {
+			if (tb.isChecked()) {
+				locationType = "hd";
+				r.execute("sync_hd");
+			}
+			else {
+				locationType = "mp3";
+				r.execute("sync_mp3");
+			}
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+			boolean check = true;
+			while (check == true) {
+				if (syncStatus == SYNC_ERROR) {
+				songs = new ArrayList<Song>();
+				check = false;
+				return false;
+				}
+				else if (syncStatus == SYNC_DONE) {
+					long t1 = System.currentTimeMillis(); 		
+					try {
+						songs = getSong(t.getLocation(locationType));
+					} catch (ParserConfigurationException e) {
+						e.printStackTrace();
+						return false;
+					} catch (SAXException e) {
+						e.printStackTrace();
+						return false;
+					} catch (IOException e) {
+						e.printStackTrace();
+						return false;
+					}				
+			    	long t2 = System.currentTimeMillis();
+			    	Log.i("Total TIME: ", Long.toString(t2-t1));				
+					check = false;
+				}
+			}
+			return true;
+		}
+    	
+    }
     
 	public void initDb() {
 		db = Db.getInstance(this);

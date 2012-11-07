@@ -26,7 +26,6 @@
         android:fadingEdge="horizontal"
 		android:singleLine="true"
 		android:textSize="17dp" 
-        android:ellipsize="marquee"                  
         android:text="balhblahblahblahblahblahblah"/>
     
 

@@ -22,18 +22,6 @@
          android:onClick="onRemoteClick"
          android:src="@android:color/transparent"
          remotecontrol:remote_key_name="prev" />
-     
-     <com.axcoto.shinjuku.sushi.RemoteKeyButton
-         android:id="@+id/cmd_forward"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBottom="@+id/cmd_fast_forward"
-         android:layout_alignParentRight="true"
-         android:layout_below="@id/playback_title"
-         android:background="@drawable/next_button"
-         android:onClick="onRemoteClick"
-         android:src="@android:color/transparent"
-         remotecontrol:remote_key_name="next" />
      
      <com.axcoto.shinjuku.sushi.RemoteKeyButton
 	         android:id="@+id/cmd_pause"
@@ -89,6 +77,19 @@
 	         android:onClick="onRemoteClick"
 	         remotecontrol:remote_key_name="forward"      
 	         android:src="@android:color/transparent" />
+     
+     
+     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+         android:id="@+id/cmd_forward"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBottom="@+id/cmd_fast_forward"
+         android:layout_toRightOf="@id/cmd_stop"
+         android:layout_below="@id/playback_title"
+         android:background="@drawable/next_button"
+         android:onClick="onRemoteClick"
+         android:src="@android:color/transparent"
+         remotecontrol:remote_key_name="next" />
      
      <ImageView
          android:id="@+id/include_background" 

@@ -41,7 +41,7 @@
         </activity>
 
         <activity android:name=".SongActivity" android:label="@string/title_activity_song"
-            android:windowSoftInputMode="adjustPan">        	<intent-filter> 
+            android:windowSoftInputMode="stateHidden|adjustResize">        	<intent-filter> 
         	    <action android:name="android.intent.action.VIEW" /> 
         	    <category android:name="android.intent.category.DEFAULT" /> 
         	</intent-filter>    

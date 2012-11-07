@@ -45,19 +45,29 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/cmd_sync"
         android:onClick="testButton"
-        android:text="SYNC" />
+        android:text="Sync" />
 
     <EditText
         android:id="@+id/cmd_songsearch"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:linksClickable="true"			                
         android:layout_alignBaseline="@+id/cmd_test"
         android:layout_alignBottom="@+id/cmd_test"
         android:layout_toRightOf="@+id/karaoke_switch"
-        android:ems="10"
-        android:hint="@string/song_search"
-        android:textSize="12sp"
+        android:hint="Nhap tua bai"
+        android:textSize="10dp"
         android:textStyle="italic" >
         <requestFocus />
     </EditText>
+    
+    <Button
+        android:id="@+id/cmd_extra_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/cmd_songsearch"
+        android:layout_toLeftOf="@+id/cmd_test"
+        android:onClick="search"
+        android:text="Search" />
 </RelativeLayout>
