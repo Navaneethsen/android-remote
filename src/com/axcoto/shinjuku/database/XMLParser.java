@@ -21,7 +21,6 @@ public class XMLParser extends DefaultHandler{
 	String currentValue= "";
 	Song song = null;
 	ArrayList<Song> list;
-	Db db = SongActivity.t.getDb();
 	
 	public XMLParser() {
 //		SQLiteDatabase conn = db.getDatabase();	  

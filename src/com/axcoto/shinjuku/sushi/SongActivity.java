@@ -70,7 +70,6 @@ public class SongActivity extends RootActivity{
 	
 	
 	public ProgressDialog progressDialog;
-	public ProgressThread progressThread;
 	private boolean autosearch;
 
 	static final int PROGRESS_DIALOG = 0;
@@ -332,30 +331,10 @@ public class SongActivity extends RootActivity{
 //		else return "/storage/sdcard0/Ceenee/MP3KaraokeDB.xml";
 //		return "/data/data/com.axcoto.shinjuku.sushi/files/2mbKaraokeDB.xml";
 	}
-	
-    public void dump(String name) {
-//    	SQLiteDatabase s = db.getDatabase();
-    	songs = new ArrayList<Song>();
-    	String location = "";
-//    	s.execSQL("DELETE FROM hd");
-//    	s.execSQL("DELETE FROM mp3");
-    	if (name.equals("hd")){
-    		location = this.getFilesDir().toString()+"/KaraokeDB.xml";
-    	}
-    	else if (name.equals("mp3")) {
-    		location = this.getFilesDir().toString()+"/MP3KaraokeDB.xml";
-    	}    		
-//    	Log.i("SUSHI", "Location of db is" + location);
-//   		XMLParser parser = new XMLParser(name, db, location);
-    }
     
     public void testButton(View v) throws ParserConfigurationException, SAXException, IOException
     {    	    	
     	new ProgressTask().execute();      
-       
-        
-//    	Toast.makeText(SongActivity.t, "Done processing", Toast.LENGTH_LONG).show();
-    	
     }
     
     private class ProgressTask extends AsyncTask<String, Void, Boolean> {
@@ -435,137 +414,5 @@ public class SongActivity extends RootActivity{
 		}
     	
     }
-    
-	public void initDb() {
-		db = Db.getInstance(this);
-		db.open();
-	}
-	
-	public Db getDb() {
-		return db;
-	}
-
-//	public void runTest() {
-//		SQLiteDatabase conn = db.getDatabase();
-//		ContentValues v = new ContentValues();
-//		Random r = new Random();
-//		v.put("id", r.nextInt());
-//		v.put("title", "test");
-//		v.put("id", 2);
-//
-//		v.put("title", "dada ");
-//		v.put("id", 4);
-//		v.put("title", "fdisf ds");
-//		conn.insert("HD", null, v);
-//	}
-
-	public void dump() {
-		this.syncStatus = this.SYNC_DONE;
-	}
-
-	public void onSync(View v) {
-		ToggleButton t = (ToggleButton) this.findViewById(R.id.karaoke_switch);
-		showDialog(PROGRESS_DIALOG);
-	}
-
-	protected Dialog onCreateDialog(int id) {
-		switch (id) {
-		case PROGRESS_DIALOG:
-			progressDialog = new ProgressDialog(SongActivity.this);
-			progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			progressDialog.setMessage("Waiting for song book...");
-			return progressDialog;
-		default:
-			return null;
-		}
-	}
-
-	@Override
-	protected void onPrepareDialog(int id, Dialog dialog) {
-		switch (id) {
-		case PROGRESS_DIALOG:
-			progressDialog.setProgress(0);
-			progressThread = new ProgressThread(handler);
-			progressThread.start();
-		}
-	}
-
-	private Handler handler = new Handler() {
-		
-		/**
-		 * @param Message msg: arg1 is the current Status of process
-		 */
-		public void handleMessage(Message msg) {
-			switch (msg.arg1) {
-				case SongActivity.SYNC_RECEIVE_SONGBOOK:
-					progressDialog.setMessage("Received song book");					
-					break;
-				case SongActivity.SYNC_PROCESS_SONGBOOK:
-					progressDialog.setMessage("Process song book");
-					break;
-				case SongActivity.SYNC_DRAW_UI:
-					break;
-			}
-			if (SongActivity.syncStatus == SongActivity.SYNC_DONE) {
-				progressDialog.setProgress(0); // clear the value to avoid cache for next appearance.												
-				dismissDialog(PROGRESS_DIALOG);
-				progressThread.setState(ProgressThread.STATE_DONE);
-			}
-		}
-	};
-
-	/** Nested class that performs progress syncing song book */
-	private class ProgressThread extends Thread {
-		Handler mHandler;		
-		final static int STATE_DONE = 0;
-		final static int STATE_RUNNING = 1;
-		int mState;
-
-		ProgressThread(Handler h) {
-			mHandler = h;
-		}
-
-		public void run() {
-			mState = STATE_RUNNING;			
-			while (mState == STATE_RUNNING) {				
-				try {
-//					songs = new XMLParser(SongActivity.t.getLocation()).get();	
-					SongActivity.syncStatus = STATE_DONE;					
-					Log.i("DONE: ", "Status done");
-					Message msg = mHandler.obtainMessage();
-					msg.arg1 = SongActivity.syncStatus;
-					if (SongActivity.syncStatus == SongActivity.SYNC_PROCESS_SONGBOOK) {
-					//	dump();
-					}
-					mHandler.sendMessage(msg);
-				} catch (Exception e) {
-					Log.e("ERROR", "Thread Interrupted");
-				}
-			}
-
-		}
-
-		/*
-		 * sets the current state for the thread, used to stop the thread
-		 */
-		public void setState(int state) {
-			mState = state;
-			if (state == STATE_DONE) {
-				songAdapter = new SongAdapter(t, R.layout.song_item, songs);
-				songAdapter.notifyDataSetChanged();
-			}
-		}
-	}
-
-	/**
-	 * Handler syncing flag. Instead of setting value of syncStatus directly, we
-	 * pass message to this handle to set flag.
-	 */
-	private Handler syncHandler = new Handler() {
-		public void handleMessage(Message msg) {
-			SongActivity.syncStatus = msg.arg1;
-
-		}
-	};
 
 }
