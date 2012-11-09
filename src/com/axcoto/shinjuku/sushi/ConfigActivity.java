@@ -2,16 +2,44 @@ package com.axcoto.shinjuku.sushi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ConfigActivity extends PreferenceActivity{
+import com.axcoto.shinjuku.maki.MyHttpServer;
+
+public class ConfigActivity extends PreferenceActivity {
 	 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);            
             addPreferencesFromResource(R.layout.activity_config);
+            final CheckBoxPreference serverPref = (CheckBoxPreference)findPreference("sync_server_status");
+            serverPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object newValue) {
+					try {
+						if (serverPref.isChecked()) {
+							MyHttpServer s = MyHttpServer.getInstance();
+							Log.i("SUSHI:: CONFIG", "Stop the web server");
+							s.close();
+						} else {
+							Log.i("SUSHI:: CONFIG", "Restart the web server");
+							MyHttpServer s = MyHttpServer.start();					
+						}
+						return true;
+					} catch (Exception e) {
+						
+					}
+					return true;
+				}
+            	
+            });
     }
  
     @Override
@@ -25,11 +53,7 @@ public class ConfigActivity extends PreferenceActivity{
         switch (item.getItemId()) 
         {
             case R.id.menu_device:
-                //ShowScreenAddSite();
-
-            	// Place code to handle Button-Click here. 
-            	//Log.e(Log.VERBOSE, "Lolz. Test event listenr");
-            	/* Create an Intent to start * MySecondActivity. */ 
+                /* Create an Intent to start * MySecondActivity. */ 
             	i = new Intent( this, DeviceActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); 
             	/* Send intent to the OS to make * it aware that we want to start * MySecondActivity as a SubActivity. */ 
             	finish();
