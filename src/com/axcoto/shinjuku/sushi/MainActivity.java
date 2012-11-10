@@ -65,7 +65,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		//Adding extra stuff to test	
 //		this.findViewById(R.id.ScrollView01).setVisibility(View.VISIBLE);
 		//End of test
-		Resources res = getResources();
+//		Resources res = getResources();
 		setTextListener();
 		RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
 		Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS ".concat(b.getKeyName()));
