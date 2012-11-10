@@ -25,9 +25,20 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 	private static int has_file = 0;
 	protected static MyHttpServer instance=null;
 	protected final int SERVER_PORT = 5320;
-	protected File docRoot;
+	protected static File docRoot;
+	protected static int port;
 	
 	public static MyHttpServer getInstance(int port, File docRoot) throws IOException{
+		if (instance==null) {
+			Log.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
+			instance = new MyHttpServer(port, docRoot);
+			MyHttpServer.docRoot = docRoot;
+			MyHttpServer.port = port;
+		}
+		return instance;		
+	}
+	
+	public static MyHttpServer getInstance() throws IOException{
 		if (instance==null) {
 			Log.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
 			instance = new MyHttpServer(port, docRoot);
@@ -35,9 +46,14 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 		return instance;		
 	}
 	
+	public static MyHttpServer start() throws IOException{
+		Log.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
+		return instance = new MyHttpServer(port, docRoot);	
+		
+	}
+	
 	public MyHttpServer(int port, File wwwroot) throws IOException {
 		super(port, wwwroot);
-		this.docRoot = wwwroot;
 	}
 	
 	public MyHttpServer() throws IOException {
@@ -135,22 +151,6 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 		
 	}
 
-
-	public static void start( String[] args )
-	{
-		try
-		{
-			new MyHttpServer();
-		}
-		catch( IOException ioe )
-		{
-			System.err.println( "Couldn't start server:\n" + ioe );
-			System.exit( -1 );
-		}
-		System.out.println( "Listening on port 8080. Hit Enter to stop.\n" );
-		try { System.in.read(); } catch( Throwable t ) {};
-	}
-	
 	public  void upload() {
 		
 	}
@@ -159,4 +159,8 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 		
 	}
 	
+	public static void close() {
+		instance.stop();
+		instance = null;
+	}
 }

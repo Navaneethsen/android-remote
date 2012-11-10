@@ -31,5 +31,7 @@
    	<string name="label_hd">HD</string>
    	<string name="label_sync">Sync</string>
    	<string name="song_search">Search for songs</string>
+   	<string name="pref_ip_scanning">Scanning</string>
+   	<string name="pref_extra_setting">Extra</string>
    	
 </resources>
