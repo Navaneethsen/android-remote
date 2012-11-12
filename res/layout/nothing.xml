@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:visibility="visible" >
     
-
-
      <ImageView
 	        android:id="@+id/nothing_title"
 	        android:layout_width="wrap_content"

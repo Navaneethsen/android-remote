@@ -9,23 +9,95 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="ToggleButton"
+        android:text="ToggleButton"        
         android:textOff="@string/label_mp3"
         android:textOn="@string/label_hd" />
 
-    <Button
-        android:id="@+id/cmd_sync"
+     <Button
+        android:id="@+id/cmd_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="1dp"
-        android:onClick="onSync"
-        android:text="n/a" />
-        
+        android:onClick="testButton"      
+        android:text="Sync"/>
+         
+    <Button
+        android:id="@+id/cmd_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/cmd_test"
+        android:onClick="clickDelete"
+        android:text="Del" />
+
+    <TableLayout
+        android:id="@+id/tableLayout123"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_alignBottom="@id/karaoke_switch"
+        android:layout_toLeftOf="@id/cmd_delete"
+        android:layout_toRightOf="@id/karaoke_switch">
+        <TableRow
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"  	>
+		     <ImageButton
+		        android:id="@+id/cmd_left"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"		        
+		        android:layout_weight="1"
+		        android:onClick="clickLeft"  
+		        android:src="@drawable/left_arrow"    
+		        android:textSize="14dp"
+		        android:text="Left"/>
+		     
+		     <ImageButton
+		        android:id="@+id/cmd_right"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:src="@drawable/right_arrow"   
+		        android:textSize="14dp"
+		        android:onClick="clickRight"      
+		        android:text="Right"/>
+		</TableRow>
+     </TableLayout>
+     
+    <TableLayout
+        android:id="@+id/tableLayout123"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/karaoke_switch">
+        <TableRow
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent">
+		    <EditText
+		        android:id="@+id/cmd_songsearch"
+		        android:layout_width="fill_parent"
+		        android:layout_height="48dp"
+		        android:linksClickable="true"			      
+		        android:hint="Nhap tua bai"
+		        android:layout_weight="20"
+		        android:textSize="10dp"
+		        android:textStyle="italic" >
+		        <requestFocus />
+		    </EditText>
+		    
+		    <Button
+		        android:id="@+id/cmd_extra_search"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:onClick="search"
+		        android:layout_weight="1"
+		        android:text="Search" />
+		    
+    	</TableRow>	
+    </TableLayout>
+    
     <ListView
         android:id="@+id/song_list"
-        android:layout_below="@id/karaoke_switch"
+        android:layout_below="@id/tableLayout123"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
@@ -38,36 +110,5 @@
         android:scrollbarStyle="insideInset">        
     </ListView>
 
-    <Button
-        android:id="@+id/cmd_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/cmd_sync"
-        android:onClick="testButton"
-        android:text="Sync" />
-
-    <EditText
-        android:id="@+id/cmd_songsearch"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:linksClickable="true"			                
-        android:layout_alignBaseline="@+id/cmd_test"
-        android:layout_alignBottom="@+id/cmd_test"
-        android:layout_toRightOf="@+id/karaoke_switch"
-        android:hint="Nhap tua bai"
-        android:textSize="10dp"
-        android:textStyle="italic" >
-        <requestFocus />
-    </EditText>
     
-    <Button
-        android:id="@+id/cmd_extra_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/cmd_songsearch"
-        android:layout_toLeftOf="@+id/cmd_test"
-        android:onClick="search"
-        android:text="Search" />
 </RelativeLayout>

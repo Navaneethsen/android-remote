@@ -137,7 +137,7 @@ public class SongActivity extends RootActivity{
 						{
 							if(textlength<=songs.get(i).getTitle().length())
 							{
-								if (songs.get(i).getTitle().toLowerCase().contains(ed.getText().toString().toLowerCase()))
+								if (Unicode.convert(songs.get(i).getTitle()).toLowerCase().contains(Unicode.convert(ed.getText().toString().toLowerCase())))
 								{
 								arr_sort.add(songs.get(i));
 								}
@@ -203,7 +203,7 @@ public class SongActivity extends RootActivity{
 				{
 					if(textlength<=songs.get(i).getTitle().length())
 					{
-						if (songs.get(i).getTitle().toLowerCase().contains(ed.getText().toString().toLowerCase()))
+						if (Unicode.convert(songs.get(i).getTitle()).toLowerCase().contains(Unicode.convert(ed.getText().toString().toLowerCase())))
 						{
 						arr_sort.add(songs.get(i));
 						}
@@ -219,7 +219,7 @@ public class SongActivity extends RootActivity{
 					{
 						if(textlength<=songs.get(i).getTitle().length())
 						{
-							if (songs.get(i).getTitle().toLowerCase().contains(ed.getText().toString().toLowerCase()))
+							if (Unicode.convert(songs.get(i).getTitle()).toLowerCase().contains(Unicode.convert(ed.getText().toString().toLowerCase())))
 							{
 							arr_sort.add(songs.get(i));
 							}
@@ -315,7 +315,7 @@ public class SongActivity extends RootActivity{
 		{
 			if(textlength<=songs.get(i).getTitle().length())
 			{
-				if (songs.get(i).getTitle().toLowerCase().contains(ed.getText().toString().toLowerCase()))
+				if (Unicode.convert(songs.get(i).getTitle()).toLowerCase().contains(Unicode.convert(ed.getText().toString().toLowerCase())))
 				{
 				arr_sort.add(songs.get(i));
 				}
@@ -359,7 +359,7 @@ public class SongActivity extends RootActivity{
             if (success) {
 //                Toast.makeText(t, "DONE", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(t, "Error, XML file not found", Toast.LENGTH_LONG).show();
+                Toast.makeText(t, "No Songbook Found", Toast.LENGTH_LONG).show();
             }
         }
 		@Override
@@ -414,5 +414,49 @@ public class SongActivity extends RootActivity{
 		}
     	
     }
+    
+    
+    private static class Unicode {
+		public static String convert (String input) {			
+			String s = input;
 
+		    s = s.replaceAll("[èéẹẻẽêềếệểễ]","e");
+		    s = s.replaceAll("[ùúụủũưừứựửữ]","u");
+		    s = s.replaceAll("[ìíịỉĩ]","i");
+		    s = s.replaceAll("[àáạảãâầấậẩẫăằắặẳẵ]","a");
+		    s = s.replaceAll("[òóọỏõôồốộổỗơờớợởỡ]","o");
+
+		    s = s.replaceAll("[ÈÉẸẺẼÊỀẾỆỂỄ]","E");
+		    s = s.replaceAll("[ÙÚỤỦŨƯỪỨỰỬỮ]","U");
+		    s = s.replaceAll("[ÌÍỊỈĨ]","I");
+		    s = s.replaceAll("[ÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴ]","A");
+		    s = s.replaceAll("[ÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠ]","O");
+		    return s;
+		}
+    }
+
+    
+    public void clickDelete(View v) {		
+		this.execute("delete");		
+	}
+    
+    public void clickRight(View v) {
+    	this.execute("right");
+    }
+    
+    public void clickLeft(View v) {
+    	this.execute("left");
+    }
+    
+    public void execute(String command) {
+		Remote r = Remote.getInstance();
+		if (r.getConnected()) {
+			try {
+				r.execute(command);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+			}
+		}
+	}
 }

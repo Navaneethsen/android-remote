@@ -83,7 +83,6 @@ public class Finder {
 				
 			}
 		}
-		
 	}
 	
 	public boolean isPortOpen(String ip, int port, int timeout) {
@@ -120,9 +119,15 @@ public class Finder {
 	                if (!inetAddress.isLoopbackAddress()) {
 	                   _ipAddress = inetAddress.getHostAddress().toString();
 	                   String[] part = _ipAddress.split("\\.");
+	                   if (part.length < 4) {
+	                	   Log.e("Error: ", "Not support ipv6");
+	                	   break;
+	                   }
+	                   else {
 	                   Log.e("MAKI", "Current IP of Device is " + _ipAddress);
 	                   Log.e("MAKI: Finder", "Ip Part is " + Arrays.toString(part));
 	                   _maskIpAddress = part[0] + "." + part[1] + "." + part[2];
+	                   }
 	                }
 	            }
 	        }
