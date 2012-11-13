@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible" >
+    
+     <ImageView
+	        android:id="@+id/nothing_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@android:color/transparent"
+	        android:src="@drawable/nothing_title" />   
+	        
+     <ImageView
+	        android:id="@+id/ceenee_icon"
+	        android:layout_below="@id/nothing_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@android:color/black"
+	        android:src="@drawable/ceenee" />  
+     
+     <ImageView
+         android:id="@+id/include_background" 
+         android:layout_below="@id/nothing_title"         
+         android:layout_width="wrap_content"
+         android:layout_height="107dp"
+         android:src="@drawable/background" 
+         android:clickable="false"    />
+         
+              
+</RelativeLayout>

@@ -4,6 +4,7 @@
     android:id="@+id/scrollview1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Black"
     android:fillViewport="true"
     android:focusable="true"
     android:scrollbars="vertical" >
@@ -12,6 +13,7 @@
 	    android:id="@+id/LinearLayout01"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
+	    android:layout_centerInParent="true"
 	    android:background="@color/Goldenrod"
 	    android:padding="10dp" >
 		<RelativeLayout

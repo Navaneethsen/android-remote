@@ -31,14 +31,14 @@ import android.widget.ToggleButton;
 
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
-
+	
 public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_DEVELOPMENT = 1;
 	final static int PHASE_TESTING = 2;
 	final static int PHASE_PRODUCTION = 3;
 	
-	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
-//	final static int ENVIRONMENT = PHASE_PRODUCTION;
+//	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
+	final static int ENVIRONMENT = PHASE_PRODUCTION;
 	//final static int ENVIRONMENT = PHASE_TESTING;
 		
 	final static int VIRGIN = 1;

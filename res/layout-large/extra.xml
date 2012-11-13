@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone" >
+    
+
+
+     <ImageView
+	        android:id="@+id/extra_title"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@android:color/transparent"
+	        android:src="@drawable/extra_title" />  
+	        
+     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_timeseek"
+	         android:layout_below="@id/extra_title"	
+	         android:layout_marginTop="5dp"         
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_marginLeft="22dp"
+	         android:background="@android:color/transparent"	
+	         remotecontrol:remote_key_name="timeseek"  
+	         android:onClick="onRemoteClick"
+	         android:src="@drawable/seek_button" />
+     
+     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_info"
+	         android:layout_below="@id/extra_title"
+	         android:layout_marginTop="5dp" 	         
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_toRightOf="@id/cmd_timeseek"
+	         android:layout_marginLeft="22dp"
+	         android:background="@android:color/transparent"	
+	         remotecontrol:remote_key_name="info"  
+	         android:onClick="onRemoteClick"
+	         android:src="@drawable/info_button" />
+     
+     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_bookmark"
+	         android:layout_below="@id/extra_title"	 
+	         android:layout_marginTop="5dp"         
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_toRightOf="@id/cmd_info"
+	         android:layout_marginLeft="22dp"
+	         android:background="@android:color/transparent"	
+	         remotecontrol:remote_key_name="bookmark"  
+	         android:onClick="onRemoteClick"
+	         android:src="@drawable/bookmark_button" />
+     
+     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_tvmode"
+	         android:layout_below="@id/extra_title"	    
+	         android:layout_marginTop="5dp"      
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_toRightOf="@id/cmd_bookmark"
+	         android:layout_marginLeft="22dp"
+	         android:background="@android:color/transparent"	
+	         remotecontrol:remote_key_name="tvmode"  
+	         android:onClick="onRemoteClick"
+	         android:src="@drawable/tv_button" />
+     
+     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_red"
+	         android:layout_below="@id/cmd_timeseek"	         
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_marginTop="5dp"
+	         android:layout_marginLeft="27dp"
+	         android:background="@android:color/transparent"	
+	         remotecontrol:remote_key_name="red"  
+	         android:onClick="onRemoteClick"
+	         android:src="@drawable/red_button" />
+     
+     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_green"
+	         android:layout_below="@id/cmd_timeseek"	         
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_toRightOf="@id/cmd_red"
+	         android:layout_marginTop="5dp"
+	         android:layout_marginLeft="27dp"
+	         android:background="@android:color/transparent"	
+	         remotecontrol:remote_key_name="green"  
+	         android:onClick="onRemoteClick"
+	         android:src="@drawable/green_button" />
+     
+     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_yellow"
+	         android:layout_below="@id/cmd_timeseek"	         
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_toRightOf="@id/cmd_green"
+	         android:layout_marginTop="5dp"
+	         android:layout_marginLeft="27dp"
+	         android:background="@android:color/transparent"	
+	         remotecontrol:remote_key_name="yellow"  
+	         android:onClick="onRemoteClick"
+	         android:src="@drawable/yellow_button" />
+     
+     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_blue"
+	         android:layout_below="@id/cmd_timeseek"	         
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_toRightOf="@id/cmd_yellow"
+	         android:layout_marginTop="5dp"
+	         android:layout_marginLeft="30dp"
+	         android:background="@android:color/transparent"	
+	         remotecontrol:remote_key_name="blue"  
+	         android:onClick="onRemoteClick"
+	         android:src="@drawable/blue_button" />
+     
+     <ImageView
+         android:id="@+id/include_background" 
+         android:layout_below="@id/extra_title"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:src="@drawable/background" 
+         android:clickable="false"    />
+         
+              
+</RelativeLayout>

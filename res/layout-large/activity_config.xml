@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:robobunny="http://robobunny.com"
+    android:title="Settings" >
+
+    <PreferenceCategory
+        android:key="pref_key_storage_settings"
+        android:title="@string/pref_ip_scanning" >
+
+        <com.robobunny.SeekBarPreference
+            android:defaultValue="2"
+            android:key="ip_from"
+            android:max="253"
+            android:summary="Start here"
+            android:title="Ip Range Begin"
+            robobunny:min="2"
+            robobunny:unitsLeft=""
+            robobunny:unitsRight=" " />
+
+        <com.robobunny.SeekBarPreference
+            android:defaultValue="253"
+            android:key="ip_end"
+            android:max="253"
+            android:summary="Stop here"
+            android:title="Ip Range End"
+            robobunny:min="2"
+            robobunny:unitsLeft=""
+            robobunny:unitsRight="" />
+
+        <com.robobunny.SeekBarPreference
+            android:defaultValue="500"
+            android:key="ping_time"
+            android:max="8000"
+            android:summary="Retry in"
+            android:title="Timeout"
+            robobunny:min="100"
+            robobunny:unitsLeft=""
+            robobunny:unitsRight=" micro seconds" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_key_storage_settings"
+        android:title="@string/pref_extra_setting" >
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="auto_search"
+            android:summary="Song Autosearch"
+            android:title="Auto-search mode" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="sync_server_status"
+            android:summary="Song Book Syncing Server "
+            android:title="Sync Server" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="orchid_device"
+            android:summary="Orchid Compatible Mode"
+            android:title="Orchid Device" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

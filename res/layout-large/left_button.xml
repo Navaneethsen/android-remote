@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="left"
+    android:orientation="vertical" >
+
+    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+        android:id="@+id/cmd_menu"
+        style="@style/RemoteButtonLeft"
+        android:onClick="onRemoteClick"
+        remotecontrol:remote_key_name="menu"
+        android:src="@drawable/glyphicons_351_book_open"
+        
+         />
+
+    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+        android:id="@+id/cmd_volup"
+        style="@style/RemoteButtonLeft"
+        android:onClick="onRemoteClick"
+        remotecontrol:remote_key_name="volup"
+        android:src="@drawable/glyphicons_184_volume_up" />
+
+    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+        android:id="@+id/cmd_voldown"
+        style="@style/RemoteButtonLeft"
+        android:onClick="onRemoteClick"
+        remotecontrol:remote_key_name="voldown"
+        android:src="@drawable/glyphicons_183_volume_down" />
+
+    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+        android:id="@+id/cmd_home"
+        style="@style/RemoteButtonLeft"
+        android:onClick="onRemoteClick"
+        remotecontrol:remote_key_name="home"
+        android:src="@drawable/glyphicons_020_home" />
+
+    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+        android:id="@+id/cmd_info"
+        style="@style/RemoteButtonLeft"
+        android:onClick="onRemoteClick"
+        remotecontrol:remote_key_name="info"
+        android:src="@drawable/ceenee_2_info" />
+
+</LinearLayout>
