@@ -118,7 +118,7 @@
          android:layout_below="@id/settings_title"         
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:src="@drawable/background"
+         android:src="@drawable/tbackground"
          android:clickable="false" />
       
 </RelativeLayout>

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 
-public class RootActivity extends FragmentActivity {
+public class RootActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

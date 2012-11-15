@@ -2,18 +2,17 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
     android:id="@+id/scrollview1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Black"
     android:fillViewport="true"
     android:focusable="true"
     android:scrollbars="vertical" >
 
 	<LinearLayout
 	    android:id="@+id/LinearLayout01"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
 	    android:background="@color/Goldenrod"
 	    android:padding="10dp" >
 		<RelativeLayout
@@ -96,7 +95,7 @@
 			        android:layout_below="@id/cmd_return"
 			        android:layout_marginTop="20dp"
 			        layout="@layout/playback" />
-		
+		
 			    <include
 			        android:id="@+id/include_audio_control"
 			        android:layout_width="match_parent"
@@ -125,7 +124,7 @@
 			        android:id="@+id/search_button"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginTop="300dp"
+			        android:layout_marginTop="500dp"
 					android:layout_marginRight="2dp"
 			        android:layout_alignParentRight="true"
 			        android:clickable="false"
@@ -136,7 +135,7 @@
 			        android:id="@+id/cmd_keyboard"
 			        android:layout_width="40dp"
 			        android:layout_height="30dp"
-			        android:layout_marginTop="303dp"
+			        android:layout_marginTop="503dp"
 			        android:layout_marginRight="3dp"
 			        android:layout_alignParentRight="true"
 			        android:linksClickable="true"			        
@@ -154,6 +153,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_centerHorizontal="true"
 			        android:layout_alignTop="@id/search_button"
+			        
 			        android:background="@android:color/transparent"
 			        android:onClick="onRemoteClick"
 			        android:layout_marginBottom="3dp"
@@ -170,7 +170,7 @@
 			        android:layout_marginBottom = "10dp"
 			        android:background="@drawable/new_button"
 			        android:onClick="onRemoteClick"
-			        android:src="@drawable/normal_audio"
+			        android:src="@drawable/taudio"
 			        remotecontrol:remote_key_name="audio_control" />			    			    
 		
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
@@ -182,7 +182,7 @@
 			        android:layout_marginLeft="10dp"		        
 			        android:background="@drawable/new_button"
 			        android:onClick="onRemoteClick"
-			        android:src="@drawable/normal_playback"
+			        android:src="@drawable/tplayback"
 			        remotecontrol:remote_key_name="playback" />			    			   					    		    			    			  
 			    
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
@@ -194,20 +194,21 @@
 			        android:layout_marginLeft="10dp"
 			        android:background="@drawable/new_button"
 			        android:onClick="onRemoteClick"
-			        android:src="@drawable/normal_settings"
+			        android:src="@drawable/tsettings"
 			        remotecontrol:remote_key_name="settings" />
 			    
 			    
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
 			        android:id="@+id/etc"
-			        android:layout_width="50dp"
-			        android:layout_height="30dp"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
 			        android:layout_alignBottom="@id/audio_control"
 			        android:layout_toRightOf="@id/settings"
 			        android:background="@drawable/new_button"
 			        android:layout_marginLeft="10dp"
+			        android:layout_marginBottom="10dp"
 			        android:onClick="onRemoteClick"
-			        android:src="@drawable/normal_extra"
+			        android:src="@drawable/textra"
 			        android:layout_marginTop="7dp"
 			        remotecontrol:remote_key_name="extra" />
 			    
@@ -220,7 +221,7 @@
 			        android:background="@drawable/new_button"
 			        android:layout_marginLeft="10dp"
 			        android:onClick="onRemoteClick"
-			        android:src="@drawable/delete"
+			        android:src="@drawable/tdelete"
 			        android:layout_marginTop="7dp"
 			        remotecontrol:remote_key_name="delete" />					   
 

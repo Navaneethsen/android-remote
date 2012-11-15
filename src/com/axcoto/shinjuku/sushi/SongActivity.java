@@ -113,7 +113,22 @@ public class SongActivity extends RootActivity{
         setContentView(R.layout.activity_song);
         SongActivity.t = this;
         final Remote r = Remote.getInstance();
-        if (songs == null) songs = new ArrayList<Song>();
+        ToggleButton tb = (ToggleButton) findViewById(R.id.karaoke_switch);
+        if (songs == null || songs.size() == 0) 
+        	{
+        	try {
+	        	if (tb.isChecked())				
+					songs =getSong(t.getLocation("hd"));
+	        		else songs = getSong(t.getLocation("mp3"));
+				} catch (ParserConfigurationException e) {
+					e.printStackTrace();
+				} catch (SAXException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
+        	}
         if (arr_sort == null) arr_sort = new ArrayList<Song>();
 //		We need to keep this on during device scanning--REMOVED FOR CRASH TEST
 //		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -308,6 +323,15 @@ public class SongActivity extends RootActivity{
     }
 
 
+	public void onToggle(View v) throws ParserConfigurationException, SAXException, IOException {
+		ToggleButton tb = (ToggleButton) v;
+		if (tb.isChecked()) songs =getSong(t.getLocation("hd"));
+		else songs = getSong(t.getLocation("mp3"));
+		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
+		songList.setAdapter(songAdapter);
+	}
+
+	
 	public void search(View v) {		
 		textlength=ed.getText().length();
 		arr_sort.clear();
