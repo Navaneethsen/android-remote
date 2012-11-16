@@ -59,7 +59,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	  // Save UI state changes to the savedInstanceState.
 	  // This bundle will be passed to onCreate if the process is
 	  // killed and restarted.
-		savedInstanceState.putStringArray("deviceIp", (String[])deviceIp.toArray());
+		savedInstanceState.putStringArrayList("deviceIp", deviceIp);
 		//savedInstanceState.put
 		// etc.
 		Log.e("SUSHI: SAVED", "Saved Device Ip");
@@ -71,15 +71,15 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	  super.onRestoreInstanceState(savedInstanceState);
 	  // Restore UI state from the savedInstanceState.
 	  // This bundle has also been passed to onCreate.
-	  String[] ip = savedInstanceState.getStringArray("deviceIp");
-	  Log.e("SUSHI:: RESTORE", "From Restore. We had devices: " + ip.length);
+	  ArrayList<String> ip = savedInstanceState.getStringArrayList("deviceIp");
+	  Log.e("SUSHI:: RESTORE", "From Restore. We had devices: " + ip.size());
 	  
 	  deviceIp = new ArrayList<String>();
 		devices = new ArrayList<DeviceItem>();
-		if (ip.length>0) {
-			for (int i=0; i<ip.length; i++) {
-				deviceIp.add(ip[i]);
-				devices.add(new DeviceItem(ip[i]));
+		if (ip.size()>0) {
+			for (int i=0; i<ip.size(); i++) {
+				deviceIp.add(ip.get(i));
+				devices.add(new DeviceItem(ip.get(i)));
 			}
 
 			deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
@@ -94,12 +94,12 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		Log.e("SUSHI:: DEVICE", "Pause activity");
 
 		//Okay, now we done we can skip it
-		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
 		String ip;
 		try {
 			FileOutputStream fos = openFileOutput(this.DEVICE_FILENAME, Context.MODE_PRIVATE);
-			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(fos));
+			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(fos));			
 			for (int i=0; i < deviceIp.size(); i++) {
 				ip = deviceIp.get(i) + "\n";				
 				//fos.write(ip.getBytes());

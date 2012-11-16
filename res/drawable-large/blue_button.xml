@@ -2,6 +2,6 @@
 <selector
   xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true"
-        android:drawable="@drawable/xblue" />
-    <item android:drawable="@drawable/xblue" />
+        android:drawable="@drawable/txblue" />
+    <item android:drawable="@drawable/txblue" />
 </selector>

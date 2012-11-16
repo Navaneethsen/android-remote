@@ -2,6 +2,6 @@
 <selector
   xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true"
-        android:drawable="@drawable/xfast_forward" />
-    <item android:drawable="@drawable/fast_forward" />
+        android:drawable="@drawable/txforward" />
+    <item android:drawable="@drawable/tforward" />
 </selector>
