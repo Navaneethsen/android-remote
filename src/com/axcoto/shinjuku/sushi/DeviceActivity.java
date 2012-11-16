@@ -282,39 +282,47 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		public void run() {
 
 			Finder f = Finder.getInstance();
-			f.resolve();
+			if(f.resolve() == false) {
+				Log.e("Error: ", "no internet connection");
+				Message msg1 = mHandler.obtainMessage();
+				msg1.arg2 = 0;
+				msg1.arg1 = 120;					
+				mHandler.sendMessage(msg1);
+			}
+//			f.resolve();
+			else
+			{
 			mState = STATE_RUNNING;
 
 			if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
 				maskIp = "192.168.0.";
 			} else {
-				maskIp = f.getMaskIpAddress() + ".";
-			}
-			DeviceActivity.ipMaskAdd = maskIp;
-			
-			while (mState == STATE_RUNNING) {
-
-				try {
-					Message msg = mHandler.obtainMessage();
-					msg.arg2 = 0;
-					if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT, DeviceActivity.ipTimeoutPing)) {
-						msg.arg2 = checkIp;
-						Log.e("MAKI::FINDER",
-								"Okay. We added the board to listview "
-										+ checkIp);
+					maskIp = f.getMaskIpAddress() + ".";
+				}
+				DeviceActivity.ipMaskAdd = maskIp;
+				
+				while (mState == STATE_RUNNING) {
+	
+					try {
+						Message msg = mHandler.obtainMessage();
+						msg.arg2 = 0;
+						if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT, DeviceActivity.ipTimeoutPing)) {
+							msg.arg2 = checkIp;
+							Log.e("MAKI::FINDER",
+									"Okay. We added the board to listview "
+											+ checkIp);
+						}
+	
+						msg.arg1 = Math.round((checkIp - from) * 100 / (to - from));
+						Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
+						mHandler.sendMessage(msg);
+						checkIp++;
+					} catch (Exception e) {
+						Log.e("ERROR", "Thread Interrupted");
 					}
-
-					msg.arg1 = Math.round((checkIp - from) * 100 / (to - from));
-					Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
-					mHandler.sendMessage(msg);
-					checkIp++;
-				} catch (Exception e) {
-					Log.e("ERROR", "Thread Interrupted");
 				}
 			}
-
-			// }
-
+				// }			
 		}
 
 		/*
