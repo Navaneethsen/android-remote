@@ -13,11 +13,14 @@ import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 public class SongAdapter extends ArrayAdapter<Song> {
 	// declaring our ArrayList of items
 		private ArrayList<Song> objects;
+		private ArrayList<Song> fitems;
+		private Filter filter;
 		
 		/* here we must override the constructor for ArrayAdapter
 		* the only variable we care about now is ArrayList<Item> objects,
@@ -88,4 +91,64 @@ public class SongAdapter extends ArrayAdapter<Song> {
 			// the view must be returned to our activity
 			return v;			
 		}
+		
+		@Override
+		public Filter getFilter() {
+		    if (filter == null)
+		        filter = new SongFilter();
+
+		    return filter;
+		}
+		
+		private class SongFilter extends Filter
+		{
+		        @Override
+		        protected FilterResults performFiltering(CharSequence constraint)
+		        {   
+		            FilterResults results = new FilterResults();
+		            String prefix = constraint.toString().toLowerCase();
+
+		            if (prefix == null || prefix.length() == 0)
+		            {
+		                ArrayList<Song> list = new ArrayList<Song>();
+		                results.values = list;
+		                results.count = list.size();
+		            }
+		            else
+		            {
+		                final ArrayList<Song> list = new ArrayList<Song>();
+		                final ArrayList<Song> nlist = new ArrayList<Song>();
+		                int count = list.size();
+
+		                for (int i=0; i<count; i++)
+		                {
+		                    final Song pkmn = list.get(i);
+		                    final String value = pkmn.getTitle().toLowerCase();
+
+		                    if (value.contains(prefix))
+		                    {
+		                        nlist.add(pkmn);
+		                    }
+		                }
+		                results.values = nlist;
+		                results.count = nlist.size();
+		            }
+		            return results;
+		        }
+
+		        @SuppressWarnings("unchecked")
+		        @Override
+		        protected void publishResults(CharSequence constraint, FilterResults results) {
+		            fitems = (ArrayList<Song>)results.values;
+
+		            clear();
+		            int count = fitems.size();
+		            for (int i=0; i<count; i++)
+		            {
+		                Song pkmn = (Song)fitems.get(i);
+		                add(pkmn);
+		            }
+		        }
+
+		    }
 }
