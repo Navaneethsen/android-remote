@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="ToggleButton"        
+        android:text="ToggleButton"
+        android:onClick="onToggle"        
         android:textOff="@string/label_mp3"
         android:textOn="@string/label_hd" />
 
@@ -79,7 +80,7 @@
 		        android:linksClickable="true"			      
 		        android:hint="Nhap tua bai"
 		        android:layout_weight="20"
-		        android:textSize="10dp"
+		        android:textSize="20dp"
 		        android:textStyle="italic" >
 		        <requestFocus />
 		    </EditText>

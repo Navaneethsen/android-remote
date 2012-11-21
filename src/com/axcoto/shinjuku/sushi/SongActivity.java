@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
@@ -88,51 +89,69 @@ public class SongActivity extends RootActivity{
 	public static final int SYNC_DONE = 5;
 	public static final int SYNC_ERROR = 6;
 	public static SongActivity t;
-	
-	public ArrayList<Song> getSong(String location) throws ParserConfigurationException, SAXException, IOException
-	{
+	private final int TRIGGER_SEARCH = 1;
+	private final long SEARCH_TRIGGER_DELAY_IN_MS = 1000;
+	private String text;
+			  
+	public ArrayList<Song> getSong(String location) {
+		try {
 		SAXParserFactory spf = SAXParserFactory.newInstance();
-        SAXParser sp = spf.newSAXParser();
-        XMLReader xr = sp.getXMLReader();
+        SAXParser sp;	
+		sp = spf.newSAXParser();	
+        XMLReader xr;
+		xr = sp.getXMLReader();
         XMLParser myXMLHandler = new XMLParser();
-        xr.setContentHandler(myXMLHandler);
-        InputStream inStream = new FileInputStream(new File(location));
-        Reader reader = new InputStreamReader(inStream,"UTF-8");        
-        InputSource is = new InputSource(reader);
-        is.setEncoding("UTF-8");
-        xr.parse(is);
-        Log.i("DONE: ", "DONE");
-        songs = myXMLHandler.getSongs();        
-//        songs = new XMLParser(location).get();
+        xr.setContentHandler(myXMLHandler);        
+        	InputStream inStream;	
+			inStream = new FileInputStream(new File(location));
+			Reader reader;
+			reader = new InputStreamReader(inStream,"UTF-8");
+			InputSource is = new InputSource(reader);
+	        is.setEncoding("UTF-8");
+	        xr.parse(is);
+	        songs = myXMLHandler.getSongs(); 
+		} 
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (ParserConfigurationException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		} catch (SAXException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		} 	
         return songs;
 	}	
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_song);
-        SongActivity.t = this;
+        setContentView(R.layout.activity_song);        
+        SongActivity.t = this;        
+        songList = (ListView) findViewById(R.id.song_list);
+        songList.setTextFilterEnabled(true);
         final Remote r = Remote.getInstance();
         ToggleButton tb = (ToggleButton) findViewById(R.id.karaoke_switch);
         if (songs == null || songs.size() == 0) 
         	{
-        	try {
-	        	if (tb.isChecked())				
+	        	if (tb.getText().equals("HD"))				
 					songs =getSong(t.getLocation("hd"));
-	        		else songs = getSong(t.getLocation("mp3"));
-				} catch (ParserConfigurationException e) {
-					e.printStackTrace();
-				} catch (SAXException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+	        		else songs = getSong(t.getLocation("mp3"));				
 			
         	}
+        Log.i("Location", t.getFilesDir().toString());
         if (arr_sort == null) arr_sort = new ArrayList<Song>();
+        songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, songs);
+		songList.setAdapter(songAdapter);
 //		We need to keep this on during device scanning--REMOVED FOR CRASH TEST
 //		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		songList = (ListView) findViewById(R.id.song_list);
+		
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		this.autosearch = sharedPref.getBoolean("auto_search",true);
         ed=(EditText)findViewById(R.id.cmd_songsearch);
@@ -178,89 +197,31 @@ public class SongActivity extends RootActivity{
         });
         }
         
-		if (autosearch == true) {			
-			ed.addTextChangedListener(new TextWatcher(){
-			long rLast = 0;
-			long lastTimeTextChanged = 0;
-			long currentTime;
-			long time1;
-			long time2;
+		if (autosearch == true) {				
+			
+			ed.addTextChangedListener(new TextWatcher(){			
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				textlength=ed.getText().length();
-				if (textlength == 0)
-				{
-					songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, songs);
-					songList.setAdapter(songAdapter);
-					rLast = currentTime;
-				}
-//				else if (ed.getText().toString().substring(textlength-1).equals(" "))
-//				{
-//					arr_sort.clear();
-//					for(int i=0;i<songs.size();i++)
-//					{
-//						if(textlength<=songs.get(i).getTitle().length())
-//						{
-//							if (songs.get(i).getTitle().toLowerCase().contains(ed.getText().toString().toLowerCase()))
-//							{
-//							arr_sort.add(songs.get(i));
-//							}
-//						}
-//					}
-//					songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
-//					songList.setAdapter(songAdapter);
-//					rLast = currentTime;
-//				}
-				else if (time1 > 2000) {
-				arr_sort.clear();
-				for(int i=0;i<songs.size();i++)
-				{
-					if(textlength<=songs.get(i).getTitle().length())
-					{
-						if (Unicode.convert(songs.get(i).getTitle()).toLowerCase().contains(Unicode.convert(ed.getText().toString().toLowerCase())))
-						{
-						arr_sort.add(songs.get(i));
-						}
-					}
-				}
-				songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
-				songList.setAdapter(songAdapter);
-				rLast = currentTime;
-				}
-				else if (time2 > 4000) {
-					arr_sort.clear();
-					for(int i=0;i<songs.size();i++)
-					{
-						if(textlength<=songs.get(i).getTitle().length())
-						{
-							if (Unicode.convert(songs.get(i).getTitle()).toLowerCase().contains(Unicode.convert(ed.getText().toString().toLowerCase())))
-							{
-							arr_sort.add(songs.get(i));
-							}
-						}
-					}
+				if (ed.getText().toString().equals("")) {
 					songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
 					songList.setAdapter(songAdapter);
-					rLast = currentTime;
 				}
-				lastTimeTextChanged = currentTime;
+				else {
+					songAdapter.getFilter().filter(s.toString());
+//					songAdapter.notifyDataSetChanged();				
+				    songList.setAdapter(songAdapter);
+				}				
 			}
 
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				currentTime = System.currentTimeMillis();
-				time1 = currentTime - lastTimeTextChanged;
-				time2 = currentTime - rLast;
 			}
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {				
+					int count) {	
 			}
-
-			
-        	
         });
 		}
 		
@@ -323,10 +284,16 @@ public class SongActivity extends RootActivity{
     }
 
 
-	public void onToggle(View v) throws ParserConfigurationException, SAXException, IOException {
-		ToggleButton tb = (ToggleButton) v;
-		if (tb.isChecked()) songs =getSong(t.getLocation("hd"));
-		else songs = getSong(t.getLocation("mp3"));
+	public void onToggle(View v) throws ParserConfigurationException, SAXException, IOException {		
+		ToggleButton tb = (ToggleButton) v;		
+		if (tb.getText().equals("HD")) {
+			Log.i("Location::" ,t.getLocation("hd"));
+			songs =getSong(t.getLocation("hd"));
+		}
+		else {
+			Log.i("Location::",t.getLocation("mp3"));
+			songs = getSong(t.getLocation("mp3"));
+		}
 		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
 		songList.setAdapter(songAdapter);
 	}
@@ -334,19 +301,11 @@ public class SongActivity extends RootActivity{
 	
 	public void search(View v) {		
 		textlength=ed.getText().length();
-		arr_sort.clear();
-		for(int i=0;i<songs.size();i++)
-		{
-			if(textlength<=songs.get(i).getTitle().length())
-			{
-				if (Unicode.convert(songs.get(i).getTitle()).toLowerCase().contains(Unicode.convert(ed.getText().toString().toLowerCase())))
-				{
-				arr_sort.add(songs.get(i));
-				}
-			}
-		}
-		songList.setAdapter(new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort));
+		songAdapter.getFilter().filter(ed.getText().toString());
+//		songAdapter.notifyDataSetChanged();				
+	    songList.setAdapter(songAdapter);		
 	}
+	
 	public String getLocation(String databaseName) {
 		if (databaseName.equals("hd")) 
 			return t.getFilesDir() + "/KaraokeDB.xml";
@@ -417,18 +376,7 @@ public class SongActivity extends RootActivity{
 				}
 				else if (syncStatus == SYNC_DONE) {
 					long t1 = System.currentTimeMillis(); 		
-					try {
-						songs = getSong(t.getLocation(locationType));
-					} catch (ParserConfigurationException e) {
-						e.printStackTrace();
-						return false;
-					} catch (SAXException e) {
-						e.printStackTrace();
-						return false;
-					} catch (IOException e) {
-						e.printStackTrace();
-						return false;
-					}				
+						songs = getSong(t.getLocation(locationType));					
 			    	long t2 = System.currentTimeMillis();
 			    	Log.i("Total TIME: ", Long.toString(t2-t1));				
 					check = false;
@@ -437,28 +385,7 @@ public class SongActivity extends RootActivity{
 			return true;
 		}
     	
-    }
-    
-    
-    private static class Unicode {
-		public static String convert (String input) {			
-			String s = input;
-
-		    s = s.replaceAll("[èéẹẻẽêềếệểễ]","e");
-		    s = s.replaceAll("[ùúụủũưừứựửữ]","u");
-		    s = s.replaceAll("[ìíịỉĩ]","i");
-		    s = s.replaceAll("[àáạảãâầấậẩẫăằắặẳẵ]","a");
-		    s = s.replaceAll("[òóọỏõôồốộổỗơờớợởỡ]","o");
-
-		    s = s.replaceAll("[ÈÉẸẺẼÊỀẾỆỂỄ]","E");
-		    s = s.replaceAll("[ÙÚỤỦŨƯỪỨỰỬỮ]","U");
-		    s = s.replaceAll("[ÌÍỊỈĨ]","I");
-		    s = s.replaceAll("[ÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴ]","A");
-		    s = s.replaceAll("[ÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠ]","O");
-		    return s;
-		}
-    }
-
+    }           
     
     public void clickDelete(View v) {		
 		this.execute("delete");		
