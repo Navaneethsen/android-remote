@@ -24,6 +24,7 @@ public final class ServerUtilities {
     private static final int MAX_ATTEMPTS = 5;
     private static final int BACKOFF_MILLI_SECONDS = 2000;
     private static final Random random = new Random();
+    private static String email = "No permission";
  
     /**
      * Register this account/device pair within the server.
@@ -31,8 +32,11 @@ public final class ServerUtilities {
      */
     static void register(final Context context, final String regId) {
         Log.i(TAG, "registering device (regId = " + regId + ")");
-        String serverUrl = SERVER_URL;
-        String params = regId;
+        String serverUrl = SERVER_URL ;
+        email = UserEmailFetcher.getEmail(context);
+        Map<String, String> params = new HashMap<String, String>();        
+        params.put("regId",regId);
+        params.put("email", email);
         
         long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
         // Once GCM returns a registration id, we need to register on our server
@@ -80,8 +84,12 @@ public final class ServerUtilities {
     static void unregister(final Context context, final String regId) {
         Log.i(TAG, "unregistering device (regId = " + regId + ")");
         String serverUrl = SERVER_URL + "/unregister";
+        email = UserEmailFetcher.getEmail(context);
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("regId", regId);
+        params.put("email", email);
         try {
-            post(serverUrl, regId);
+            post(serverUrl, params);
             GCMRegistrar.setRegisteredOnServer(context, false);
             String message = context.getString(R.string.server_unregistered);
             CommonUtilities.displayMessage(context, message);
@@ -105,7 +113,7 @@ public final class ServerUtilities {
      *
      * @throws IOException propagated from POST.
      */
-    private static void post(String endpoint, String params)
+    private static void post(String endpoint, Map<String,String> params)
             throws IOException {    
  
         URL url;
@@ -114,8 +122,22 @@ public final class ServerUtilities {
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException("invalid url: " + endpoint);
         }        
-        Log.v(TAG, "Posting '" + params + "' to " + url);
-        byte[] bytes = params.getBytes();
+//      ---constructs the POST body using the parameters -- when params has multiple keys
+//        Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
+//        while (iterator.hasNext()) {
+//            Entry<String, String> param = iterator.next();
+//            bodyBuilder.append(param.getKey()).append('=')
+//                    .append(param.getValue());
+//            if (iterator.hasNext()) {
+//                bodyBuilder.append('&');
+//            }
+//        }	
+//        String body = bodyBuilder.toString();
+        
+        //Using this since we only use 1 key regId
+        String body = "regId="+params.get("regId")+"&"+"email="+params.get("email");
+        Log.v(TAG, "Posting '" + body + "' to " + url);
+        byte[] bytes = body.getBytes();
         HttpURLConnection conn = null;
         try {
             Log.e("URL", "> " + url);

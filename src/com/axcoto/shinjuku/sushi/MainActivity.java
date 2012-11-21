@@ -119,16 +119,16 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 //		Resources res = getResources();
 		
 		//New 2
-		// Check if Internet present
-//		cd = new ConnectionDetector(getApplicationContext()); 		
-//        if (!cd.isConnectingToInternet()) {
-//            // Internet Connection is not present
-//            alert.showAlertDialog(MainActivity.this,
-//                    "Internet Connection Error",
-//                    "Please connect to working Internet connection", false);
-//            // stop executing code by return
-//            return;
-//        }		
+//		 Check if Internet present
+		cd = new ConnectionDetector(getApplicationContext()); 		
+        if (!cd.isConnectingToInternet()) {
+            // Internet Connection is not present
+            alert.showAlertDialog(MainActivity.this,
+                    "Internet Connection Error",
+                    "Please connect to working Internet connection", false);
+            // stop executing code by return
+            return;
+        }		
         
         //add GCM support
       		GCMRegistrar.checkDevice(this);
