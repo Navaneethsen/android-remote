@@ -14,10 +14,6 @@
     
     <permission android:name="com.axcoto.shinjuku.sushi.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 	<uses-permission android:name="com.axcoto.shinjuku.sushi.permission.C2D_MESSAGE" /> 
-
-	<permission android:name="com.axcoto.shinjuku.sushi.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-	<uses-permission android:name="com.axcoto.shinjuku.sushi.permission.C2D_MESSAGE" /> 
-
 	
 	<!-- App receives GCM messages. -->
 	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
