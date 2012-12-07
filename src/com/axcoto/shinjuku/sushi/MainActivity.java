@@ -51,9 +51,9 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_TESTING = 2;
 	final static int PHASE_PRODUCTION = 3;
 	
-//	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
-	final static int ENVIRONMENT = PHASE_PRODUCTION;
-	//final static int ENVIRONMENT = PHASE_TESTING;
+	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
+//	final static int ENVIRONMENT = PHASE_PRODUCTION;
+//	final static int ENVIRONMENT = PHASE_TESTING;
 		
 	final static int VIRGIN = 1;
 	final static String VERSION = "0.7-dev-1207";  
@@ -85,34 +85,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		setContentView(R.layout.activity_main);
 		setTextListener();
 		RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
-		Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS ".concat(b.getKeyName()));
 		
 		gestureScanner = new GestureDetector(this);
-		try {
-			homeDir = this.getFilesDir();
-			boolean mExternalStorageAvailable = false;
-			boolean mExternalStorageWriteable = false;
-			String state = Environment.getExternalStorageState();
-			
-			// For simplicity. use internal storage for now
-//			if (Environment.MEDIA_MOUNTED.equals(state)) {
-//				// We can read and write the media
-//				mExternalStorageAvailable = mExternalStorageWriteable = true;
-//				homeDir = this.getExternalFilesDir(null);
-//			};
-
-			MyHttpServer ht = MyHttpServer.getInstance(PORT, homeDir);
-			File file = this.getFileStreamPath("f.html");
-			if (file.exists()) {
-				Log.e("MAKI: SERVER", "initialize app before");
-			} else {
-				this.copyAssets();
-			}
-		} catch (IOException e) {
-			Log.e("MAKI:: SERVER", "The docroot is not valid");
-		} catch (Exception e) {
-			Log.e("MAKI:: SERVER", e.getMessage());
-		}
 		//Adding extra stuff to test	
 //		this.findViewById(R.id.ScrollView01).setVisibility(View.VISIBLE);
 		//End of test
@@ -130,50 +104,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
             return;
         }		
         
-        //add GCM support
-      		GCMRegistrar.checkDevice(this);
-      		GCMRegistrar.checkManifest(this);
-      		final String regId = GCMRegistrar.getRegistrationId(this);
-      		Log.i("ID: ", regId);
-      	//New 2
-		//New3
-      		 // Get GCM registration id
-            
-     
-            // Check if regid already presents
-            if (regId.equals("")) {
-                // Registration is not present, register now with GCM
-                GCMRegistrar.register(this, SENDER_ID);
-            } else {
-                // Device is already registered on GCM
-                if (GCMRegistrar.isRegisteredOnServer(this)) {
-                    // Skips registration.
-//                    Toast.makeText(getApplicationContext(), "Already registered with GCM", Toast.LENGTH_LONG).show();
-                	Log.i("GCM:", "Device is already registered with GCM");
-                } else {
-                    // Try to register again, but not in the UI thread.
-                    // It's also necessary to cancel the thread onDestroy(),
-                    // hence the use of AsyncTask instead of a raw thread.
-                    final Context context = this;
-                    mRegisterTask = new AsyncTask<Void, Void, Void>() {
-     
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            // Register on our server
-                            // On server creates a new user
-                            ServerUtilities.register(context, regId);
-                            return null;
-                        }
-     
-                        @Override
-                        protected void onPostExecute(Void result) {
-                            mRegisterTask = null;
-                        }
-     
-                    };
-                    mRegisterTask.execute(null, null, null);
-                }
-            }
                 //New3
             final Remote r = Remote.getInstance();
             final EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
@@ -207,6 +137,91 @@ public class MainActivity extends RootActivity implements OnGestureListener {
       	
 	}
 	
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);				
+		this.startServer();
+		this.gcmHandle();		
+	}
+	
+	/**
+	 * We run a embedded web server on port 5320 for song book syncing.
+	 * The docroot of web server is homedirectory of app
+	 */
+	private void startServer() {
+		try {
+			homeDir = this.getFilesDir();
+			boolean mExternalStorageAvailable = false;
+			boolean mExternalStorageWriteable = false;
+			String state = Environment.getExternalStorageState();
+			
+			// For simplicity. use internal storage for now
+//			if (Environment.MEDIA_MOUNTED.equals(state)) {
+//				// We can read and write the media
+//				mExternalStorageAvailable = mExternalStorageWriteable = true;
+//				homeDir = this.getExternalFilesDir(null);
+//			};
+
+			MyHttpServer ht = MyHttpServer.getInstance(PORT, homeDir);
+			File file = this.getFileStreamPath("f.html");
+			if (file.exists()) {
+				Log.e("MAKI: SERVER", "initialize app before");
+			} else {
+				this.copyAssets();
+			}
+		} catch (IOException e) {
+			Log.e("MAKI:: SERVER", "The docroot is not valid");
+		} catch (Exception e) {
+			Log.e("MAKI:: SERVER", e.getMessage());
+		}
+	}
+	
+	/**
+	 * gcmHandling
+	 */
+	private void gcmHandle() {
+		//add GCM support
+  		GCMRegistrar.checkDevice(this);
+  		GCMRegistrar.checkManifest(this);
+  		final String regId = GCMRegistrar.getRegistrationId(this);
+  		Log.i("Device ID: ", regId);
+  	//New 2
+	//New3
+  		 // Get GCM registration id        
+ 
+        // Check if regid already presents
+        if (regId.equals("")) {
+            // Registration is not present, register now with GCM
+            GCMRegistrar.register(this, SENDER_ID);
+        } else {
+            // Device is already registered on GCM
+            if (GCMRegistrar.isRegisteredOnServer(this)) {
+            	Log.i("GCM:", "Device is already registered with GCM");
+            	//GCMRegistrar.unregister(getApplicationContext()); //Unregister device for testing
+            } else {
+                // Try to register again, but not in the UI thread.
+                // It's also necessary to cancel the thread onDestroy(),
+                // hence the use of AsyncTask instead of a raw thread.
+                final Context context = this;
+                mRegisterTask = new AsyncTask<Void, Void, Void>() {
+ 
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        // Register on our server
+                        // On server creates a new user
+                        ServerUtilities.register(context, regId);
+                        return null;
+                    }
+ 
+                    @Override
+                    protected void onPostExecute(Void result) {
+                        mRegisterTask = null;
+                    }
+ 
+                };
+                mRegisterTask.execute(null, null, null);
+            }
+        }
+	}
 
 	private void copyAssets() {
 		Log.e("MAKI: ASSET COPY",
@@ -334,7 +349,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 //		toast.setGravity(Gravity.TOP|Gravity.LEFT, 400,700);
 //		toast.show();
 //		new CountDownLatch(1).countDown();
-		Log.i("SUSHI:: REMOTE", "PRESS " + key);		
+		Log.i("SUSHI:: REMOTE", "THE KEY THAT IS PRESSED ON UI IS: " + key);		
 		this.execute(key);		
 		}
 	}
@@ -614,8 +629,5 @@ public class MainActivity extends RootActivity implements OnGestureListener {
         }
         super.onDestroy();
     }
- 
+
 }
-
-
-

@@ -249,13 +249,14 @@ public class Remote {
 			throw new Exception("Key not found");
 		}
 		String k = remoteKeyCode.get(command);
-
-//		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
-//		Log.e("MAKI:: REMOTE", "Key code of volup" + remoteKeyCode.get(command));
-//		Log.e("SUSHI:: REMOTE", "Key code is pressed" + k);
 		String[] part = k.split(",");
+		if (clientSocket.isOutputShutdown()) {
+			Log.d("MAKI:: REMOTE", "Connection is broken");
+			throw new IOException();
+		}
+		
 		for (int count=0; count<Integer.parseInt(part[0]); count++) {
-//			Log.i("MAKI:: REMOTE", "Send key " + part[0]);
+			Log.i("MAKI:: REMOTE", "Send key " + part[1]);
 			outToServer.writeBytes(part[1]);			
 		}
 	}
