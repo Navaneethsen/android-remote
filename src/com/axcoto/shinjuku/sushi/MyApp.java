@@ -11,5 +11,6 @@ public class MyApp extends Application {
     // The following line triggers the initialization of ACRA
     ACRA.init(this);
     super.onCreate();
+    
   }
 }	

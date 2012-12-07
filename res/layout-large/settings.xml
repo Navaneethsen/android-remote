@@ -12,7 +12,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:background="@android:color/transparent"
-	        android:src="@drawable/settings_title" /> 	       
+	        android:src="@drawable/tsettings_title" /> 	       
      
      <TableLayout
 	          android:id="@+id/tableLayout3"

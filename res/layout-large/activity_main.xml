@@ -95,7 +95,7 @@
 			        android:layout_below="@id/cmd_return"
 			        android:layout_marginTop="20dp"
 			        layout="@layout/playback" />
-		
+
 			    <include
 			        android:id="@+id/include_audio_control"
 			        android:layout_width="match_parent"
@@ -225,19 +225,6 @@
 			        android:layout_marginTop="7dp"
 			        remotecontrol:remote_key_name="delete" />					   
 
-			   <com.axcoto.shinjuku.sushi.RemoteKeyButton
-			        android:id="@+id/hide_button"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_below="@id/delete"	
-			        android:layout_marginTop="5dp"		        
-					android:layout_marginRight="7dp"
-					android:onClick="onHideTouch"
-			        android:layout_alignParentRight="true"
-			        android:visibility="gone"			        
-			        android:background="@drawable/new_button"
-			        android:src="@drawable/hide" />			    			    			   
-			    
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
 			        android:id="@+id/enter"
 			        android:layout_width="wrap_content"

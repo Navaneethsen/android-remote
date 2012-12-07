@@ -17,8 +17,8 @@
  	    android:id = "@+id/table_audio"
  	    android:layout_below="@id/audio_control_title"
  	    android:layout_width="match_parent"
-        android:layout_height="wrap_content"        
-        android:background="@drawable/background">
+        android:layout_height="wrap_content"
+        android:background = "@drawable/background">
        
        <TableRow
             android:id="@+id/tableRow1"

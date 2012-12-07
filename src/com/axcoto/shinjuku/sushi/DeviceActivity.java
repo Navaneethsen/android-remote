@@ -59,7 +59,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	  // Save UI state changes to the savedInstanceState.
 	  // This bundle will be passed to onCreate if the process is
 	  // killed and restarted.
-		savedInstanceState.putStringArray("deviceIp", (String[])deviceIp.toArray());
+		savedInstanceState.putStringArrayList("deviceIp", deviceIp);
 		//savedInstanceState.put
 		// etc.
 		Log.e("SUSHI: SAVED", "Saved Device Ip");
@@ -71,15 +71,15 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	  super.onRestoreInstanceState(savedInstanceState);
 	  // Restore UI state from the savedInstanceState.
 	  // This bundle has also been passed to onCreate.
-	  String[] ip = savedInstanceState.getStringArray("deviceIp");
-	  Log.e("SUSHI:: RESTORE", "From Restore. We had devices: " + ip.length);
+	  ArrayList<String> ip = savedInstanceState.getStringArrayList("deviceIp");
+	  Log.e("SUSHI:: RESTORE", "From Restore. We had devices: " + ip.size());
 	  
 	  deviceIp = new ArrayList<String>();
 		devices = new ArrayList<DeviceItem>();
-		if (ip.length>0) {
-			for (int i=0; i<ip.length; i++) {
-				deviceIp.add(ip[i]);
-				devices.add(new DeviceItem(ip[i]));
+		if (ip.size()>0) {
+			for (int i=0; i<ip.size(); i++) {
+				deviceIp.add(ip.get(i));
+				devices.add(new DeviceItem(ip.get(i)));
 			}
 
 			deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
@@ -94,12 +94,12 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		Log.e("SUSHI:: DEVICE", "Pause activity");
 
 		//Okay, now we done we can skip it
-		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
 		String ip;
 		try {
 			FileOutputStream fos = openFileOutput(this.DEVICE_FILENAME, Context.MODE_PRIVATE);
-			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(fos));
+			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(fos));			
 			for (int i=0; i < deviceIp.size(); i++) {
 				ip = deviceIp.get(i) + "\n";				
 				//fos.write(ip.getBytes());
@@ -269,11 +269,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 
 		ProgressThread(Handler h) {
 			mHandler = h;
-			if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
-				from = 147;
-				to = 150;
-				checkIp = from;
-			} 
+
 			from = DeviceActivity.ipScanFrom;
 			to = DeviceActivity.ipScanTo;
 			checkIp = from;
@@ -282,39 +278,49 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		public void run() {
 
 			Finder f = Finder.getInstance();
-			f.resolve();
+			boolean res = f.resolve();
+			if(res == false) {
+				Log.e("Error: ", "no internet connection");
+				Message msg1 = mHandler.obtainMessage();
+				msg1.arg2 = 0;
+				msg1.arg1 = 120;					
+				mHandler.sendMessage(msg1);
+			}
+//			f.resolve();
+			else
+			{
 			mState = STATE_RUNNING;
 
 			if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
 				maskIp = "192.168.0.";
 			} else {
-				maskIp = f.getMaskIpAddress() + ".";
-			}
-			DeviceActivity.ipMaskAdd = maskIp;
-			
-			while (mState == STATE_RUNNING) {
-
-				try {
-					Message msg = mHandler.obtainMessage();
-					msg.arg2 = 0;
-					if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT, DeviceActivity.ipTimeoutPing)) {
-						msg.arg2 = checkIp;
-						Log.e("MAKI::FINDER",
-								"Okay. We added the board to listview "
-										+ checkIp);
+					maskIp = f.getMaskIpAddress() + ".";
+				}
+				DeviceActivity.ipMaskAdd = maskIp;
+				
+				while (mState == STATE_RUNNING) {
+					Log.i("MaskIp=",maskIp + checkIp);
+					try {
+						Message msg = mHandler.obtainMessage();
+						msg.arg2 = 0;
+						
+						if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT, DeviceActivity.ipTimeoutPing)) {
+							msg.arg2 = checkIp;
+							Log.e("MAKI::FINDER",
+									"Okay. We added the board to listview "
+											+ checkIp);
+						}
+	
+						msg.arg1 = Math.round((checkIp - from) * 100 / (to - from));
+						Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
+						mHandler.sendMessage(msg);
+						checkIp++;
+					} catch (Exception e) {
+						Log.e("ERROR", "Thread Interrupted");
 					}
-
-					msg.arg1 = Math.round((checkIp - from) * 100 / (to - from));
-					Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
-					mHandler.sendMessage(msg);
-					checkIp++;
-				} catch (Exception e) {
-					Log.e("ERROR", "Thread Interrupted");
 				}
 			}
-
-			// }
-
+				// }			
 		}
 
 		/*

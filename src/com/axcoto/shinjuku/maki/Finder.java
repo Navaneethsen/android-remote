@@ -2,6 +2,7 @@ package com.axcoto.shinjuku.maki;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
@@ -9,6 +10,10 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Arrays;
 import java.util.Enumeration;
+
+import org.apache.http.conn.util.InetAddressUtils;
+
+import com.axcoto.shinjuku.sushi.DeviceActivity;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -92,12 +97,12 @@ public class Finder {
 			Socket socket = new Socket();
 			socket.connect(new InetSocketAddress(ip, port), timeout);
 	        socket.close();
-			Log.e("MAKI::FINDER", "Horay. We found out the board at: " + ip);				
+			Log.i("MAKI::FINDER", "Horay. We found out the board at: " + ip);				
 			found = true;
 		} catch (IOException e) {
-			Log.e("MAKI::FINDER", "Badly. No board at " + ip);			
+			Log.w("MAKI::FINDER", "Badly. No board at " + ip);			
 		} catch (Exception e) {
-			Log.e("MAKI::FINDER", "Horay. No board at " + ip);		
+			Log.w("MAKI::FINDER", "Horay. No board at " + ip);		
 		}
 		return found;
 	}
@@ -111,32 +116,40 @@ public class Finder {
 	 * maskIpAddress is without "." notation
 	 * @return void
 	 */
-	public void resolve() {
+	public boolean resolve() {
 		try {
 	        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
 	            NetworkInterface intf = en.nextElement();
 	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
 	                InetAddress inetAddress = enumIpAddr.nextElement();
-	                if (!inetAddress.isLoopbackAddress()) {
-	                   _ipAddress = inetAddress.getHostAddress().toString();
+	                String ipv4;
+					if (!inetAddress.isLoopbackAddress() && InetAddressUtils.isIPv4Address(ipv4 = inetAddress.getHostAddress())) {
+//	                   _ipAddress = inetAddress.getHostAddress();
+//	                   if (inetAddress instanceof Inet4Address) { 
+	                	   _ipAddress = inetAddress.getHostAddress().toString();
+//                       } 
 	                   String[] part = _ipAddress.split("\\.");
-	                   if (part.length < 4) {
-	                	   Log.e("Error: ", "Not support ipv6");
-	                	   break;
-	                   }
-	                   else {
+//	                   if (part.length < 4) {
+//	                	   Log.e("Error: ", "Not support ipv6");
+//	                	   break;
+//	                   }
+//	                   else {
 	                   Log.e("MAKI", "Current IP of Device is " + _ipAddress);
 	                   Log.e("MAKI: Finder", "Ip Part is " + Arrays.toString(part));
 	                   _maskIpAddress = part[0] + "." + part[1] + "." + part[2];
-	                   }
+	                   Log.i("_maskIpAddress", _maskIpAddress);
+	                   return true;
+//	                   }
 	                }
 	            }
 	        }
 	    } catch (SocketException ex) {
 	        Log.e("MAKI: FIND IP", ex.toString());
-	    }
+	        return false;
+	    }		
+		return false;
+		
 	}
-	
 	public String getMaskIpAddress() {
 		return _maskIpAddress;
 	}

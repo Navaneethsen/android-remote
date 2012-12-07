@@ -3,14 +3,14 @@
     xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="visible" >
+    android:visibility="gone" >
     
      <ImageView
 	        android:id="@+id/audio_control_title"	        
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"	
 	        android:background="@android:color/transparent"
-	        android:src="@drawable/audio_control_title" />      	              
+	        android:src="@drawable/taudio_control_title" />      	              
 
  	<TableLayout 
  	    android:id = "@+id/table_audio"
@@ -30,7 +30,7 @@
 	         android:layout_weight="1"
 	         android:layout_marginTop="2dp"
 	         android:layout_marginLeft="2dp"
-	         android:layout_width="fill_parent"
+	         android:layout_width="0dp"
 	         android:layout_height="fill_parent"	         
 	         android:background="@drawable/voldown_button"	
 	         remotecontrol:remote_key_name="voldown"  
@@ -41,7 +41,7 @@
 	         android:id="@+id/cmd_volup"
 	         android:layout_weight="1"
 	         android:layout_marginTop="2dp"
-	         android:layout_width="fill_parent"
+	         android:layout_width="0dp"
 	         android:layout_height="fill_parent"
 	         android:layout_marginLeft="2dp"
 	         android:layout_marginRight="4dp"
@@ -84,8 +84,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@android:color/transparent" />
      	</TableRow>
- 	</TableLayout>
- 	
+	</TableLayout> 	
  	<ImageView
  	    android:id="@+id/include_background"
  	    android:layout_width="wrap_content"

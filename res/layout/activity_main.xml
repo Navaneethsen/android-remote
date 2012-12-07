@@ -221,20 +221,7 @@
 			        android:onClick="onRemoteClick"
 			        android:src="@drawable/delete"
 			        android:layout_marginTop="7dp"
-			        remotecontrol:remote_key_name="delete" />					   
-
-			   <com.axcoto.shinjuku.sushi.RemoteKeyButton
-			        android:id="@+id/hide_button"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_below="@id/delete"	
-			        android:layout_marginTop="5dp"		        
-					android:layout_marginRight="7dp"
-					android:onClick="onHideTouch"
-			        android:layout_alignParentRight="true"
-			        android:visibility="gone"			        
-			        android:background="@drawable/new_button"
-			        android:src="@drawable/hide" />			    			    			   
+			        remotecontrol:remote_key_name="delete" />					      			    			   
 			    
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
 			        android:id="@+id/enter"

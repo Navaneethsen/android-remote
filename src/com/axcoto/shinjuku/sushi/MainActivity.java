@@ -1,14 +1,17 @@
 package com.axcoto.shinjuku.sushi;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.CountDownLatch;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -26,12 +29,23 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import com.google.android.gcm.GCMRegistrar;
 
 import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.Remote;
-	
+
+import static com.axcoto.shinjuku.sushi.CommonUtilities.DISPLAY_MESSAGE_ACTION;
+import static com.axcoto.shinjuku.sushi.CommonUtilities.EXTRA_MESSAGE;
+import static com.axcoto.shinjuku.sushi.CommonUtilities.SENDER_ID;
+import android.app.Activity;
+
+import android.content.Intent;
+import android.content.IntentFilter;
+ 
+
 public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_DEVELOPMENT = 1;
 	final static int PHASE_TESTING = 2;
@@ -42,7 +56,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	//final static int ENVIRONMENT = PHASE_TESTING;
 		
 	final static int VIRGIN = 1;
-	final static String VERSION = "0.2-dev-1018";  
+	final static String VERSION = "0.7-dev-1207";  
 	public String remote;
 	final int PORT = 5320;
 	protected File homeDir;
@@ -52,6 +66,13 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	private long lastTouchedTime = 0;
 	private long doubleTapDistance = 350000000;
 	
+	//New 1
+	AsyncTask<Void, Void, Void> mRegisterTask;
+	TextView lblMessage;
+	AlertDialogManager alert = new AlertDialogManager();
+	ConnectionDetector cd;
+	//New 1
+	
 	private String currentText = "";
 	
 	public File getHomeDir() {
@@ -60,12 +81,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);				
 		setContentView(R.layout.activity_main);
-		//Adding extra stuff to test	
-//		this.findViewById(R.id.ScrollView01).setVisibility(View.VISIBLE);
-		//End of test
-//		Resources res = getResources();
 		setTextListener();
 		RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
 		Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS ".concat(b.getKeyName()));
@@ -96,7 +113,100 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		} catch (Exception e) {
 			Log.e("MAKI:: SERVER", e.getMessage());
 		}
+		//Adding extra stuff to test	
+//		this.findViewById(R.id.ScrollView01).setVisibility(View.VISIBLE);
+		//End of test
+//		Resources res = getResources();
+		
+		//New 2
+//		 Check if Internet present
+		cd = new ConnectionDetector(getApplicationContext()); 		
+        if (!cd.isConnectingToInternet()) {
+            // Internet Connection is not present
+            alert.showAlertDialog(MainActivity.this,
+                    "Internet Connection Error",
+                    "Please connect to working Internet connection", false);
+            // stop executing code by return
+            return;
+        }		
+        
+        //add GCM support
+      		GCMRegistrar.checkDevice(this);
+      		GCMRegistrar.checkManifest(this);
+      		final String regId = GCMRegistrar.getRegistrationId(this);
+      		Log.i("ID: ", regId);
+      	//New 2
+		//New3
+      		 // Get GCM registration id
+            
+     
+            // Check if regid already presents
+            if (regId.equals("")) {
+                // Registration is not present, register now with GCM
+                GCMRegistrar.register(this, SENDER_ID);
+            } else {
+                // Device is already registered on GCM
+                if (GCMRegistrar.isRegisteredOnServer(this)) {
+                    // Skips registration.
+//                    Toast.makeText(getApplicationContext(), "Already registered with GCM", Toast.LENGTH_LONG).show();
+                	Log.i("GCM:", "Device is already registered with GCM");
+                } else {
+                    // Try to register again, but not in the UI thread.
+                    // It's also necessary to cancel the thread onDestroy(),
+                    // hence the use of AsyncTask instead of a raw thread.
+                    final Context context = this;
+                    mRegisterTask = new AsyncTask<Void, Void, Void>() {
+     
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            // Register on our server
+                            // On server creates a new user
+                            ServerUtilities.register(context, regId);
+                            return null;
+                        }
+     
+                        @Override
+                        protected void onPostExecute(Void result) {
+                            mRegisterTask = null;
+                        }
+     
+                    };
+                    mRegisterTask.execute(null, null, null);
+                }
+            }
+                //New3
+            final Remote r = Remote.getInstance();
+            final EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
+            int AndroidVersion = android.os.Build.VERSION.SDK_INT;
+            if (AndroidVersion < 16)
+            {
+            	
+            edt.setOnKeyListener(new OnKeyListener() {
+    			@Override
+    			public boolean onKey(View v, int keyCode, KeyEvent event) {
+    			     if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+    					 InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+    					 if (im.isAcceptingText()) im.hideSoftInputFromWindow(edt.getWindowToken(),0);    			    	 					
+    			    	 
+    			    	 try {
+    							r.execute("enter");
+    						} catch (IOException e) {
+    							// TODO Auto-generated catch block
+    							e.printStackTrace();
+    						} catch (Exception e) {
+    							// TODO Auto-generated catch block
+    							e.printStackTrace();
+    						}
+    			          return true;
+    			     }
+    			     return false;
+    			}
+            	
+            });
+            }
+      	
 	}
+	
 
 	private void copyAssets() {
 		Log.e("MAKI: ASSET COPY",
@@ -460,16 +570,52 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 //	}
 
 	public void onKeyboardTouch(View v) {
-		findViewById(R.id.hide_button).setVisibility(View.VISIBLE);
-	}
-	
-	public void onHideTouch(View v) {
 		EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
 		InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-		if (im.isAcceptingText()) im.hideSoftInputFromWindow(edt.getWindowToken(),0);
-		v.setVisibility(View.GONE);
-		
+		im.hideSoftInputFromWindow(edt.getWindowToken(),1);
 	}
+	
+	/**
+     * Receiving push messages
+     * */
+    private final BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String newMessage = intent.getExtras().getString(EXTRA_MESSAGE);
+            Log.e("MESSAGE: ", newMessage);
+            // Waking up mobile if it is sleeping
+            WakeLocker.acquire(getApplicationContext());
+ 
+            /**
+             * Take appropriate action on this message
+             * depending upon your app requirement
+             * For now i am just displaying it on the screen
+             * */
+ 
+            // Showing received message
+            lblMessage.append(newMessage + "\n");
+            Toast.makeText(getApplicationContext(), "New Message: " + newMessage, Toast.LENGTH_LONG).show();
+ 
+            // Releasing wake lock
+            WakeLocker.release();
+        }
+    };
+ 
+    @Override
+    protected void onDestroy() {
+        if (mRegisterTask != null) {
+            mRegisterTask.cancel(true);
+        }
+        try {
+            unregisterReceiver(mHandleMessageReceiver);
+            GCMRegistrar.onDestroy(this);
+        } catch (Exception e) {
+            Log.e("UnRegister Receiver Error", "> " + e.getMessage());
+        }
+        super.onDestroy();
+    }
+ 
 }
+
 
 
