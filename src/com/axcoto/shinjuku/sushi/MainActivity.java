@@ -275,14 +275,14 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public void execute(String command) {
 		Remote r = Remote.getInstance();
 		if (r.getConnected()) {
-//			Log.e("Text: ", Boolean.toString(r.getConnection().getReuseAddress()));
 			try {
 				r.execute(command);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				Log.e("SUSHI: REMOTE", "Exception: " + e.getMessage());
 				e.printStackTrace();
 			} catch (Exception e) {
-//				Log.e("SUSHI: REMOTE", "Key not found: " + command);
+				Log.e("SUSHI: REMOTE", "Exception: " + e.getMessage());
 			}
 		}
 	}

@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import android.content.ClipData.Item;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ItemAdapter extends ArrayAdapter<DeviceItem> {
@@ -49,12 +51,17 @@ public class ItemAdapter extends ArrayAdapter<DeviceItem> {
 			DeviceItem i = objects.get(position);
 
 			if (i != null) {
-
-				// This is how you obtain a reference to the TextViews.
-				// These TextViews are created in the XML files we defined.
-
 				TextView tt = (TextView) v.findViewById(R.id.ipLabel);
-
+				ImageView iv = (ImageView) v.findViewById(R.id.imageDeviceStatus);
+				
+				Log.i("MAKI:: DEVICE IP: ", i.getIp());
+				
+				if (i.isConnected()) {
+					Log.i("MAKI:: CONNECTED", "Connected to this device" + i.getIp());
+					iv.setImageResource(R.drawable.glyphicons_165_iphone_exchange);
+				} else {
+					iv.setImageResource(R.drawable.glyphicons_164_iphone_transfer);
+				}
 				// check to see if each individual textview is null.
 				// if not, assign some text!
 				if (tt != null){

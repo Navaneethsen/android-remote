@@ -2,6 +2,7 @@ package com.axcoto.shinjuku.maki;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
@@ -127,6 +128,7 @@ public class Remote {
 	public static final int TCP_PORT=30000;
 	Socket clientSocket = null;
 	DataOutputStream outToServer = null;
+	PrintWriter printer;
 	
 	public Map<String, String> remoteKeyCode;
 	
@@ -255,9 +257,23 @@ public class Remote {
 			throw new IOException();
 		}
 		
+		if (clientSocket.isInputShutdown()) {
+			Log.d("MAKI:: REMOTE", "Connection is broken");
+			throw new IOException();
+		}
+		
+		if (printer.checkError()) {
+			Log.d("MAKI:: REMOTE", "Connection is broken");			
+		}
+		
 		for (int count=0; count<Integer.parseInt(part[0]); count++) {
 			Log.i("MAKI:: REMOTE", "Send key " + part[1]);
-			outToServer.writeBytes(part[1]);			
+			try {
+				outToServer.writeBytes(part[1]);			
+			} catch (Exception e) {
+				Log.d("MAKI: REMOTE", "Exception");
+				throw e;
+			}
 		}
 	}
 
@@ -267,6 +283,8 @@ public class Remote {
 		try {
 			clientSocket = new Socket(this.ip, Remote.TCP_PORT);			
 			outToServer = new DataOutputStream(clientSocket.getOutputStream());
+			printer = new PrintWriter(clientSocket.getOutputStream(), true);
+			
 			connected = true;
 		} catch (IOException io) {
 			throw io;
@@ -280,6 +298,10 @@ public class Remote {
 	
 	public boolean getConnected() {		
 		return this.connected;
+	}
+	
+	public String getIp() {
+		return this.ip;
 	}
 	
 	public void close() {

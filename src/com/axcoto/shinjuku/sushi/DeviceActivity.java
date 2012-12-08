@@ -121,8 +121,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		super.onCreate(savedInstanceState);
 		//We need to keep this on during device scanning
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		
-		
+	
 		setContentView(R.layout.activity_device);
 		listDevice = (ListView) findViewById(R.id.list_device);
 		
@@ -179,6 +178,12 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		
 		gestureScanner = new GestureDetector(this);
 		
+		Log.i("SUSHI:: ", "RUN TO HERE");
+		try {
+			Log.i("SUSHI:: CURRENT CONNECTED IP", Remote.getInstance().getIp());
+		} catch (Exception e) {
+			Log.i("Ignore", "IGNORE");
+		}
 	}
 
 	public void doTest(View view) {

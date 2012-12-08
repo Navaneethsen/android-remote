@@ -5,10 +5,10 @@
     android:orientation="horizontal" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/imageDeviceStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/glyphicons_165_iphone_exchange" />
+        android:src="@drawable/glyphicons_164_iphone_transfer" />
 
     <TextView
         android:id="@+id/ipLabel"
