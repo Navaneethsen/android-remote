@@ -269,7 +269,8 @@ public class Remote {
 		for (int count=0; count<Integer.parseInt(part[0]); count++) {
 			Log.i("MAKI:: REMOTE", "Send key " + part[1]);
 			try {
-				outToServer.writeBytes(part[1]);			
+				outToServer.writeBytes(part[1]);	
+				outToServer.flush();
 			} catch (Exception e) {
 				Log.d("MAKI: REMOTE", "Exception");
 				throw e;
@@ -277,7 +278,7 @@ public class Remote {
 		}
 	}
 
-	public Socket connect(String ip) throws IOException {
+	public Socket connect(String ip) throws IOException, Exception {
 		this.ip = ip;
 		connected = false;
 		try {
@@ -288,6 +289,8 @@ public class Remote {
 			connected = true;
 		} catch (IOException io) {
 			throw io;
+		} catch (Exception e) {
+			throw e;
 		}
 		return clientSocket;
 	}
@@ -296,7 +299,7 @@ public class Remote {
 		return clientSocket;
 	}
 	
-	public boolean getConnected() {		
+	public boolean getConnected() {
 		return this.connected;
 	}
 	

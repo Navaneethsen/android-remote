@@ -35,15 +35,18 @@ public class DeviceItem {
 	 * @return Remote object represent the connection between phone and device
 	 * @throws IOException
 	 */
-	public Remote connect() throws IOException {
+	public Remote connect() throws Exception, IOException {
 		Remote r = Remote.getInstance();
 		
 		try {
 			r.connect(this.ip);
-		} catch (IOException e) {
+		} catch (IOException io) {
+			io.printStackTrace();
+			throw io;
+		}  catch (Exception e) {
 			e.printStackTrace();
 			throw e;
-		}
+		} 
 		return r;
 	}
 }
