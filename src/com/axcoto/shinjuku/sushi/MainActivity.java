@@ -285,6 +285,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 				Log.e("SUSHI: REMOTE", "Exception: " + e.getMessage());
 			}
 		}
+		
 	}
 
 //	public void toggle(View v)
