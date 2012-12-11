@@ -1,5 +1,6 @@
 package com.axcoto.shinjuku.maki;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -99,9 +100,11 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 				InputStream in = new FileInputStream(new File(files.getProperty(value).toString()));
 				OutputStream out = new FileOutputStream(docRoot.getAbsoluteFile() + "/" +  parms.getProperty("upload1").toString());
 				
+				BufferedInputStream bis=new BufferedInputStream(in);
+				
 				byte[] buffer = new byte[1024];
 				int read;
-				while ((read = in.read(buffer)) != -1) {
+				while ((read = bis.read(buffer)) != -1) {
 					out.write(buffer, 0, read);
 				}
 				

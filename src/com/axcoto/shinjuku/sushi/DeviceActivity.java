@@ -281,7 +281,6 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		}
 
 		public void run() {
-
 			Finder f = Finder.getInstance();
 			boolean res = f.resolve();
 			if(res == false) {
@@ -294,15 +293,15 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 //			f.resolve();
 			else
 			{
-			mState = STATE_RUNNING;
-
-			if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
-				maskIp = "192.168.0.";
-			} else {
+				mState = STATE_RUNNING;
+	
+				if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
+					maskIp = "192.168.0.";
+				} else {
 					maskIp = f.getMaskIpAddress() + ".";
 				}
 				DeviceActivity.ipMaskAdd = maskIp;
-				
+					
 				while (mState == STATE_RUNNING) {
 					Log.i("MaskIp=",maskIp + checkIp);
 					try {
@@ -315,7 +314,6 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 									"Okay. We added the board to listview "
 											+ checkIp);
 						}
-	
 						msg.arg1 = Math.round((checkIp - from) * 100 / (to - from));
 						Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
 						mHandler.sendMessage(msg);
@@ -325,7 +323,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 					}
 				}
 			}
-				// }			
+						
 		}
 
 		/*

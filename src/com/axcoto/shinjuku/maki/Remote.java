@@ -284,8 +284,7 @@ public class Remote {
 		try {
 			clientSocket = new Socket(this.ip, Remote.TCP_PORT);			
 			outToServer = new DataOutputStream(clientSocket.getOutputStream());
-			printer = new PrintWriter(clientSocket.getOutputStream(), true);
-			
+			printer = new PrintWriter(clientSocket.getOutputStream(), true);			
 			connected = true;
 		} catch (IOException io) {
 			throw io;
