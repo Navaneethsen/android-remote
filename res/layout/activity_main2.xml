@@ -85,7 +85,7 @@
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
 			        android:layout_below="@id/cmd_return"
-			        android:layout_marginTop="20dp"
+			        android:layout_marginTop="15dp"
 			        layout="@layout/nothing" />
 		
 			    <include
@@ -93,7 +93,7 @@
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
 			        android:layout_below="@id/cmd_return"
-			        android:layout_marginTop="20dp"
+			        android:layout_marginTop="15dp"
 			        layout="@layout/playback" />
 		
 			    <include
@@ -101,7 +101,7 @@
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
 			        android:layout_below="@id/cmd_return"
-			        android:layout_marginTop="20dp"
+			        android:layout_marginTop="15dp"
 			        layout="@layout/audio_control" />
 		
 			    <include
@@ -109,7 +109,7 @@
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
 			        android:layout_below="@id/cmd_return"
-			        android:layout_marginTop="20dp"
+			        android:layout_marginTop="15dp"
 			        layout="@layout/settings" />
 		
 			    <include
@@ -117,7 +117,7 @@
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
 			        android:layout_below="@id/cmd_return"
-			        android:layout_marginTop="20dp"
+			        android:layout_marginTop="15dp"
 			        layout="@layout/extra" />
 		
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton

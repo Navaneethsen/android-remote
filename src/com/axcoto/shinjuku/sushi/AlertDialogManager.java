@@ -25,8 +25,9 @@ public class AlertDialogManager {
  
         if(status != null)
             // Setting alert dialog icon-NEED FIXED
-            alertDialog.setIcon((status) ? R.drawable.audio : R.drawable.volumedown);
- 
+            alertDialog.setIcon(0);
+//        alertDialog.setIcon((status) ? R.drawable.audio : R.drawable.volumedown);
+        
         // Setting OK Button
         alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {

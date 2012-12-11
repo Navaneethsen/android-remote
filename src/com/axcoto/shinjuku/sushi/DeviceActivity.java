@@ -16,6 +16,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -50,6 +51,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	static int ipScanTo = 253;	
 	static int ipTimeoutPing = 400;
 	static String ipMaskAdd = "";
+	AsyncTask<Void, Void, Void> mConnectTask;
+	Remote r;
 	
 	private GestureDetector gestureScanner;
 	
@@ -127,23 +130,38 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		listDevice = (ListView) findViewById(R.id.list_device);
 		
 		Log.e("SUSHI:: DEVICE", "Create activity");
-		final DeviceActivity t = this;		
+		final DeviceActivity t = this;	
+		final Context context = this;
+		
 		listDevice.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Log.e("DEVICE: CLICKED", "Click ListItem Number " + position);
-				DeviceItem d = deviceAdapter.getItem(position);
+				final DeviceItem d = deviceAdapter.getItem(position);
 				Log.e("SUSHI::DEVICE", "About to connect to " + d.getIp());
-				try {
-					Remote r = d.connect();
-					Toast.makeText(getApplicationContext(),
-							"Connected to " + d.getIp(),
-							Toast.LENGTH_LONG).show();
+				try { 
+					
+                   mConnectTask = new AsyncTask<Void, Void, Void>() {
+     
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            r = d.connect();
+                            return null;
+                        }
+     
+                        @Override
+                        protected void onPostExecute(Void result) {
+                            mConnectTask = null;
+                            Toast.makeText(getApplicationContext(),
+        							"Connected to " + d.getIp(),
+        							Toast.LENGTH_LONG).show();
+                        }
+     
+                    };
+                    mConnectTask.execute(null, null, null);
 					Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);;
 					finish();
 	            	startActivityForResult(i, 0x13343);
-				} catch (IOException e) {
-
 				} catch (Exception e) {
 
 				}
@@ -269,11 +287,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 
 		ProgressThread(Handler h) {
 			mHandler = h;
-			if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
-				from = 147;
-				to = 150;
-				checkIp = from;
-			} 
+
 			from = DeviceActivity.ipScanFrom;
 			to = DeviceActivity.ipScanTo;
 			checkIp = from;
@@ -282,7 +296,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		public void run() {
 
 			Finder f = Finder.getInstance();
-			if(f.resolve() == false) {
+			boolean res = f.resolve();
+			if(res == false) {
 				Log.e("Error: ", "no internet connection");
 				Message msg1 = mHandler.obtainMessage();
 				msg1.arg2 = 0;
@@ -302,10 +317,11 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 				DeviceActivity.ipMaskAdd = maskIp;
 				
 				while (mState == STATE_RUNNING) {
-	
+					Log.i("MaskIp=",maskIp + checkIp);
 					try {
 						Message msg = mHandler.obtainMessage();
 						msg.arg2 = 0;
+						
 						if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT, DeviceActivity.ipTimeoutPing)) {
 							msg.arg2 = checkIp;
 							Log.e("MAKI::FINDER",

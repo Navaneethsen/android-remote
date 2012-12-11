@@ -3,6 +3,10 @@ package com.axcoto.shinjuku.maki;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+import java.nio.channels.IllegalBlockingModeException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -260,15 +264,38 @@ public class Remote {
 		}
 	}
 
-	public Socket connect(String ip) throws IOException {
+	public Socket connect(String ip) {
 		this.ip = ip;
 		connected = false;
 		try {
 			clientSocket = new Socket(this.ip, Remote.TCP_PORT);			
 			outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			connected = true;
-		} catch (IOException io) {
-			throw io;
+		}
+		catch (SocketException e) {
+			Log.e("ERROR:","Socket Exception");
+		}
+		catch (SecurityException e) {
+			Log.e("ERROR:","Security Exception");
+		}
+		catch (UnknownHostException e) {
+			Log.e("ERROR:","Unknown Host Exception");
+		}
+		catch (SocketTimeoutException e) {
+			Log.e("ERROR:","SocketTimeoutException");
+		}
+		catch (IllegalBlockingModeException e) {
+			Log.e("ERROR:","IllegalBlockingModeException");
+		}
+		catch (IOException io) {
+			Log.e("ERROR:","I/0 Exception");
+		}
+		catch (IllegalArgumentException e) {
+			Log.e("ERROR:","IllegalArgumentException");			
+		}		
+		catch (Exception e) {
+			e.printStackTrace();
+			Log.e("Error:", "Some exception at Remote connect");
 		}
 		return clientSocket;
 	}

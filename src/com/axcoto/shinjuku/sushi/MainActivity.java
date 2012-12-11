@@ -148,7 +148,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
                 // Device is already registered on GCM
                 if (GCMRegistrar.isRegisteredOnServer(this)) {
                     // Skips registration.
-                    Toast.makeText(getApplicationContext(), "Already registered with GCM", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "Already registered with GCM", Toast.LENGTH_LONG).show();
+                	Log.i("GCM:", "Device is already registered with GCM");
                 } else {
                     // Try to register again, but not in the UI thread.
                     // It's also necessary to cancel the thread onDestroy(),
@@ -174,6 +175,35 @@ public class MainActivity extends RootActivity implements OnGestureListener {
                 }
             }
                 //New3
+            final Remote r = Remote.getInstance();
+            final EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
+            int AndroidVersion = android.os.Build.VERSION.SDK_INT;
+            if (AndroidVersion < 16)
+            {
+            	
+            edt.setOnKeyListener(new OnKeyListener() {
+    			@Override
+    			public boolean onKey(View v, int keyCode, KeyEvent event) {
+    			     if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+    					 InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+    					 if (im.isAcceptingText()) im.hideSoftInputFromWindow(edt.getWindowToken(),0);    			    	 					
+    			    	 
+    			    	 try {
+    							r.execute("enter");
+    						} catch (IOException e) {
+    							// TODO Auto-generated catch block
+    							e.printStackTrace();
+    						} catch (Exception e) {
+    							// TODO Auto-generated catch block
+    							e.printStackTrace();
+    						}
+    			          return true;
+    			     }
+    			     return false;
+    			}
+            	
+            });
+            }
       	
 	}
 	
@@ -540,15 +570,9 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 //	}
 
 	public void onKeyboardTouch(View v) {
-		findViewById(R.id.hide_button).setVisibility(View.VISIBLE);
-	}
-	
-	public void onHideTouch(View v) {
 		EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
 		InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-		if (im.isAcceptingText()) im.hideSoftInputFromWindow(edt.getWindowToken(),0);
-		v.setVisibility(View.GONE);
-		
+		im.hideSoftInputFromWindow(edt.getWindowToken(),1);
 	}
 	
 	/**

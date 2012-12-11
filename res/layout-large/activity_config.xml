@@ -43,7 +43,7 @@
         android:title="@string/pref_extra_setting" >
 
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="auto_search"
             android:summary="Song Autosearch"
             android:title="Auto-search mode" >

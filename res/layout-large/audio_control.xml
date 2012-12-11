@@ -10,7 +10,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"	
 	        android:background="@android:color/transparent"
-	        android:src="@drawable/audio_control_title" />      	              
+	        android:src="@drawable/taudio_control_title" />      	              
 
  	<TableLayout 
  	    android:id = "@+id/table_audio"
@@ -84,8 +84,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@android:color/transparent" />
      	</TableRow>
- 	</TableLayout>
- 	
+	</TableLayout> 	
  	<ImageView
  	    android:id="@+id/include_background"
  	    android:layout_width="wrap_content"

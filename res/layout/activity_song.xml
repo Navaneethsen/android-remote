@@ -9,8 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="ToggleButton"        
-        android:checked = "true"
+        android:checked="true"
         android:onClick= "onToggle"
         android:textOff="@string/label_mp3"
         android:textOn="@string/label_hd" />

@@ -2,6 +2,8 @@ package com.axcoto.shinjuku.sushi;
 
 import java.io.IOException;
 
+import android.util.Log;
+
 import com.axcoto.shinjuku.maki.Remote;
 
 public class DeviceItem {
@@ -19,15 +21,10 @@ public class DeviceItem {
 	 * @return Remote object represent the connection between phone and device
 	 * @throws IOException
 	 */
-	public Remote connect() throws IOException {
-		Remote r = Remote.getInstance();
-		
-		try {
-			r.connect(this.ip);
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw e;
-		}
+	public Remote connect() {
+		Remote r = Remote.getInstance();		
+		r.connect(this.ip);
+//		Log.i("Yea", "connected");
 		return r;
 	}
 }

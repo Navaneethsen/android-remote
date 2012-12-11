@@ -65,6 +65,7 @@ public class SongActivity extends RootActivity{
 	int textlength=0;
 	private SongAdapter songAdapter;
 	public static ArrayList<Song> songs = new ArrayList<Song>();
+	public static ArrayList<Song> fullsong = new ArrayList<Song>();
 	public ArrayList<String> songId;
 	public ArrayList<String> songTitle;
 	private static ArrayList<Song> arr_sort= new ArrayList<Song>();
@@ -132,7 +133,8 @@ public class SongActivity extends RootActivity{
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_song);        
+        setContentView(R.layout.activity_song);    
+        fullsong = new ArrayList<Song>();
         SongActivity.t = this;        
         songList = (ListView) findViewById(R.id.song_list);
         songList.setTextFilterEnabled(true);
@@ -204,7 +206,7 @@ public class SongActivity extends RootActivity{
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (ed.getText().toString().equals("")) {
-					songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
+					songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, fullsong);
 					songList.setAdapter(songAdapter);
 				}
 				else {
@@ -376,12 +378,15 @@ public class SongActivity extends RootActivity{
 				}
 				else if (syncStatus == SYNC_DONE) {
 					long t1 = System.currentTimeMillis(); 		
-						songs = getSong(t.getLocation(locationType));					
+						songs = getSong(t.getLocation(locationType));
+						for (Song s: songs){
+							fullsong.add(s);
+						}
 			    	long t2 = System.currentTimeMillis();
 			    	Log.i("Total TIME: ", Long.toString(t2-t1));				
 					check = false;
 				}
-			}
+			}			
 			return true;
 		}
     	
