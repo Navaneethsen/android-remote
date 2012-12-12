@@ -2,13 +2,17 @@ package com.axcoto.shinjuku.sushi;
 
 import java.util.ArrayList;
 
+import com.axcoto.shinjuku.maki.Remote;
+
 import android.content.ClipData.Item;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,13 +59,32 @@ public class ItemAdapter extends ArrayAdapter<DeviceItem> {
 				ImageView iv = (ImageView) v.findViewById(R.id.imageDeviceStatus);
 				
 				Log.i("MAKI:: DEVICE IP: ", i.getIp());
+				ImageButton ib = (ImageButton) v.findViewById(R.id.imageDisconnect);
 				
 				if (i.isConnected()) {
+					ib.setVisibility(View.VISIBLE);
 					Log.i("MAKI:: CONNECTED", "Connected to this device" + i.getIp());
 					iv.setImageResource(R.drawable.glyphicons_165_iphone_exchange);
+					
+//					ImageButton disConnectButton = new ImageButton(this.getContext());
+//					disConnectButton.setOnClickListener(new OnClickListener() {
+//						public void onClick(View v) {
+//							Remote.getInstance().disConnect();
+//						}
+//					});
+//					disConnectButton.setImageResource(R.drawable.glyphicons_197_remove);
+//					//parent.addView(disConnectButton);
+					ib.setOnClickListener(new OnClickListener() {
+						public void onClick(View v) {
+							Remote.getInstance().disConnect();
+						}
+					});
+					
 				} else {
+					ib.setVisibility(View.INVISIBLE);
 					iv.setImageResource(R.drawable.glyphicons_164_iphone_transfer);
 				}
+				
 				// check to see if each individual textview is null.
 				// if not, assign some text!
 				if (tt != null){

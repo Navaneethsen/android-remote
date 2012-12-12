@@ -38,6 +38,9 @@ import com.axcoto.shinjuku.maki.Remote;
 public class DeviceActivity extends RootActivity implements OnGestureListener{
 	final public String DEVICE_FILENAME = "device";
 	
+	final public int ACTION_CONNECT = 1;
+	final public int ACTION_DISCONNECT = 2;
+	
 	static final int PROGRESS_DIALOG = 0;
 	
 	private ListView listDevice;
@@ -51,7 +54,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	static int ipScanTo = 253;	
 	static int ipTimeoutPing = 400;
 	static String ipMaskAdd = "";
-	AsyncTask<Void, Void, Void> mConnectTask;
+	AsyncTask<Integer, Void, Void> mConnectTask;
 	Remote r;
 	
 	private GestureDetector gestureScanner;
@@ -75,7 +78,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	  // Restore UI state from the savedInstanceState.
 	  // This bundle has also been passed to onCreate.
 	  ArrayList<String> ip = savedInstanceState.getStringArrayList("deviceIp");
-	  Log.e("SUSHI:: RESTORE", "From Restore. We had devices: " + ip.size());
+	  Log.e("SUSHI:: ==RESTORE", "From Restore. We had devices: " + ip.size());
 	  
 	  deviceIp = new ArrayList<String>();
 		devices = new ArrayList<DeviceItem>();
@@ -135,16 +138,28 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		listDevice.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Log.e("DEVICE: CLICKED", "Click ListItem Number " + position);
+				Log.i("SUSHI :: DEVICE: CLICKED", "Click ListItem Number " + position);
 				final DeviceItem d = deviceAdapter.getItem(position);
-				Log.e("SUSHI::DEVICE", "About to connect to " + d.getIp());
+				Log.e("SUSHI:: DEVICE", "About to connect to " + d.getIp());
+				Log.i("SUSHI :: DEVICE", Integer.toString(view.getId()));
 				try { 
+					int action = d.isConnected()? ACTION_DISCONNECT:ACTION_CONNECT;
 					
-                   mConnectTask = new AsyncTask<Void, Void, Void>() {
-     
+                   mConnectTask = new AsyncTask<Integer, Void, Void>() {
+                	   
                         @Override
-                        protected Void doInBackground(Void... params) {
-                            r = d.connect();
+                        protected Void doInBackground(Integer... params) {
+                        	try {
+                        		if (params[0].intValue() == ACTION_DISCONNECT) {
+                        			Remote.getInstance().disConnect();
+                        		} else {
+                        			r = d.connect();                                	
+                        		}
+                        	} catch (Exception e) {
+                        		Toast.makeText(getApplicationContext(),
+            							"Cannot connect to the device",
+            							Toast.LENGTH_LONG).show();
+                        	}
                             return null;
                         }
      
@@ -157,7 +172,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
                         }
      
                     };
-                    mConnectTask.execute(null, null, null);
+                    mConnectTask.execute(action, null, null);
 					Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);;
 					finish();
 	            	startActivityForResult(i, 0x13343);
@@ -398,12 +413,10 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
  
     @Override
  
-    public void onLongPress(MotionEvent e)
- 
-    {
- 
-//        Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
- 
+    public void onLongPress(MotionEvent e) 
+    { 
+        Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
+        Remote.getInstance().disConnect();
     }
  
    

@@ -281,7 +281,26 @@ public class Remote {
 			}
 		}
 	}
-
+	
+	/**
+	 * Disconnect 
+	 */
+	public boolean disConnect() {
+		try {
+			outToServer.flush();
+			outToServer.close();
+			clientSocket.close();
+			clientSocket.shutdownOutput();
+		} catch (IOException io) {
+			Log.e("MAI:: REMOTE :: ERROR", "Cannot close socket data streaming");
+			return false;
+		} catch (Exception e) {
+			Log.e("MAI:: REMOTE :: ERROR", "Unknow error" + e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
 	public Socket connect(String ip) throws IOException, Exception {
 		this.ip = ip;
 		connected = false;

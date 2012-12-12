@@ -20,9 +20,7 @@ public class DeviceItem {
 		if (!Remote.getInstance().getConnected()) {
 			return false;
 		}
-		
-		Log.i("SUSHI: COMPARE ", this.ip);
-		Log.i("SUSHI: COMPARE", Remote.getInstance().getIp());
+
 		return this.ip.equals(Remote.getInstance().getIp());
 	}
 	
