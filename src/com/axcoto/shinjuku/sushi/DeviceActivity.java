@@ -16,6 +16,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -50,6 +51,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	static int ipScanTo = 253;	
 	static int ipTimeoutPing = 400;
 	static String ipMaskAdd = "";
+	AsyncTask<Void, Void, Void> mConnectTask;
+	Remote r;
 	
 	private GestureDetector gestureScanner;
 	
@@ -126,23 +129,38 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		listDevice = (ListView) findViewById(R.id.list_device);
 		
 		Log.e("SUSHI:: DEVICE", "Create activity");
-		final DeviceActivity t = this;		
+		final DeviceActivity t = this;	
+		final Context context = this;
+		
 		listDevice.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Log.e("DEVICE: CLICKED", "Click ListItem Number " + position);
-				DeviceItem d = deviceAdapter.getItem(position);
+				final DeviceItem d = deviceAdapter.getItem(position);
 				Log.e("SUSHI::DEVICE", "About to connect to " + d.getIp());
-				try {
-					Remote r = d.connect();
-					Toast.makeText(getApplicationContext(),
-							"Connected to " + d.getIp(),
-							Toast.LENGTH_LONG).show();
+				try { 
+					
+                   mConnectTask = new AsyncTask<Void, Void, Void>() {
+     
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            r = d.connect();
+                            return null;
+                        }
+     
+                        @Override
+                        protected void onPostExecute(Void result) {
+                            mConnectTask = null;
+                            Toast.makeText(getApplicationContext(),
+        							"Connected to " + d.getIp(),
+        							Toast.LENGTH_LONG).show();
+                        }
+     
+                    };
+                    mConnectTask.execute(null, null, null);
 					Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);;
 					finish();
 	            	startActivityForResult(i, 0x13343);
-				} catch (IOException e) {
-
 				} catch (Exception e) {
 
 				}
@@ -293,15 +311,15 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 //			f.resolve();
 			else
 			{
-				mState = STATE_RUNNING;
-	
-				if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
-					maskIp = "192.168.0.";
-				} else {
+			mState = STATE_RUNNING;
+
+			if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
+				maskIp = "192.168.0.";
+			} else {
 					maskIp = f.getMaskIpAddress() + ".";
 				}
 				DeviceActivity.ipMaskAdd = maskIp;
-					
+				
 				while (mState == STATE_RUNNING) {
 					Log.i("MaskIp=",maskIp + checkIp);
 					try {
@@ -314,6 +332,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 									"Okay. We added the board to listview "
 											+ checkIp);
 						}
+	
 						msg.arg1 = Math.round((checkIp - from) * 100 / (to - from));
 						Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
 						mHandler.sendMessage(msg);

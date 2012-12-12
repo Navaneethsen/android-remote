@@ -4,6 +4,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+import java.nio.channels.IllegalBlockingModeException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -286,10 +290,31 @@ public class Remote {
 			outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			printer = new PrintWriter(clientSocket.getOutputStream(), true);			
 			connected = true;
-		} catch (IOException io) {
-			throw io;
-		} catch (Exception e) {
-			throw e;
+		}
+		catch (SocketException e) {
+			Log.e("ERROR:","Socket Exception");
+		}
+		catch (SecurityException e) {
+			Log.e("ERROR:","Security Exception");
+		}
+		catch (UnknownHostException e) {
+			Log.e("ERROR:","Unknown Host Exception");
+		}
+		catch (SocketTimeoutException e) {
+			Log.e("ERROR:","SocketTimeoutException");
+		}
+		catch (IllegalBlockingModeException e) {
+			Log.e("ERROR:","IllegalBlockingModeException");
+		}
+		catch (IOException io) {
+			Log.e("ERROR:","I/0 Exception");
+		}
+		catch (IllegalArgumentException e) {
+			Log.e("ERROR:","IllegalArgumentException");			
+		}		
+		catch (Exception e) {
+			e.printStackTrace();
+			Log.e("Error:", "Some exception at Remote connect");
 		}
 		return clientSocket;
 	}

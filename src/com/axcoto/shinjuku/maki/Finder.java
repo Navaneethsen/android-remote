@@ -2,7 +2,6 @@ package com.axcoto.shinjuku.maki;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
@@ -122,32 +121,22 @@ public class Finder {
 	            NetworkInterface intf = en.nextElement();
 	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
 	                InetAddress inetAddress = enumIpAddr.nextElement();
-	                String ipv4;
-					if (!inetAddress.isLoopbackAddress() && InetAddressUtils.isIPv4Address(ipv4 = inetAddress.getHostAddress())) {
-//	                   _ipAddress = inetAddress.getHostAddress();
-//	                   if (inetAddress instanceof Inet4Address) { 
-	                	   _ipAddress = inetAddress.getHostAddress().toString();
-//                       } 
-	                   String[] part = _ipAddress.split("\\.");
-//	                   if (part.length < 4) {
-//	                	   Log.e("Error: ", "Not support ipv6");
-//	                	   break;
-//	                   }
-//	                   else {
+	                if (!inetAddress.isLoopbackAddress() && InetAddressUtils.isIPv4Address(inetAddress.getHostAddress())){
+	                   _ipAddress = inetAddress.getHostAddress();
+//	                   Log.e("ipAddress: ", _ipAddress);
+	                   String[] part = _ipAddress.split("\\.");	                   
 	                   Log.e("MAKI", "Current IP of Device is " + _ipAddress);
 	                   Log.e("MAKI: Finder", "Ip Part is " + Arrays.toString(part));
 	                   _maskIpAddress = part[0] + "." + part[1] + "." + part[2];
 	                   Log.i("_maskIpAddress", _maskIpAddress);
-	                   return true;
-//	                   }
 	                }
 	            }
-	        }
+	        }	                   
+	        return true;	                   
 	    } catch (SocketException ex) {
 	        Log.e("MAKI: FIND IP", ex.toString());
 	        return false;
 	    }		
-		return false;
 		
 	}
 	public String getMaskIpAddress() {

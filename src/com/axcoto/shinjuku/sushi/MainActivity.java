@@ -85,12 +85,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		setContentView(R.layout.activity_main);
 		setTextListener();
 		RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
-		
-		gestureScanner = new GestureDetector(this);
-		//Adding extra stuff to test	
-//		this.findViewById(R.id.ScrollView01).setVisibility(View.VISIBLE);
-		//End of test
-//		Resources res = getResources();
+		Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS ".concat(b.getKeyName()));
 		
 		//New 2
 //		 Check if Internet present
@@ -173,6 +168,98 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		} catch (Exception e) {
 			Log.e("MAKI:: SERVER", e.getMessage());
 		}
+		//Adding extra stuff to test	
+//		this.findViewById(R.id.ScrollView01).setVisibility(View.VISIBLE);
+		//End of test
+//		Resources res = getResources();
+		
+		//New 2
+//		 Check if Internet present
+		cd = new ConnectionDetector(getApplicationContext()); 		
+        if (!cd.isConnectingToInternet()) {
+            // Internet Connection is not present
+            alert.showAlertDialog(MainActivity.this,
+                    "Internet Connection Error",
+                    "Please connect to working Internet connection", false);
+            // stop executing code by return
+            return;
+        }		
+        
+        //add GCM support
+      		GCMRegistrar.checkDevice(this);
+      		GCMRegistrar.checkManifest(this);
+      		final String regId = GCMRegistrar.getRegistrationId(this);
+      		Log.i("ID: ", regId);
+      	//New 2
+		//New3
+      		 // Get GCM registration id
+            
+     
+            // Check if regid already presents
+            if (regId.equals("")) {
+                // Registration is not present, register now with GCM
+                GCMRegistrar.register(this, SENDER_ID);
+            } else {
+                // Device is already registered on GCM
+                if (GCMRegistrar.isRegisteredOnServer(this)) {
+                    // Skips registration.
+//                    Toast.makeText(getApplicationContext(), "Already registered with GCM", Toast.LENGTH_LONG).show();
+                	Log.i("GCM:", "Device is already registered with GCM");
+                } else {
+                    // Try to register again, but not in the UI thread.
+                    // It's also necessary to cancel the thread onDestroy(),
+                    // hence the use of AsyncTask instead of a raw thread.
+                    final Context context = this;
+                    mRegisterTask = new AsyncTask<Void, Void, Void>() {
+     
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            // Register on our server
+                            // On server creates a new user
+                            ServerUtilities.register(context, regId);
+                            return null;
+                        }
+     
+                        @Override
+                        protected void onPostExecute(Void result) {
+                            mRegisterTask = null;
+                        }
+     
+                    };
+                    mRegisterTask.execute(null, null, null);
+                }
+            }
+                //New3
+            final Remote r = Remote.getInstance();
+            final EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
+            int AndroidVersion = android.os.Build.VERSION.SDK_INT;
+            if (AndroidVersion < 16)
+            {
+            	
+            edt.setOnKeyListener(new OnKeyListener() {
+    			@Override
+    			public boolean onKey(View v, int keyCode, KeyEvent event) {
+    			     if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+    					 InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+    					 if (im.isAcceptingText()) im.hideSoftInputFromWindow(edt.getWindowToken(),0);    			    	 					
+    			    	 
+    			    	 try {
+    							r.execute("enter");
+    						} catch (IOException e) {
+    							// TODO Auto-generated catch block
+    							e.printStackTrace();
+    						} catch (Exception e) {
+    							// TODO Auto-generated catch block
+    							e.printStackTrace();
+    						}
+    			          return true;
+    			     }
+    			     return false;
+    			}
+            	
+            });
+            }
+      	
 	}
 	
 	/**
@@ -630,5 +717,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
         }
         super.onDestroy();
     }
+ 
+}
 
 }

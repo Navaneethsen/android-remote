@@ -1,6 +1,6 @@
 package com.axcoto.shinjuku.maki;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,6 +28,8 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 	protected final int SERVER_PORT = 5320;
 	protected static File docRoot;
 	protected static int port;
+	InputStream in;
+	OutputStream out;
 	
 	public static MyHttpServer getInstance(int port, File docRoot) throws IOException{
 		if (instance==null) {
@@ -97,22 +99,25 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader{
 			try {
 				SongActivity.syncStatus = SongActivity.SYNC_RECEIVE_SONGBOOK;
 				Log.i("Sync Status: ", "STARTING TO WRITE SONGBOOK");
-				InputStream in = new FileInputStream(new File(files.getProperty(value).toString()));
-				OutputStream out = new FileOutputStream(docRoot.getAbsoluteFile() + "/" +  parms.getProperty("upload1").toString());
+				in = new FileInputStream(new File(files.getProperty(value).toString()));
+				out = new FileOutputStream(docRoot.getAbsoluteFile() + "/" +  parms.getProperty("upload1").toString());
 				
 				BufferedInputStream bis=new BufferedInputStream(in);
 				
 				byte[] buffer = new byte[1024];
-				int read;
-				while ((read = bis.read(buffer)) != -1) {
-					out.write(buffer, 0, read);
-				}
-				
+//				int read;
+//				while ((read = in.read(buffer)) != -1) {
+//					out.write(buffer, 0, read);
+//				}
+				int length;
+				while ((length = in.read(buffer)) > 0){
+					 
+	    	    	out.write(buffer, 0, length);
+	 
+	    	    }
+
 				in.close();
-				in = null;
-				out.flush();
 				out.close();
-				out = null;
 				has_file = 2;
 				SongActivity.syncStatus = SongActivity.SYNC_PROCESS_SONGBOOK;
 				Log.i("Sync Status: ", "SONG BOOK RETRIEVED");
