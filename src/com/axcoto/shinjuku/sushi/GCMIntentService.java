@@ -1,5 +1,11 @@
 package com.axcoto.shinjuku.sushi;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,7 +18,8 @@ import com.google.android.gcm.GCMBaseIntentService;
  
 import static com.axcoto.shinjuku.sushi.CommonUtilities.SENDER_ID;
 import static com.axcoto.shinjuku.sushi.CommonUtilities.displayMessage;
- 
+import com.axcoto.shinjuku.maki.IdRegister; 
+
 public class GCMIntentService extends GCMBaseIntentService {
  
     private static final String TAG = "GCMIntentService";
@@ -29,6 +36,11 @@ public class GCMIntentService extends GCMBaseIntentService {
         Log.i(TAG, "Device registered: regId = " + registrationId);
         displayMessage(context, "Your device registred with GCM");
         Log.d("ID", registrationId);
+        
+        IdRegister r = new IdRegister(registrationId);
+        r.setContext(context);
+        r.perform();
+        
         ServerUtilities.register(context,registrationId);
     }
  

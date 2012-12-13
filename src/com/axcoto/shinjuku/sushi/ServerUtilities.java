@@ -32,7 +32,7 @@ public final class ServerUtilities {
      */
     static void register(final Context context, final String regId) {
         Log.i(TAG, "registering device (regId = " + regId + ")");
-        String serverUrl = SERVER_URL ;
+        String serverUrl = SERVER_URL + "register";
         email = UserEmailFetcher.getEmail(context);
         Map<String, String> params = new HashMap<String, String>();        
         params.put("regId",regId);
@@ -83,7 +83,7 @@ public final class ServerUtilities {
      */
     static void unregister(final Context context, final String regId) {
         Log.i(TAG, "unregistering device (regId = " + regId + ")");
-        String serverUrl = SERVER_URL + "/unregister";
+        String serverUrl = SERVER_URL + "unregister";
         email = UserEmailFetcher.getEmail(context);
         Map<String, String> params = new HashMap<String, String>();
         params.put("regId", regId);

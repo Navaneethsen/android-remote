@@ -54,8 +54,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	// final static int ENVIRONMENT = PHASE_PRODUCTION;
 	// final static int ENVIRONMENT = PHASE_TESTING;
 
-	final static int VIRGIN = 1;
-	final static String VERSION = "0.7-dev-1207";
 	public String remote;
 	final int PORT = 5320;
 	protected File homeDir;
@@ -142,7 +140,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			boolean mExternalStorageAvailable = false;
 			boolean mExternalStorageWriteable = false;
 			String state = Environment.getExternalStorageState();
-
+			Log.i("SUSHI:: MAIN :: HomeDir is", homeDir.toString());
 			// For simplicity. use internal storage for now
 			// if (Environment.MEDIA_MOUNTED.equals(state)) {
 			// // We can read and write the media
@@ -151,16 +149,16 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			// };
 
 			MyHttpServer ht = MyHttpServer.getInstance(PORT, homeDir);
-			File file = this.getFileStreamPath("f.html");
+			File file = this.getFileStreamPath("file-upload.html");
 			if (file.exists()) {
-				Log.i("MAKI: SERVER", "initialize app before");
+				Log.i("MAKI: SERVER", "initialize app before so we don't need to copy the file for web server");
 			} else {
 				this.copyAssets();
 			}
 		} catch (IOException e) {
-			Log.e("MAKI:: SERVER", "The docroot is not valid");
+			Log.e("MAKI:: SERVER:: IOError", "The docroot is not valid");
 		} catch (Exception e) {
-			Log.e("MAKI:: SERVER", e.getMessage());
+			Log.e("MAKI:: SERVER:: GENERAL ERROR", e.getMessage());
 		}
 
 	}
@@ -183,8 +181,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			// Device is already registered on GCM
 			if (GCMRegistrar.isRegisteredOnServer(this)) {
 				Log.i("GCM:", "Device is already registered with GCM");
-				// GCMRegistrar.unregister(getApplicationContext());
-				// //Unregister device for testing
+				//GCMRegistrar.unregister(getApplicationContext());
+				//Unregister device for testing
 			} else {
 				// Try to register again, but not in the UI thread.
 				// It's also necessary to cancel the thread onDestroy(),
@@ -212,19 +210,18 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	}
 
 	private void copyAssets() {
-		Log.e("MAKI: ASSET COPY",
+		Log.e("MAKI:: MAIN:: ASSET COPY",
 				"Start to copy asset for the first initialization of app");
 		AssetManager assetManager = getAssets();
 		String[] files = null;
 		try {
 			files = assetManager.list("");
 		} catch (IOException e) {
-			Log.e("tag", e.getMessage());
+			Log.e("SUSHI:: MAINACTIVITY:: ERROR", e.getMessage());
 		}
 
 		for (String filename : files) {
-			if ("images".equals(filename) || "sounds".equals(filename)
-					|| "webkit".equals(filename)) {
+			if ("images".equals(filename) || "sounds".equals(filename) || "webkit".equals(filename)) {
 				continue;
 			}
 			InputStream in = null;
