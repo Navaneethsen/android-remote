@@ -56,7 +56,7 @@ public class ItemAdapter extends ArrayAdapter<DeviceItem> {
 
 			if (i != null) {
 				TextView tt = (TextView) v.findViewById(R.id.ipLabel);
-				ImageView iv = (ImageView) v.findViewById(R.id.imageDeviceStatus);
+				final ImageView iv = (ImageView) v.findViewById(R.id.imageDeviceStatus);
 				
 				Log.i("MAKI:: DEVICE IP: ", i.getIp());
 				ImageButton ib = (ImageButton) v.findViewById(R.id.imageDisconnect);
@@ -74,9 +74,15 @@ public class ItemAdapter extends ArrayAdapter<DeviceItem> {
 //					});
 //					disConnectButton.setImageResource(R.drawable.glyphicons_197_remove);
 //					//parent.addView(disConnectButton);
+					
 					ib.setOnClickListener(new OnClickListener() {
 						public void onClick(View v) {
 							Remote.getInstance().disConnect();
+							ImageButton ib = (ImageButton) v;
+							ib.setVisibility(View.INVISIBLE);
+							//ImageView iv = findViewById(R.id.imageDeviceStatus);
+							iv.setImageResource(R.drawable.glyphicons_164_iphone_transfer);
+							
 						}
 					});
 					

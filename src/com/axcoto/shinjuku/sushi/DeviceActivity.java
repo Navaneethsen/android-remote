@@ -135,7 +135,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Log.i("SUSHI :: DEVICE: CLICKED", "Click ListItem Number " + position);
 				final DeviceItem d = deviceAdapter.getItem(position);
-				Log.e("SUSHI:: DEVICE", "About to connect to " + d.getIp());
+				Log.i("SUSHI:: DEVICE", "About to connect to " + d.getIp());
 				Log.i("SUSHI :: DEVICE", Integer.toString(view.getId()));
 				try { 
 					final int action = d.isConnected()? ACTION_DISCONNECT:ACTION_CONNECT;

@@ -83,22 +83,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setTextListener();
-		RemoteKeyButton b = (RemoteKeyButton) this.findViewById(R.id.cmd_power);
-		Log.e("SUSHI:: KEYNAME", "NUT POWER UP IS ".concat(b.getKeyName()));
-
-		// New 2
-		// Check if Internet present
-		cd = new ConnectionDetector(getApplicationContext());
-		if (!cd.isConnectingToInternet()) {
-			// Internet Connection is not present
-			alert.showAlertDialog(MainActivity.this,
-					"Internet Connection Error",
-					"Please connect to working Internet connection", false);
-			// stop executing code by return
-			return;
-		}
-
-		// New3
+		
 		final Remote r = Remote.getInstance();
 		final EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
 		int AndroidVersion = android.os.Build.VERSION.SDK_INT;
@@ -106,12 +91,11 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			edt.setOnKeyListener(new OnKeyListener() {
 				@Override
 				public boolean onKey(View v, int keyCode, KeyEvent event) {
-					if ((event.getAction() == KeyEvent.ACTION_DOWN)
-							&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
+					if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 						InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-						if (im.isAcceptingText())
+						if (im.isAcceptingText()) {
 							im.hideSoftInputFromWindow(edt.getWindowToken(), 0);
-
+						}
 						try {
 							r.execute("enter");
 						} catch (IOException e) {
@@ -125,16 +109,27 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 					}
 					return false;
 				}
-
 			});
 		}
-
+	}
+	
+	protected boolean isOnline() {
+		cd = new ConnectionDetector(getApplicationContext());
+		return cd.isConnectingToInternet();		
 	}
 
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		this.startServer();
-		this.gcmHandle();
+		if (this.isOnline()) {
+			this.startServer();
+			this.gcmHandle();
+		} else {
+			alert.showAlertDialog(MainActivity.this,
+						"Internet Connection Error",
+						"Please connect to working Internet connection", false);
+				
+		}
+		
 	}
 
 	/**
@@ -158,7 +153,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			MyHttpServer ht = MyHttpServer.getInstance(PORT, homeDir);
 			File file = this.getFileStreamPath("f.html");
 			if (file.exists()) {
-				Log.e("MAKI: SERVER", "initialize app before");
+				Log.i("MAKI: SERVER", "initialize app before");
 			} else {
 				this.copyAssets();
 			}
@@ -166,48 +161,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			Log.e("MAKI:: SERVER", "The docroot is not valid");
 		} catch (Exception e) {
 			Log.e("MAKI:: SERVER", e.getMessage());
-		}
-
-		cd = new ConnectionDetector(getApplicationContext());
-		if (!cd.isConnectingToInternet()) {
-			// Internet Connection is not present
-			alert.showAlertDialog(MainActivity.this,
-					"Internet Connection Error",
-					"Please connect to working Internet connection", false);
-			// stop executing code by return
-			return;
-		}
-
-		// New3
-		final Remote r = Remote.getInstance();
-		final EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
-		int AndroidVersion = android.os.Build.VERSION.SDK_INT;
-		if (AndroidVersion < 16) {
-
-			edt.setOnKeyListener(new OnKeyListener() {
-				@Override
-				public boolean onKey(View v, int keyCode, KeyEvent event) {
-					if ((event.getAction() == KeyEvent.ACTION_DOWN)
-							&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
-						InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-						if (im.isAcceptingText())
-							im.hideSoftInputFromWindow(edt.getWindowToken(), 0);
-
-						try {
-							r.execute("enter");
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						return true;
-					}
-					return false;
-				}
-
-			});
 		}
 
 	}
@@ -314,7 +267,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 				r.execute(command);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				Log.e("SUSHI: REMOTE", "IOException: " + e.getMessage());
+				Log.e("SUSHI: REMOTE", "yException: " + e.getMessage());
 				e.printStackTrace();
 			} catch (Exception e) {
 				Log.e("SUSHI: REMOTE", "Exception: " + e.getMessage());
