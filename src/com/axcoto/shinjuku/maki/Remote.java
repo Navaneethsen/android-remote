@@ -286,16 +286,20 @@ public class Remote {
 	 * Disconnect 
 	 */
 	public boolean disConnect() {
+		Log.i("MAKI:: REMOTE", "Trying to close socket connection");
+		
 		try {
+			this.connected = false;
 			outToServer.flush();
-			outToServer.close();
-			clientSocket.close();
+			//outToServer.close();
 			clientSocket.shutdownOutput();
+			clientSocket.close();
+			Log.i("MAKI:: REMOTE", "Socket closed");
 		} catch (IOException io) {
-			Log.e("MAI:: REMOTE :: ERROR", "Cannot close socket data streaming");
+			Log.e("MAKI:: REMOTE :: ERROR", "Cannot close socket data streaming. " + io.getStackTrace());
 			return false;
 		} catch (Exception e) {
-			Log.e("MAI:: REMOTE :: ERROR", "Unknow error" + e.getMessage());
+			Log.e("MAI:: REMOTE :: ERROR", "Unknow error. " + e.getStackTrace());
 			return false;
 		}
 		return true;

@@ -94,14 +94,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		}	  
 	}
 	
-	@Override
-	public void onPause() {
-		super.onPause();
-		Log.e("SUSHI:: DEVICE", "Pause activity");
-
-		//Okay, now we done we can skip it
-//		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		
+	public void saveDeviceList() {
 		String ip;
 		try {
 			FileOutputStream fos = openFileOutput(this.DEVICE_FILENAME, Context.MODE_PRIVATE);
@@ -119,7 +112,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		} catch (IOException e) {
 			Log.e("SUSHI:: DEVICE", "Cannot write data to the file ");			
 		}
-		
+
+		//Okay, now we done we can skip it
+		//		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	}
 	
 	@Override
@@ -143,18 +138,18 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 				Log.e("SUSHI:: DEVICE", "About to connect to " + d.getIp());
 				Log.i("SUSHI :: DEVICE", Integer.toString(view.getId()));
 				try { 
-					int action = d.isConnected()? ACTION_DISCONNECT:ACTION_CONNECT;
+					final int action = d.isConnected()? ACTION_DISCONNECT:ACTION_CONNECT;
 					
                    mConnectTask = new AsyncTask<Integer, Void, Void>() {
                 	   
                         @Override
                         protected Void doInBackground(Integer... params) {
                         	try {
-                        		if (params[0].intValue() == ACTION_DISCONNECT) {
+                        		//We need to close previous connection first.
+                        		if (action == ACTION_DISCONNECT) {
                         			Remote.getInstance().disConnect();
-                        		} else {
-                        			r = d.connect();                                	
-                        		}
+                        		}                        		
+                        		r = d.connect();
                         	} catch (Exception e) {
                         		Toast.makeText(getApplicationContext(),
             							"Cannot connect to the device",
@@ -219,21 +214,6 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		}
 	}
 
-	public void doTest(View view) {
-		Remote r = Remote.getInstance();
-		if (r.getConnected()) {
-			try {
-				r.execute("DOWN");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-
 	public void scanDevice(View view) {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		this.ipScanFrom = sharedPref.getInt("ip_from", 2);
@@ -286,6 +266,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 				deviceIp.add(ip);
 			}
 			if (total >= 100) {
+				saveDeviceList();
 				progressDialog.setProgress(0); // clear the value to avoid cache
 												// for next appearance.
 				dismissDialog(PROGRESS_DIALOG);
