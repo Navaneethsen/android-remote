@@ -151,9 +151,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
                         		}                        		
                         		r = d.connect();
                         	} catch (Exception e) {
-                        		Toast.makeText(getApplicationContext(),
-            							"Cannot connect to the device",
-            							Toast.LENGTH_LONG).show();
+                        		
+                        		Log.e("SUSHI:: DEVICE:: CONNECT_ERROR", e.getStackTrace().toString());
                         	}
                             return null;
                         }
@@ -161,19 +160,32 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
                         @Override
                         protected void onPostExecute(Void result) {
                             mConnectTask = null;
-                            Toast.makeText(getApplicationContext(),
+                            if (d.isConnected()) {
+                            	Toast.makeText(getApplicationContext(),
         							"Connected to " + d.getIp(),
         							Toast.LENGTH_LONG).show();
+                            	
+                            	Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+             					finish();
+             	            	startActivityForResult(i, 0x13343);
+             	            	
+                            } else {
+                            	Toast.makeText(getApplicationContext(),
+            							"Cannot connect to the device",
+            							Toast.LENGTH_LONG).show();
+                            }
                         }
      
                     };
                     mConnectTask.execute(action, null, null);
-					Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);;
-					finish();
-	            	startActivityForResult(i, 0x13343);
+//					Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//					finish();
+//	            	startActivityForResult(i, 0x13343);
 				} catch (Exception e) {
-
+					Log.e("SUSHI:: DEVICE", e.getMessage());
 				}
+				Log.i("SUSHI :: DEVICE:: WAIT_CONNECT", "Waiting for device connection in background");
+				
 			}
 
 		});
@@ -182,8 +194,6 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		devices = new ArrayList<DeviceItem>();		
 
 		try {
-			
-			//FileInputStream fis = new FileInputStream(this.DEVICE_FILENAME);
 			FileInputStream fis = openFileInput(this.DEVICE_FILENAME);
 			DataInputStream in = new DataInputStream(fis);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -192,8 +202,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 				  // Print the content on the console
 				  deviceIp.add(ip);
 				  devices.add(new DeviceItem(ip));
-			}
-			
+			}			
 			fis.close();
 		} catch (FileNotFoundException e) {
 			Log.e("SUSHI:: DEVICE", "Device file has not existed yet.");

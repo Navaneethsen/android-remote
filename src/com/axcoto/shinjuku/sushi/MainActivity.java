@@ -173,6 +173,11 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		final String regId = GCMRegistrar.getRegistrationId(this);
 		Log.i("Device ID: ", regId);
 		
+		File f = new File(this.getFilesDir(), com.axcoto.shinjuku.sushi.CommonUtilities.REGID_FILENAME);
+		if (f.exists()) {
+			//We don't need to register the device
+			return;
+		}
 		// Check if regid already presents
 		if (regId.equals("")) {
 			// Registration is not present, register now with GCM
