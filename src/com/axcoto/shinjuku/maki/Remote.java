@@ -3,7 +3,9 @@ package com.axcoto.shinjuku.maki;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -130,6 +132,7 @@ public class Remote {
 	private String ip;
 	protected static  Remote instance = null;
 	public static final int TCP_PORT=30000;
+	public static final int SOCKET_TIMEOUT = 7000; //4 seconds 
 	Socket clientSocket = null;
 	DataOutputStream outToServer = null;
 	PrintWriter printer;
@@ -309,8 +312,10 @@ public class Remote {
 		this.ip = ip;
 		connected = false;
 		try {
-			clientSocket = new Socket(this.ip, Remote.TCP_PORT);	
-			clientSocket.setSoTimeout(100);
+			clientSocket = new Socket();
+			SocketAddress sockAddr = new InetSocketAddress(this.ip, Remote.TCP_PORT);
+			clientSocket.connect(sockAddr, Remote.SOCKET_TIMEOUT);
+			//clientSocket.setSoTimeout(100);
 			outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			printer = new PrintWriter(clientSocket.getOutputStream(), true);			
 			connected = true;

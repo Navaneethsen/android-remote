@@ -30,6 +30,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.axcoto.shinjuku.maki.Finder;
@@ -49,6 +50,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	public ArrayList<String> deviceIp;
 	public ProgressDialog progressDialog;
 	public ProgressThread progressThread;
+
 
 	static int ipScanFrom = 2;
 	static int ipScanTo = 253;	
@@ -122,14 +124,14 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		super.onCreate(savedInstanceState);
 		//We need to keep this on during device scanning
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-	
+		
 		setContentView(R.layout.activity_device);
 		listDevice = (ListView) findViewById(R.id.list_device);
 		
 		Log.e("SUSHI:: DEVICE", "Create activity");
 		final DeviceActivity t = this;	
 		final Context context = this;
-		
+		//waitingConnectBar.setVisibility(View.VISIBLE);
 		listDevice.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -137,13 +139,21 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 				final DeviceItem d = deviceAdapter.getItem(position);
 				Log.i("SUSHI:: DEVICE", "About to connect to " + d.getIp());
 				Log.i("SUSHI :: DEVICE", Integer.toString(view.getId()));
+				
 				try { 
 					final int action = d.isConnected()? ACTION_DISCONNECT:ACTION_CONNECT;
 					
                    mConnectTask = new AsyncTask<Integer, Void, Void>() {
-                	   
+                	    ProgressDialog connectProgress;
+       				
+                	    @Override
+                	    protected void onPreExecute() {
+                	    	connectProgress = ProgressDialog.show(context, "Connect Status", "Trying to connect to CeeNee Media Player...", true);
+                        }
+                	    
                         @Override
                         protected Void doInBackground(Integer... params) {
+                        	
                         	try {
                         		//We need to close previous connection first.
                         		if (action == ACTION_DISCONNECT) {
@@ -174,6 +184,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
             							"Cannot connect to the device",
             							Toast.LENGTH_LONG).show();
                             }
+                            connectProgress.dismiss();                            
                         }
      
                     };
