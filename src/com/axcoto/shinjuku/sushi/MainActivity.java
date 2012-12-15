@@ -50,8 +50,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_TESTING = 2;
 	final static int PHASE_PRODUCTION = 3;
 
-	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
-	// final static int ENVIRONMENT = PHASE_PRODUCTION;
+	//final static int ENVIRONMENT = PHASE_DEVELOPMENT;
+	final static int ENVIRONMENT = PHASE_PRODUCTION;
 	// final static int ENVIRONMENT = PHASE_TESTING;
 
 	public String remote;
@@ -81,6 +81,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setTextListener();
+		gestureScanner = new GestureDetector(this);
 		
 		final Remote r = Remote.getInstance();
 		final EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
