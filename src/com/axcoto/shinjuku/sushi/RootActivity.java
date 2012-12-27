@@ -1,5 +1,7 @@
 package com.axcoto.shinjuku.sushi;
 
+import com.axcoto.shinjuku.sushi.R.id;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+import com.axcoto.shinjuku.sushi.*;
 
 public class RootActivity extends Activity {
 
@@ -45,6 +48,12 @@ public class RootActivity extends Activity {
             	finish();
             	startActivityForResult(i, 0x13341);
             	break;	
+            case R.id.menu_about:
+            	AlertDialogManager alert = new AlertDialogManager();
+            	alert.showAlertDialog(this,
+						"iCeeNee v" + CommonUtilities.RELEASE_VERSION,
+						"CeeNee Remote Control by Http://CeeNee.Com.", false);			
+            	break;
             case R.id.menu_remote:	
             default:    
             	i = new Intent( this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);; 
