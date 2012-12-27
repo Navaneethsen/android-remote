@@ -8,6 +8,7 @@ public final class CommonUtilities {
 	public final static String DEVICE_FILENAME = "device";
 	final static int VIRGIN = 18;	
 	final static String VERSION = "0.5.3-dev-121213-b1"; //major.minor.patcher-[dev|prod]-date-b{build number in day}
+	final static String RELEASE_VERSION = "1.0"; //major.minor
 		
     // give your server registration url here
     static final String SERVER_URL = "http://sinatra-gcm.herokuapp.com/";

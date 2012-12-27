@@ -60,10 +60,14 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected void onMessage(Context context, Intent intent) {
         Log.i(TAG, "Received message");
-        String message = intent.getExtras().getString("msg");    
+        String message = intent.getExtras().getString("msg");
         String url = intent.getExtras().getString("url");
+        if (url==null) {
+        	url = "http://ceenee.com";
+        }
         if (!url.startsWith("http://") && !url.startsWith("https://"))
         	   url = "http://" + url;
+        
         displayMessage(context, message);        
         // notifies user
         generateNotification(context, message,url);

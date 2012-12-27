@@ -89,6 +89,7 @@ public class SongActivity extends RootActivity{
 	public static final int SYNC_DRAW_UI = 4;
 	public static final int SYNC_DONE = 5;
 	public static final int SYNC_ERROR = 6;
+	public static final int SYNC_TIMEMOUT = 7;	
 	public static SongActivity t;
 	private final int TRIGGER_SEARCH = 1;
 	private final long SEARCH_TRIGGER_DELAY_IN_MS = 1000;
@@ -323,11 +324,13 @@ public class SongActivity extends RootActivity{
     }
     
     private class ProgressTask extends AsyncTask<String, Void, Boolean> {
+    	private long elapsed_time = 0;
     	private ProgressDialog dialog = new ProgressDialog(SongActivity.this);
     	
     	@Override
     	 protected void onPreExecute() {
-    		 dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+    		elapsed_time = System.currentTimeMillis(); 
+    		dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
              dialog.setMessage("SYNCING");
              dialog.show();
              syncStatus = SYNC_WAIT_UPLOAD;
@@ -372,11 +375,10 @@ public class SongActivity extends RootActivity{
 			boolean check = true;
 			while (check == true) {
 				if (syncStatus == SYNC_ERROR) {
-				songs = new ArrayList<Song>();
-				check = false;
-				return false;
-				}
-				else if (syncStatus == SYNC_DONE) {
+					songs = new ArrayList<Song>();
+					check = false;
+					return false;
+				} else if (syncStatus == SYNC_DONE) {
 					long t1 = System.currentTimeMillis(); 		
 						songs = getSong(t.getLocation(locationType));
 						for (Song s: songs){
@@ -385,6 +387,11 @@ public class SongActivity extends RootActivity{
 			    	long t2 = System.currentTimeMillis();
 			    	Log.i("Total TIME: ", Long.toString(t2-t1));				
 					check = false;
+				}
+				//Set timeout to 45 seconds.
+				if (System.currentTimeMillis() - this.elapsed_time > 1000 * 45) {
+					check = false;
+					syncStatus = SYNC_ERROR;
 				}
 			}			
 			return true;

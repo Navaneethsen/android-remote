@@ -20,6 +20,8 @@
         android:id="@+id/imageDisconnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/glyphicons_179_eject" />
+        android:background="@color/White"
+        android:paddingLeft="10dp"
+        android:src="@drawable/disconnect" />
 
 </LinearLayout>

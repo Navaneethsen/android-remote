@@ -9,6 +9,7 @@ import java.util.concurrent.CountDownLatch;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -41,6 +42,7 @@ import static com.axcoto.shinjuku.sushi.CommonUtilities.DISPLAY_MESSAGE_ACTION;
 import static com.axcoto.shinjuku.sushi.CommonUtilities.EXTRA_MESSAGE;
 import static com.axcoto.shinjuku.sushi.CommonUtilities.SENDER_ID;
 import android.app.Activity;
+import android.app.AlertDialog;
 
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -50,8 +52,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_TESTING = 2;
 	final static int PHASE_PRODUCTION = 3;
 
-	//final static int ENVIRONMENT = PHASE_DEVELOPMENT;
-	final static int ENVIRONMENT = PHASE_PRODUCTION;
+	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
+	//final static int ENVIRONMENT = PHASE_PRODUCTION;
 	// final static int ENVIRONMENT = PHASE_TESTING;
 
 	public String remote;
@@ -174,6 +176,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		final String regId = GCMRegistrar.getRegistrationId(this);
 		Log.i("Device ID: ", regId);
 		
+		//GCMRegistrar.unregister(getApplicationContext());
+				
 		File f = new File(this.getFilesDir(), com.axcoto.shinjuku.sushi.CommonUtilities.REGID_FILENAME);
 		if (f.exists()) {
 			//We don't need to register the device
@@ -187,8 +191,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			// Device is already registered on GCM
 			if (GCMRegistrar.isRegisteredOnServer(this)) {
 				Log.i("GCM:", "Device is already registered with GCM");
-				//GCMRegistrar.unregister(getApplicationContext());
-				//Unregister device for testing
 			} else {
 				// Try to register again, but not in the UI thread.
 				// It's also necessary to cancel the thread onDestroy(),
@@ -332,7 +334,30 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			if (x.isShown() == false) {
 				x.setVisibility(View.VISIBLE);
 			}
-		} else {
+		} else if (key.equals("power")) {
+			new AlertDialog.Builder(this)
+	        .setIcon(android.R.drawable.ic_dialog_alert)
+	        .setTitle("Are you sure to turn off the player?")
+	        .setMessage("You will be no longer able to turn on with this app. You must use an physical remote to turn on it")
+	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+		    {
+		        @Override
+		        public void onClick(DialogInterface dialog, int which) {
+		        	Log.i("SUSHI:: REMOTE", "THE KEY THAT IS PRESSED ON UI IS: power");
+		    		Remote r = Remote.getInstance();
+		    		try {
+		    			r.execute("power");
+		    		} catch (Exception e) {
+		    			Log.e("SUSHI:: MAIN:: ", e.getMessage());
+		    		}
+		    		r.disConnect(); 
+		        }
+	
+		    })
+		    .setNegativeButton("No", null)
+		    .show();
+			
+		}else {
 			// Toast toast =
 			// Toast.makeText(getApplicationContext(),b.getKeyName(),
 			// Toast.LENGTH_SHORT);
