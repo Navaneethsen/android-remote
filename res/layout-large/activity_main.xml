@@ -22,15 +22,15 @@
 		    android:orientation="horizontal" >
 		
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
-			        android:id="@+id/cmd_power"
+			        android:id="@+id/cmd_home"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="7dp"
 			        android:layout_marginTop="7dp"
-			        android:background="@drawable/power_button"
+			        android:background="@drawable/home_button"
 			        android:onClick="onRemoteClick"
 			        android:src="@android:color/transparent"
-			        remotecontrol:remote_key_name="power" />
+			        remotecontrol:remote_key_name="home" />
 		
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
 			        android:id="@+id/cmd_menu"
@@ -38,23 +38,11 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="15dp"
 			        android:layout_marginTop="7dp"
-			        android:layout_toRightOf="@id/cmd_power"
+			        android:layout_toRightOf="@id/cmd_home"
 			        android:background="@drawable/menu_button"
 			        android:onClick="onRemoteClick"
 			        android:src="@android:color/transparent"
 			        remotecontrol:remote_key_name="menu" />
-		
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
-			        android:id="@+id/cmd_home"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="15dp"
-			        android:layout_marginTop="7dp"
-			        android:layout_toRightOf="@id/cmd_menu"
-			        android:background="@drawable/home_button"
-			        android:onClick="onRemoteClick"
-			        android:src="@android:color/transparent"
-			        remotecontrol:remote_key_name="home" />
 		
 			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
 			        android:id="@+id/cmd_return"
@@ -62,7 +50,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="15dp"
 			        android:layout_marginTop="7dp"
-			        android:layout_toRightOf="@id/cmd_home"
+			        android:layout_toRightOf="@id/cmd_menu"
 			        android:background="@drawable/return_button"
 			        android:onClick="onRemoteClick"
 			        android:src="@android:color/transparent"
@@ -165,7 +153,7 @@
 			        android:id="@+id/audio_control"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_alignLeft="@id/cmd_power"
+			        android:layout_alignLeft="@id/cmd_home"
 					android:layout_above="@+id/up"
 			        android:layout_marginBottom = "10dp"
 			        android:background="@drawable/new_button"

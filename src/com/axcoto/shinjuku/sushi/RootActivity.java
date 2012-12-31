@@ -1,5 +1,8 @@
 package com.axcoto.shinjuku.sushi;
 
+import java.io.IOException;
+
+import com.axcoto.shinjuku.maki.Remote;
 import com.axcoto.shinjuku.sushi.R.id;
 
 import android.app.Activity;
@@ -53,6 +56,17 @@ public class RootActivity extends Activity {
             	alert.showAlertDialog(this,
 						"iCeeNee v" + CommonUtilities.RELEASE_VERSION,
 						"CeeNee Remote Control by Http://CeeNee.Com.", false);			
+            	break;
+            case R.id.menu_power:
+            	Remote r = Remote.getInstance();
+				try {
+					r.execute("power");
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+            	finish();
             	break;
             case R.id.menu_remote:	
             default:    

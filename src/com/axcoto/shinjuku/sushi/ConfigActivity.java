@@ -1,5 +1,7 @@
 package com.axcoto.shinjuku.sushi;
 
+import java.io.IOException;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -11,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.axcoto.shinjuku.maki.MyHttpServer;
+import com.axcoto.shinjuku.maki.Remote;
 
 public class ConfigActivity extends PreferenceActivity {
 	 
@@ -70,6 +73,17 @@ public class ConfigActivity extends PreferenceActivity {
             	finish();
             	startActivityForResult(i, 0x13341);
             	break;	
+            case R.id.menu_power:
+            	Remote r = Remote.getInstance();
+				try {
+					r.execute("power");
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+            	finish();
+            	break;
             case R.id.menu_remote:	
             default:    
             	i = new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);; 

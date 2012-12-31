@@ -3,14 +3,14 @@
     xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:visibility= "gone" >
-        
+    android:visibility= "visible" >
+    
      <ImageView
 	        android:id="@+id/playback_title"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:background="@android:color/transparent"
-	        android:src="@drawable/tplayback_title" />    
+	        android:src="@drawable/playback_title" />           
 
      <RelativeLayout
          android:id="@+id/play_screen"
@@ -136,7 +136,7 @@
          android:layout_below="@id/playback_title"   
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:src="@drawable/tbackground"    />
+         android:src="@drawable/background"    />
       
               
 </RelativeLayout>

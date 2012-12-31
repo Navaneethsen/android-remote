@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
-
-    <ImageView
-        android:id="@+id/imageDeviceStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/glyphicons_164_iphone_transfer" />
-
+ 
     <TextView
         android:id="@+id/ipLabel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:text="TextView"
+        android:textColor="@color/Green"
+        android:textSize="30sp" />
 
-    <ImageButton
-        android:id="@+id/imageDisconnect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/White"
-        android:paddingLeft="10dp"
-        android:src="@drawable/disconnect" />
+     <ImageButton
+        android:id="@+id/imageDeviceStatus"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_toRightOf="@id/ipLabel"
+        android:layout_marginLeft ="35dp"        
+        android:background="@android:color/transparent" />
 
-</LinearLayout>
+</RelativeLayout>

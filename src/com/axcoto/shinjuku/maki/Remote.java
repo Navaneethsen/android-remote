@@ -1,8 +1,12 @@
 package com.axcoto.shinjuku.maki;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -13,6 +17,9 @@ import java.nio.channels.IllegalBlockingModeException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.axcoto.shinjuku.sushi.ServerUtilities;
+
+import android.os.AsyncTask;
 import android.util.Log;
 
 
@@ -129,12 +136,13 @@ import android.util.Log;
 
 public class Remote {
 	private boolean connected = false;
-	private String ip;
+	private String ip = "No Host";
 	protected static  Remote instance = null;
 	public static final int TCP_PORT=30000;
 	public static final int SOCKET_TIMEOUT = 7000; //4 seconds 
 	Socket clientSocket = null;
 	DataOutputStream outToServer = null;
+	DataInputStream inToServer = null;
 	PrintWriter printer;
 	
 	public Map<String, String> remoteKeyCode;
@@ -317,6 +325,7 @@ public class Remote {
 			clientSocket.connect(sockAddr, Remote.SOCKET_TIMEOUT);
 			//clientSocket.setSoTimeout(100);
 			outToServer = new DataOutputStream(clientSocket.getOutputStream());
+			inToServer= new DataInputStream(clientSocket.getInputStream());
 			printer = new PrintWriter(clientSocket.getOutputStream(), true);			
 			connected = true;
 		} catch (SocketTimeoutException e) {
@@ -354,6 +363,30 @@ public class Remote {
 	
 	public boolean getConnected() {
 		return this.connected;
+	}
+	
+	public boolean testConnection(String i) throws IOException{		
+		Process p;
+			p = new ProcessBuilder("sh").redirectErrorStream(true).start();
+			DataOutputStream os = new DataOutputStream(p.getOutputStream());
+			os.writeBytes("ping -c 1 -w 1 -s 1 " + i + '\n');
+			os.flush();
+	
+			// Close the terminal
+			os.writeBytes("exit\n");
+			os.flush();
+	
+			// read ping replys
+			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			String line;
+			int count = 0;
+			while ((line = reader.readLine()) != null) {
+				count ++;
+//			    Log.i("Pinging: ", line);
+			}
+//			Log.i("COUNT", Integer.toString(count));
+			if (count > 5) return true;
+			else return false;
 	}
 	
 	public String getIp() {

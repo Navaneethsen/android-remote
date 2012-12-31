@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone" >
+    
+
+
+     <ImageView
+	        android:id="@+id/audio_control_title"	        
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"	
+	        android:src="@drawable/audio_control_title" />      	              
+
+ 	<TableLayout 
+ 	    android:id = "@+id/table_audio"
+ 	    android:layout_below="@id/audio_control_title"
+ 	    android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background = "@drawable/background">
+       
+       <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+ 	      
+ 	      <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_voldown"
+	         android:layout_weight="1"
+	         android:layout_marginTop="2dp"
+	         android:layout_marginLeft="2dp"
+	         android:layout_width="fill_parent"
+	         android:layout_height="fill_parent"	         
+	         android:background="@drawable/voldown_button"	
+	         remotecontrol:remote_key_name="voldown"  
+	         android:onClick="onRemoteClick"
+	         android:src="@android:color/transparent" />
+     
+     	 <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_volup"
+	         android:layout_weight="1"
+	         android:layout_marginTop="2dp"
+	         android:layout_width="fill_parent"
+	         android:layout_height="fill_parent"
+	         android:layout_marginLeft="2dp"
+	         android:layout_marginRight="4dp"
+	         remotecontrol:remote_key_name="volup"
+	         android:background="@drawable/volup_button"  
+	         android:onClick="onRemoteClick"
+	         android:src="@android:color/transparent" />
+     </TableRow>
+     
+     <TableRow
+         android:id="@+id/tableRow2"
+         android:layout_width="fill_parent"
+         android:layout_height="fill_parent"
+         android:layout_weight="1">
+     	
+     	<com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_mute"
+	         android:layout_weight="1"
+	         android:layout_marginLeft="2dp"
+	         android:layout_marginTop="2dp"
+	         android:layout_width="fill_parent"
+	         android:layout_height="fill_parent"
+	         android:background="@drawable/mute_button"	
+	         remotecontrol:remote_key_name="mute"  
+	         android:layout_marginBottom="5dp"
+	         android:onClick="onRemoteClick"
+	         android:src="@android:color/transparent" />
+   
+     	<com.axcoto.shinjuku.sushi.RemoteKeyButton
+	         android:id="@+id/cmd_audio"
+	         android:layout_weight="1"
+	         android:layout_width="fill_parent"
+	         android:layout_height="fill_parent"
+	         android:layout_marginTop="2dp"
+	         android:layout_marginLeft="2dp"
+	         android:layout_marginRight="4dp"
+	         android:layout_marginBottom="5dp"
+	         remotecontrol:remote_key_name="audio"
+	         android:background="@drawable/audio_button"  
+	         android:onClick="onRemoteClick"
+	         android:src="@android:color/transparent" />
+     	</TableRow>
+ 	</TableLayout>
+ 	
+ 	<ImageView
+	        android:id="@+id/include_background"	        
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/audio_control_title"	        
+	        android:src="@drawable/background" />
+</RelativeLayout>

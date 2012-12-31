@@ -10,6 +10,7 @@ import java.util.concurrent.CountDownLatch;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -80,7 +81,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_main);
 		setTextListener();
 		gestureScanner = new GestureDetector(this);

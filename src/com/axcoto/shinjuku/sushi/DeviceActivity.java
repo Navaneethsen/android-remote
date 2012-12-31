@@ -160,10 +160,11 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
                         			Remote.getInstance().disConnect();
                         		}                        		
                         		r = d.connect();
+                        		                  
                         	} catch (Exception e) {
                         		
                         		Log.e("SUSHI:: DEVICE:: CONNECT_ERROR", e.getStackTrace().toString());
-                        	}
+                        	}                        	 
                             return null;
                         }
      
@@ -174,10 +175,11 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
                             	Toast.makeText(getApplicationContext(),
         							"Connected to " + d.getIp(),
         							Toast.LENGTH_LONG).show();
-                            	
-                            	Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-             					finish();
-             	            	startActivityForResult(i, 0x13343);
+	                            deviceAdapter.notifyDataSetChanged();
+	                    		listDevice.setAdapter(deviceAdapter);
+//                            	Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//             					finish();
+//             	            	startActivityForResult(i, 0x13343);
              	            	
                             } else {
                             	Toast.makeText(getApplicationContext(),
@@ -223,6 +225,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
 		deviceAdapter.notifyDataSetChanged();
 		listDevice.setAdapter(deviceAdapter);
+		listDevice.invalidateViews();
 		
 		gestureScanner = new GestureDetector(this);
 		
@@ -273,7 +276,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 			progressThread.start();
 		}
 	}
-
+	
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 
@@ -314,6 +317,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 			checkIp = from;
 		}
 
+
+		
 		public void run() {
 			Finder f = Finder.getInstance();
 			boolean res = f.resolve();
