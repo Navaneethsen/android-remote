@@ -3,18 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <ToggleButton        
-        android:id="@+id/karaoke_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:checked="true"
-        android:onClick= "onToggle"
-        android:textOff="@string/label_mp3"
-        android:textOn="@string/label_hd" />
-
-     <Button
+    <Button
         android:id="@+id/cmd_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,9 +26,8 @@
         android:id="@+id/tableLayout123"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        android:layout_alignBottom="@id/karaoke_switch"
         android:layout_toLeftOf="@id/cmd_delete"
-        android:layout_toRightOf="@id/karaoke_switch">
+        android:layout_alignParentLeft="true">
         <TableRow
             android:layout_width="fill_parent"
         	android:layout_height="fill_parent"  	>
@@ -69,7 +57,7 @@
         android:id="@+id/tableLayout123"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/karaoke_switch">
+        android:layout_below="@id/tableLayout123">
         <TableRow
             android:layout_width="fill_parent"
         	android:layout_height="fill_parent">

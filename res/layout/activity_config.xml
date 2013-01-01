@@ -62,6 +62,17 @@
             android:summary="Orchid Compatible Mode"
             android:title="Orchid Device" >
         </CheckBoxPreference>
+        
+        <ListPreference
+            android:title="Karaoke Mode"
+            android:summary="Choose between HD or Mp3 Karaoke mode"
+            android:key="listPref"
+            android:defaultValue="hd"
+            android:entries="@array/listArray"
+            android:entryValues="@array/listValues" />       
+             
     </PreferenceCategory>
+
+   
 
 </PreferenceScreen>

@@ -156,11 +156,10 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
                         	
                         	try {
                         		//We need to close previous connection first.
-                        		if (action == ACTION_DISCONNECT) {
+                        		if (action == ACTION_DISCONNECT) {                        			
                         			Remote.getInstance().disConnect();
                         		}                        		
-                        		r = d.connect();
-                        		                  
+                        		r = d.connect();                         	
                         	} catch (Exception e) {
                         		
                         		Log.e("SUSHI:: DEVICE:: CONNECT_ERROR", e.getStackTrace().toString());
@@ -173,8 +172,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
                             mConnectTask = null;
                             if (d.isConnected()) {
                             	Toast.makeText(getApplicationContext(),
-        							"Connected to " + d.getIp(),
-        							Toast.LENGTH_LONG).show();
+        							"Click on the check mark to disconnect",
+        							Toast.LENGTH_SHORT).show();
 	                            deviceAdapter.notifyDataSetChanged();
 	                    		listDevice.setAdapter(deviceAdapter);
 //                            	Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

@@ -70,7 +70,6 @@ public class ItemAdapter extends ArrayAdapter<DeviceItem> {
 			if (i != null) {
 				TextView tt = (TextView) v.findViewById(R.id.ipLabel);
 				String itemIp = i.getIp();
-
 				Log.i("MAKI:: DEVICE IP: ", i.getIp());
 				final ImageButton ib = (ImageButton) v.findViewById(R.id.imageDeviceStatus);
 				ib.setOnClickListener(new OnClickListener() {

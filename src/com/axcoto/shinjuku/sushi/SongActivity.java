@@ -93,6 +93,7 @@ public class SongActivity extends RootActivity{
 	public static SongActivity t;
 	private final int TRIGGER_SEARCH = 1;
 	private final long SEARCH_TRIGGER_DELAY_IN_MS = 1000;
+	private static String karaoke;
 	private String text;
 			  
 	public ArrayList<Song> getSong(String location) {
@@ -140,10 +141,12 @@ public class SongActivity extends RootActivity{
         songList = (ListView) findViewById(R.id.song_list);
         songList.setTextFilterEnabled(true);
         final Remote r = Remote.getInstance();
-        ToggleButton tb = (ToggleButton) findViewById(R.id.karaoke_switch);
+//        ToggleButton tb = (ToggleButton) findViewById(R.id.karaoke_switch);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        karaoke = sharedPref.getString("listPref","hd");
         if (songs == null || songs.size() == 0) 
         	{
-	        	if (tb.getText().equals("HD"))				
+	        	if (karaoke.equals("hd"))				
 					songs =getSong(t.getLocation("hd"));
 	        		else songs = getSong(t.getLocation("mp3"));				
 			
@@ -155,7 +158,7 @@ public class SongActivity extends RootActivity{
 //		We need to keep this on during device scanning--REMOVED FOR CRASH TEST
 //		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        
 		this.autosearch = sharedPref.getBoolean("auto_search",true);
         ed=(EditText)findViewById(R.id.cmd_songsearch);
         int AndroidVersion = android.os.Build.VERSION.SDK_INT;
@@ -207,7 +210,8 @@ public class SongActivity extends RootActivity{
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (ed.getText().toString().equals("")) {
-					songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, fullsong);
+//					songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, songs);
+					songAdapter.getFilter().filter(ed.getText().toString());
 					songList.setAdapter(songAdapter);
 				}
 				else {
@@ -287,19 +291,19 @@ public class SongActivity extends RootActivity{
     }
 
 
-	public void onToggle(View v) throws ParserConfigurationException, SAXException, IOException {		
-		ToggleButton tb = (ToggleButton) v;		
-		if (tb.getText().equals("HD")) {
-			Log.i("Location::" ,t.getLocation("hd"));
-			songs =getSong(t.getLocation("hd"));
-		}
-		else {
-			Log.i("Location::",t.getLocation("mp3"));
-			songs = getSong(t.getLocation("mp3"));
-		}
-		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
-		songList.setAdapter(songAdapter);
-	}
+//	public void onToggle(View v) throws ParserConfigurationException, SAXException, IOException {		
+//		ToggleButton tb = (ToggleButton) v;		
+//		if (tb.getText().equals("HD")) {
+//			Log.i("Location::" ,t.getLocation("hd"));
+//			songs =getSong(t.getLocation("hd"));
+//		}
+//		else {
+//			Log.i("Location::",t.getLocation("mp3"));
+//			songs = getSong(t.getLocation("mp3"));
+//		}
+//		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
+//		songList.setAdapter(songAdapter);
+//	}
 
 	
 	public void search(View v) {		
@@ -355,9 +359,9 @@ public class SongActivity extends RootActivity{
 			Remote r = Remote.getInstance();
 			String locationType;
 			Log.i("Sync Status : ", Integer.toString(syncStatus));
-			ToggleButton tb = (ToggleButton) findViewById(R.id.karaoke_switch);
+//			ToggleButton tb = (ToggleButton) findViewById(R.id.karaoke_switch);
 			try {
-			if (tb.isChecked()) {
+			if (karaoke.equals("hd")) {
 				locationType = "hd";
 				r.execute("sync_hd");
 			}
