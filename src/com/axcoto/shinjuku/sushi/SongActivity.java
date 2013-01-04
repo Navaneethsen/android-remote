@@ -1,22 +1,14 @@
 package com.axcoto.shinjuku.sushi;
 
 //import java.util.Random;
-import android.view.*;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.concurrent.CountDownLatch;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -26,16 +18,10 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-//import android.content.ContentValues;
-//import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Message;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -45,18 +31,19 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.axcoto.shinjuku.database.Db;
 import com.axcoto.shinjuku.database.Song;
-//import com.axcoto.shinjuku.database.Db;
 import com.axcoto.shinjuku.database.XMLParser;
 import com.axcoto.shinjuku.maki.Remote;
+//import android.content.ContentValues;
+//import android.database.sqlite.SQLiteDatabase;
+//import com.axcoto.shinjuku.database.Db;
 
 public class SongActivity extends RootActivity{
 	private Db db;
@@ -134,8 +121,11 @@ public class SongActivity extends RootActivity{
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_song);    
+        super.onCreate(savedInstanceState);     
+//        if (getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT)
+			setContentView(R.layout.activity_song);
+//		else
+//			setContentView(R.layout.activity_song_land);
         fullsong = new ArrayList<Song>();
         SongActivity.t = this;        
         songList = (ListView) findViewById(R.id.song_list);
@@ -305,7 +295,24 @@ public class SongActivity extends RootActivity{
 //		songList.setAdapter(songAdapter);
 //	}
 
+//	@Override
+//	public void onConfigurationChanged(Configuration newConfig) {
+//	    super.onConfigurationChanged(newConfig);
+//
+//	    // Checks the orientation of the screen
+//	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//	    	setContentView(R.layout.activity_song_land);
+////	        Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+//	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+//	    	setContentView(R.layout.activity_song);
+////	        Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+//	    }
+//	}
 	
+//	public void onSaveInstanceState(Bundle savedInstanceState) {
+//	    savedInstanceState.putString("MyText", edtMyText.getText().toString());
+//	}
+//	
 	public void search(View v) {		
 		textlength=ed.getText().length();
 		songAdapter.getFilter().filter(ed.getText().toString());
@@ -314,8 +321,9 @@ public class SongActivity extends RootActivity{
 	}
 	
 	public String getLocation(String databaseName) {
-		if (databaseName.equals("hd")) 
-			return t.getFilesDir() + "/KaraokeDB.xml";
+		if (databaseName.equals("hd")) {
+			Log.e("Location",t.getFilesDir().toString());
+			return t.getFilesDir() + "/KaraokeDB.xml";}
 //			return "/storage/sdcard0/Ceenee/KaraokeDB.xml";
 		else return t.getFilesDir() + "/MP3KaraokeDB.xml";
 //		else return "/storage/sdcard0/Ceenee/MP3KaraokeDB.xml";
@@ -413,6 +421,10 @@ public class SongActivity extends RootActivity{
     
     public void clickLeft(View v) {
     	this.execute("left");
+    }
+    
+    public void clickPlay(View v) {
+    	this.execute("play");
     }
     
     public void execute(String command) {

@@ -69,8 +69,8 @@
         </activity>
 
         <activity android:name=".SongActivity" android:label="@string/title_activity_song"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:configChanges="orientation|screenSize">
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"
+            android:configChanges="orientation|screenSize|keyboardHidden">
           	<intent-filter> 
         	    <action android:name="android.intent.action.VIEW" /> 
         	    <category android:name="android.intent.category.DEFAULT" /> 

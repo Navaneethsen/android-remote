@@ -8,7 +8,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:layout_marginRight="1dp"
         android:onClick="testButton"      
         android:text="Sync"/>
@@ -17,7 +16,6 @@
         android:id="@+id/cmd_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/cmd_test"
         android:onClick="clickDelete"
         android:text="Del" />
@@ -25,36 +23,55 @@
     <TableLayout
         android:id="@+id/tableLayout123"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="match_parent" 
         android:layout_toLeftOf="@id/cmd_delete"
+        android:layout_alignTop="@id/cmd_delete"
+        android:layout_alignBottom="@id/cmd_delete"
         android:layout_alignParentLeft="true">
         <TableRow
-            android:layout_width="fill_parent"
-        	android:layout_height="fill_parent"  	>
+            android:layout_width="match_parent"
+        	android:layout_height="match_parent"
+        	android:layout_weight="1" 	>
 		     <ImageButton
 		        android:id="@+id/cmd_left"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"		        
 		        android:layout_weight="1"
 		        android:onClick="clickLeft"  
-		        android:src="@drawable/left_arrow"    
-		        android:textSize="14dp"
-		        android:text="Left"/>
+		        android:background="@android:color/transparent"
+		        android:scaleType="fitXY"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginRight="5dp"
+		        android:layout_marginBottom="5dp"
+		        android:layout_marginLeft="5dp"		        
+		        android:src="@drawable/left_button" />
+		     
+		     <Button
+		        android:id="@+id/cmd_mid"
+		        android:layout_width="match_parent"
+		        android:layout_height="fill_parent"		        
+		        android:layout_weight="1"
+		        android:onClick="clickPlay"  
+		        android:text="PLAY" />
 		     
 		     <ImageButton
 		        android:id="@+id/cmd_right"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="1"
-		        android:src="@drawable/right_arrow"   
-		        android:textSize="14dp"
-		        android:onClick="clickRight"      
-		        android:text="Right"/>
+		        android:scaleType="fitXY"
+		        android:src="@drawable/right_button"
+		        android:background="@android:color/transparent"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginRight="5dp"
+		        android:layout_marginBottom="5dp"
+		        android:layout_marginLeft="5dp"	
+		        android:onClick="clickRight"      />
 		</TableRow>
      </TableLayout>
      
     <TableLayout
-        android:id="@+id/tableLayout123"
+        android:id="@+id/tableLayout234"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tableLayout123">
@@ -86,7 +103,7 @@
     
     <ListView
         android:id="@+id/song_list"
-        android:layout_below="@id/tableLayout123"
+        android:layout_below="@id/tableLayout234"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
