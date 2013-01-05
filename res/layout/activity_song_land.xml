@@ -19,17 +19,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="1dp"
-        android:onClick="clickDelete"		
+        android:onClick="clickDelete"
         android:text="Del" />
 
     <TableLayout
         android:id="@+id/tableLayout123"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="match_parent" 
         android:layout_toLeftOf="@id/cmd_delete"
         android:layout_toRightOf="@id/cmd_test"
-        android:layout_alignBottom="@id/cmd_delete"
-        android:layout_alignTop="@id/cmd_delete">
+        android:layout_alignTop="@id/cmd_delete"
+        android:layout_alignBottom="@id/cmd_delete">
         <TableRow
             android:layout_width="match_parent"
         	android:layout_height="match_parent"
@@ -46,7 +46,7 @@
 		        android:layout_marginRight="5dp"
 		        android:layout_marginBottom="5dp"
 		        android:layout_marginLeft="5dp"		        
-		        android:src="@drawable/left_button" />
+		        android:src="@drawable/left_arrow" />
 		     
 		     <Button
 		        android:id="@+id/cmd_mid"
@@ -114,7 +114,7 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:smoothScrollbar="true"
-        android:cacheColorHint="@color/Black"        
+        android:cacheColorHint="@color/Blue"    
         android:scrollbarStyle="insideInset">        
     </ListView>
 
