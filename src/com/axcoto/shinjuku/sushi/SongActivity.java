@@ -18,33 +18,23 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.graphics.Point;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.axcoto.shinjuku.database.Db;
@@ -91,41 +81,8 @@ public class SongActivity extends RootActivity{
 	private final int TRIGGER_SEARCH = 1;
 	private final long SEARCH_TRIGGER_DELAY_IN_MS = 1000;
 	private static String karaoke;
-	private ImageButton left;
-	private ImageButton right;
-	private TableRow.LayoutParams leftParams;
-	private TableRow.LayoutParams rightParams;
-	private int width = 0; //screen width
-	private int height = 0; //screen height
 	private String text;
 			  
-	public void getSize() {
-		Display display = getWindowManager().getDefaultDisplay();
-	    int deviceVersion= Build.VERSION.SDK_INT;
-	    //API 13+	    
-	    if (deviceVersion >= 13) {
-		    Point size = new Point();	    
-		    display.getSize(size);
-		    width = size.x;
-		    height = size.y;
-	    }
-	    else 	//before API 13
-	    {
-	    	width = display.getWidth();
-	    	height = display.getHeight();
-	    }	    	    	    
-	}
-	
-	public int getWidth() {
-		getSize();
-		return width;
-	}
-	
-	public int getHeight() {
-		getSize();
-		return height;
-	}
-	
 	public ArrayList<Song> getSong(String location) {
 		try {
 		SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -166,18 +123,9 @@ public class SongActivity extends RootActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);     
 //        if (getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT)
-		setContentView(R.layout.activity_song);
-		left = (ImageButton) findViewById(R.id.cmd_left);
-    	right = (ImageButton) findViewById(R.id.cmd_right);
-    	leftParams = (TableRow.LayoutParams) left.getLayoutParams();
-    	rightParams = (TableRow.LayoutParams) right.getLayoutParams();	 
-		if (getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE) {
-			getSize();
-	        leftParams.setMargins(width/8, 5, 30, 5);	    	
-	        rightParams.setMargins(30, 5, width/8, 5);       
-	        left.setLayoutParams(leftParams);
-	        right.setLayoutParams(rightParams);
-		}
+			setContentView(R.layout.activity_song);
+//		else
+//			setContentView(R.layout.activity_song_land);
         fullsong = new ArrayList<Song>();
         SongActivity.t = this;        
         songList = (ListView) findViewById(R.id.song_list);
@@ -333,7 +281,6 @@ public class SongActivity extends RootActivity{
     }
 
 
-
 //	public void onToggle(View v) throws ParserConfigurationException, SAXException, IOException {		
 //		ToggleButton tb = (ToggleButton) v;		
 //		if (tb.getText().equals("HD")) {
@@ -348,33 +295,24 @@ public class SongActivity extends RootActivity{
 //		songList.setAdapter(songAdapter);
 //	}
 
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-	    super.onConfigurationChanged(newConfig);
-	    getSize();
-//	     Checks the orientation of the screen
-	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-	    	leftParams.setMargins(width/8, 5, width/15, 5);	    	
-	        rightParams.setMargins(width/15, 5, width/8, 5);       	    	    
-	        left.setLayoutParams(leftParams);
-	        right.setLayoutParams(rightParams);
-	    }
-	    else
-	    {
-	    	getSize();
-	    	leftParams.setMargins(width/30, 5, width/40, 5);	    	
-	        rightParams.setMargins(width/40, 5, width/30, 5);       	    	    
-	        left.setLayoutParams(leftParams);
-	        right.setLayoutParams(rightParams);
-	    }
-	}
+//	@Override
+//	public void onConfigurationChanged(Configuration newConfig) {
+//	    super.onConfigurationChanged(newConfig);
+//
+//	    // Checks the orientation of the screen
+//	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//	    	setContentView(R.layout.activity_song_land);
+////	        Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+//	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+//	    	setContentView(R.layout.activity_song);
+////	        Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+//	    }
+//	}
 	
 //	public void onSaveInstanceState(Bundle savedInstanceState) {
 //	    savedInstanceState.putString("MyText", edtMyText.getText().toString());
 //	}
-
-	
+//	
 	public void search(View v) {		
 		textlength=ed.getText().length();
 		songAdapter.getFilter().filter(ed.getText().toString());

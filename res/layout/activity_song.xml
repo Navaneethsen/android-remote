@@ -19,17 +19,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="1dp"
-        android:onClick="clickDelete"		
+        android:onClick="clickDelete"
         android:text="Del" />
 
     <TableLayout
         android:id="@+id/tableLayout123"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="match_parent" 
         android:layout_toLeftOf="@id/cmd_delete"
         android:layout_toRightOf="@id/cmd_test"
-        android:layout_alignBottom="@id/cmd_delete"
-        android:layout_alignTop="@id/cmd_delete">
+        android:layout_alignTop="@id/cmd_delete"
+        android:layout_alignBottom="@id/cmd_delete">
         <TableRow
             android:layout_width="match_parent"
         	android:layout_height="match_parent"
