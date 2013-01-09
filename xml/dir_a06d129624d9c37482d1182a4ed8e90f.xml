@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="dir_a06d129624d9c37482d1182a4ed8e90f" kind="dir">
+    <compoundname>src/</compoundname>
+    <innerdir refid="dir_3b31d329adb4e5b3db66434cd96583f3">src/com/</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/"/>
+  </compounddef>
+</doxygen>

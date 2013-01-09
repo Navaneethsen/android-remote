@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="namespaceorg_1_1acra_1_1annotation_1_1" kind="namespace">
+    <compoundname>org::acra::annotation::</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/MyApp.java" line="1"/>
+  </compounddef>
+</doxygen>

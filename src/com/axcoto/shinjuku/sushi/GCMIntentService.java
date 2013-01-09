@@ -1,5 +1,9 @@
 package com.axcoto.shinjuku.sushi;
 
+/**
+ * GCM Intent Service (For GCM)
+ */
+
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="interfacecom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book_uploader" kind="interface" prot="package">
+    <compoundname>com::axcoto::shinjuku::maki::SongBookUploader</compoundname>
+    <derivedcompoundref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_my_http_server" prot="public" virt="non-virtual">MyHttpServer</derivedcompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="interfacecom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book_uploader_1af94458b1e155a86f91f1bed04b16bca3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void upload</definition>
+        <argsstring>()</argsstring>
+        <name>upload</name>
+        <reimplementedby refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_my_http_server_1af94458b1e155a86f91f1bed04b16bca3">upload</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/MyHttpServer.java" line="21"/>
+      </memberdef>
+      <memberdef kind="function" id="interfacecom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book_uploader_1ae3aed844a4bbfb69d20ebe835f9f94f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void response</definition>
+        <argsstring>()</argsstring>
+        <name>response</name>
+        <reimplementedby refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_my_http_server_1ae3aed844a4bbfb69d20ebe835f9f94f8">response</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/MyHttpServer.java" line="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="275">
+        <label>MyHttpServer</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_my_http_server"/>
+        <childnode refid="274" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="274">
+        <label>SongBookUploader</label>
+        <link refid="interfacecom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book_uploader"/>
+      </node>
+    </inheritancegraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/MyHttpServer.java" line="20" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/MyHttpServer.java" bodystart="20" bodyend="23"/>
+    <listofallmembers>
+      <member refid="interfacecom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book_uploader_1ae3aed844a4bbfb69d20ebe835f9f94f8" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongBookUploader</scope><name>response</name></member>
+      <member refid="interfacecom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book_uploader_1af94458b1e155a86f91f1bed04b16bca3" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongBookUploader</scope><name>upload</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

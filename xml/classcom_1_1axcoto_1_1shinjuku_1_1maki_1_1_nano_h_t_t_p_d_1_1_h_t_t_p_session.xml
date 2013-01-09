@@ -1,0 +1,297 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session" kind="class" prot="private">
+    <compoundname>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a7d419d4989676f8fea040d96ac4665e3" prot="private" static="no" mutable="no">
+        <type>Socket</type>
+        <definition>Socket mySocket</definition>
+        <argsstring></argsstring>
+        <name>mySocket</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="805" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="805" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a4cbdc0bfa376f0e648fe3dfef51cb708" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>HTTPSession</definition>
+        <argsstring>(Socket s)</argsstring>
+        <name>HTTPSession</name>
+        <param>
+          <type>Socket</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="305" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="304" bodyend="310"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a13a43e6d814de94978c515cb084873b1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="313" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="312" bodyend="460"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1acf74c864665c8eb24206cca86920e8ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int[]</type>
+        <definition>int [] getBoundaryPositions</definition>
+        <argsstring>(byte[] b, byte[] boundary)</argsstring>
+        <name>getBoundaryPositions</name>
+        <param>
+          <type>byte[]</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>byte[]</type>
+          <declname>boundary</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Find the byte positions where multipart boundaries start. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="605" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="604" bodyend="636"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a197b3fef6ad51ef29840f98e89c68681" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void decodeHeader</definition>
+        <argsstring>(BufferedReader in, Properties pre, Properties parms, Properties header)</argsstring>
+        <name>decodeHeader</name>
+        <param>
+          <type>BufferedReader</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>Properties</type>
+          <declname>pre</declname>
+        </param>
+        <param>
+          <type>Properties</type>
+          <declname>parms</declname>
+        </param>
+        <param>
+          <type>Properties</type>
+          <declname>header</declname>
+        </param>
+        <exceptions> throws InterruptedException 		</exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Decodes the sent headers and loads the data into java Properties&apos; key - value pairs </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="468" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="466" bodyend="516"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1aa9f411cf5c281baeda86dea0063e91db" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void decodeMultipartData</definition>
+        <argsstring>(String boundary, byte[] fbuf, BufferedReader in, Properties parms, Properties files)</argsstring>
+        <name>decodeMultipartData</name>
+        <param>
+          <type>String</type>
+          <declname>boundary</declname>
+        </param>
+        <param>
+          <type>byte[]</type>
+          <declname>fbuf</declname>
+        </param>
+        <param>
+          <type>BufferedReader</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>Properties</type>
+          <declname>parms</declname>
+        </param>
+        <param>
+          <type>Properties</type>
+          <declname>files</declname>
+        </param>
+        <exceptions> throws InterruptedException 		</exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Decodes the Multipart Body data and put it into java Properties&apos; key - value pairs. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="524" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="522" bodyend="599"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1af3eaf7694e870195a95677c3bab0b411" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>String</type>
+        <definition>String saveTmpFile</definition>
+        <argsstring>(byte[] b, int offset, int len)</argsstring>
+        <name>saveTmpFile</name>
+        <param>
+          <type>byte[]</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieves the content of a sent file and saves it to a temporary file. The full path to the saved file is returned. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="644" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="643" bodyend="660"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a83ee0b0b9a3ff8ffd3496ce5e4fa8b77" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int stripMultipartHeaders</definition>
+        <argsstring>(byte[] b, int offset)</argsstring>
+        <name>stripMultipartHeaders</name>
+        <param>
+          <type>byte[]</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>It returns the offset separating multipart file headers from the file&apos;s data. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="668" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="667" bodyend="676"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a436719e75146925eba1816600da680f1" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>String</type>
+        <definition>String decodePercent</definition>
+        <argsstring>(String str)</argsstring>
+        <name>decodePercent</name>
+        <param>
+          <type>String</type>
+          <declname>str</declname>
+        </param>
+        <exceptions> throws InterruptedException 		</exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Decodes the percent encoding scheme. <linebreak/>
+ For example: &quot;an+example%20string&quot; -&gt; &quot;an example string&quot; </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="683" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="682" bodyend="711"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a3c8a1d61001f267b57fd9a0331321e8e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void decodeParms</definition>
+        <argsstring>(String parms, Properties p)</argsstring>
+        <name>decodeParms</name>
+        <param>
+          <type>String</type>
+          <declname>parms</declname>
+        </param>
+        <param>
+          <type>Properties</type>
+          <declname>p</declname>
+        </param>
+        <exceptions> throws InterruptedException 		</exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Decodes parameters in percent-encoded URI-format ( e.g. &quot;name=Jack%20Daniels&amp;pass=Single%20Malt&quot; ) and adds them to given Properties. NOTE: this doesn&apos;t support multiple identical keys due to the simplicity of Properties -- if you need multiples, you might want to replace the Properties with a Hashtable of Vectors or such. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="722" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="720" bodyend="735"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a3fd4b6622813b60de910c88d189ebefe" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void sendError</definition>
+        <argsstring>(String status, String msg)</argsstring>
+        <name>sendError</name>
+        <param>
+          <type>String</type>
+          <declname>status</declname>
+        </param>
+        <param>
+          <type>String</type>
+          <declname>msg</declname>
+        </param>
+        <exceptions> throws InterruptedException 		</exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns an error message as a HTTP response and throws InterruptedException to stop further request processing. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="742" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="741" bodyend="745"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1afb67608bb8292247452881a8496b4580" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void sendResponse</definition>
+        <argsstring>(String status, String mime, Properties header, InputStream data)</argsstring>
+        <name>sendResponse</name>
+        <param>
+          <type>String</type>
+          <declname>status</declname>
+        </param>
+        <param>
+          <type>String</type>
+          <declname>mime</declname>
+        </param>
+        <param>
+          <type>Properties</type>
+          <declname>header</declname>
+        </param>
+        <param>
+          <type>InputStream</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sends given response to the socket. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="751" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="750" bodyend="803"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Handles one session, i.e. parses the HTTP request and returns the response. </para>    </detaileddescription>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="303" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="302" bodyend="806"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a197b3fef6ad51ef29840f98e89c68681" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>decodeHeader</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1aa9f411cf5c281baeda86dea0063e91db" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>decodeMultipartData</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a3c8a1d61001f267b57fd9a0331321e8e" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>decodeParms</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a436719e75146925eba1816600da680f1" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>decodePercent</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1acf74c864665c8eb24206cca86920e8ba" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>getBoundaryPositions</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a4cbdc0bfa376f0e648fe3dfef51cb708" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>HTTPSession</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a7d419d4989676f8fea040d96ac4665e3" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>mySocket</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a13a43e6d814de94978c515cb084873b1" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>run</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1af3eaf7694e870195a95677c3bab0b411" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>saveTmpFile</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a3fd4b6622813b60de910c88d189ebefe" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>sendError</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1afb67608bb8292247452881a8496b4580" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>sendResponse</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_h_t_t_p_session_1a83ee0b0b9a3ff8ffd3496ce5e4fa8b77" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::HTTPSession</scope><name>stripMultipartHeaders</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::sushi::RemoteKeyButton</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ImageButton</basecompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1a89c32c1f801aee1e2f7bc48b676f3428" prot="protected" static="no" mutable="no">
+        <type>String</type>
+        <definition>String keyName</definition>
+        <argsstring></argsstring>
+        <name>keyName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" line="15" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1a5c1b5fc2f10c7f59a3069907e3bda40d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>String</type>
+        <definition>String getKeyName</definition>
+        <argsstring>()</argsstring>
+        <name>getKeyName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" line="17" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" bodystart="17" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1af5d30635b80641f7df2bcdb2a3b979c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RemoteKeyButton</definition>
+        <argsstring>(Context context)</argsstring>
+        <name>RemoteKeyButton</name>
+        <param>
+          <type>Context</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" line="21" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" bodystart="21" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1ac85e9a69ddd3615144b7d0a9245b597e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RemoteKeyButton</definition>
+        <argsstring>(Context context, AttributeSet attrs)</argsstring>
+        <name>RemoteKeyButton</name>
+        <param>
+          <type>Context</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>AttributeSet</type>
+          <declname>attrs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" line="25" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" bodystart="25" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1a3bad8c4aae55c38dd14f87d5387ffa4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RemoteKeyButton</definition>
+        <argsstring>(Context context, AttributeSet attrs, int defStyle)</argsstring>
+        <name>RemoteKeyButton</name>
+        <param>
+          <type>Context</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>AttributeSet</type>
+          <declname>attrs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>defStyle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" line="31" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" bodystart="31" bodyend="35"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1a37d3d69e4662e393d6e4a6e11edc8b1e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void initRemoteButton</definition>
+        <argsstring>(AttributeSet attrs)</argsstring>
+        <name>initRemoteButton</name>
+        <param>
+          <type>AttributeSet</type>
+          <declname>attrs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" line="38" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" bodystart="38" bodyend="43"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>TODO: document your custom view class. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="233">
+        <label>ImageButton</label>
+      </node>
+      <node id="232">
+        <label>RemoteKeyButton</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button"/>
+        <childnode refid="233" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="235">
+        <label>ImageButton</label>
+      </node>
+      <node id="234">
+        <label>RemoteKeyButton</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button"/>
+        <childnode refid="235" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" line="14" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RemoteKeyButton.java" bodystart="14" bodyend="44"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1a5c1b5fc2f10c7f59a3069907e3bda40d" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::RemoteKeyButton</scope><name>getKeyName</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1a37d3d69e4662e393d6e4a6e11edc8b1e" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::RemoteKeyButton</scope><name>initRemoteButton</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1a89c32c1f801aee1e2f7bc48b676f3428" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::RemoteKeyButton</scope><name>keyName</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1af5d30635b80641f7df2bcdb2a3b979c7" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::RemoteKeyButton</scope><name>RemoteKeyButton</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1ac85e9a69ddd3615144b7d0a9245b597e" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::RemoteKeyButton</scope><name>RemoteKeyButton</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button_1a3bad8c4aae55c38dd14f87d5387ffa4f" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::RemoteKeyButton</scope><name>RemoteKeyButton</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

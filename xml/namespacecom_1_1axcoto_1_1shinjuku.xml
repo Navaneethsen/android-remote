@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="namespacecom_1_1axcoto_1_1shinjuku" kind="namespace">
+    <compoundname>com::axcoto::shinjuku</compoundname>
+    <innernamespace refid="namespacecom_1_1axcoto_1_1shinjuku_1_1maki">com::axcoto::shinjuku::maki</innernamespace>
+    <innernamespace refid="namespacecom_1_1axcoto_1_1shinjuku_1_1sushi">com::axcoto::shinjuku::sushi</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="[generated]" line="1"/>
+  </compounddef>
+</doxygen>

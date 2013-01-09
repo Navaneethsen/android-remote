@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_alert_dialog_manager" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::sushi::AlertDialogManager</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_alert_dialog_manager_1a41ed5e7e64309a3f3397a4d338f7d5bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void showAlertDialog</definition>
+        <argsstring>(Context context, String title, String message, Boolean status)</argsstring>
+        <name>showAlertDialog</name>
+        <param>
+          <type>Context</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>String</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type>String</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>Boolean</type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Function to display simple Alert Dialog <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- application context </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- alert dialog title </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- alert message </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- success/failure (used to set icon)<itemizedlist>
+<listitem><para>pass null if you don&apos;t want icon </para></listitem></itemizedlist>
+</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/AlertDialogManager.java" line="20" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/AlertDialogManager.java" bodystart="19" bodyend="42"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/AlertDialogManager.java" line="10" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/AlertDialogManager.java" bodystart="10" bodyend="43"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_alert_dialog_manager_1a41ed5e7e64309a3f3397a4d338f7d5bf" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::AlertDialogManager</scope><name>showAlertDialog</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

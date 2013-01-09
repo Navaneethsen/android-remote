@@ -1,5 +1,9 @@
 package com.axcoto.shinjuku.sushi;
 
+/**
+ * Common Utilities (For GCM)
+ */
+
 import android.content.Context;
 import android.content.Intent;
  

@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['r',['r',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity.html#a0e73f743b74362a313af6f4bc6057b9c',1,'com::axcoto::shinjuku::sushi::DeviceActivity']]],
+  ['refresh',['refresh',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity.html#a5f2e190b8261a98c97c2ea4e86670d54',1,'com::axcoto::shinjuku::sushi::DeviceActivity']]],
+  ['regid_5ffilename',['REGID_FILENAME',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities.html#aa8ee6c89d27f7a01ecae7f8371873abd',1,'com::axcoto::shinjuku::sushi::CommonUtilities']]],
+  ['register',['register',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_server_utilities.html#a08c4d36e81c0008228393042e0795f22',1,'com::axcoto::shinjuku::sushi::ServerUtilities']]],
+  ['release',['release',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_wake_locker.html#a9e5d3fad9e601bb8c8c37183aaa737d2',1,'com::axcoto::shinjuku::sushi::WakeLocker']]],
+  ['release_5fversion',['RELEASE_VERSION',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities.html#a72efe0777a0465abd0884b09c411522e',1,'com::axcoto::shinjuku::sushi::CommonUtilities']]],
+  ['remote',['Remote',['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote.html',1,'com::axcoto::shinjuku::maki']]],
+  ['remote',['Remote',['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote.html#a788955b106b4417456ce5228a699c2ca',1,'com::axcoto::shinjuku::maki::Remote.Remote()'],['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_main_activity.html#a183609665ec025bb030be97c68faa84f',1,'com::axcoto::shinjuku::sushi::MainActivity.remote()']]],
+  ['remote_2ejava',['Remote.java',['../_remote_8java.html',1,'']]],
+  ['remotekeybutton',['RemoteKeyButton',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button.html',1,'com::axcoto::shinjuku::sushi']]],
+  ['remotekeybutton',['RemoteKeyButton',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button.html#af5d30635b80641f7df2bcdb2a3b979c7',1,'com::axcoto::shinjuku::sushi::RemoteKeyButton.RemoteKeyButton(Context context)'],['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button.html#ac85e9a69ddd3615144b7d0a9245b597e',1,'com::axcoto::shinjuku::sushi::RemoteKeyButton.RemoteKeyButton(Context context, AttributeSet attrs)'],['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button.html#a3bad8c4aae55c38dd14f87d5387ffa4f',1,'com::axcoto::shinjuku::sushi::RemoteKeyButton.RemoteKeyButton(Context context, AttributeSet attrs, int defStyle)']]],
+  ['remotekeybutton_2ejava',['RemoteKeyButton.java',['../_remote_key_button_8java.html',1,'']]],
+  ['remotekeycode',['remoteKeyCode',['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote.html#a6bfdec8a6e2398841ac2cdf6bca33010',1,'com::axcoto::shinjuku::maki::Remote']]],
+  ['resolve',['resolve',['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder.html#a49ecfb0ff5a157d06a36e921de9668d6',1,'com::axcoto::shinjuku::maki::Finder']]],
+  ['response',['response',['../interfacecom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book_uploader.html#ae3aed844a4bbfb69d20ebe835f9f94f8',1,'com::axcoto::shinjuku::maki::SongBookUploader.response()'],['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_my_http_server.html#ae3aed844a4bbfb69d20ebe835f9f94f8',1,'com::axcoto::shinjuku::maki::MyHttpServer.response()'],['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response.html#aa622db3f1d240d8044a939ba95d1a760',1,'com::axcoto::shinjuku::maki::NanoHTTPD::Response.Response()'],['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response.html#a7646c8b256df3d46b93e76782fb57649',1,'com::axcoto::shinjuku::maki::NanoHTTPD::Response.Response(String status, String mimeType, InputStream data)'],['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response.html#a500a8dc6f30cff33436ec1b366e9a15e',1,'com::axcoto::shinjuku::maki::NanoHTTPD::Response.Response(String status, String mimeType, String txt)']]],
+  ['response',['Response',['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response.html',1,'com::axcoto::shinjuku::maki::NanoHTTPD']]],
+  ['rootactivity',['RootActivity',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity.html',1,'com::axcoto::shinjuku::sushi']]],
+  ['rootactivity_2ejava',['RootActivity.java',['../_root_activity_8java.html',1,'']]]
+];

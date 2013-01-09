@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_wake_locker" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::sushi::WakeLocker</compoundname>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_wake_locker_1a7da7367383f094ea3dcbc0ed6b46354e" prot="private" static="yes" mutable="no">
+        <type>PowerManager.WakeLock</type>
+        <definition>PowerManager.WakeLock wakeLock</definition>
+        <argsstring></argsstring>
+        <name>wakeLock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/WakeLocker.java" line="7" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/WakeLocker.java" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_wake_locker_1a6f9a6a94f7774f14b7c517688456c779" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void acquire</definition>
+        <argsstring>(Context context)</argsstring>
+        <name>acquire</name>
+        <param>
+          <type>Context</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/WakeLocker.java" line="9" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/WakeLocker.java" bodystart="9" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_wake_locker_1a9e5d3fad9e601bb8c8c37183aaa737d2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void release</definition>
+        <argsstring>()</argsstring>
+        <name>release</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/WakeLocker.java" line="19" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/WakeLocker.java" bodystart="19" bodyend="21"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/WakeLocker.java" line="6" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/WakeLocker.java" bodystart="6" bodyend="22"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_wake_locker_1a6f9a6a94f7774f14b7c517688456c779" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::WakeLocker</scope><name>acquire</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_wake_locker_1a9e5d3fad9e601bb8c8c37183aaa737d2" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::WakeLocker</scope><name>release</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_wake_locker_1a7da7367383f094ea3dcbc0ed6b46354e" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::WakeLocker</scope><name>wakeLock</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

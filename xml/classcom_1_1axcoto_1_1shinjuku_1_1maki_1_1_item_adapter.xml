@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::maki::ItemAdapter</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">android::widget::ArrayAdapter&lt; DeviceItem &gt;</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_1ae097b12810eb5dcdc90449dec7e3910c" prot="private" static="no" mutable="no">
+        <type>ArrayList&lt; <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_device_item" kindref="compound">DeviceItem</ref> &gt;</type>
+        <definition>ArrayList&lt;DeviceItem&gt; objects</definition>
+        <argsstring></argsstring>
+        <name>objects</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" line="29" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_1a596dc9491194e77ce6f7b32e65e1ed19" prot="private" static="no" mutable="no">
+        <type>String</type>
+        <definition>String hostIp</definition>
+        <argsstring></argsstring>
+        <name>hostIp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" line="30" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_1abad456331d60ff41abe398624130462f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ItemAdapter</definition>
+        <argsstring>(Context context, int textViewResourceId, ArrayList&lt; DeviceItem &gt; objects)</argsstring>
+        <name>ItemAdapter</name>
+        <param>
+          <type>Context</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>textViewResourceId</declname>
+        </param>
+        <param>
+          <type>ArrayList&lt; <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_device_item" kindref="compound">DeviceItem</ref> &gt;</type>
+          <declname>objects</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Here we must override the constructor for ArrayAdapter the only variable we care about now is ArrayList&lt;Item&gt; objects, because it is the list of objects we want to display. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" line="36" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" bodystart="36" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_1a43b6588c6c308b0ab351b9fadf63cc03" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean connectTest</definition>
+        <argsstring>(String i)</argsstring>
+        <name>connectTest</name>
+        <param>
+          <type>String</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check connection whether the current ip is the one being connected <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the current hostIp being connected </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" line="46" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" bodystart="46" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_1af6292d542d7937de5b4044234a2db905" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>View</type>
+        <definition>View getView</definition>
+        <argsstring>(int position, View convertView, ViewGroup parent)</argsstring>
+        <name>getView</name>
+        <param>
+          <type>int</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>View</type>
+          <declname>convertView</declname>
+        </param>
+        <param>
+          <type>ViewGroup</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>We are overriding the getView method here - this is what defines how each list item will look. </para>        </detaileddescription>
+        <inbodydescription>
+<para>Recall that the variable position is sent in as an argument to this method. The variable simply refers to the position of the current object in the list. (The ArrayAdapter iterates through the list we sent it)</para><para>Therefore, i refers to the current Item object.</para>        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" line="58" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" bodystart="58" bodyend="120"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="author"><para>dphan </para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="184">
+        <label>ArrayAdapter&lt; DeviceItem &gt;</label>
+      </node>
+      <node id="183">
+        <label>ItemAdapter</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter"/>
+        <childnode refid="184" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="186">
+        <label>ArrayAdapter&lt; DeviceItem &gt;</label>
+      </node>
+      <node id="185">
+        <label>ItemAdapter</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter"/>
+        <childnode refid="186" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" line="28" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/ItemAdapter.java" bodystart="28" bodyend="121"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_1a43b6588c6c308b0ab351b9fadf63cc03" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::ItemAdapter</scope><name>connectTest</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_1af6292d542d7937de5b4044234a2db905" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::ItemAdapter</scope><name>getView</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_1a596dc9491194e77ce6f7b32e65e1ed19" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::ItemAdapter</scope><name>hostIp</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_1abad456331d60ff41abe398624130462f" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::ItemAdapter</scope><name>ItemAdapter</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_1ae097b12810eb5dcdc90449dec7e3910c" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::ItemAdapter</scope><name>objects</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

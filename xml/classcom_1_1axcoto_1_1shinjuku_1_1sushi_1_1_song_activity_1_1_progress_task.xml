@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task" kind="class" prot="private">
+    <compoundname>com::axcoto::shinjuku::sushi::SongActivity::ProgressTask</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">android::os::AsyncTask&lt; String, Void, Boolean &gt;</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task_1aec71ddc99e779573fcea5869f4b88f11" prot="private" static="no" mutable="no">
+        <type>long</type>
+        <definition>long elapsed_time</definition>
+        <argsstring></argsstring>
+        <name>elapsed_time</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" line="336" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" bodystart="336" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task_1af0aece8947f650c4ac247f3c8e592124" prot="private" static="no" mutable="no">
+        <type>ProgressDialog</type>
+        <definition>ProgressDialog dialog</definition>
+        <argsstring></argsstring>
+        <name>dialog</name>
+        <initializer> new ProgressDialog(SongActivity.this)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" line="337" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" bodystart="337" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task_1ade7dc4350a25a30b40df7cfba08e4de6" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void onPreExecute</definition>
+        <argsstring>()</argsstring>
+        <name>onPreExecute</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" line="340" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" bodystart="340" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task_1a2f6a76970711c2288579dc25b5790ab2" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void onPostExecute</definition>
+        <argsstring>(final Boolean success)</argsstring>
+        <name>onPostExecute</name>
+        <param>
+          <type>final Boolean</type>
+          <declname>success</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" line="349" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" bodystart="349" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task_1ab917a85142736d324892dd496df67a91" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Boolean</type>
+        <definition>Boolean doInBackground</definition>
+        <argsstring>(String...params)</argsstring>
+        <name>doInBackground</name>
+        <param>
+          <type>String...</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" line="363" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" bodystart="363" bodyend="407"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="219">
+        <label>AsyncTask&lt; String, Void, Boolean &gt;</label>
+      </node>
+      <node id="218">
+        <label>SongActivity.ProgressTask</label>
+        <childnode refid="219" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="221">
+        <label>AsyncTask&lt; String, Void, Boolean &gt;</label>
+      </node>
+      <node id="220">
+        <label>SongActivity.ProgressTask</label>
+        <childnode refid="221" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" line="335" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/SongActivity.java" bodystart="335" bodyend="409"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task_1af0aece8947f650c4ac247f3c8e592124" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::SongActivity::ProgressTask</scope><name>dialog</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task_1ab917a85142736d324892dd496df67a91" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::SongActivity::ProgressTask</scope><name>doInBackground</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task_1aec71ddc99e779573fcea5869f4b88f11" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::SongActivity::ProgressTask</scope><name>elapsed_time</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task_1a2f6a76970711c2288579dc25b5790ab2" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::SongActivity::ProgressTask</scope><name>onPostExecute</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity_1_1_progress_task_1ade7dc4350a25a30b40df7cfba08e4de6" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::SongActivity::ProgressTask</scope><name>onPreExecute</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

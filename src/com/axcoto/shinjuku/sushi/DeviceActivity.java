@@ -33,17 +33,19 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.axcoto.shinjuku.maki.DeviceItem;
 import com.axcoto.shinjuku.maki.Finder;
+import com.axcoto.shinjuku.maki.ItemAdapter;
 import com.axcoto.shinjuku.maki.Remote;
 
-public class DeviceActivity extends RootActivity implements OnGestureListener{
+public class DeviceActivity extends RootActivity implements OnGestureListener {
 	final public String DEVICE_FILENAME = "device";
-	
+
 	final public int ACTION_CONNECT = 1;
 	final public int ACTION_DISCONNECT = 2;
-	
+
 	static final int PROGRESS_DIALOG = 0;
-	
+
 	private ListView listDevice;
 	private ItemAdapter deviceAdapter;
 	public ArrayList<DeviceItem> devices;
@@ -51,41 +53,40 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	public ProgressDialog progressDialog;
 	public ProgressThread progressThread;
 
-
 	static int ipScanFrom = 2;
-	static int ipScanTo = 253;	
+	static int ipScanTo = 253;
 	static int ipTimeoutPing = 400;
 	static String ipMaskAdd = "";
 	AsyncTask<Integer, Void, Void> mConnectTask;
 	Remote r;
-	
+
 	private GestureDetector gestureScanner;
-	
-	
+
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
-	  // Save UI state changes to the savedInstanceState.
-	  // This bundle will be passed to onCreate if the process is
-	  // killed and restarted.
+		// Save UI state changes to the savedInstanceState.
+		// This bundle will be passed to onCreate if the process is
+		// killed and restarted.
 		savedInstanceState.putStringArrayList("deviceIp", deviceIp);
-		//savedInstanceState.put
+		// savedInstanceState.put
 		// etc.
 		Log.e("SUSHI: SAVED", "Saved Device Ip");
-	  super.onSaveInstanceState(savedInstanceState);
+		super.onSaveInstanceState(savedInstanceState);
 	}
 
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
-	  super.onRestoreInstanceState(savedInstanceState);
-	  // Restore UI state from the savedInstanceState.
-	  // This bundle has also been passed to onCreate.
-	  ArrayList<String> ip = savedInstanceState.getStringArrayList("deviceIp");
-	  Log.e("SUSHI:: ==RESTORE", "From Restore. We had devices: " + ip.size());
-	  
-	  deviceIp = new ArrayList<String>();
+		super.onRestoreInstanceState(savedInstanceState);
+		// Restore UI state from the savedInstanceState.
+		// This bundle has also been passed to onCreate.
+		ArrayList<String> ip = savedInstanceState
+				.getStringArrayList("deviceIp");
+		Log.e("SUSHI:: ==RESTORE", "From Restore. We had devices: " + ip.size());
+
+		deviceIp = new ArrayList<String>();
 		devices = new ArrayList<DeviceItem>();
-		if (ip.size()>0) {
-			for (int i=0; i<ip.size(); i++) {
+		if (ip.size() > 0) {
+			for (int i = 0; i < ip.size(); i++) {
 				deviceIp.add(ip.get(i));
 				devices.add(new DeviceItem(ip.get(i)));
 			}
@@ -93,141 +94,154 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 			deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
 			deviceAdapter.notifyDataSetChanged();
 			listDevice.setAdapter(deviceAdapter);
-		}	  
+		}
 	}
-	
+
 	public void saveDeviceList() {
 		String ip;
 		try {
-			FileOutputStream fos = openFileOutput(this.DEVICE_FILENAME, Context.MODE_PRIVATE);
-			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(fos));			
-			for (int i=0; i < deviceIp.size(); i++) {
-				ip = deviceIp.get(i) + "\n";				
-				//fos.write(ip.getBytes());
+			FileOutputStream fos = openFileOutput(this.DEVICE_FILENAME,
+					Context.MODE_PRIVATE);
+			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(fos));
+			for (int i = 0; i < deviceIp.size(); i++) {
+				ip = deviceIp.get(i) + "\n";
+				// fos.write(ip.getBytes());
 				br.write(ip);
-			}			
+			}
 			br.flush();
 			br.close();
 			fos.close();
 		} catch (FileNotFoundException e) {
 			Log.e("SUSHI:: DEVICE", "Cannot find the file ");
 		} catch (IOException e) {
-			Log.e("SUSHI:: DEVICE", "Cannot write data to the file ");			
+			Log.e("SUSHI:: DEVICE", "Cannot write data to the file ");
 		}
 
-		//Okay, now we done we can skip it
-		//		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		// Okay, now we done we can skip it
+		// getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//We need to keep this on during device scanning
+		// We need to keep this on during device scanning
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		
+
 		setContentView(R.layout.activity_device);
 		listDevice = (ListView) findViewById(R.id.list_device);
-		
+
 		Log.e("SUSHI:: DEVICE", "Create activity");
-		final DeviceActivity t = this;	
+		final DeviceActivity t = this;
 		final Context context = this;
-		//waitingConnectBar.setVisibility(View.VISIBLE);
+		// waitingConnectBar.setVisibility(View.VISIBLE);
 		listDevice.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Log.i("SUSHI :: DEVICE: CLICKED", "Click ListItem Number " + position);
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Log.i("SUSHI :: DEVICE: CLICKED", "Click ListItem Number "
+						+ position);
 				final DeviceItem d = deviceAdapter.getItem(position);
 				Log.i("SUSHI:: DEVICE", "About to connect to " + d.getIp());
 				Log.i("SUSHI :: DEVICE", Integer.toString(view.getId()));
-				
-				try { 
-					final int action = d.isConnected()? ACTION_DISCONNECT:ACTION_CONNECT;
-					
-                   mConnectTask = new AsyncTask<Integer, Void, Void>() {
-                	    ProgressDialog connectProgress;
-       				
-                	    @Override
-                	    protected void onPreExecute() {
-                	    	connectProgress = ProgressDialog.show(context, "Connect Status", "Trying to connect to CeeNee Media Player...", true);
-                        }
-                	    
-                        @Override
-                        protected Void doInBackground(Integer... params) {
-                        	
-                        	try {
-                        		//We need to close previous connection first.
-                        		if (action == ACTION_DISCONNECT) {                        			
-                        			Remote.getInstance().disConnect();
-                        		}                        		
-                        		r = d.connect();                         	
-                        	} catch (Exception e) {
-                        		
-                        		Log.e("SUSHI:: DEVICE:: CONNECT_ERROR", e.getStackTrace().toString());
-                        	}                        	 
-                            return null;
-                        }
-     
-                        @Override
-                        protected void onPostExecute(Void result) {
-                            mConnectTask = null;
-                            if (d.isConnected()) {
-                            	Toast.makeText(getApplicationContext(),
-        							"Click on the check mark to disconnect",
-        							Toast.LENGTH_SHORT).show();
-	                            deviceAdapter.notifyDataSetChanged();
-	                    		listDevice.setAdapter(deviceAdapter);
-//                            	Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//             					finish();
-//             	            	startActivityForResult(i, 0x13343);
-             	            	
-                            } else {
-                            	Toast.makeText(getApplicationContext(),
-            							"Cannot connect to the device",
-            							Toast.LENGTH_LONG).show();
-                            }
-                            connectProgress.dismiss();                            
-                        }
-     
-                    };
-                    mConnectTask.execute(action, null, null);
-//					Intent i = new Intent( t, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//					finish();
-//	            	startActivityForResult(i, 0x13343);
+
+				try {
+					final int action = d.isConnected() ? ACTION_DISCONNECT
+							: ACTION_CONNECT;
+
+					mConnectTask = new AsyncTask<Integer, Void, Void>() {
+						ProgressDialog connectProgress;
+
+						@Override
+						protected void onPreExecute() {
+							connectProgress = ProgressDialog
+									.show(context,
+											"Connect Status",
+											"Trying to connect to CeeNee Media Player...",
+											true);
+						}
+
+						@Override
+						protected Void doInBackground(Integer... params) {
+
+							try {
+								// We need to close previous connection first.
+								if (action == ACTION_DISCONNECT) {
+									Remote.getInstance().disConnect();
+								}
+								r = d.connect();
+							} catch (Exception e) {
+
+								Log.e("SUSHI:: DEVICE:: CONNECT_ERROR", e
+										.getStackTrace().toString());
+							}
+							return null;
+						}
+
+						@Override
+						protected void onPostExecute(Void result) {
+							mConnectTask = null;
+							if (d.isConnected()) {
+								Toast.makeText(
+										getApplicationContext(),
+										"Click on the check mark to disconnect",
+										Toast.LENGTH_SHORT).show();
+								deviceAdapter.notifyDataSetChanged();
+								listDevice.setAdapter(deviceAdapter);
+								// Intent i = new Intent( t,
+								// MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+								// finish();
+								// startActivityForResult(i, 0x13343);
+
+							} else {
+								Toast.makeText(getApplicationContext(),
+										"Cannot connect to the device",
+										Toast.LENGTH_LONG).show();
+							}
+							connectProgress.dismiss();
+						}
+
+					};
+					mConnectTask.execute(action, null, null);
+					// Intent i = new Intent( t,
+					// MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					// finish();
+					// startActivityForResult(i, 0x13343);
 				} catch (Exception e) {
 					Log.e("SUSHI:: DEVICE", e.getMessage());
 				}
-				Log.i("SUSHI :: DEVICE:: WAIT_CONNECT", "Waiting for device connection in background");
-				
+				Log.i("SUSHI :: DEVICE:: WAIT_CONNECT",
+						"Waiting for device connection in background");
+
 			}
 
 		});
-		
+
 		deviceIp = new ArrayList<String>();
-		devices = new ArrayList<DeviceItem>();		
+		devices = new ArrayList<DeviceItem>();
 
 		try {
 			FileInputStream fis = openFileInput(this.DEVICE_FILENAME);
 			DataInputStream in = new DataInputStream(fis);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String ip;
-			while ((ip = br.readLine()) != null)   {
-				  // Print the content on the console
-				  deviceIp.add(ip);
-				  devices.add(new DeviceItem(ip));
-			}			
+			while ((ip = br.readLine()) != null) {
+				// Print the content on the console
+				deviceIp.add(ip);
+				devices.add(new DeviceItem(ip));
+			}
 			fis.close();
 		} catch (FileNotFoundException e) {
 			Log.e("SUSHI:: DEVICE", "Device file has not existed yet.");
 		} catch (IOException e) {
-			Log.e("SUSHI:: DEVICE", "Cannot read device file");			
+			Log.e("SUSHI:: DEVICE", "Cannot read device file");
 		}
 		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
 		deviceAdapter.notifyDataSetChanged();
 		listDevice.setAdapter(deviceAdapter);
 		listDevice.invalidateViews();
-		
+
 		gestureScanner = new GestureDetector(this);
-		
+
 		Log.i("SUSHI:: ", "RUN TO HERE");
 		try {
 			Log.i("SUSHI:: CURRENT CONNECTED IP", Remote.getInstance().getIp());
@@ -237,11 +251,12 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 	}
 
 	public void scanDevice(View view) {
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences sharedPref = PreferenceManager
+				.getDefaultSharedPreferences(this);
 		this.ipScanFrom = sharedPref.getInt("ip_from", 2);
-		this.ipScanTo = sharedPref.getInt("ip_end", 253);		
-		this.ipTimeoutPing = sharedPref.getInt("ping_time", 400);	
-		
+		this.ipScanTo = sharedPref.getInt("ip_end", 253);
+		this.ipTimeoutPing = sharedPref.getInt("ping_time", 400);
+
 		Log.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanFrom);
 		Log.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanTo);
 		showDialog(PROGRESS_DIALOG);
@@ -275,15 +290,16 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 			progressThread.start();
 		}
 	}
-	
+
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 
 			int total = msg.arg1;
 			progressDialog.setProgress(total);
 			if (msg.arg2 > 0) {
-				
-				String ip = DeviceActivity.ipMaskAdd + Integer.toString(msg.arg2);
+
+				String ip = DeviceActivity.ipMaskAdd
+						+ Integer.toString(msg.arg2);
 				deviceAdapter.add(new DeviceItem(ip));
 				deviceIp.add(ip);
 			}
@@ -305,7 +321,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		int mState;
 
 		int from = 2, to = 253, checkIp = from;
-		
+
 		String maskIp;
 
 		ProgressThread(Handler h) {
@@ -316,44 +332,43 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 			checkIp = from;
 		}
 
-
-		
 		public void run() {
 			Finder f = Finder.getInstance();
 			boolean res = f.resolve();
-			if(res == false) {
+			if (res == false) {
 				Log.e("Error: ", "no internet connection");
 				Message msg1 = mHandler.obtainMessage();
 				msg1.arg2 = 0;
-				msg1.arg1 = 120;					
+				msg1.arg1 = 120;
 				mHandler.sendMessage(msg1);
 			}
-//			f.resolve();
-			else
-			{
-			mState = STATE_RUNNING;
+			// f.resolve();
+			else {
+				mState = STATE_RUNNING;
 
-			if (MainActivity.ENVIRONMENT==MainActivity.PHASE_DEVELOPMENT) {
-				maskIp = "192.168.0.";
-			} else {
+				if (MainActivity.ENVIRONMENT == MainActivity.PHASE_DEVELOPMENT) {
+					maskIp = "192.168.0.";
+				} else {
 					maskIp = f.getMaskIpAddress() + ".";
 				}
 				DeviceActivity.ipMaskAdd = maskIp;
-				
+
 				while (mState == STATE_RUNNING) {
-					Log.i("MaskIp=",maskIp + checkIp);
+					Log.i("MaskIp=", maskIp + checkIp);
 					try {
 						Message msg = mHandler.obtainMessage();
 						msg.arg2 = 0;
-						
-						if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT, DeviceActivity.ipTimeoutPing)) {
+
+						if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT,
+								DeviceActivity.ipTimeoutPing)) {
 							msg.arg2 = checkIp;
 							Log.e("MAKI::FINDER",
 									"Okay. We added the board to listview "
 											+ checkIp);
 						}
-	
-						msg.arg1 = Math.round((checkIp - from) * 100 / (to - from));
+
+						msg.arg1 = Math.round((checkIp - from) * 100
+								/ (to - from));
 						Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
 						mHandler.sendMessage(msg);
 						checkIp++;
@@ -362,7 +377,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 					}
 				}
 			}
-						
+
 		}
 
 		/*
@@ -376,91 +391,72 @@ public class DeviceActivity extends RootActivity implements OnGestureListener{
 		}
 	}
 
-	
 	@Override
-	 
-    public boolean onTouchEvent(MotionEvent me)
- 
-    {
- 
-        return gestureScanner.onTouchEvent(me);
- 
-    }
- 
-   
- 
-    @Override
- 
-    public boolean onDown(MotionEvent e)
- 
-    {
- 
-        Log.e("SUSHI:: DEVICE", "-" + "DOWN" + "-");
- 
-        return true;
- 
-    }
- 
-   
- 
-    @Override
- 
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
- 
-    {
- 
-//        Log.e("SUSHI:: DEVICE", "-" + "FLING" + "-");
-        return true;
- 
-    }
- 
-   
- 
-    @Override
- 
-    public void onLongPress(MotionEvent e) 
-    { 
-        Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
-        Remote.getInstance().disConnect();
-    }
- 
-   
- 
-    @Override
- 
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
- 
-    {
- 
-//        Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
-// 
-//        return true;
-    	  return false;
-    }
- 
-   
- 
-    @Override
- 
-    public void onShowPress(MotionEvent e)
- 
-    {
- 
-//        Log.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
- 
-    }    
- 
-   
- 
-    @Override  
- 
-    public boolean onSingleTapUp(MotionEvent e)    
- 
-    {
- 
-//        Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
-//        return true;
-    	  return false;
-    }
-	
+	public boolean onTouchEvent(MotionEvent me)
+
+	{
+
+		return gestureScanner.onTouchEvent(me);
+
+	}
+
+	@Override
+	public boolean onDown(MotionEvent e)
+
+	{
+
+		Log.e("SUSHI:: DEVICE", "-" + "DOWN" + "-");
+
+		return true;
+
+	}
+
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+			float velocityY)
+
+	{
+
+		// Log.e("SUSHI:: DEVICE", "-" + "FLING" + "-");
+		return true;
+
+	}
+
+	@Override
+	public void onLongPress(MotionEvent e) {
+		Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
+		Remote.getInstance().disConnect();
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+			float distanceY)
+
+	{
+
+		// Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
+		//
+		// return true;
+		return false;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent e)
+
+	{
+
+		// Log.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
+
+	}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent e)
+
+	{
+
+		// Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
+		// return true;
+		return false;
+	}
+
 }

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="dir_4c561a9e8d0582752ae8a2879afa217f" kind="dir">
+    <compoundname>src/com/robobunny/</compoundname>
+    <innerfile refid="_seek_bar_preference_8java">SeekBarPreference.java</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/robobunny/"/>
+  </compounddef>
+</doxygen>

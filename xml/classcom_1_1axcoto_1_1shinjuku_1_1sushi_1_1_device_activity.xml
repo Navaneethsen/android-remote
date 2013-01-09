@@ -1,0 +1,720 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::sushi::DeviceActivity</compoundname>
+    <basecompoundref refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity" prot="public" virt="non-virtual">RootActivity</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">OnGestureListener</basecompoundref>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1_1_progress_thread" prot="private">com::axcoto::shinjuku::sushi::DeviceActivity::ProgressThread</innerclass>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a8dc5249305626e68b7e27ca3164f369c" prot="public" static="no" mutable="no">
+        <type>final String</type>
+        <definition>final String DEVICE_FILENAME</definition>
+        <argsstring></argsstring>
+        <name>DEVICE_FILENAME</name>
+        <initializer>&quot;device&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="42" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a5e97f8925a2febf6eb35d1b2217622f3" prot="public" static="no" mutable="no">
+        <type>final int</type>
+        <definition>final int ACTION_CONNECT</definition>
+        <argsstring></argsstring>
+        <name>ACTION_CONNECT</name>
+        <initializer> 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="44" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a36511138d97f58bd9eea490d883425eb" prot="public" static="no" mutable="no">
+        <type>final int</type>
+        <definition>final int ACTION_DISCONNECT</definition>
+        <argsstring></argsstring>
+        <name>ACTION_DISCONNECT</name>
+        <initializer> 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="45" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a3bc44a016145802ad56376304ad754c3" prot="public" static="no" mutable="no">
+        <type>ArrayList&lt; <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_device_item" kindref="compound">DeviceItem</ref> &gt;</type>
+        <definition>ArrayList&lt;DeviceItem&gt; devices</definition>
+        <argsstring></argsstring>
+        <name>devices</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="51" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a0f4b2ab01bd93f8f14fc3370c044bca1" prot="public" static="no" mutable="no">
+        <type>ArrayList&lt; String &gt;</type>
+        <definition>ArrayList&lt;String&gt; deviceIp</definition>
+        <argsstring></argsstring>
+        <name>deviceIp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="52" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a1d5efa5914b65e5097867ea92779c501" prot="public" static="no" mutable="no">
+        <type>ProgressDialog</type>
+        <definition>ProgressDialog progressDialog</definition>
+        <argsstring></argsstring>
+        <name>progressDialog</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="53" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a36d87d10b183916cb328fc0604ecd22c" prot="public" static="no" mutable="no">
+        <type>ProgressThread</type>
+        <definition>ProgressThread progressThread</definition>
+        <argsstring></argsstring>
+        <name>progressThread</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="54" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-static-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a677c859dfacb01cdb0b5c4866505729a" prot="package" static="yes" mutable="no">
+        <type>final int</type>
+        <definition>final int PROGRESS_DIALOG</definition>
+        <argsstring></argsstring>
+        <name>PROGRESS_DIALOG</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="47" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a61f5f7bc06ebd608448533adcc79459b" prot="package" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int ipScanFrom</definition>
+        <argsstring></argsstring>
+        <name>ipScanFrom</name>
+        <initializer> 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="57" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a2130e0832d315259bf3e07d7e4e3af5c" prot="package" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int ipScanTo</definition>
+        <argsstring></argsstring>
+        <name>ipScanTo</name>
+        <initializer> 253</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="58" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a719a84da11fb1de67b04772b06684513" prot="package" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int ipTimeoutPing</definition>
+        <argsstring></argsstring>
+        <name>ipTimeoutPing</name>
+        <initializer> 400</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="59" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a59a64a7255aa5deb40208cc228772dc6" prot="package" static="yes" mutable="no">
+        <type>String</type>
+        <definition>String ipMaskAdd</definition>
+        <argsstring></argsstring>
+        <name>ipMaskAdd</name>
+        <initializer>&quot;&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="60" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1ab4cc4bcf87ff880a28c9aa1f962a3bfc" prot="private" static="no" mutable="no">
+        <type>ListView</type>
+        <definition>ListView listDevice</definition>
+        <argsstring></argsstring>
+        <name>listDevice</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="49" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a9958d4199f608275db242cc7e16e5d44" prot="private" static="no" mutable="no">
+        <type><ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter" kindref="compound">ItemAdapter</ref></type>
+        <definition>ItemAdapter deviceAdapter</definition>
+        <argsstring></argsstring>
+        <name>deviceAdapter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="50" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1abdcb7c7b0f6c3ce5dcc0a13af95bf1bb" prot="private" static="no" mutable="no">
+        <type>GestureDetector</type>
+        <definition>GestureDetector gestureScanner</definition>
+        <argsstring></argsstring>
+        <name>gestureScanner</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="64" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a57d71e19104af6fa1574d8267a940023" prot="private" static="no" mutable="no">
+        <type>Handler</type>
+        <definition>Handler handler</definition>
+        <argsstring></argsstring>
+        <name>handler</name>
+        <initializer> new Handler() {
+		public void handleMessage(Message msg) {
+
+			int total = msg.arg1;
+			progressDialog.setProgress(total);
+			if (msg.arg2 &gt; 0) {
+				
+				String ip = <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a59a64a7255aa5deb40208cc228772dc6" kindref="member">DeviceActivity.ipMaskAdd</ref> + Integer.toString(msg.arg2);
+				deviceAdapter.add(new <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_device_item" kindref="compound">DeviceItem</ref>(ip));
+				deviceIp.add(ip);
+			}
+			if (total &gt;= 100) {
+				<ref refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a474cd371b3913797ee9439ebc567c219" kindref="member">saveDeviceList</ref>();
+				progressDialog.setProgress(0); 
+												
+				dismissDialog(<ref refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a677c859dfacb01cdb0b5c4866505729a" kindref="member">PROGRESS_DIALOG</ref>);
+				progressThread.setState(ProgressThread.STATE_DONE);
+			}
+		}
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="300" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="281" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a0abadf85d0f7d5dd87312581a62d45ca" prot="package" static="no" mutable="no">
+        <type>AsyncTask&lt; Integer, Void, Void &gt;</type>
+        <definition>AsyncTask&lt;Integer, Void, Void&gt; mConnectTask</definition>
+        <argsstring></argsstring>
+        <name>mConnectTask</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="61" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a0e73f743b74362a313af6f4bc6057b9c" prot="package" static="no" mutable="no">
+        <type><ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote" kindref="compound">Remote</ref></type>
+        <definition>Remote r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="62" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a6992969459b5fc776a9d595a5aa7e7e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void onSaveInstanceState</definition>
+        <argsstring>(Bundle savedInstanceState)</argsstring>
+        <name>onSaveInstanceState</name>
+        <param>
+          <type>Bundle</type>
+          <declname>savedInstanceState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="68" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="68" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a3fd108ef7b3bf7c29e53e6c4984d5f84" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void onRestoreInstanceState</definition>
+        <argsstring>(Bundle savedInstanceState)</argsstring>
+        <name>onRestoreInstanceState</name>
+        <param>
+          <type>Bundle</type>
+          <declname>savedInstanceState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="80" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="80" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a474cd371b3913797ee9439ebc567c219" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void saveDeviceList</definition>
+        <argsstring>()</argsstring>
+        <name>saveDeviceList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="101" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="101" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a85e87cb5ced88dff7c8173ecc4f636d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void onCreate</definition>
+        <argsstring>(Bundle savedInstanceState)</argsstring>
+        <name>onCreate</name>
+        <param>
+          <type>Bundle</type>
+          <declname>savedInstanceState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="125" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="125" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1aedac3a1961a15d78dbf608505a6c0e11" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void scanDevice</definition>
+        <argsstring>(View view)</argsstring>
+        <name>scanDevice</name>
+        <param>
+          <type>View</type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="241" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="241" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a5f2e190b8261a98c97c2ea4e86670d54" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void refresh</definition>
+        <argsstring>()</argsstring>
+        <name>refresh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="252" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="252" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a316e2162aee3b81438c6f324cadbfd4e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean onTouchEvent</definition>
+        <argsstring>(MotionEvent me)</argsstring>
+        <name>onTouchEvent</name>
+        <param>
+          <type>MotionEvent</type>
+          <declname>me</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="386" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="384" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1afe7febda1f2210be8658c06fce770e1c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean onDown</definition>
+        <argsstring>(MotionEvent e)</argsstring>
+        <name>onDown</name>
+        <param>
+          <type>MotionEvent</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="398" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="396" bodyend="404"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1ae44fb084c2495a486a664f60ae319b8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean onFling</definition>
+        <argsstring>(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)</argsstring>
+        <name>onFling</name>
+        <param>
+          <type>MotionEvent</type>
+          <declname>e1</declname>
+        </param>
+        <param>
+          <type>MotionEvent</type>
+          <declname>e2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>velocityX</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>velocityY</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="412" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="410" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1ac12f39cb7fd9003b2aa5ddf76f2e93fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void onLongPress</definition>
+        <argsstring>(MotionEvent e)</argsstring>
+        <name>onLongPress</name>
+        <param>
+          <type>MotionEvent</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="424" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="423" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1af912304fa5a847e1231b71015c2ed06a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean onScroll</definition>
+        <argsstring>(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)</argsstring>
+        <name>onScroll</name>
+        <param>
+          <type>MotionEvent</type>
+          <declname>e1</declname>
+        </param>
+        <param>
+          <type>MotionEvent</type>
+          <declname>e2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>distanceX</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>distanceY</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="435" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="433" bodyend="441"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a929cec72582aad79985fd2927344b9c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void onShowPress</definition>
+        <argsstring>(MotionEvent e)</argsstring>
+        <name>onShowPress</name>
+        <param>
+          <type>MotionEvent</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="449" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="447" bodyend="453"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a05333c5dbd12d347d100d8cb029e4530" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean onSingleTapUp</definition>
+        <argsstring>(MotionEvent e)</argsstring>
+        <name>onSingleTapUp</name>
+        <param>
+          <type>MotionEvent</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="461" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="459" bodyend="466"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a3c6dd4273e9b563fbffdd8bad1cc6cf2" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Dialog</type>
+        <definition>Dialog onCreateDialog</definition>
+        <argsstring>(int id)</argsstring>
+        <name>onCreateDialog</name>
+        <param>
+          <type>int</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="257" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="257" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1ab7a28022e93c8600afe1878d779a1157" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void onPrepareDialog</definition>
+        <argsstring>(int id, Dialog dialog)</argsstring>
+        <name>onPrepareDialog</name>
+        <param>
+          <type>int</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>Dialog</type>
+          <declname>dialog</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="270" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="270" bodyend="279"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="151">
+        <label>RootActivity</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity"/>
+        <childnode refid="152" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="152">
+        <label>Activity</label>
+      </node>
+      <node id="153">
+        <label>OnGestureListener</label>
+      </node>
+      <node id="150">
+        <label>DeviceActivity</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity"/>
+        <childnode refid="151" relation="public-inheritance">
+        </childnode>
+        <childnode refid="153" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="155">
+        <label>RootActivity</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity"/>
+        <childnode refid="156" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="164">
+        <label>PrintWriter</label>
+      </node>
+      <node id="156">
+        <label>Activity</label>
+      </node>
+      <node id="162">
+        <label>Map&lt; String, String &gt;</label>
+      </node>
+      <node id="169">
+        <label>ProgressDialog</label>
+      </node>
+      <node id="165">
+        <label>AsyncTask&lt; Integer, Void, Void &gt;</label>
+      </node>
+      <node id="161">
+        <label>DataOutputStream</label>
+      </node>
+      <node id="158">
+        <label>ArrayList&lt; DeviceItem &gt;</label>
+      </node>
+      <node id="166">
+        <label>DeviceActivity.ProgressThread</label>
+        <childnode refid="167" relation="usage">
+          <edgelabel>mHandler</edgelabel>
+        </childnode>
+      </node>
+      <node id="167">
+        <label>Handler</label>
+      </node>
+      <node id="163">
+        <label>Socket</label>
+      </node>
+      <node id="160">
+        <label>DataInputStream</label>
+      </node>
+      <node id="159">
+        <label>Remote</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote"/>
+        <childnode refid="159" relation="usage">
+          <edgelabel>instance</edgelabel>
+        </childnode>
+        <childnode refid="160" relation="usage">
+          <edgelabel>inToServer</edgelabel>
+        </childnode>
+        <childnode refid="161" relation="usage">
+          <edgelabel>outToServer</edgelabel>
+        </childnode>
+        <childnode refid="162" relation="usage">
+          <edgelabel>remoteKeyCode</edgelabel>
+        </childnode>
+        <childnode refid="163" relation="usage">
+          <edgelabel>clientSocket</edgelabel>
+        </childnode>
+        <childnode refid="164" relation="usage">
+          <edgelabel>printer</edgelabel>
+        </childnode>
+      </node>
+      <node id="168">
+        <label>ArrayList&lt; String &gt;</label>
+      </node>
+      <node id="157">
+        <label>OnGestureListener</label>
+      </node>
+      <node id="154">
+        <label>DeviceActivity</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity"/>
+        <childnode refid="155" relation="public-inheritance">
+        </childnode>
+        <childnode refid="157" relation="public-inheritance">
+        </childnode>
+        <childnode refid="158" relation="usage">
+          <edgelabel>devices</edgelabel>
+        </childnode>
+        <childnode refid="159" relation="usage">
+          <edgelabel>r</edgelabel>
+        </childnode>
+        <childnode refid="165" relation="usage">
+          <edgelabel>mConnectTask</edgelabel>
+        </childnode>
+        <childnode refid="166" relation="usage">
+          <edgelabel>progressThread</edgelabel>
+        </childnode>
+        <childnode refid="168" relation="usage">
+          <edgelabel>deviceIp</edgelabel>
+        </childnode>
+        <childnode refid="169" relation="usage">
+          <edgelabel>progressDialog</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" line="41" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/DeviceActivity.java" bodystart="41" bodyend="468"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a5e97f8925a2febf6eb35d1b2217622f3" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>ACTION_CONNECT</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a36511138d97f58bd9eea490d883425eb" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>ACTION_DISCONNECT</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a8dc5249305626e68b7e27ca3164f369c" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>DEVICE_FILENAME</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a9958d4199f608275db242cc7e16e5d44" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>deviceAdapter</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a0f4b2ab01bd93f8f14fc3370c044bca1" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>deviceIp</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a3bc44a016145802ad56376304ad754c3" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>devices</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1abdcb7c7b0f6c3ce5dcc0a13af95bf1bb" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>gestureScanner</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a57d71e19104af6fa1574d8267a940023" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>handler</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a59a64a7255aa5deb40208cc228772dc6" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>ipMaskAdd</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a61f5f7bc06ebd608448533adcc79459b" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>ipScanFrom</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a2130e0832d315259bf3e07d7e4e3af5c" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>ipScanTo</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a719a84da11fb1de67b04772b06684513" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>ipTimeoutPing</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1ab4cc4bcf87ff880a28c9aa1f962a3bfc" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>listDevice</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a0abadf85d0f7d5dd87312581a62d45ca" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>mConnectTask</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a85e87cb5ced88dff7c8173ecc4f636d1" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onCreate</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a3c6dd4273e9b563fbffdd8bad1cc6cf2" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onCreateDialog</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity_1a8f7d87763ddaf085205a54e8477ecfce" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onCreateOptionsMenu</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1afe7febda1f2210be8658c06fce770e1c" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onDown</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1ae44fb084c2495a486a664f60ae319b8c" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onFling</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1ac12f39cb7fd9003b2aa5ddf76f2e93fe" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onLongPress</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity_1a37a55c533c74b60c0290ef1329d74e65" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onOptionsItemSelected</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1ab7a28022e93c8600afe1878d779a1157" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onPrepareDialog</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a3fd108ef7b3bf7c29e53e6c4984d5f84" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onRestoreInstanceState</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a6992969459b5fc776a9d595a5aa7e7e6" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onSaveInstanceState</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1af912304fa5a847e1231b71015c2ed06a" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onScroll</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a929cec72582aad79985fd2927344b9c7" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onShowPress</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a05333c5dbd12d347d100d8cb029e4530" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onSingleTapUp</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a316e2162aee3b81438c6f324cadbfd4e" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>onTouchEvent</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a677c859dfacb01cdb0b5c4866505729a" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>PROGRESS_DIALOG</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a1d5efa5914b65e5097867ea92779c501" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>progressDialog</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a36d87d10b183916cb328fc0604ecd22c" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>progressThread</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a0e73f743b74362a313af6f4bc6057b9c" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>r</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a5f2e190b8261a98c97c2ea4e86670d54" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>refresh</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1a474cd371b3913797ee9439ebc567c219" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>saveDeviceList</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_1aedac3a1961a15d78dbf608505a6c0e11" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::DeviceActivity</scope><name>scanDevice</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

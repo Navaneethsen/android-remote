@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::sushi::CommonUtilities</compoundname>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1aa8ee6c89d27f7a01ecae7f8371873abd" prot="public" static="yes" mutable="no">
+        <type>final String</type>
+        <definition>final String REGID_FILENAME</definition>
+        <argsstring></argsstring>
+        <name>REGID_FILENAME</name>
+        <initializer>&quot;regid&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="11" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a8dc5249305626e68b7e27ca3164f369c" prot="public" static="yes" mutable="no">
+        <type>final String</type>
+        <definition>final String DEVICE_FILENAME</definition>
+        <argsstring></argsstring>
+        <name>DEVICE_FILENAME</name>
+        <initializer>&quot;device&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="12" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-static-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a407e41a2127125cd417c1fc9a6e386d3" prot="package" static="yes" mutable="no">
+        <type>final int</type>
+        <definition>final int VIRGIN</definition>
+        <argsstring></argsstring>
+        <name>VIRGIN</name>
+        <initializer> 18</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="13" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a105e560486f3a1da9e93f217457721f3" prot="package" static="yes" mutable="no">
+        <type>final String</type>
+        <definition>final String VERSION</definition>
+        <argsstring></argsstring>
+        <name>VERSION</name>
+        <initializer>&quot;0.5.3-dev-121213-b1&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="14" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a72efe0777a0465abd0884b09c411522e" prot="package" static="yes" mutable="no">
+        <type>final String</type>
+        <definition>final String RELEASE_VERSION</definition>
+        <argsstring></argsstring>
+        <name>RELEASE_VERSION</name>
+        <initializer>&quot;1.0&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="15" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1acd97eb519a94f326404d38eecc610827" prot="package" static="yes" mutable="no">
+        <type>final String</type>
+        <definition>final String SERVER_URL</definition>
+        <argsstring></argsstring>
+        <name>SERVER_URL</name>
+        <initializer>&quot;http://sinatra-gcm.herokuapp.com/&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="18" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1aa840ce9801840253f450d1ef532a119b" prot="package" static="yes" mutable="no">
+        <type>final String</type>
+        <definition>final String SENDER_ID</definition>
+        <argsstring></argsstring>
+        <name>SENDER_ID</name>
+        <initializer>&quot;217582217558&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="21" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a844c5efdea72aa6bf76fb98b1072572a" prot="package" static="yes" mutable="no">
+        <type>final String</type>
+        <definition>final String TAG</definition>
+        <argsstring></argsstring>
+        <name>TAG</name>
+        <initializer>&quot;iCeeNee&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Tag used on log messages. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="26" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a660b2cbce60057020b6583343c22be93" prot="package" static="yes" mutable="no">
+        <type>final String</type>
+        <definition>final String DISPLAY_MESSAGE_ACTION</definition>
+        <argsstring></argsstring>
+        <name>DISPLAY_MESSAGE_ACTION</name>
+        <initializer>&quot;com.axcoto.shinjuku.sushi.DISPLAY_MESSAGE&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="29" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a52f7c94c47a3edf550c4a0ef62363432" prot="package" static="yes" mutable="no">
+        <type>final String</type>
+        <definition>final String EXTRA_MESSAGE</definition>
+        <argsstring></argsstring>
+        <name>EXTRA_MESSAGE</name>
+        <initializer>&quot;message&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="31" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-static-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a1954ce8378d13de06ad55abb4cac1d36" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void displayMessage</definition>
+        <argsstring>(Context context, String message)</argsstring>
+        <name>displayMessage</name>
+        <param>
+          <type>Context</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>String</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Notifies UI to display a message. </para><para>This method is defined in the common helper because it&apos;s used both by the UI and the background service.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>application&apos;s context. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>message to be displayed. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="42" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="42" bodyend="46"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" line="10" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/CommonUtilities.java" bodystart="10" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a8dc5249305626e68b7e27ca3164f369c" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>DEVICE_FILENAME</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a660b2cbce60057020b6583343c22be93" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>DISPLAY_MESSAGE_ACTION</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a1954ce8378d13de06ad55abb4cac1d36" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>displayMessage</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a52f7c94c47a3edf550c4a0ef62363432" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>EXTRA_MESSAGE</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1aa8ee6c89d27f7a01ecae7f8371873abd" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>REGID_FILENAME</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a72efe0777a0465abd0884b09c411522e" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>RELEASE_VERSION</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1aa840ce9801840253f450d1ef532a119b" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>SENDER_ID</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1acd97eb519a94f326404d38eecc610827" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>SERVER_URL</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a844c5efdea72aa6bf76fb98b1072572a" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>TAG</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a105e560486f3a1da9e93f217457721f3" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>VERSION</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities_1a407e41a2127125cd417c1fc9a6e386d3" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::CommonUtilities</scope><name>VIRGIN</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

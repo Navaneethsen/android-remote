@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::maki::NanoHTTPD::Response</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a4e531c185af848083db0808335a78168" prot="public" static="no" mutable="no">
+        <type>String</type>
+        <definition>String status</definition>
+        <argsstring></argsstring>
+        <name>status</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>HTTP status code after processing, e.g. &quot;200 OK&quot;, HTTP_OK </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="170" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a09c78e464072ccab667894f0d179fbdf" prot="public" static="no" mutable="no">
+        <type>String</type>
+        <definition>String mimeType</definition>
+        <argsstring></argsstring>
+        <name>mimeType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>MIME type of content, e.g. &quot;text/html&quot; </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="175" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a249c1175304a02be30d8409a6b378d24" prot="public" static="no" mutable="no">
+        <type>InputStream</type>
+        <definition>InputStream data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Data of the response, may be null. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="180" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a6e0174d9737ad5af0e26b24e5d2e16d4" prot="public" static="no" mutable="no">
+        <type>Properties</type>
+        <definition>Properties header</definition>
+        <argsstring></argsstring>
+        <name>header</name>
+        <initializer> new Properties()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Headers for the HTTP response. Use <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a64eafade5fabc6691cb1f28637943cea" kindref="member">addHeader()</ref> to add lines. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="186" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1aa622db3f1d240d8044a939ba95d1a760" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Response</definition>
+        <argsstring>()</argsstring>
+        <name>Response</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Default constructor: response = HTTP_OK, data = mime = &apos;null&apos; </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="127" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="126" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a7646c8b256df3d46b93e76782fb57649" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Response</definition>
+        <argsstring>(String status, String mimeType, InputStream data)</argsstring>
+        <name>Response</name>
+        <param>
+          <type>String</type>
+          <declname>status</declname>
+        </param>
+        <param>
+          <type>String</type>
+          <declname>mimeType</declname>
+        </param>
+        <param>
+          <type>InputStream</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Basic constructor. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="135" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="134" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a500a8dc6f30cff33436ec1b366e9a15e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Response</definition>
+        <argsstring>(String status, String mimeType, String txt)</argsstring>
+        <name>Response</name>
+        <param>
+          <type>String</type>
+          <declname>status</declname>
+        </param>
+        <param>
+          <type>String</type>
+          <declname>mimeType</declname>
+        </param>
+        <param>
+          <type>String</type>
+          <declname>txt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Convenience method that makes an InputStream out of given text. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="146" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="145" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a64eafade5fabc6691cb1f28637943cea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void addHeader</definition>
+        <argsstring>(String name, String value)</argsstring>
+        <name>addHeader</name>
+        <param>
+          <type>String</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>String</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds given line to the header. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="163" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="162" bodyend="165"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>HTTP response. Return one of these from <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1a0ef7299275c6b9aae10e13fdbe9df1da" kindref="member">serve()</ref>. </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="237">
+        <label>NanoHTTPD.Response</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response"/>
+        <childnode refid="238" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+        <childnode refid="239" relation="usage">
+          <edgelabel>header</edgelabel>
+        </childnode>
+      </node>
+      <node id="238">
+        <label>InputStream</label>
+      </node>
+      <node id="239">
+        <label>Properties</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" line="122" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/NanoHTTPD.java" bodystart="121" bodyend="187"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a64eafade5fabc6691cb1f28637943cea" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::Response</scope><name>addHeader</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a249c1175304a02be30d8409a6b378d24" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::Response</scope><name>data</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a6e0174d9737ad5af0e26b24e5d2e16d4" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::Response</scope><name>header</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a09c78e464072ccab667894f0d179fbdf" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::Response</scope><name>mimeType</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1aa622db3f1d240d8044a939ba95d1a760" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::Response</scope><name>Response</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a7646c8b256df3d46b93e76782fb57649" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::Response</scope><name>Response</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a500a8dc6f30cff33436ec1b366e9a15e" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::Response</scope><name>Response</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response_1a4e531c185af848083db0808335a78168" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::NanoHTTPD::Response</scope><name>status</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

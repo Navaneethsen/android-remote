@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="_song_book_8java" kind="file">
+    <compoundname>SongBook.java</compoundname>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book" prot="public">com::axcoto::shinjuku::maki::SongBook</innerclass>
+    <innernamespace refid="namespacecom_1_1axcoto_1_1shinjuku_1_1maki">com::axcoto::shinjuku::maki</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">package<sp/></highlight><highlight class="normal">com.axcoto.shinjuku.maki;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3" refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book" kindref="compound">SongBook</ref><sp/>{</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal"><sp/>String[]<sp/><ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book_1a950a5efe90d47b263b2c46d6d369b8ee" kindref="member">_songs</ref>;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal"><sp/>String[]<sp/><ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_book_1a5cf3a460a4bf6127af0a08b57a4747ee" kindref="member">_songAlphabet</ref>;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongBook.java"/>
+  </compounddef>
+</doxygen>

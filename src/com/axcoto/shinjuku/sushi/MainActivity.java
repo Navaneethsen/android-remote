@@ -54,7 +54,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_PRODUCTION = 3;
 
 	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
-	//final static int ENVIRONMENT = PHASE_PRODUCTION;
+	// final static int ENVIRONMENT = PHASE_PRODUCTION;
 	// final static int ENVIRONMENT = PHASE_TESTING;
 
 	public String remote;
@@ -82,11 +82,11 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		super.onCreate(savedInstanceState);		
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setTextListener();
 		gestureScanner = new GestureDetector(this);
-		
+
 		final Remote r = Remote.getInstance();
 		final EditText edt = (EditText) findViewById(R.id.cmd_keyboard);
 		int AndroidVersion = android.os.Build.VERSION.SDK_INT;
@@ -94,7 +94,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			edt.setOnKeyListener(new OnKeyListener() {
 				@Override
 				public boolean onKey(View v, int keyCode, KeyEvent event) {
-					if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+					if ((event.getAction() == KeyEvent.ACTION_DOWN)
+							&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
 						InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 						if (im.isAcceptingText()) {
 							im.hideSoftInputFromWindow(edt.getWindowToken(), 0);
@@ -115,10 +116,10 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			});
 		}
 	}
-	
+
 	protected boolean isOnline() {
 		cd = new ConnectionDetector(getApplicationContext());
-		return cd.isConnectingToInternet();		
+		return cd.isConnectingToInternet();
 	}
 
 	protected void onPostCreate(Bundle savedInstanceState) {
@@ -128,11 +129,11 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			this.gcmHandle();
 		} else {
 			alert.showAlertDialog(MainActivity.this,
-						"Internet Connection Error",
-						"Please connect to working Internet connection", false);
-				
+					"Internet Connection Error",
+					"Please connect to working Internet connection", false);
+
 		}
-		
+
 	}
 
 	/**
@@ -156,7 +157,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			MyHttpServer ht = MyHttpServer.getInstance(PORT, homeDir);
 			File file = this.getFileStreamPath("file-upload.html");
 			if (file.exists()) {
-				Log.i("MAKI: SERVER", "initialize app before so we don't need to copy the file for web server");
+				Log.i("MAKI: SERVER",
+						"initialize app before so we don't need to copy the file for web server");
 			} else {
 				this.copyAssets();
 			}
@@ -174,15 +176,16 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	private void gcmHandle() {
 		GCMRegistrar.checkDevice(this);
 		GCMRegistrar.checkManifest(this);
-		
+
 		final String regId = GCMRegistrar.getRegistrationId(this);
 		Log.i("Device ID: ", regId);
-		
-		//GCMRegistrar.unregister(getApplicationContext());
-				
-		File f = new File(this.getFilesDir(), com.axcoto.shinjuku.sushi.CommonUtilities.REGID_FILENAME);
+
+		// GCMRegistrar.unregister(getApplicationContext());
+
+		File f = new File(this.getFilesDir(),
+				com.axcoto.shinjuku.sushi.CommonUtilities.REGID_FILENAME);
 		if (f.exists()) {
-			//We don't need to register the device
+			// We don't need to register the device
 			return;
 		}
 		// Check if regid already presents
@@ -231,7 +234,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		}
 
 		for (String filename : files) {
-			if ("images".equals(filename) || "sounds".equals(filename) || "webkit".equals(filename)) {
+			if ("images".equals(filename) || "sounds".equals(filename)
+					|| "webkit".equals(filename)) {
 				continue;
 			}
 			InputStream in = null;
@@ -338,28 +342,29 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			}
 		} else if (key.equals("power")) {
 			new AlertDialog.Builder(this)
-	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle("Are you sure to turn off the player?")
-	        .setMessage("You will be no longer able to turn on with this app. You must use an physical remote to turn on it")
-	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-		    {
-		        @Override
-		        public void onClick(DialogInterface dialog, int which) {
-		        	Log.i("SUSHI:: REMOTE", "THE KEY THAT IS PRESSED ON UI IS: power");
-		    		Remote r = Remote.getInstance();
-		    		try {
-		    			r.execute("power");
-		    		} catch (Exception e) {
-		    			Log.e("SUSHI:: MAIN:: ", e.getMessage());
-		    		}
-		    		r.disConnect(); 
-		        }
-	
-		    })
-		    .setNegativeButton("No", null)
-		    .show();
-			
-		}else {
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setTitle("Are you sure to turn off the player?")
+					.setMessage(
+							"You will be no longer able to turn on with this app. You must use an physical remote to turn on it")
+					.setPositiveButton("Yes",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									Log.i("SUSHI:: REMOTE",
+											"THE KEY THAT IS PRESSED ON UI IS: power");
+									Remote r = Remote.getInstance();
+									try {
+										r.execute("power");
+									} catch (Exception e) {
+										Log.e("SUSHI:: MAIN:: ", e.getMessage());
+									}
+									r.disConnect();
+								}
+
+							}).setNegativeButton("No", null).show();
+
+		} else {
 			// Toast toast =
 			// Toast.makeText(getApplicationContext(),b.getKeyName(),
 			// Toast.LENGTH_SHORT);

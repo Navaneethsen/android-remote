@@ -1,0 +1,252 @@
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity}{\section{\-Device\-Activity \-Class \-Reference}
+\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity}\index{\-Device\-Activity@{\-Device\-Activity}}
+}
+
+
+\-Inheritance diagram for \-Device\-Activity\-:
+
+
+\-Collaboration diagram for \-Device\-Activity\-:
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries \-Progress\-Thread}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a6992969459b5fc776a9d595a5aa7e7e6}{on\-Save\-Instance\-State} (\-Bundle saved\-Instance\-State)
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a3fd108ef7b3bf7c29e53e6c4984d5f84}{on\-Restore\-Instance\-State} (\-Bundle saved\-Instance\-State)
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a474cd371b3913797ee9439ebc567c219}{save\-Device\-List} ()
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a85e87cb5ced88dff7c8173ecc4f636d1}{on\-Create} (\-Bundle saved\-Instance\-State)
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_aedac3a1961a15d78dbf608505a6c0e11}{scan\-Device} (\-View view)
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a5f2e190b8261a98c97c2ea4e86670d54}{refresh} ()
+\item 
+boolean \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a316e2162aee3b81438c6f324cadbfd4e}{on\-Touch\-Event} (\-Motion\-Event me)
+\item 
+boolean \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_afe7febda1f2210be8658c06fce770e1c}{on\-Down} (\-Motion\-Event e)
+\item 
+boolean \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_ae44fb084c2495a486a664f60ae319b8c}{on\-Fling} (\-Motion\-Event e1, \-Motion\-Event e2, float velocity\-X, float velocity\-Y)
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_ac12f39cb7fd9003b2aa5ddf76f2e93fe}{on\-Long\-Press} (\-Motion\-Event e)
+\item 
+boolean \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_af912304fa5a847e1231b71015c2ed06a}{on\-Scroll} (\-Motion\-Event e1, \-Motion\-Event e2, float distance\-X, float distance\-Y)
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a929cec72582aad79985fd2927344b9c7}{on\-Show\-Press} (\-Motion\-Event e)
+\item 
+boolean \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a05333c5dbd12d347d100d8cb029e4530}{on\-Single\-Tap\-Up} (\-Motion\-Event e)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final \-String \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a8dc5249305626e68b7e27ca3164f369c}{\-D\-E\-V\-I\-C\-E\-\_\-\-F\-I\-L\-E\-N\-A\-M\-E} = \char`\"{}device\char`\"{}
+\item 
+final int \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a5e97f8925a2febf6eb35d1b2217622f3}{\-A\-C\-T\-I\-O\-N\-\_\-\-C\-O\-N\-N\-E\-C\-T} = 1
+\item 
+final int \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a36511138d97f58bd9eea490d883425eb}{\-A\-C\-T\-I\-O\-N\-\_\-\-D\-I\-S\-C\-O\-N\-N\-E\-C\-T} = 2
+\item 
+\-Array\-List$<$ \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_device_item}{\-Device\-Item} $>$ \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a3bc44a016145802ad56376304ad754c3}{devices}
+\item 
+\-Array\-List$<$ \-String $>$ \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a0f4b2ab01bd93f8f14fc3370c044bca1}{device\-Ip}
+\item 
+\-Progress\-Dialog \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a1d5efa5914b65e5097867ea92779c501}{progress\-Dialog}
+\item 
+\-Progress\-Thread \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a36d87d10b183916cb328fc0604ecd22c}{progress\-Thread}
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\-Dialog \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a3c6dd4273e9b563fbffdd8bad1cc6cf2}{on\-Create\-Dialog} (int id)
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_ab7a28022e93c8600afe1878d779a1157}{on\-Prepare\-Dialog} (int id, \-Dialog dialog)
+\end{DoxyCompactItemize}
+\subsection*{\-Package \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Async\-Task$<$ \-Integer, \-Void, \-Void $>$ \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a0abadf85d0f7d5dd87312581a62d45ca}{m\-Connect\-Task}
+\item 
+\hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote}{\-Remote} \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a0e73f743b74362a313af6f4bc6057b9c}{r}
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Package \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final int \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a677c859dfacb01cdb0b5c4866505729a}{\-P\-R\-O\-G\-R\-E\-S\-S\-\_\-\-D\-I\-A\-L\-O\-G} = 0
+\item 
+static int \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a61f5f7bc06ebd608448533adcc79459b}{ip\-Scan\-From} = 2
+\item 
+static int \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a2130e0832d315259bf3e07d7e4e3af5c}{ip\-Scan\-To} = 253
+\item 
+static int \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a719a84da11fb1de67b04772b06684513}{ip\-Timeout\-Ping} = 400
+\item 
+static \-String \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a59a64a7255aa5deb40208cc228772dc6}{ip\-Mask\-Add} = \char`\"{}\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a85e87cb5ced88dff7c8173ecc4f636d1}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Create@{on\-Create}}
+\index{on\-Create@{on\-Create}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Create}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf on\-Create} (
+\begin{DoxyParamCaption}
+\item[{\-Bundle}]{saved\-Instance\-State}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a85e87cb5ced88dff7c8173ecc4f636d1}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a3c6dd4273e9b563fbffdd8bad1cc6cf2}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Create\-Dialog@{on\-Create\-Dialog}}
+\index{on\-Create\-Dialog@{on\-Create\-Dialog}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Create\-Dialog}]{\setlength{\rightskip}{0pt plus 5cm}\-Dialog {\bf on\-Create\-Dialog} (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a3c6dd4273e9b563fbffdd8bad1cc6cf2}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_afe7febda1f2210be8658c06fce770e1c}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Down@{on\-Down}}
+\index{on\-Down@{on\-Down}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Down}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf on\-Down} (
+\begin{DoxyParamCaption}
+\item[{\-Motion\-Event}]{e}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_afe7febda1f2210be8658c06fce770e1c}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_ae44fb084c2495a486a664f60ae319b8c}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Fling@{on\-Fling}}
+\index{on\-Fling@{on\-Fling}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Fling}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf on\-Fling} (
+\begin{DoxyParamCaption}
+\item[{\-Motion\-Event}]{e1, }
+\item[{\-Motion\-Event}]{e2, }
+\item[{float}]{velocity\-X, }
+\item[{float}]{velocity\-Y}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_ae44fb084c2495a486a664f60ae319b8c}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_ac12f39cb7fd9003b2aa5ddf76f2e93fe}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Long\-Press@{on\-Long\-Press}}
+\index{on\-Long\-Press@{on\-Long\-Press}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Long\-Press}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf on\-Long\-Press} (
+\begin{DoxyParamCaption}
+\item[{\-Motion\-Event}]{e}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_ac12f39cb7fd9003b2aa5ddf76f2e93fe}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_ab7a28022e93c8600afe1878d779a1157}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Prepare\-Dialog@{on\-Prepare\-Dialog}}
+\index{on\-Prepare\-Dialog@{on\-Prepare\-Dialog}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Prepare\-Dialog}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf on\-Prepare\-Dialog} (
+\begin{DoxyParamCaption}
+\item[{int}]{id, }
+\item[{\-Dialog}]{dialog}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_ab7a28022e93c8600afe1878d779a1157}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a3fd108ef7b3bf7c29e53e6c4984d5f84}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Restore\-Instance\-State@{on\-Restore\-Instance\-State}}
+\index{on\-Restore\-Instance\-State@{on\-Restore\-Instance\-State}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Restore\-Instance\-State}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf on\-Restore\-Instance\-State} (
+\begin{DoxyParamCaption}
+\item[{\-Bundle}]{saved\-Instance\-State}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a3fd108ef7b3bf7c29e53e6c4984d5f84}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a6992969459b5fc776a9d595a5aa7e7e6}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Save\-Instance\-State@{on\-Save\-Instance\-State}}
+\index{on\-Save\-Instance\-State@{on\-Save\-Instance\-State}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Save\-Instance\-State}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf on\-Save\-Instance\-State} (
+\begin{DoxyParamCaption}
+\item[{\-Bundle}]{saved\-Instance\-State}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a6992969459b5fc776a9d595a5aa7e7e6}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_af912304fa5a847e1231b71015c2ed06a}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Scroll@{on\-Scroll}}
+\index{on\-Scroll@{on\-Scroll}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Scroll}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf on\-Scroll} (
+\begin{DoxyParamCaption}
+\item[{\-Motion\-Event}]{e1, }
+\item[{\-Motion\-Event}]{e2, }
+\item[{float}]{distance\-X, }
+\item[{float}]{distance\-Y}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_af912304fa5a847e1231b71015c2ed06a}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a929cec72582aad79985fd2927344b9c7}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Show\-Press@{on\-Show\-Press}}
+\index{on\-Show\-Press@{on\-Show\-Press}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Show\-Press}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf on\-Show\-Press} (
+\begin{DoxyParamCaption}
+\item[{\-Motion\-Event}]{e}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a929cec72582aad79985fd2927344b9c7}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a05333c5dbd12d347d100d8cb029e4530}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Single\-Tap\-Up@{on\-Single\-Tap\-Up}}
+\index{on\-Single\-Tap\-Up@{on\-Single\-Tap\-Up}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Single\-Tap\-Up}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf on\-Single\-Tap\-Up} (
+\begin{DoxyParamCaption}
+\item[{\-Motion\-Event}]{e}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a05333c5dbd12d347d100d8cb029e4530}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a316e2162aee3b81438c6f324cadbfd4e}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!on\-Touch\-Event@{on\-Touch\-Event}}
+\index{on\-Touch\-Event@{on\-Touch\-Event}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{on\-Touch\-Event}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf on\-Touch\-Event} (
+\begin{DoxyParamCaption}
+\item[{\-Motion\-Event}]{me}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a316e2162aee3b81438c6f324cadbfd4e}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a5f2e190b8261a98c97c2ea4e86670d54}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!refresh@{refresh}}
+\index{refresh@{refresh}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{refresh}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf refresh} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a5f2e190b8261a98c97c2ea4e86670d54}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a474cd371b3913797ee9439ebc567c219}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!save\-Device\-List@{save\-Device\-List}}
+\index{save\-Device\-List@{save\-Device\-List}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{save\-Device\-List}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf save\-Device\-List} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a474cd371b3913797ee9439ebc567c219}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_aedac3a1961a15d78dbf608505a6c0e11}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!scan\-Device@{scan\-Device}}
+\index{scan\-Device@{scan\-Device}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{scan\-Device}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf scan\-Device} (
+\begin{DoxyParamCaption}
+\item[{\-View}]{view}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_aedac3a1961a15d78dbf608505a6c0e11}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a5e97f8925a2febf6eb35d1b2217622f3}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!\-A\-C\-T\-I\-O\-N\-\_\-\-C\-O\-N\-N\-E\-C\-T@{\-A\-C\-T\-I\-O\-N\-\_\-\-C\-O\-N\-N\-E\-C\-T}}
+\index{\-A\-C\-T\-I\-O\-N\-\_\-\-C\-O\-N\-N\-E\-C\-T@{\-A\-C\-T\-I\-O\-N\-\_\-\-C\-O\-N\-N\-E\-C\-T}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{\-A\-C\-T\-I\-O\-N\-\_\-\-C\-O\-N\-N\-E\-C\-T}]{\setlength{\rightskip}{0pt plus 5cm}final int {\bf \-A\-C\-T\-I\-O\-N\-\_\-\-C\-O\-N\-N\-E\-C\-T} = 1}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a5e97f8925a2febf6eb35d1b2217622f3}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a36511138d97f58bd9eea490d883425eb}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!\-A\-C\-T\-I\-O\-N\-\_\-\-D\-I\-S\-C\-O\-N\-N\-E\-C\-T@{\-A\-C\-T\-I\-O\-N\-\_\-\-D\-I\-S\-C\-O\-N\-N\-E\-C\-T}}
+\index{\-A\-C\-T\-I\-O\-N\-\_\-\-D\-I\-S\-C\-O\-N\-N\-E\-C\-T@{\-A\-C\-T\-I\-O\-N\-\_\-\-D\-I\-S\-C\-O\-N\-N\-E\-C\-T}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{\-A\-C\-T\-I\-O\-N\-\_\-\-D\-I\-S\-C\-O\-N\-N\-E\-C\-T}]{\setlength{\rightskip}{0pt plus 5cm}final int {\bf \-A\-C\-T\-I\-O\-N\-\_\-\-D\-I\-S\-C\-O\-N\-N\-E\-C\-T} = 2}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a36511138d97f58bd9eea490d883425eb}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a8dc5249305626e68b7e27ca3164f369c}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!\-D\-E\-V\-I\-C\-E\-\_\-\-F\-I\-L\-E\-N\-A\-M\-E@{\-D\-E\-V\-I\-C\-E\-\_\-\-F\-I\-L\-E\-N\-A\-M\-E}}
+\index{\-D\-E\-V\-I\-C\-E\-\_\-\-F\-I\-L\-E\-N\-A\-M\-E@{\-D\-E\-V\-I\-C\-E\-\_\-\-F\-I\-L\-E\-N\-A\-M\-E}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{\-D\-E\-V\-I\-C\-E\-\_\-\-F\-I\-L\-E\-N\-A\-M\-E}]{\setlength{\rightskip}{0pt plus 5cm}final \-String {\bf \-D\-E\-V\-I\-C\-E\-\_\-\-F\-I\-L\-E\-N\-A\-M\-E} = \char`\"{}device\char`\"{}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a8dc5249305626e68b7e27ca3164f369c}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a0f4b2ab01bd93f8f14fc3370c044bca1}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!device\-Ip@{device\-Ip}}
+\index{device\-Ip@{device\-Ip}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{device\-Ip}]{\setlength{\rightskip}{0pt plus 5cm}\-Array\-List$<$\-String$>$ {\bf device\-Ip}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a0f4b2ab01bd93f8f14fc3370c044bca1}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a3bc44a016145802ad56376304ad754c3}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!devices@{devices}}
+\index{devices@{devices}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{devices}]{\setlength{\rightskip}{0pt plus 5cm}\-Array\-List$<${\bf \-Device\-Item}$>$ {\bf devices}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a3bc44a016145802ad56376304ad754c3}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a59a64a7255aa5deb40208cc228772dc6}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!ip\-Mask\-Add@{ip\-Mask\-Add}}
+\index{ip\-Mask\-Add@{ip\-Mask\-Add}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{ip\-Mask\-Add}]{\setlength{\rightskip}{0pt plus 5cm}\-String {\bf ip\-Mask\-Add} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}static, package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a59a64a7255aa5deb40208cc228772dc6}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a61f5f7bc06ebd608448533adcc79459b}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!ip\-Scan\-From@{ip\-Scan\-From}}
+\index{ip\-Scan\-From@{ip\-Scan\-From}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{ip\-Scan\-From}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ip\-Scan\-From} = 2\hspace{0.3cm}{\ttfamily  \mbox{[}static, package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a61f5f7bc06ebd608448533adcc79459b}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a2130e0832d315259bf3e07d7e4e3af5c}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!ip\-Scan\-To@{ip\-Scan\-To}}
+\index{ip\-Scan\-To@{ip\-Scan\-To}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{ip\-Scan\-To}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ip\-Scan\-To} = 253\hspace{0.3cm}{\ttfamily  \mbox{[}static, package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a2130e0832d315259bf3e07d7e4e3af5c}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a719a84da11fb1de67b04772b06684513}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!ip\-Timeout\-Ping@{ip\-Timeout\-Ping}}
+\index{ip\-Timeout\-Ping@{ip\-Timeout\-Ping}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{ip\-Timeout\-Ping}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ip\-Timeout\-Ping} = 400\hspace{0.3cm}{\ttfamily  \mbox{[}static, package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a719a84da11fb1de67b04772b06684513}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a0abadf85d0f7d5dd87312581a62d45ca}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!m\-Connect\-Task@{m\-Connect\-Task}}
+\index{m\-Connect\-Task@{m\-Connect\-Task}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{m\-Connect\-Task}]{\setlength{\rightskip}{0pt plus 5cm}\-Async\-Task$<$\-Integer, \-Void, \-Void$>$ {\bf m\-Connect\-Task}\hspace{0.3cm}{\ttfamily  \mbox{[}package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a0abadf85d0f7d5dd87312581a62d45ca}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a677c859dfacb01cdb0b5c4866505729a}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!\-P\-R\-O\-G\-R\-E\-S\-S\-\_\-\-D\-I\-A\-L\-O\-G@{\-P\-R\-O\-G\-R\-E\-S\-S\-\_\-\-D\-I\-A\-L\-O\-G}}
+\index{\-P\-R\-O\-G\-R\-E\-S\-S\-\_\-\-D\-I\-A\-L\-O\-G@{\-P\-R\-O\-G\-R\-E\-S\-S\-\_\-\-D\-I\-A\-L\-O\-G}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{\-P\-R\-O\-G\-R\-E\-S\-S\-\_\-\-D\-I\-A\-L\-O\-G}]{\setlength{\rightskip}{0pt plus 5cm}final int {\bf \-P\-R\-O\-G\-R\-E\-S\-S\-\_\-\-D\-I\-A\-L\-O\-G} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}static, package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a677c859dfacb01cdb0b5c4866505729a}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a1d5efa5914b65e5097867ea92779c501}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!progress\-Dialog@{progress\-Dialog}}
+\index{progress\-Dialog@{progress\-Dialog}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{progress\-Dialog}]{\setlength{\rightskip}{0pt plus 5cm}\-Progress\-Dialog {\bf progress\-Dialog}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a1d5efa5914b65e5097867ea92779c501}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a36d87d10b183916cb328fc0604ecd22c}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!progress\-Thread@{progress\-Thread}}
+\index{progress\-Thread@{progress\-Thread}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{progress\-Thread}]{\setlength{\rightskip}{0pt plus 5cm}\-Progress\-Thread {\bf progress\-Thread}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a36d87d10b183916cb328fc0604ecd22c}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a0e73f743b74362a313af6f4bc6057b9c}{\index{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}!r@{r}}
+\index{r@{r}!com::axcoto::shinjuku::sushi::DeviceActivity@{com\-::axcoto\-::shinjuku\-::sushi\-::\-Device\-Activity}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Remote} {\bf r}\hspace{0.3cm}{\ttfamily  \mbox{[}package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity_a0e73f743b74362a313af6f4bc6057b9c}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/com/axcoto/shinjuku/sushi/\hyperlink{_device_activity_8java}{\-Device\-Activity.\-java}\end{DoxyCompactItemize}

@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['sender_5fid',['SENDER_ID',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities.html#aa840ce9801840253f450d1ef532a119b',1,'com::axcoto::shinjuku::sushi::CommonUtilities']]],
+  ['server_5fport',['SERVER_PORT',['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_my_http_server.html#a68f9973d11588790c24066bae3a3cb87',1,'com::axcoto::shinjuku::maki::MyHttpServer']]],
+  ['server_5furl',['SERVER_URL',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities.html#acd97eb519a94f326404d38eecc610827',1,'com::axcoto::shinjuku::sushi::CommonUtilities']]],
+  ['socket_5ftimeout',['SOCKET_TIMEOUT',['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote.html#ac33d0d5b79125bd418f08fea3d829c4c',1,'com::axcoto::shinjuku::maki::Remote']]],
+  ['song',['song',['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_x_m_l_parser.html#a7c60888e9337b09158412f1dbeb289ce',1,'com::axcoto::shinjuku::maki::XMLParser']]],
+  ['songid',['songId',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#a46dd2375b54b76b1942d6917fd0b01d1',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['songs',['songs',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#a2bc7138b54f5cc324ab4484a1b5a93a3',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['songtitle',['songTitle',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#abb3e113934ebcb4090cec7c75a299f76',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['status',['status',['../classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_nano_h_t_t_p_d_1_1_response.html#a4e531c185af848083db0808335a78168',1,'com::axcoto::shinjuku::maki::NanoHTTPD::Response']]],
+  ['sync_5fdone',['SYNC_DONE',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#a5e6dcaf1d008eced644b33fe29d03657',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['sync_5fdraw_5fui',['SYNC_DRAW_UI',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#a5b1c352e946a1ae9c3818b73ce406e67',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['sync_5ferror',['SYNC_ERROR',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#a96bf274be6c21e4c855caf513e133426',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['sync_5finitialize_5fdb',['SYNC_INITIALIZE_DB',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#a92406fdebd7cef4a4e027efed690fc70',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['sync_5fprocess_5fsongbook',['SYNC_PROCESS_SONGBOOK',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#a7f89a4f96cbb266d97ac9165b2baea03',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['sync_5freceive_5fsongbook',['SYNC_RECEIVE_SONGBOOK',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#a2b130714fb3ca4d760857e63644ae40f',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['sync_5ftimemout',['SYNC_TIMEMOUT',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#ae7a1c41bd61e64a70df3f481b5106160',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['sync_5ftotal_5fphase',['SYNC_TOTAL_PHASE',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#aba0067d5d9c1dc96d37562ff1886677a',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['sync_5fwait_5fupload',['SYNC_WAIT_UPLOAD',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#a6b8cab47f0a4808112b3adaa0105ab81',1,'com::axcoto::shinjuku::sushi::SongActivity']]],
+  ['syncstatus',['syncStatus',['../classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity.html#a9cc4d49086de820c00b3ce396cbb42b3',1,'com::axcoto::shinjuku::sushi::SongActivity']]]
+];

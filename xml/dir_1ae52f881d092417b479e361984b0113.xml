@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="dir_1ae52f881d092417b479e361984b0113" kind="dir">
+    <compoundname>src/com/axcoto/shinjuku/sushi/</compoundname>
+    <innerfile refid="_alert_dialog_manager_8java">AlertDialogManager.java</innerfile>
+    <innerfile refid="_common_utilities_8java">CommonUtilities.java</innerfile>
+    <innerfile refid="_config_activity_8java">ConfigActivity.java</innerfile>
+    <innerfile refid="_connection_detector_8java">ConnectionDetector.java</innerfile>
+    <innerfile refid="_device_activity_8java">DeviceActivity.java</innerfile>
+    <innerfile refid="_g_c_m_intent_service_8java">GCMIntentService.java</innerfile>
+    <innerfile refid="_main_activity_8java">MainActivity.java</innerfile>
+    <innerfile refid="_my_app_8java">MyApp.java</innerfile>
+    <innerfile refid="_remote_key_button_8java">RemoteKeyButton.java</innerfile>
+    <innerfile refid="_root_activity_8java">RootActivity.java</innerfile>
+    <innerfile refid="_server_utilities_8java">ServerUtilities.java</innerfile>
+    <innerfile refid="_song_activity_8java">SongActivity.java</innerfile>
+    <innerfile refid="_user_email_fetcher_8java">UserEmailFetcher.java</innerfile>
+    <innerfile refid="_wake_locker_8java">WakeLocker.java</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/"/>
+  </compounddef>
+</doxygen>

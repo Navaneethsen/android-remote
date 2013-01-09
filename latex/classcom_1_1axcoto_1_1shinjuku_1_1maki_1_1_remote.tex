@@ -1,0 +1,272 @@
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote}{\section{\-Remote \-Class \-Reference}
+\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote}\index{\-Remote@{\-Remote}}
+}
+
+
+\-Collaboration diagram for \-Remote\-:
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a788955b106b4417456ce5228a699c2ca}{\-Remote} ()
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a1d6ee937b4c42ba06093c71a06adac7b}{execute} (\-String command)  throws I\-O\-Exception, Exception 
+\item 
+boolean \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a3d98022421bd577091e44ae493f879f4}{dis\-Connect} ()
+\item 
+\-Socket \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab14cd875029df52c2b797ba52b7b6c96}{connect} (\-String ip)  throws I\-O\-Exception, Exception 
+\item 
+\-Socket \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab2c6f4020b1e02762c63da1e54ec0492}{get\-Connection} ()
+\item 
+boolean \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ac626bca838000f09bc3565bcc12c07ac}{get\-Connected} ()
+\item 
+boolean \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a72560515167edd869e2d4c3e88a49ae1}{test\-Connection} (\-String i)  throws I\-O\-Exception
+\item 
+\-String \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a7f6ad1fbb8ddfbceb2416ca94574252a}{get\-Ip} ()
+\item 
+void \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a5ae591df94fc66ccb85cbb6565368bca}{close} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote}{\-Remote} \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab114be717412af726ae58f4f27feb3a1}{get\-Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Map$<$ \-String, \-String $>$ \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a6bfdec8a6e2398841ac2cdf6bca33010}{remote\-Key\-Code}
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final int \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a68ddf0d3e72cbbd6d1d82820cefac66f}{\-T\-C\-P\-\_\-\-P\-O\-R\-T} = 30000
+\item 
+static final int \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ac33d0d5b79125bd418f08fea3d829c4c}{\-S\-O\-C\-K\-E\-T\-\_\-\-T\-I\-M\-E\-O\-U\-T} = 7000
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote}{\-Remote} \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_adff3b1d9933e14d47d585ef91fbc26e7}{instance} = null
+\end{DoxyCompactItemize}
+\subsection*{\-Package \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Socket \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a89b498bf5817107590128ae3f3ef4668}{client\-Socket} = null
+\item 
+\-Data\-Output\-Stream \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a3e972d8dc81bb4d869614171b1329830}{out\-To\-Server} = null
+\item 
+\-Data\-Input\-Stream \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_af084643f1009ee5f8c970061f174966e}{in\-To\-Server} = null
+\item 
+\-Print\-Writer \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ac461ef142760f9de73b1a3a5a8a181d9}{printer}
+\item 
+final \-String\mbox{[}$\,$\mbox{]} \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a3493cd3fb8ea7c4bcae194d3e709efba}{\-K\-E\-Y\-N\-A\-M\-E}
+\item 
+final \-String\mbox{[}$\,$\mbox{]} \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab3ed5199860ba7e4f225ff393e0c2423}{\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-O\-R\-C\-H\-I\-D}
+\item 
+final \-String\mbox{[}$\,$\mbox{]} \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a9e3bf0dbe114364f66a1f462eff6ae18}{\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-G\-E\-N\-E\-S\-I\-S}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote}{\-Remote} class. \-A virtual mapping between the android remote key and the corresponding physical key 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a788955b106b4417456ce5228a699c2ca}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!\-Remote@{\-Remote}}
+\index{\-Remote@{\-Remote}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{\-Remote}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Remote} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a788955b106b4417456ce5228a699c2ca}
+\-Constructor 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a5ae591df94fc66ccb85cbb6565368bca}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!close@{close}}
+\index{close@{close}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf close} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a5ae591df94fc66ccb85cbb6565368bca}
+\-Set socket connection status to false \hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab14cd875029df52c2b797ba52b7b6c96}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!connect@{connect}}
+\index{connect@{connect}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{connect}]{\setlength{\rightskip}{0pt plus 5cm}\-Socket {\bf connect} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{ip}
+\end{DoxyParamCaption}
+)  throws \-I\-O\-Exception, \-Exception }}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab14cd875029df52c2b797ba52b7b6c96}
+\-Connect to the specified ip address 
+\begin{DoxyParams}{\-Parameters}
+{\em ip} & the specified ip address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+client\-Socket -\/ name of the socket in connection 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{\-Exceptions}
+{\em \-I\-O\-Exception} & \\
+\hline
+{\em \-Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a3d98022421bd577091e44ae493f879f4}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!dis\-Connect@{dis\-Connect}}
+\index{dis\-Connect@{dis\-Connect}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{dis\-Connect}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf dis\-Connect} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a3d98022421bd577091e44ae493f879f4}
+\-Close socket connection -\/ \-Disconnect \hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a1d6ee937b4c42ba06093c71a06adac7b}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!execute@{execute}}
+\index{execute@{execute}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf execute} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{command}
+\end{DoxyParamCaption}
+)  throws \-I\-O\-Exception, \-Exception }}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a1d6ee937b4c42ba06093c71a06adac7b}
+\-Pressing the key 
+\begin{DoxyParams}{\-Parameters}
+{\em command} & -\/ the name of the key \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{\-Exceptions}
+{\em \-I\-O\-Exception} & \\
+\hline
+{\em \-Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ac626bca838000f09bc3565bcc12c07ac}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!get\-Connected@{get\-Connected}}
+\index{get\-Connected@{get\-Connected}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{get\-Connected}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf get\-Connected} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ac626bca838000f09bc3565bcc12c07ac}
+\-Check the socket status \begin{DoxyReturn}{\-Returns}
+connected -\/ the current state of the socket (true/false) 
+\end{DoxyReturn}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab2c6f4020b1e02762c63da1e54ec0492}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!get\-Connection@{get\-Connection}}
+\index{get\-Connection@{get\-Connection}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{get\-Connection}]{\setlength{\rightskip}{0pt plus 5cm}\-Socket {\bf get\-Connection} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab2c6f4020b1e02762c63da1e54ec0492}
+\-Get the connected socket \begin{DoxyReturn}{\-Returns}
+client\-Socket the connected socket 
+\end{DoxyReturn}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab114be717412af726ae58f4f27feb3a1}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!get\-Instance@{get\-Instance}}
+\index{get\-Instance@{get\-Instance}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf \-Remote} {\bf get\-Instance} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab114be717412af726ae58f4f27feb3a1}
+\-Access to the remote at that instance \begin{DoxyReturn}{\-Returns}
+instance of the remote 
+\end{DoxyReturn}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a7f6ad1fbb8ddfbceb2416ca94574252a}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!get\-Ip@{get\-Ip}}
+\index{get\-Ip@{get\-Ip}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{get\-Ip}]{\setlength{\rightskip}{0pt plus 5cm}\-String {\bf get\-Ip} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a7f6ad1fbb8ddfbceb2416ca94574252a}
+\-Return the host ip being remembered by the \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote}{\-Remote} \begin{DoxyReturn}{\-Returns}
+host ip of the device 
+\end{DoxyReturn}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a72560515167edd869e2d4c3e88a49ae1}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!test\-Connection@{test\-Connection}}
+\index{test\-Connection@{test\-Connection}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{test\-Connection}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf test\-Connection} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{i}
+\end{DoxyParamCaption}
+)  throws \-I\-O\-Exception}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a72560515167edd869e2d4c3e88a49ae1}
+\-Test the connection status from the android device to the specified ip 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & the ip to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if the ip is still pingable false if the ip's ping time out 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{\-Exceptions}
+{\em \-I\-O\-Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a89b498bf5817107590128ae3f3ef4668}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!client\-Socket@{client\-Socket}}
+\index{client\-Socket@{client\-Socket}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{client\-Socket}]{\setlength{\rightskip}{0pt plus 5cm}\-Socket {\bf client\-Socket} = null\hspace{0.3cm}{\ttfamily  \mbox{[}package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a89b498bf5817107590128ae3f3ef4668}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_adff3b1d9933e14d47d585ef91fbc26e7}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!instance@{instance}}
+\index{instance@{instance}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Remote} {\bf instance} = null\hspace{0.3cm}{\ttfamily  \mbox{[}static, protected\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_adff3b1d9933e14d47d585ef91fbc26e7}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_af084643f1009ee5f8c970061f174966e}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!in\-To\-Server@{in\-To\-Server}}
+\index{in\-To\-Server@{in\-To\-Server}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{in\-To\-Server}]{\setlength{\rightskip}{0pt plus 5cm}\-Data\-Input\-Stream {\bf in\-To\-Server} = null\hspace{0.3cm}{\ttfamily  \mbox{[}package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_af084643f1009ee5f8c970061f174966e}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a9e3bf0dbe114364f66a1f462eff6ae18}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-G\-E\-N\-E\-S\-I\-S@{\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-G\-E\-N\-E\-S\-I\-S}}
+\index{\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-G\-E\-N\-E\-S\-I\-S@{\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-G\-E\-N\-E\-S\-I\-S}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-G\-E\-N\-E\-S\-I\-S}]{\setlength{\rightskip}{0pt plus 5cm}final \-String \mbox{[}$\,$\mbox{]} {\bf \-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-G\-E\-N\-E\-S\-I\-S}\hspace{0.3cm}{\ttfamily  \mbox{[}package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a9e3bf0dbe114364f66a1f462eff6ae18}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab3ed5199860ba7e4f225ff393e0c2423}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-O\-R\-C\-H\-I\-D@{\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-O\-R\-C\-H\-I\-D}}
+\index{\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-O\-R\-C\-H\-I\-D@{\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-O\-R\-C\-H\-I\-D}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-O\-R\-C\-H\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}final \-String \mbox{[}$\,$\mbox{]} {\bf \-K\-E\-Y\-\_\-\-C\-O\-D\-E\-\_\-\-O\-R\-C\-H\-I\-D}\hspace{0.3cm}{\ttfamily  \mbox{[}package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ab3ed5199860ba7e4f225ff393e0c2423}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a3493cd3fb8ea7c4bcae194d3e709efba}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!\-K\-E\-Y\-N\-A\-M\-E@{\-K\-E\-Y\-N\-A\-M\-E}}
+\index{\-K\-E\-Y\-N\-A\-M\-E@{\-K\-E\-Y\-N\-A\-M\-E}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{\-K\-E\-Y\-N\-A\-M\-E}]{\setlength{\rightskip}{0pt plus 5cm}final \-String \mbox{[}$\,$\mbox{]} {\bf \-K\-E\-Y\-N\-A\-M\-E}\hspace{0.3cm}{\ttfamily  \mbox{[}package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a3493cd3fb8ea7c4bcae194d3e709efba}
+{\bfseries \-Initial value\-:}
+\begin{DoxyCode}
+ {" ",
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", 
+            
+            "~",  "!", "", "#", "$", 
+            "%",  "^", "&", "*", "(", 
+            ")",  "-", "_", "+", "=", 
+            "[",  "]", "{", "}", "|", 
+            "\\", ":", ";", "\"", "\'", 
+            "<",  ",", ">", ".", "?", 
+            "/",  "`",
+            
+            "a", "b", "c", "d", "e", 
+            "f", "g", "h", "i", "j", 
+            "k", "l", "m", "n", "o", 
+            "p", "q", "r", "s", "t", 
+            "u", "v", "w", "x", "y", "z", 
+            
+            "power",  "setup",   "eject",  "tvmode",  "mute", 
+            "delete", "cap_num", "return",  "source", 
+            "up",    "left",    "enter",  "down",   "right", 
+            "info",   "home",   "menu",
+            
+            "prev",  "play",  "next",   "title",    "rewind", "stop",     "
+      forward", "repeat",
+            "angle", "pause", "slow",   "timeseek",  "audio",  "subtitle", "
+      zoom",
+            "red",   "green", "yellow", "blue",
+            
+            "volup", "voldown",
+            
+            "sync_hd", "sync_mp3"}
+\end{DoxyCode}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a3e972d8dc81bb4d869614171b1329830}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!out\-To\-Server@{out\-To\-Server}}
+\index{out\-To\-Server@{out\-To\-Server}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{out\-To\-Server}]{\setlength{\rightskip}{0pt plus 5cm}\-Data\-Output\-Stream {\bf out\-To\-Server} = null\hspace{0.3cm}{\ttfamily  \mbox{[}package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a3e972d8dc81bb4d869614171b1329830}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ac461ef142760f9de73b1a3a5a8a181d9}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!printer@{printer}}
+\index{printer@{printer}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{printer}]{\setlength{\rightskip}{0pt plus 5cm}\-Print\-Writer {\bf printer}\hspace{0.3cm}{\ttfamily  \mbox{[}package\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ac461ef142760f9de73b1a3a5a8a181d9}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a6bfdec8a6e2398841ac2cdf6bca33010}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!remote\-Key\-Code@{remote\-Key\-Code}}
+\index{remote\-Key\-Code@{remote\-Key\-Code}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{remote\-Key\-Code}]{\setlength{\rightskip}{0pt plus 5cm}\-Map$<$\-String, \-String$>$ {\bf remote\-Key\-Code}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a6bfdec8a6e2398841ac2cdf6bca33010}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ac33d0d5b79125bd418f08fea3d829c4c}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!\-S\-O\-C\-K\-E\-T\-\_\-\-T\-I\-M\-E\-O\-U\-T@{\-S\-O\-C\-K\-E\-T\-\_\-\-T\-I\-M\-E\-O\-U\-T}}
+\index{\-S\-O\-C\-K\-E\-T\-\_\-\-T\-I\-M\-E\-O\-U\-T@{\-S\-O\-C\-K\-E\-T\-\_\-\-T\-I\-M\-E\-O\-U\-T}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{\-S\-O\-C\-K\-E\-T\-\_\-\-T\-I\-M\-E\-O\-U\-T}]{\setlength{\rightskip}{0pt plus 5cm}final int {\bf \-S\-O\-C\-K\-E\-T\-\_\-\-T\-I\-M\-E\-O\-U\-T} = 7000\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_ac33d0d5b79125bd418f08fea3d829c4c}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a68ddf0d3e72cbbd6d1d82820cefac66f}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}!\-T\-C\-P\-\_\-\-P\-O\-R\-T@{\-T\-C\-P\-\_\-\-P\-O\-R\-T}}
+\index{\-T\-C\-P\-\_\-\-P\-O\-R\-T@{\-T\-C\-P\-\_\-\-P\-O\-R\-T}!com::axcoto::shinjuku::maki::Remote@{com\-::axcoto\-::shinjuku\-::maki\-::\-Remote}}
+\subsubsection[{\-T\-C\-P\-\_\-\-P\-O\-R\-T}]{\setlength{\rightskip}{0pt plus 5cm}final int {\bf \-T\-C\-P\-\_\-\-P\-O\-R\-T} = 30000\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_a68ddf0d3e72cbbd6d1d82820cefac66f}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/com/axcoto/shinjuku/maki/\hyperlink{_remote_8java}{\-Remote.\-java}\end{DoxyCompactItemize}

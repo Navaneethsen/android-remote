@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::maki::SongAdapter</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">android::widget::ArrayAdapter&lt; Song &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">Filterable</basecompoundref>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1_1_song_filter" prot="private">com::axcoto::shinjuku::maki::SongAdapter::SongFilter</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1ade68c2df69fdac24ed27ddc60824a202" prot="private" static="no" mutable="no">
+        <type>ArrayList&lt; <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song" kindref="compound">Song</ref> &gt;</type>
+        <definition>ArrayList&lt;Song&gt; objects</definition>
+        <argsstring></argsstring>
+        <name>objects</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="26" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1ac3c60c88d76aa0964a28f15875ecc33d" prot="private" static="no" mutable="no">
+        <type>ArrayList&lt; <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song" kindref="compound">Song</ref> &gt;</type>
+        <definition>ArrayList&lt;Song&gt; fitems</definition>
+        <argsstring></argsstring>
+        <name>fitems</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="27" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1a801059eea6ff89dc09d9dfb1c88538a7" prot="private" static="no" mutable="no">
+        <type>SongFilter</type>
+        <definition>SongFilter filter</definition>
+        <argsstring></argsstring>
+        <name>filter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="28" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1aaa276c816aeab5582cb1e0bf86e86d20" prot="private" static="no" mutable="no">
+        <type>final <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song" kindref="compound">Song</ref></type>
+        <definition>final Song mLock</definition>
+        <argsstring></argsstring>
+        <name>mLock</name>
+        <initializer> new <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song" kindref="compound">Song</ref>()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="29" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1a3432f1657ef5cc6395cd6573f839172f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SongAdapter</definition>
+        <argsstring>(Context context, int textViewResourceId, ArrayList&lt; Song &gt; objects)</argsstring>
+        <name>SongAdapter</name>
+        <param>
+          <type>Context</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>textViewResourceId</declname>
+        </param>
+        <param>
+          <type>ArrayList&lt; <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song" kindref="compound">Song</ref> &gt;</type>
+          <declname>objects</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="35" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="35" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1af6292d542d7937de5b4044234a2db905" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>View</type>
+        <definition>View getView</definition>
+        <argsstring>(int position, View convertView, ViewGroup parent)</argsstring>
+        <name>getView</name>
+        <param>
+          <type>int</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>View</type>
+          <declname>convertView</declname>
+        </param>
+        <param>
+          <type>ViewGroup</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="46" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="46" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1aaa1b3ed4b9b7277e559a83821dff5b4b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Filter</type>
+        <definition>Filter getFilter</definition>
+        <argsstring>()</argsstring>
+        <name>getFilter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="103" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="103" bodyend="108"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="268">
+        <label>Filterable</label>
+      </node>
+      <node id="267">
+        <label>ArrayAdapter&lt; Song &gt;</label>
+      </node>
+      <node id="266">
+        <label>SongAdapter</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter"/>
+        <childnode refid="267" relation="public-inheritance">
+        </childnode>
+        <childnode refid="268" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="271">
+        <label>Filterable</label>
+      </node>
+      <node id="270">
+        <label>ArrayAdapter&lt; Song &gt;</label>
+      </node>
+      <node id="269">
+        <label>SongAdapter</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter"/>
+        <childnode refid="270" relation="public-inheritance">
+        </childnode>
+        <childnode refid="271" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="24" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="24" bodyend="164"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1a801059eea6ff89dc09d9dfb1c88538a7" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongAdapter</scope><name>filter</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1ac3c60c88d76aa0964a28f15875ecc33d" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongAdapter</scope><name>fitems</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1aaa1b3ed4b9b7277e559a83821dff5b4b" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongAdapter</scope><name>getFilter</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1af6292d542d7937de5b4044234a2db905" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongAdapter</scope><name>getView</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1aaa276c816aeab5582cb1e0bf86e86d20" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongAdapter</scope><name>mLock</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1ade68c2df69fdac24ed27ddc60824a202" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongAdapter</scope><name>objects</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1a3432f1657ef5cc6395cd6573f839172f" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongAdapter</scope><name>SongAdapter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

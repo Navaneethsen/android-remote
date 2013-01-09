@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::sushi::RootActivity</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Activity</basecompoundref>
+    <derivedcompoundref refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity" prot="public" virt="non-virtual">DeviceActivity</derivedcompoundref>
+    <derivedcompoundref refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_main_activity" prot="public" virt="non-virtual">MainActivity</derivedcompoundref>
+    <derivedcompoundref refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity" prot="public" virt="non-virtual">SongActivity</derivedcompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity_1a8f7d87763ddaf085205a54e8477ecfce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean onCreateOptionsMenu</definition>
+        <argsstring>(Menu menu)</argsstring>
+        <name>onCreateOptionsMenu</name>
+        <param>
+          <type>Menu</type>
+          <declname>menu</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RootActivity.java" line="22" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RootActivity.java" bodystart="22" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity_1a37a55c533c74b60c0290ef1329d74e65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean onOptionsItemSelected</definition>
+        <argsstring>(MenuItem item)</argsstring>
+        <name>onOptionsItemSelected</name>
+        <param>
+          <type>MenuItem</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RootActivity.java" line="27" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RootActivity.java" bodystart="27" bodyend="79"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="240">
+        <label>RootActivity</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity"/>
+        <childnode refid="241" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="241">
+        <label>Activity</label>
+      </node>
+      <node id="243">
+        <label>MainActivity</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_main_activity"/>
+        <childnode refid="240" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="244">
+        <label>SongActivity</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity"/>
+        <childnode refid="240" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="242">
+        <label>DeviceActivity</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity"/>
+        <childnode refid="240" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="245">
+        <label>RootActivity</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity"/>
+        <childnode refid="246" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="246">
+        <label>Activity</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RootActivity.java" line="19" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/RootActivity.java" bodystart="19" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity_1a8f7d87763ddaf085205a54e8477ecfce" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::RootActivity</scope><name>onCreateOptionsMenu</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity_1a37a55c533c74b60c0290ef1329d74e65" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::sushi::RootActivity</scope><name>onOptionsItemSelected</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

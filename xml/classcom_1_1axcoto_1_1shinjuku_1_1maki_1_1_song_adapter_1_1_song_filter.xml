@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1_1_song_filter" kind="class" prot="private">
+    <compoundname>com::axcoto::shinjuku::maki::SongAdapter::SongFilter</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Filter</basecompoundref>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1_1_song_filter_1a7671f1e40fe5a1559278475a908cd0dc" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>FilterResults</type>
+        <definition>FilterResults performFiltering</definition>
+        <argsstring>(CharSequence constraint)</argsstring>
+        <name>performFiltering</name>
+        <param>
+          <type>CharSequence</type>
+          <declname>constraint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="114" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="113" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1_1_song_filter_1a62a2b97ef56279b34400c03b9d5db76a" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void publishResults</definition>
+        <argsstring>(CharSequence constraint, FilterResults results)</argsstring>
+        <name>publishResults</name>
+        <param>
+          <type>CharSequence</type>
+          <declname>constraint</declname>
+        </param>
+        <param>
+          <type>FilterResults</type>
+          <declname>results</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="149" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="149" bodyend="161"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="278">
+        <label>Filter</label>
+      </node>
+      <node id="277">
+        <label>SongAdapter.SongFilter</label>
+        <childnode refid="278" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="280">
+        <label>Filter</label>
+      </node>
+      <node id="279">
+        <label>SongAdapter.SongFilter</label>
+        <childnode refid="280" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" line="111" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/SongAdapter.java" bodystart="110" bodyend="163"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1_1_song_filter_1a7671f1e40fe5a1559278475a908cd0dc" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongAdapter::SongFilter</scope><name>performFiltering</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_song_adapter_1_1_song_filter_1a62a2b97ef56279b34400c03b9d5db76a" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::SongAdapter::SongFilter</scope><name>publishResults</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

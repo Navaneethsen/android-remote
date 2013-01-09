@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="namespacecom_1_1axcoto_1_1shinjuku_1_1sushi" kind="namespace">
+    <compoundname>com::axcoto::shinjuku::sushi</compoundname>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_alert_dialog_manager" prot="public">com::axcoto::shinjuku::sushi::AlertDialogManager</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_common_utilities" prot="public">com::axcoto::shinjuku::sushi::CommonUtilities</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_config_activity" prot="public">com::axcoto::shinjuku::sushi::ConfigActivity</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_connection_detector" prot="public">com::axcoto::shinjuku::sushi::ConnectionDetector</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_device_activity" prot="public">com::axcoto::shinjuku::sushi::DeviceActivity</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_g_c_m_intent_service" prot="public">com::axcoto::shinjuku::sushi::GCMIntentService</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_main_activity" prot="public">com::axcoto::shinjuku::sushi::MainActivity</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_my_app" prot="public">com::axcoto::shinjuku::sushi::MyApp</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_remote_key_button" prot="public">com::axcoto::shinjuku::sushi::RemoteKeyButton</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_root_activity" prot="public">com::axcoto::shinjuku::sushi::RootActivity</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_server_utilities" prot="public">com::axcoto::shinjuku::sushi::ServerUtilities</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_song_activity" prot="public">com::axcoto::shinjuku::sushi::SongActivity</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_user_email_fetcher" prot="public">com::axcoto::shinjuku::sushi::UserEmailFetcher</innerclass>
+    <innerclass refid="classcom_1_1axcoto_1_1shinjuku_1_1sushi_1_1_wake_locker" prot="public">com::axcoto::shinjuku::sushi::WakeLocker</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/sushi/AlertDialogManager.java" line="1"/>
+  </compounddef>
+</doxygen>

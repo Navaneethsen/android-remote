@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::maki::Finder</compoundname>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1aaf4f6272bf11258a623ee42c86094dec" prot="protected" static="no" mutable="no">
+        <type>Integer</type>
+        <definition>Integer _from</definition>
+        <argsstring></argsstring>
+        <name>_from</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="22" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a353ea6b9e735fa762738888980c9708b" prot="protected" static="no" mutable="no">
+        <type>Integer</type>
+        <definition>Integer _to</definition>
+        <argsstring></argsstring>
+        <name>_to</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="23" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a9fbfb33b8035f9921ede2a600d25db29" prot="protected" static="no" mutable="no">
+        <type>String</type>
+        <definition>String _maskIpAddress</definition>
+        <argsstring></argsstring>
+        <name>_maskIpAddress</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="24" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a85d26bde416daf94c282ac93b211be10" prot="protected" static="no" mutable="no">
+        <type>String</type>
+        <definition>String _ipAddress</definition>
+        <argsstring></argsstring>
+        <name>_ipAddress</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="25" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a2a7ac56cbdddc2652772ef5adac6d364" prot="protected" static="yes" mutable="no">
+        <type><ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder" kindref="compound">Finder</ref></type>
+        <definition>Finder instance</definition>
+        <argsstring></argsstring>
+        <name>instance</name>
+        <initializer> null</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="26" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a49ffc085cf38e2ad7c45353ee3b9feed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setFrom</definition>
+        <argsstring>(int from)</argsstring>
+        <name>setFrom</name>
+        <param>
+          <type>int</type>
+          <declname>from</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="28" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="28" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1ac20a9d887e68e59cd55f0e06e8adc3d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setTo</definition>
+        <argsstring>(int from)</argsstring>
+        <name>setTo</name>
+        <param>
+          <type>int</type>
+          <declname>from</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="33" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="33" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a4194bb7a4c7f2a95f023574720bd9449" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Finder</definition>
+        <argsstring>()</argsstring>
+        <name>Finder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="48" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="48" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a61af3e60b94ae3e748f6fbac1e794af7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void execute</definition>
+        <argsstring>()</argsstring>
+        <name>execute</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="52" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="52" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a91536df7fdfdc1c387e35b5698ca874d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean isPortOpen</definition>
+        <argsstring>(String ip, int port, int timeout)</argsstring>
+        <name>isPortOpen</name>
+        <param>
+          <type>String</type>
+          <declname>ip</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="93" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="93" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1ae7211c94c54be43ddd7913b8cfd04516" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean isPortOpen</definition>
+        <argsstring>(String ip, int port)</argsstring>
+        <name>isPortOpen</name>
+        <param>
+          <type>String</type>
+          <declname>ip</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="109" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="109" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a49ecfb0ff5a157d06a36e921de9668d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean resolve</definition>
+        <argsstring>()</argsstring>
+        <name>resolve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="118" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="118" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a7e0964244cc53921efceee777fd8b890" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>String</type>
+        <definition>String getMaskIpAddress</definition>
+        <argsstring>()</argsstring>
+        <name>getMaskIpAddress</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="142" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="142" bodyend="144"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a974c36d832f8688c6d2073839a601eda" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder" kindref="compound">Finder</ref></type>
+        <definition>static Finder getInstance</definition>
+        <argsstring>()</argsstring>
+        <name>getInstance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="37" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="37" bodyend="46"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="173">
+        <label>Finder</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder"/>
+        <childnode refid="173" relation="usage">
+          <edgelabel>instance</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" line="20" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Finder.java" bodystart="20" bodyend="152"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1aaf4f6272bf11258a623ee42c86094dec" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>_from</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a85d26bde416daf94c282ac93b211be10" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>_ipAddress</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a9fbfb33b8035f9921ede2a600d25db29" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>_maskIpAddress</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a353ea6b9e735fa762738888980c9708b" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>_to</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a61af3e60b94ae3e748f6fbac1e794af7" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>execute</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a4194bb7a4c7f2a95f023574720bd9449" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>Finder</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a974c36d832f8688c6d2073839a601eda" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>getInstance</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a7e0964244cc53921efceee777fd8b890" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>getMaskIpAddress</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a2a7ac56cbdddc2652772ef5adac6d364" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>instance</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a91536df7fdfdc1c387e35b5698ca874d" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>isPortOpen</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1ae7211c94c54be43ddd7913b8cfd04516" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>isPortOpen</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a49ecfb0ff5a157d06a36e921de9668d6" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>resolve</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1a49ffc085cf38e2ad7c45353ee3b9feed" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>setFrom</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_finder_1ac20a9d887e68e59cd55f0e06e8adc3d5" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Finder</scope><name>setTo</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

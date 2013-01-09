@@ -1,7 +1,10 @@
 package com.axcoto.shinjuku.sushi;
+
+/**
+ * MyApp main class for ARCA crash report
+ */
 import org.acra.*;
 import org.acra.annotation.*;
-
 import android.app.Application;
 
 @ReportsCrashes(formKey = "dEZHZ0VQYWdTUV9MQnVkOUIySW9QbXc6MQ") 

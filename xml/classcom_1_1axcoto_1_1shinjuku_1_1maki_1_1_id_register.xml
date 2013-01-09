@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::maki::IdRegister</compoundname>
+      <sectiondef kind="package-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register_1a76010eef1edc0406cc2375c25d2a433d" prot="package" static="no" mutable="no">
+        <type>String</type>
+        <definition>String id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" line="22" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register_1af73e715b5b0bbc5ea42336c758ceda5f" prot="package" static="no" mutable="no">
+        <type>Context</type>
+        <definition>Context context</definition>
+        <argsstring></argsstring>
+        <name>context</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" line="23" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register_1a59e5f71a56aa0fca358f5be670ac4df4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>IdRegister</definition>
+        <argsstring>(String id)</argsstring>
+        <name>IdRegister</name>
+        <param>
+          <type>String</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" line="25" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" bodystart="25" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register_1ae2e388266690dfd70ce8db5a7960c729" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setContext</definition>
+        <argsstring>(Context c)</argsstring>
+        <name>setContext</name>
+        <param>
+          <type>Context</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" line="29" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" bodystart="29" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register_1a070a7a08f32719d8b9fa9b861039140f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean perform</definition>
+        <argsstring>()</argsstring>
+        <name>perform</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" line="33" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" bodystart="33" bodyend="47"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="181">
+        <label>IdRegister</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register"/>
+        <childnode refid="182" relation="usage">
+          <edgelabel>context</edgelabel>
+        </childnode>
+      </node>
+      <node id="182">
+        <label>Context</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" line="21" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/IdRegister.java" bodystart="21" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register_1af73e715b5b0bbc5ea42336c758ceda5f" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::IdRegister</scope><name>context</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register_1a76010eef1edc0406cc2375c25d2a433d" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::IdRegister</scope><name>id</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register_1a59e5f71a56aa0fca358f5be670ac4df4" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::IdRegister</scope><name>IdRegister</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register_1a070a7a08f32719d8b9fa9b861039140f" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::IdRegister</scope><name>perform</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_id_register_1ae2e388266690dfd70ce8db5a7960c729" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::IdRegister</scope><name>setContext</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,572 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote" kind="class" prot="public">
+    <compoundname>com::axcoto::shinjuku::maki::Remote</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a0d81108a07c63814f11b6daa884120ec" prot="private" static="no" mutable="no">
+        <type>boolean</type>
+        <definition>boolean connected</definition>
+        <argsstring></argsstring>
+        <name>connected</name>
+        <initializer> false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="143" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ac48f6ccb8e79c93e8c1d512be13826dd" prot="private" static="no" mutable="no">
+        <type>String</type>
+        <definition>String ip</definition>
+        <argsstring></argsstring>
+        <name>ip</name>
+        <initializer>&quot;No Host&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="144" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1adff3b1d9933e14d47d585ef91fbc26e7" prot="protected" static="yes" mutable="no">
+        <type><ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote" kindref="compound">Remote</ref></type>
+        <definition>Remote instance</definition>
+        <argsstring></argsstring>
+        <name>instance</name>
+        <initializer> null</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="145" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a68ddf0d3e72cbbd6d1d82820cefac66f" prot="public" static="yes" mutable="no">
+        <type>final int</type>
+        <definition>final int TCP_PORT</definition>
+        <argsstring></argsstring>
+        <name>TCP_PORT</name>
+        <initializer>30000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="146" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ac33d0d5b79125bd418f08fea3d829c4c" prot="public" static="yes" mutable="no">
+        <type>final int</type>
+        <definition>final int SOCKET_TIMEOUT</definition>
+        <argsstring></argsstring>
+        <name>SOCKET_TIMEOUT</name>
+        <initializer> 7000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="147" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a89b498bf5817107590128ae3f3ef4668" prot="package" static="no" mutable="no">
+        <type>Socket</type>
+        <definition>Socket clientSocket</definition>
+        <argsstring></argsstring>
+        <name>clientSocket</name>
+        <initializer> null</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="148" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a3e972d8dc81bb4d869614171b1329830" prot="package" static="no" mutable="no">
+        <type>DataOutputStream</type>
+        <definition>DataOutputStream outToServer</definition>
+        <argsstring></argsstring>
+        <name>outToServer</name>
+        <initializer> null</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="149" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1af084643f1009ee5f8c970061f174966e" prot="package" static="no" mutable="no">
+        <type>DataInputStream</type>
+        <definition>DataInputStream inToServer</definition>
+        <argsstring></argsstring>
+        <name>inToServer</name>
+        <initializer> null</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="150" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ac461ef142760f9de73b1a3a5a8a181d9" prot="package" static="no" mutable="no">
+        <type>PrintWriter</type>
+        <definition>PrintWriter printer</definition>
+        <argsstring></argsstring>
+        <name>printer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="151" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a3493cd3fb8ea7c4bcae194d3e709efba" prot="package" static="no" mutable="no">
+        <type>final String[]</type>
+        <definition>final String [] KEYNAME</definition>
+        <argsstring></argsstring>
+        <name>KEYNAME</name>
+        <initializer> {&quot; &quot;,
+            &quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, 
+            
+            &quot;~&quot;,  &quot;!&quot;, &quot;&quot;, &quot;#&quot;, &quot;$&quot;, 
+            &quot;%&quot;,  &quot;^&quot;, &quot;&amp;&quot;, &quot;*&quot;, &quot;(&quot;, 
+            &quot;)&quot;,  &quot;-&quot;, &quot;_&quot;, &quot;+&quot;, &quot;=&quot;, 
+            &quot;[&quot;,  &quot;]&quot;, &quot;{&quot;, &quot;}&quot;, &quot;|&quot;, 
+            &quot;\\&quot;, &quot;:&quot;, &quot;;&quot;, &quot;\&quot;&quot;, &quot;\&apos;&quot;, 
+            &quot;&lt;&quot;,  &quot;,&quot;, &quot;&gt;&quot;, &quot;.&quot;, &quot;?&quot;, 
+            &quot;/&quot;,  &quot;`&quot;,
+            
+            &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, 
+            &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;, 
+            &quot;k&quot;, &quot;l&quot;, &quot;m&quot;, &quot;n&quot;, &quot;o&quot;, 
+            &quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;s&quot;, &quot;t&quot;, 
+            &quot;u&quot;, &quot;v&quot;, &quot;w&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;, 
+            
+            &quot;power&quot;,  &quot;setup&quot;,   &quot;eject&quot;,  &quot;tvmode&quot;,  &quot;mute&quot;, 
+            &quot;delete&quot;, &quot;cap_num&quot;, &quot;return&quot;,  &quot;source&quot;, 
+            &quot;up&quot;,    &quot;left&quot;,    &quot;enter&quot;,  &quot;down&quot;,   &quot;right&quot;, 
+            &quot;info&quot;,   &quot;home&quot;,   &quot;menu&quot;,
+            
+            &quot;prev&quot;,  &quot;play&quot;,  &quot;next&quot;,   &quot;title&quot;,    &quot;rewind&quot;, &quot;stop&quot;,     &quot;forward&quot;, &quot;repeat&quot;,
+            &quot;angle&quot;, &quot;pause&quot;, &quot;slow&quot;,   &quot;timeseek&quot;,  &quot;audio&quot;,  &quot;subtitle&quot;, &quot;zoom&quot;,
+            &quot;red&quot;,   &quot;green&quot;, &quot;yellow&quot;, &quot;blue&quot;,
+            
+            &quot;volup&quot;, &quot;voldown&quot;,
+            
+            &quot;sync_hd&quot;, &quot;sync_mp3&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="183" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ab3ed5199860ba7e4f225ff393e0c2423" prot="package" static="no" mutable="no">
+        <type>final String[]</type>
+        <definition>final String [] KEY_CODE_ORCHID</definition>
+        <argsstring></argsstring>
+        <name>KEY_CODE_ORCHID</name>
+        <initializer> {
+			&quot;2,0&quot;, 
+            &quot;1,0&quot;, &quot;4,1&quot; ,&quot;4,2&quot; ,&quot;4,3&quot; ,&quot;4,4&quot; ,&quot;4,5&quot; ,&quot;4,6&quot; ,&quot;5,7&quot; ,&quot;4,8&quot; ,&quot;5,9&quot;,
+            
+            
+             &quot;31,1&quot;, &quot;6,1&quot;, &quot;11,1&quot;, &quot;15,1&quot;, &quot;16,1&quot;, 
+             &quot;17,1&quot;, &quot;18,1&quot;, &quot;19,1&quot;, &quot;20,1&quot;, &quot;9,1&quot;, 
+             &quot;10,1&quot;, &quot;8,1&quot;, &quot;14,1&quot;, &quot;21,1&quot;, &quot;22,1&quot;, 
+             &quot;25,1&quot;, &quot;26,1&quot;, &quot;23,1&quot;, &quot;24,1&quot;, &quot;27,1&quot;, 
+             &quot;32,1&quot;, &quot;13,1&quot;, &quot;33,1&quot;, &quot;7,1&quot;, &quot;4,1&quot;, 
+             &quot;28,1&quot;, &quot;3,1&quot;, &quot;29,1&quot;, &quot;2,1&quot;, &quot;5,1&quot;, 
+             &quot;12,1&quot;, &quot;30,1&quot;,                          
+            
+            &quot;1,2&quot;, &quot;2,2&quot;, &quot;3,2&quot;, &quot;1,3&quot;, &quot;2,3&quot;, 
+            &quot;3,3&quot;, &quot;1,4&quot;, &quot;2,4&quot;, &quot;3,4&quot;, &quot;1,5&quot;, 
+            &quot;2,5&quot;, &quot;3,5&quot;, &quot;1,6&quot;, &quot;2,6&quot;, &quot;3,6&quot;, 
+            &quot;1,7&quot;, &quot;2,7&quot;, &quot;3,7&quot;, &quot;4,7&quot;, &quot;1,8&quot;, 
+            &quot;2,8&quot;, &quot;3,8&quot;, &quot;1,.119&quot;, &quot;2,9&quot;, &quot;3,9&quot;, &quot;4,9&quot;, 
+            
+            &quot;1,x&quot;, &quot;50,e&quot;, &quot;1,j&quot;, &quot;1,T&quot;, &quot;1,u&quot;, 
+            &quot;1,c&quot;, &quot;1,l&quot;,  &quot;1,E&quot;, &quot;1,B&quot;, 
+            &quot;1,U&quot;, &quot;1,L&quot;, &quot;1,\n&quot;, &quot;1,D&quot;, &quot;1,R&quot;,
+            &quot;1,i&quot;, &quot;1,O&quot;, &quot;1,m&quot;,
+            
+            &quot;1,v&quot;, &quot;1,y&quot;, &quot;1,n&quot;, &quot;1,t&quot;, &quot;1,w&quot;, &quot;1,s&quot;, &quot;1,f&quot;, &quot;1,r&quot;, 
+            &quot;1,N&quot;, &quot;1,p&quot;, &quot;1,d&quot;, &quot;1,H&quot;, &quot;1,a&quot;, &quot;1,b&quot;, &quot;1,z&quot;,
+            &quot;1,P&quot;, &quot;1,G&quot;, &quot;1,Y&quot;, &quot;1,K&quot;,
+            
+            &quot;1,+&quot;, &quot;1,-&quot;,
+            
+            &quot;1,I&quot;, &quot;1,M&quot;
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="216" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a9e3bf0dbe114364f66a1f462eff6ae18" prot="package" static="no" mutable="no">
+        <type>final String[]</type>
+        <definition>final String [] KEY_CODE_GENESIS</definition>
+        <argsstring></argsstring>
+        <name>KEY_CODE_GENESIS</name>
+        <initializer> {
+			 &quot;2,0&quot;,                   
+             &quot;1,0&quot;, &quot;1,1&quot; ,&quot;1,2&quot; ,&quot;1,3&quot; ,&quot;1,4&quot; ,&quot;1,5&quot; ,&quot;1,6&quot; ,&quot;1,7&quot; ,&quot;1,8&quot; ,&quot;1,9&quot;,
+             
+             &quot;31,1&quot;, &quot;6,1&quot;,  &quot;11,1&quot;, &quot;15,1&quot;, &quot;16,1&quot;, 
+             &quot;17,1&quot;, &quot;18,1&quot;, &quot;19,1&quot;, &quot;20,1&quot;, &quot;9,1&quot;, 
+             &quot;10,1&quot;, &quot;8,1&quot;,  &quot;14,1&quot;, &quot;21,1&quot;, &quot;22,1&quot;, 
+             &quot;25,1&quot;, &quot;26,1&quot;, &quot;23,1&quot;, &quot;24,1&quot;, &quot;27,1&quot;, 
+             &quot;32,1&quot;, &quot;13,1&quot;, &quot;33,1&quot;, &quot;7,1&quot;,  &quot;4,1&quot;, 
+             &quot;28,1&quot;, &quot;3,1&quot;,  &quot;29,1&quot;, &quot;2,1&quot;,  &quot;5,1&quot;, 
+             &quot;12,1&quot;, &quot;30,1&quot;,                                             
+             
+       
+             &quot;2,2&quot;, &quot;3,2&quot;, &quot;4,2&quot;, &quot;2,3&quot;, &quot;3,3&quot;, 
+             &quot;4,3&quot;, &quot;2,4&quot;, &quot;3,4&quot;, &quot;4,4&quot;, &quot;2,5&quot;, 
+             &quot;3,5&quot;, &quot;4,5&quot;, &quot;2,6&quot;, &quot;3,6&quot;, &quot;4,6&quot;, 
+             &quot;2,7&quot;, &quot;3,7&quot;, &quot;4,7&quot;, &quot;5,7&quot;, &quot;2,8&quot;, 
+             &quot;3,8&quot;, &quot;4,8&quot;, &quot;2,9&quot;, &quot;3,9&quot;, &quot;4,9&quot;, &quot;5,9&quot;, 
+             
+             &quot;1,x&quot;, &quot;1,e&quot;, &quot;1,j&quot;,  &quot;1,T&quot;, &quot;1,u&quot;, 
+             &quot;1,c&quot;, &quot;1,l&quot;, &quot;1,o&quot;,  &quot;1,B&quot;,          
+             &quot;1,U&quot;, &quot;1,L&quot;, &quot;1,\n&quot;, &quot;1,D&quot;, &quot;1,R&quot;,
+             &quot;1,i&quot;, &quot;1,O&quot;, &quot;1,m&quot;,
+             
+             &quot;1,v&quot;, &quot;1,y&quot;, &quot;1,n&quot;, &quot;1,t&quot;, &quot;1,w&quot;, &quot;1,s&quot;, &quot;1,f&quot;, &quot;1,r&quot;, 
+             &quot;1,N&quot;, &quot;1,p&quot;, &quot;1,d&quot;, &quot;1,H&quot;, &quot;1,a&quot;, &quot;1,b&quot;, &quot;1,z&quot;,
+             &quot;1,P&quot;, &quot;1,G&quot;, &quot;1,Y&quot;, &quot;1,K&quot;,
+             
+             &quot;1,+&quot;, &quot;1,-&quot;,
+             
+            &quot;1,I&quot;, &quot;1,M&quot;	
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="249" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a6bfdec8a6e2398841ac2cdf6bca33010" prot="public" static="no" mutable="no">
+        <type>Map&lt; String, String &gt;</type>
+        <definition>Map&lt;String, String&gt; remoteKeyCode</definition>
+        <argsstring></argsstring>
+        <name>remoteKeyCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="153" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a788955b106b4417456ce5228a699c2ca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Remote</definition>
+        <argsstring>()</argsstring>
+        <name>Remote</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructor </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="254" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="254" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a1d6ee937b4c42ba06093c71a06adac7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void execute</definition>
+        <argsstring>(String command)</argsstring>
+        <name>execute</name>
+        <param>
+          <type>String</type>
+          <declname>command</declname>
+        </param>
+        <exceptions> throws IOException, Exception </exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pressing the key <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- the name of the key </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>IOException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="283" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="283" bodyend="313"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a3d98022421bd577091e44ae493f879f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean disConnect</definition>
+        <argsstring>()</argsstring>
+        <name>disConnect</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Close socket connection - Disconnect </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="318" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="318" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ab14cd875029df52c2b797ba52b7b6c96" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Socket</type>
+        <definition>Socket connect</definition>
+        <argsstring>(String ip)</argsstring>
+        <name>connect</name>
+        <param>
+          <type>String</type>
+          <declname>ip</declname>
+        </param>
+        <exceptions> throws IOException, Exception </exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Connect to the specified ip address <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ip</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the specified ip address </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>clientSocket - name of the socket in connection </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>IOException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="345" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="345" bodyend="384"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ab2c6f4020b1e02762c63da1e54ec0492" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Socket</type>
+        <definition>Socket getConnection</definition>
+        <argsstring>()</argsstring>
+        <name>getConnection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the connected socket <simplesect kind="return"><para>clientSocket the connected socket </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="390" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="390" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ac626bca838000f09bc3565bcc12c07ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean getConnected</definition>
+        <argsstring>()</argsstring>
+        <name>getConnected</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check the socket status <simplesect kind="return"><para>connected - the current state of the socket (true/false) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="398" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="398" bodyend="400"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a72560515167edd869e2d4c3e88a49ae1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boolean</type>
+        <definition>boolean testConnection</definition>
+        <argsstring>(String i)</argsstring>
+        <name>testConnection</name>
+        <param>
+          <type>String</type>
+          <declname>i</declname>
+        </param>
+        <exceptions> throws IOException</exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Test the connection status from the android device to the specified ip <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the ip to be checked </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the ip is still pingable false if the ip&apos;s ping time out </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>IOException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="409" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="409" bodyend="431"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a7f6ad1fbb8ddfbceb2416ca94574252a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>String</type>
+        <definition>String getIp</definition>
+        <argsstring>()</argsstring>
+        <name>getIp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the host ip being remembered by the <ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote" kindref="compound">Remote</ref> <simplesect kind="return"><para>host ip of the device </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="437" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="437" bodyend="439"/>
+      </memberdef>
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a5ae591df94fc66ccb85cbb6565368bca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set socket connection status to false </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="444" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="444" bodyend="446"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ab114be717412af726ae58f4f27feb3a1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote" kindref="compound">Remote</ref></type>
+        <definition>static Remote getInstance</definition>
+        <argsstring>()</argsstring>
+        <name>getInstance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Access to the remote at that instance <simplesect kind="return"><para>instance of the remote </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="265" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="265" bodyend="274"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote" kindref="compound">Remote</ref> class. A virtual mapping between the android remote key and the corresponding physical key </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="231">
+        <label>PrintWriter</label>
+      </node>
+      <node id="229">
+        <label>Map&lt; String, String &gt;</label>
+      </node>
+      <node id="228">
+        <label>DataOutputStream</label>
+      </node>
+      <node id="230">
+        <label>Socket</label>
+      </node>
+      <node id="227">
+        <label>DataInputStream</label>
+      </node>
+      <node id="226">
+        <label>Remote</label>
+        <link refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote"/>
+        <childnode refid="226" relation="usage">
+          <edgelabel>instance</edgelabel>
+        </childnode>
+        <childnode refid="227" relation="usage">
+          <edgelabel>inToServer</edgelabel>
+        </childnode>
+        <childnode refid="228" relation="usage">
+          <edgelabel>outToServer</edgelabel>
+        </childnode>
+        <childnode refid="229" relation="usage">
+          <edgelabel>remoteKeyCode</edgelabel>
+        </childnode>
+        <childnode refid="230" relation="usage">
+          <edgelabel>clientSocket</edgelabel>
+        </childnode>
+        <childnode refid="231" relation="usage">
+          <edgelabel>printer</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" line="142" bodyfile="/home/dphan/Ubuntu One/GitHub/android-remote/src/com/axcoto/shinjuku/maki/Remote.java" bodystart="142" bodyend="447"/>
+    <listofallmembers>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a89b498bf5817107590128ae3f3ef4668" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>clientSocket</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a5ae591df94fc66ccb85cbb6565368bca" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>close</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ab14cd875029df52c2b797ba52b7b6c96" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>connect</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a0d81108a07c63814f11b6daa884120ec" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>connected</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a3d98022421bd577091e44ae493f879f4" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>disConnect</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a1d6ee937b4c42ba06093c71a06adac7b" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>execute</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ac626bca838000f09bc3565bcc12c07ac" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>getConnected</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ab2c6f4020b1e02762c63da1e54ec0492" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>getConnection</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ab114be717412af726ae58f4f27feb3a1" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>getInstance</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a7f6ad1fbb8ddfbceb2416ca94574252a" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>getIp</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1adff3b1d9933e14d47d585ef91fbc26e7" prot="protected" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>instance</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1af084643f1009ee5f8c970061f174966e" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>inToServer</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ac48f6ccb8e79c93e8c1d512be13826dd" prot="private" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>ip</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a9e3bf0dbe114364f66a1f462eff6ae18" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>KEY_CODE_GENESIS</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ab3ed5199860ba7e4f225ff393e0c2423" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>KEY_CODE_ORCHID</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a3493cd3fb8ea7c4bcae194d3e709efba" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>KEYNAME</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a3e972d8dc81bb4d869614171b1329830" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>outToServer</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ac461ef142760f9de73b1a3a5a8a181d9" prot="package" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>printer</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a788955b106b4417456ce5228a699c2ca" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>Remote</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a6bfdec8a6e2398841ac2cdf6bca33010" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>remoteKeyCode</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1ac33d0d5b79125bd418f08fea3d829c4c" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>SOCKET_TIMEOUT</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a68ddf0d3e72cbbd6d1d82820cefac66f" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>TCP_PORT</name></member>
+      <member refid="classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_remote_1a72560515167edd869e2d4c3e88a49ae1" prot="public" virt="non-virtual"><scope>com::axcoto::shinjuku::maki::Remote</scope><name>testConnection</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

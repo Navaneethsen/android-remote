@@ -1,0 +1,70 @@
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter}{\section{\-Item\-Adapter \-Class \-Reference}
+\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter}\index{\-Item\-Adapter@{\-Item\-Adapter}}
+}
+
+
+\-Inheritance diagram for \-Item\-Adapter\-:
+
+
+\-Collaboration diagram for \-Item\-Adapter\-:
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_abad456331d60ff41abe398624130462f}{\-Item\-Adapter} (\-Context context, int text\-View\-Resource\-Id, \-Array\-List$<$ \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_device_item}{\-Device\-Item} $>$ objects)
+\item 
+boolean \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_a43b6588c6c308b0ab351b9fadf63cc03}{connect\-Test} (\-String i)
+\item 
+\-View \hyperlink{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_af6292d542d7937de5b4044234a2db905}{get\-View} (int position, \-View convert\-View, \-View\-Group parent)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyAuthor}{\-Author}
+dphan 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_abad456331d60ff41abe398624130462f}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Item\-Adapter@{com\-::axcoto\-::shinjuku\-::maki\-::\-Item\-Adapter}!\-Item\-Adapter@{\-Item\-Adapter}}
+\index{\-Item\-Adapter@{\-Item\-Adapter}!com::axcoto::shinjuku::maki::ItemAdapter@{com\-::axcoto\-::shinjuku\-::maki\-::\-Item\-Adapter}}
+\subsubsection[{\-Item\-Adapter}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Item\-Adapter} (
+\begin{DoxyParamCaption}
+\item[{\-Context}]{context, }
+\item[{int}]{text\-View\-Resource\-Id, }
+\item[{\-Array\-List$<$ {\bf \-Device\-Item} $>$}]{objects}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_abad456331d60ff41abe398624130462f}
+\-Here we must override the constructor for \-Array\-Adapter the only variable we care about now is \-Array\-List$<$\-Item$>$ objects, because it is the list of objects we want to display. 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_a43b6588c6c308b0ab351b9fadf63cc03}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Item\-Adapter@{com\-::axcoto\-::shinjuku\-::maki\-::\-Item\-Adapter}!connect\-Test@{connect\-Test}}
+\index{connect\-Test@{connect\-Test}!com::axcoto::shinjuku::maki::ItemAdapter@{com\-::axcoto\-::shinjuku\-::maki\-::\-Item\-Adapter}}
+\subsubsection[{connect\-Test}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf connect\-Test} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{i}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_a43b6588c6c308b0ab351b9fadf63cc03}
+\-Check connection whether the current ip is the one being connected 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & the current host\-Ip being connected \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+
+\end{DoxyReturn}
+\hypertarget{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_af6292d542d7937de5b4044234a2db905}{\index{com\-::axcoto\-::shinjuku\-::maki\-::\-Item\-Adapter@{com\-::axcoto\-::shinjuku\-::maki\-::\-Item\-Adapter}!get\-View@{get\-View}}
+\index{get\-View@{get\-View}!com::axcoto::shinjuku::maki::ItemAdapter@{com\-::axcoto\-::shinjuku\-::maki\-::\-Item\-Adapter}}
+\subsubsection[{get\-View}]{\setlength{\rightskip}{0pt plus 5cm}\-View {\bf get\-View} (
+\begin{DoxyParamCaption}
+\item[{int}]{position, }
+\item[{\-View}]{convert\-View, }
+\item[{\-View\-Group}]{parent}
+\end{DoxyParamCaption}
+)}}\label{classcom_1_1axcoto_1_1shinjuku_1_1maki_1_1_item_adapter_af6292d542d7937de5b4044234a2db905}
+\-We are overriding the get\-View method here -\/ this is what defines how each list item will look. \-Recall that the variable position is sent in as an argument to this method. \-The variable simply refers to the position of the current object in the list. (\-The \-Array\-Adapter iterates through the list we sent it)
+
+\-Therefore, i refers to the current \-Item object.
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/com/axcoto/shinjuku/maki/\hyperlink{_item_adapter_8java}{\-Item\-Adapter.\-java}\end{DoxyCompactItemize}
