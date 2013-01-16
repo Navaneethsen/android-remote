@@ -53,8 +53,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	final static int PHASE_TESTING = 2;
 	final static int PHASE_PRODUCTION = 3;
 
-	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
-	// final static int ENVIRONMENT = PHASE_PRODUCTION;
+//	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
+	 final static int ENVIRONMENT = PHASE_PRODUCTION;
 	// final static int ENVIRONMENT = PHASE_TESTING;
 
 	public String remote;
