@@ -39,9 +39,9 @@ public class IdRegister {
 			br.close();
 			fos.close();
 		} catch (FileNotFoundException e) {
-			Log.e("SUSHI:: DEVICE", "Cannot find the file ");
+			MyLog.e("SUSHI:: DEVICE", "Cannot find the file ");
 		} catch (IOException e) {
-			Log.e("SUSHI:: DEVICE", "Cannot write data to the file ");			
+			MyLog.e("SUSHI:: DEVICE", "Cannot write data to the file ");			
 		}
 		return true;
 	}

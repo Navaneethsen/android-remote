@@ -134,7 +134,7 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable{
                             
                             if (value.contains(prefix))
                             {
-//                            	Log.i("Value+Prefix: ", value +",,"+prefix);
+//                            	MyLog.i("Value+Prefix: ", value +",,"+prefix);
                                 nlist.add(pkmn);
                             }
                         }
@@ -154,10 +154,10 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable{
                     for (int i=0; i<count; i++)
                     {
                         Song pkmn = (Song)fitems.get(i);   
-//                        Log.e("Added: ", pkmn.getTitle());
+//                        MyLog.e("Added: ", pkmn.getTitle());
                         add(pkmn);                        
                     }
-                    Log.i("Total songs: ", Integer.toString(count));                    
+                    MyLog.i("Total songs: ", Integer.toString(count));                    
                 }
 
             }

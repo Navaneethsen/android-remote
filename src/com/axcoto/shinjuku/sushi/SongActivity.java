@@ -37,6 +37,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.maki.Remote;
 import com.axcoto.shinjuku.maki.Song;
 import com.axcoto.shinjuku.maki.SongAdapter;
@@ -137,7 +138,7 @@ public class SongActivity extends RootActivity {
 			songs = getSong(t.getLocation("mp3"));
 
 		// }
-		Log.i("Location", t.getFilesDir().toString());
+		MyLog.i("Location", t.getFilesDir().toString());
 		if (arr_sort == null)
 			arr_sort = new ArrayList<Song>();
 		songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item,
@@ -228,7 +229,7 @@ public class SongActivity extends RootActivity {
 		}
 
 		// initDb();
-		Log.e("SUSHI:: DEVICE", "Create activity");
+		MyLog.e("SUSHI:: DEVICE", "Create activity");
 		final SongActivity t = this;
 		songList.setOnItemLongClickListener(new OnItemLongClickListener() {
 			public View v;
@@ -248,26 +249,26 @@ public class SongActivity extends RootActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// Log.e("DEVICE: CLICKED", "Click ListItem Number " +
+				// MyLog.e("DEVICE: CLICKED", "Click ListItem Number " +
 				// position);
 				Song s = songAdapter.getItem(position);
-				Log.i("SUSHI::SONG", "About to open " + s.getId() + " , name: "
+				MyLog.i("SUSHI::SONG", "About to open " + s.getId() + " , name: "
 						+ s.getTitle());
 				String songid = s.getId();
 				if (songid.length() == 0)
 					throw new NullPointerException("empty id");
 				for (int i = 0; i < songid.length(); i++) {
 					try {
-						Log.i("Pressed: ", songid.substring(0 + i, 1 + i));
+						MyLog.i("Pressed: ", songid.substring(0 + i, 1 + i));
 						r.execute(songid.substring(0 + i, 1 + i));
 					} catch (IOException e) {
-						Log.e("IOException: ", "I0Exception");
+						MyLog.e("IOException: ", "I0Exception");
 						e.printStackTrace();
 					} catch (NullPointerException e) {
-						Log.e("Weird NullPointException: ",
+						MyLog.e("Weird NullPointException: ",
 								songid.substring(0 + i, 1 + i));
 					} catch (Exception e) {
-						Log.e("Exception: ", "Exception");
+						MyLog.e("Exception: ", "Exception");
 						e.printStackTrace();
 					}
 				}
@@ -292,11 +293,11 @@ public class SongActivity extends RootActivity {
 	// SAXException, IOException {
 	// ToggleButton tb = (ToggleButton) v;
 	// if (tb.getText().equals("HD")) {
-	// Log.i("Location::" ,t.getLocation("hd"));
+	// MyLog.i("Location::" ,t.getLocation("hd"));
 	// songs =getSong(t.getLocation("hd"));
 	// }
 	// else {
-	// Log.i("Location::",t.getLocation("mp3"));
+	// MyLog.i("Location::",t.getLocation("mp3"));
 	// songs = getSong(t.getLocation("mp3"));
 	// }
 	// songAdapter = new SongAdapter(this, R.layout.song_item, songs);
@@ -330,7 +331,7 @@ public class SongActivity extends RootActivity {
 
 	public String getLocation(String databaseName) {
 		if (databaseName.equals("hd")) {
-			Log.e("Location", t.getFilesDir().toString());
+			MyLog.e("Location", t.getFilesDir().toString());
 			return t.getFilesDir() + "/KaraokeDB.xml";
 		}
 		// return "/storage/sdcard0/Ceenee/KaraokeDB.xml";
@@ -378,7 +379,7 @@ public class SongActivity extends RootActivity {
 		protected Boolean doInBackground(String... params) {
 			Remote r = Remote.getInstance();
 			String locationType;
-			Log.i("Sync Status : ", Integer.toString(syncStatus));
+			MyLog.i("Sync Status : ", Integer.toString(syncStatus));
 			// ToggleButton tb = (ToggleButton)
 			// findViewById(R.id.karaoke_switch);
 			try {
@@ -409,7 +410,7 @@ public class SongActivity extends RootActivity {
 						fullsong.add(s);
 					}
 					long t2 = System.currentTimeMillis();
-					Log.i("Total TIME: ", Long.toString(t2 - t1));
+					MyLog.i("Total TIME: ", Long.toString(t2 - t1));
 					check = false;
 				}
 				// Set timeout to 45 seconds.

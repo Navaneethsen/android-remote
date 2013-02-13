@@ -40,10 +40,10 @@ public class Installation {
                 }
                 sID = readInstallationFile(installation);
             } catch (IOException e) {
-                Log.w(ACRA.LOG_TAG, "Couldn't retrieve InstallationId for " + context.getPackageName(), e);
+                MyLog.w(ACRA.LOG_TAG, "Couldn't retrieve InstallationId for " + context.getPackageName(), e);
                 return "Couldn't retrieve InstallationId";
             } catch (RuntimeException e) {
-                Log.w(ACRA.LOG_TAG, "Couldn't retrieve InstallationId for " + context.getPackageName(), e);
+                MyLog.w(ACRA.LOG_TAG, "Couldn't retrieve InstallationId for " + context.getPackageName(), e);
                 return "Couldn't retrieve InstallationId";
             }
         }

@@ -75,8 +75,8 @@ public class GoogleFormSender implements ReportSender {
 
         try {
             final URL reportUrl = new URL(formUri.toString());
-            Log.d(LOG_TAG, "Sending report " + report.get(ReportField.REPORT_ID));
-            Log.d(LOG_TAG, "Connect to " + reportUrl);
+            MyLog.d(LOG_TAG, "Sending report " + report.get(ReportField.REPORT_ID));
+            MyLog.d(LOG_TAG, "Connect to " + reportUrl);
 
             final HttpRequest request = new HttpRequest();
             request.setConnectionTimeOut(ACRA.getConfig().connectionTimeout());

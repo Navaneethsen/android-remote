@@ -69,7 +69,7 @@ public final class CrashReportDialog extends Activity {
         super.onCreate(savedInstanceState);
 
         mReportFileName = getIntent().getStringExtra(ACRAConstants.EXTRA_REPORT_FILE_NAME);
-        Log.d(LOG_TAG, "Opening CrashReportDialog for " + mReportFileName);
+        MyLog.d(LOG_TAG, "Opening CrashReportDialog for " + mReportFileName);
         if (mReportFileName == null) {
             finish();
         }
@@ -167,17 +167,17 @@ public final class CrashReportDialog extends Activity {
 
                 final CrashReportPersister persister = new CrashReportPersister(getApplicationContext());
                 try {
-                    Log.d(LOG_TAG, "Add user comment to " + mReportFileName);
+                    MyLog.d(LOG_TAG, "Add user comment to " + mReportFileName);
                     final CrashReportData crashData = persister.load(mReportFileName);
                     crashData.put(USER_COMMENT, comment);
                     crashData.put(USER_EMAIL, usrEmail);
                     persister.store(crashData, mReportFileName);
                 } catch (IOException e) {
-                    Log.w(LOG_TAG, "User comment not added: ", e);
+                    MyLog.w(LOG_TAG, "User comment not added: ", e);
                 }
 
                 // Start the report sending task
-                Log.v(ACRA.LOG_TAG, "About to start SenderWorker from CrashReportDialog");
+                MyLog.v(ACRA.LOG_TAG, "About to start SenderWorker from CrashReportDialog");
                 ACRA.getErrorReporter().startSendingReports(false, true);
 
                 // Optional Toast to thank the user

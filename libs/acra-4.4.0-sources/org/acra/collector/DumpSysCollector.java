@@ -61,7 +61,7 @@ final class DumpSysCollector {
             }
 
         } catch (IOException e) {
-            Log.e(ACRA.LOG_TAG, "DumpSysCollector.meminfo could not retrieve data", e);
+            MyLog.e(ACRA.LOG_TAG, "DumpSysCollector.meminfo could not retrieve data", e);
         }
 
         return meminfo.toString();

@@ -319,26 +319,26 @@ public class Remote {
 		String k = remoteKeyCode.get(command);
 		String[] part = k.split(",");
 		if (clientSocket.isOutputShutdown()) {
-			Log.d("MAKI:: REMOTE:: EXECUTE", "Connection is broken");
+			MyLog.d("MAKI:: REMOTE:: EXECUTE", "Connection is broken");
 			throw new IOException();
 		}
 
 		if (clientSocket.isInputShutdown()) {
-			Log.d("MAKI:: REMOTE:: EXECUTE", "Connection is broken");
+			MyLog.d("MAKI:: REMOTE:: EXECUTE", "Connection is broken");
 			throw new IOException();
 		}
 
 		if (printer.checkError()) {
-			Log.d("MAKI:: REMOTE:: EXECUTE", "Connection is broken");
+			MyLog.d("MAKI:: REMOTE:: EXECUTE", "Connection is broken");
 		}
 
 		for (int count = 0; count < Integer.parseInt(part[0]); count++) {
-			Log.i("MAKI:: REMOTE:: EXECUTE", "Send key " + part[1]);
+			MyLog.i("MAKI:: REMOTE:: EXECUTE", "Send key " + part[1]);
 			try {
 				outToServer.writeBytes(part[1]);
 				outToServer.flush();
 			} catch (Exception e) {
-				Log.d("MAKI: REMOTE:: EXECUTE",
+				MyLog.d("MAKI: REMOTE:: EXECUTE",
 						"Exception when trying to write key code to stream"
 								+ e.getMessage());
 				throw e;
@@ -350,7 +350,7 @@ public class Remote {
 	 * Close socket connection - Disconnect
 	 */
 	public boolean disConnect() {
-		Log.i("MAKI:: REMOTE", "Trying to close socket connection");
+		MyLog.i("MAKI:: REMOTE", "Trying to close socket connection");
 
 		try {
 			this.connected = false;
@@ -358,13 +358,13 @@ public class Remote {
 			// outToServer.close();
 			clientSocket.shutdownOutput();
 			clientSocket.close();
-			Log.i("MAKI:: REMOTE", "Socket closed");
+			MyLog.i("MAKI:: REMOTE", "Socket closed");
 		} catch (IOException io) {
-			Log.e("MAKI:: REMOTE :: ERROR",
+			MyLog.e("MAKI:: REMOTE :: ERROR",
 					"Cannot close socket data streaming. " + io.getStackTrace());
 			return false;
 		} catch (Exception e) {
-			Log.e("MAI:: REMOTE :: ERROR", "Unknow error. " + e.getStackTrace());
+			MyLog.e("MAI:: REMOTE :: ERROR", "Unknow error. " + e.getStackTrace());
 			return false;
 		}
 		return true;
@@ -393,29 +393,29 @@ public class Remote {
 			printer = new PrintWriter(clientSocket.getOutputStream(), true);
 			connected = true;
 		} catch (SocketTimeoutException e) {
-			Log.e("MAKI:: REMOTE:: ERROR:", "SocketTimeoutException");
+			MyLog.e("MAKI:: REMOTE:: ERROR:", "SocketTimeoutException");
 			throw e;
 		} catch (SocketException e) {
-			Log.e("MAKI:: REMOTE:: ERROR:", "Socket Exception");
+			MyLog.e("MAKI:: REMOTE:: ERROR:", "Socket Exception");
 			throw e;
 		} catch (SecurityException e) {
-			Log.e("MAKI:: REMOTE:: ERROR:", "Security Exception");
+			MyLog.e("MAKI:: REMOTE:: ERROR:", "Security Exception");
 			throw e;
 		} catch (UnknownHostException e) {
-			Log.e("MAKI:: REMOTE:: ERROR:", "Unknown Host Exception");
+			MyLog.e("MAKI:: REMOTE:: ERROR:", "Unknown Host Exception");
 			throw e;
 		} catch (IllegalArgumentException e) {
-			Log.e("MAKI:: REMOTE:: ERROR:", "IllegalArgumentException");
+			MyLog.e("MAKI:: REMOTE:: ERROR:", "IllegalArgumentException");
 			throw e;
 		} catch (IllegalBlockingModeException e) {
-			Log.e("MAKI:: REMOTE:: ERROR:", "IllegalBlockingModeException");
+			MyLog.e("MAKI:: REMOTE:: ERROR:", "IllegalBlockingModeException");
 			throw e;
 		} catch (IOException e) {
-			Log.e("MAKI:: REMOTE:: ERROR:", "I/0 Exception");
+			MyLog.e("MAKI:: REMOTE:: ERROR:", "I/0 Exception");
 			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.e("MAKI:: REMOTE:: Error:", "Some exception at Remote connect");
+			MyLog.e("MAKI:: REMOTE:: Error:", "Some exception at Remote connect");
 			throw e;
 		}
 		return clientSocket;
@@ -465,9 +465,9 @@ public class Remote {
 		int count = 0;
 		while ((line = reader.readLine()) != null) {
 			count++;
-			// Log.i("Pinging: ", line);
+			// MyLog.i("Pinging: ", line);
 		}
-		// Log.i("COUNT", Integer.toString(count));
+		// MyLog.i("COUNT", Integer.toString(count));
 		if (count > 5)
 			return true;
 		else

@@ -120,7 +120,7 @@ public class HttpPostSender implements ReportSender {
         try {
             final Map<String, String> finalReport = remap(report);
             final URL reportUrl = mFormUri == null ? new URL(ACRA.getConfig().formUri()) : new URL(mFormUri.toString());
-            Log.d(LOG_TAG, "Connect to " + reportUrl.toString());
+            MyLog.d(LOG_TAG, "Connect to " + reportUrl.toString());
 
             final String login = isNull(ACRA.getConfig().formUriBasicAuthLogin()) ? null : ACRA.getConfig()
                     .formUriBasicAuthLogin();

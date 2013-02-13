@@ -82,7 +82,7 @@ final class SendWorker extends Thread {
      * sent.
      */
     private void approvePendingReports() {
-        Log.d(LOG_TAG, "Mark all pending reports as approved.");
+        MyLog.d(LOG_TAG, "Mark all pending reports as approved.");
 
         final CrashReportFinder reportFinder = new CrashReportFinder(context);
         final String[] reportFileNames = reportFinder.getCrashReportFiles();
@@ -100,7 +100,7 @@ final class SendWorker extends Thread {
                 // option?
                 final File newFile = new File(context.getFilesDir(), newName);
                 if (!reportFile.renameTo(newFile)) {
-                    Log.e(LOG_TAG, "Could not rename approved report from " + reportFile + " to " + newFile);
+                    MyLog.e(LOG_TAG, "Could not rename approved report from " + reportFile + " to " + newFile);
                 }
             }
         }
@@ -117,7 +117,7 @@ final class SendWorker extends Thread {
      *            {@link ErrorReporter#handleSilentException(Throwable)}.
      */
     private void checkAndSendReports(Context context, boolean sendOnlySilentReports) {
-        Log.d(LOG_TAG, "#checkAndSendReports - start");
+        MyLog.d(LOG_TAG, "#checkAndSendReports - start");
         final CrashReportFinder reportFinder = new CrashReportFinder(context);
         final String[] reportFiles = reportFinder.getCrashReportFiles();
         Arrays.sort(reportFiles);
@@ -134,30 +134,30 @@ final class SendWorker extends Thread {
                        // network
             }
 
-            Log.i(LOG_TAG, "Sending file " + curFileName);
+            MyLog.i(LOG_TAG, "Sending file " + curFileName);
             try {
                 final CrashReportPersister persister = new CrashReportPersister(context);
                 final CrashReportData previousCrashReport = persister.load(curFileName);
                 sendCrashReport(previousCrashReport);
                 deleteFile(context, curFileName);
             } catch (RuntimeException e) {
-                Log.e(ACRA.LOG_TAG, "Failed to send crash reports for " + curFileName, e);
+                MyLog.e(ACRA.LOG_TAG, "Failed to send crash reports for " + curFileName, e);
                 deleteFile(context, curFileName);
                 break; // Something really unexpected happened. Don't try to
                        // send any more reports now.
             } catch (IOException e) {
-                Log.e(ACRA.LOG_TAG, "Failed to load crash report for " + curFileName, e);
+                MyLog.e(ACRA.LOG_TAG, "Failed to load crash report for " + curFileName, e);
                 deleteFile(context, curFileName);
                 break; // Something unexpected happened when reading the crash
                        // report. Don't try to send any more reports now.
             } catch (ReportSenderException e) {
-                Log.e(ACRA.LOG_TAG, "Failed to send crash report for " + curFileName, e);
+                MyLog.e(ACRA.LOG_TAG, "Failed to send crash report for " + curFileName, e);
                 break; // Something stopped the report being sent. Don't try to
                        // send any more reports now.
             }
             reportsSentCount++;
         }
-        Log.d(LOG_TAG, "#checkAndSendReports - finish");
+        MyLog.d(LOG_TAG, "#checkAndSendReports - finish");
     }
 
     /**
@@ -184,7 +184,7 @@ final class SendWorker extends Thread {
                         throw e; // Don't log here because we aren't dealing
                                  // with the Exception here.
                     } else {
-                        Log.w(LOG_TAG,
+                        MyLog.w(LOG_TAG,
                                 "ReportSender of class "
                                         + sender.getClass().getName()
                                         + " failed but other senders completed their task. ACRA will not send this report again.");
@@ -197,7 +197,7 @@ final class SendWorker extends Thread {
     private void deleteFile(Context context, String fileName) {
         final boolean deleted = context.deleteFile(fileName);
         if (!deleted) {
-            Log.w(ACRA.LOG_TAG, "Could not delete error report : " + fileName);
+            MyLog.w(ACRA.LOG_TAG, "Could not delete error report : " + fileName);
         }
     }
 }

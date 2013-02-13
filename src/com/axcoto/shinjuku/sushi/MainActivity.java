@@ -34,9 +34,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
 import com.google.android.gcm.GCMRegistrar;
 
 import com.axcoto.shinjuku.maki.MyHttpServer;
+import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.maki.Remote;
 
 import static com.axcoto.shinjuku.sushi.CommonUtilities.DISPLAY_MESSAGE_ACTION;
@@ -49,13 +51,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 
 public class MainActivity extends RootActivity implements OnGestureListener {
-	final static int PHASE_DEVELOPMENT = 1;
-	final static int PHASE_TESTING = 2;
-	final static int PHASE_PRODUCTION = 3;
+	public final static int PHASE_EMULATOR = 1;
+	public final static int PHASE_DEVELOPMENT = 2;
+	public final static int PHASE_PRODUCTION = 3;
 
-//	final static int ENVIRONMENT = PHASE_DEVELOPMENT;
-	 final static int ENVIRONMENT = PHASE_PRODUCTION;
-	// final static int ENVIRONMENT = PHASE_TESTING;
+//	public final static int ENVIRONMENT = PHASE_EMULATOR;
+	public final static int ENVIRONMENT = PHASE_DEVELOPMENT;
+//	 public final static int ENVIRONMENT = PHASE_PRODUCTION;
 
 	public String remote;
 	final int PORT = 5320;
@@ -85,6 +87,10 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setTextListener();
+		if (ENVIRONMENT != PHASE_PRODUCTION)
+		{
+			Toast.makeText(this, "Oops, you are using the developing version. Please contact CeeNee to have the correct version updated", Toast.LENGTH_LONG).show();
+		}
 		gestureScanner = new GestureDetector(this);
 
 		final Remote r = Remote.getInstance();
@@ -131,9 +137,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			alert.showAlertDialog(MainActivity.this,
 					"Internet Connection Error",
 					"Please connect to working Internet connection", false);
-
 		}
-
 	}
 
 	/**
@@ -146,7 +150,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			boolean mExternalStorageAvailable = false;
 			boolean mExternalStorageWriteable = false;
 			String state = Environment.getExternalStorageState();
-			Log.i("SUSHI:: MAIN :: HomeDir is", homeDir.toString());
+			MyLog.i("SUSHI:: MAIN :: HomeDir is", homeDir.toString());
 			// For simplicity. use internal storage for now
 			// if (Environment.MEDIA_MOUNTED.equals(state)) {
 			// // We can read and write the media
@@ -157,15 +161,15 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			MyHttpServer ht = MyHttpServer.getInstance(PORT, homeDir);
 			File file = this.getFileStreamPath("file-upload.html");
 			if (file.exists()) {
-				Log.i("MAKI: SERVER",
+				MyLog.i("MAKI: SERVER",
 						"initialize app before so we don't need to copy the file for web server");
 			} else {
 				this.copyAssets();
 			}
 		} catch (IOException e) {
-			Log.e("MAKI:: SERVER:: IOError", "The docroot is not valid");
+			MyLog.e("MAKI:: SERVER:: IOError", "The docroot is not valid");
 		} catch (Exception e) {
-			Log.e("MAKI:: SERVER:: GENERAL ERROR", e.getMessage());
+			MyLog.e("MAKI:: SERVER:: GENERAL ERROR", e.getMessage());
 		}
 
 	}
@@ -178,7 +182,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		GCMRegistrar.checkManifest(this);
 
 		final String regId = GCMRegistrar.getRegistrationId(this);
-		Log.i("Device ID: ", regId);
+		MyLog.i("Device ID: ", regId);
 
 		// GCMRegistrar.unregister(getApplicationContext());
 
@@ -195,7 +199,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		} else {
 			// Device is already registered on GCM
 			if (GCMRegistrar.isRegisteredOnServer(this)) {
-				Log.i("GCM:", "Device is already registered with GCM");
+				MyLog.i("GCM:", "Device is already registered with GCM");
 			} else {
 				// Try to register again, but not in the UI thread.
 				// It's also necessary to cancel the thread onDestroy(),
@@ -223,14 +227,14 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	}
 
 	private void copyAssets() {
-		Log.e("MAKI:: MAIN:: ASSET COPY",
+		MyLog.e("MAKI:: MAIN:: ASSET COPY",
 				"Start to copy asset for the first initialization of app");
 		AssetManager assetManager = getAssets();
 		String[] files = null;
 		try {
 			files = assetManager.list("");
 		} catch (IOException e) {
-			Log.e("SUSHI:: MAINACTIVITY:: ERROR", e.getMessage());
+			MyLog.e("SUSHI:: MAINACTIVITY:: ERROR", e.getMessage());
 		}
 
 		for (String filename : files) {
@@ -253,7 +257,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 				out.close();
 				out = null;
 			} catch (Exception e) {
-				Log.e("MAKI:: MAIN ACITIVITY", "Cannot copy asset: " + filename
+				MyLog.e("MAKI:: MAIN ACITIVITY", "Cannot copy asset: " + filename
 						+ ". Error: " + e.getMessage());
 			}
 		}
@@ -278,10 +282,10 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 				r.execute(command);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				Log.e("SUSHI: REMOTE", "yException: " + e.getMessage());
+				MyLog.e("SUSHI: REMOTE", "yException: " + e.getMessage());
 				e.printStackTrace();
 			} catch (Exception e) {
-				Log.e("SUSHI: REMOTE", "Exception: " + e.getMessage());
+				MyLog.e("SUSHI: REMOTE", "Exception: " + e.getMessage());
 			}
 		}
 
@@ -317,25 +321,25 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			findViewById(R.id.include_extra).setVisibility(View.GONE);
 		}
 		if (key.equals("playback")) {
-			Log.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			MyLog.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
 			View x = findViewById(R.id.include_playback);
 			if (x.isShown() == false) {
 				x.setVisibility(View.VISIBLE);
 			}
 		} else if (key.equals("audio_control")) {
-			Log.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			MyLog.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
 			View x = findViewById(R.id.include_audio_control);
 			if (x.isShown() == false) {
 				x.setVisibility(View.VISIBLE);
 			}
 		} else if (key.equals("settings")) {
-			Log.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			MyLog.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
 			View x = findViewById(R.id.include_settings);
 			if (x.isShown() == false) {
 				x.setVisibility(View.VISIBLE);
 			}
 		} else if (key.equals("extra")) {
-			Log.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
+			MyLog.i("SUSHI:: REMOTE", "PRESS " + key + " icon");
 			View x = findViewById(R.id.include_extra);
 			if (x.isShown() == false) {
 				x.setVisibility(View.VISIBLE);
@@ -351,13 +355,13 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 								@Override
 								public void onClick(DialogInterface dialog,
 										int which) {
-									Log.i("SUSHI:: REMOTE",
+									MyLog.i("SUSHI:: REMOTE",
 											"THE KEY THAT IS PRESSED ON UI IS: power");
 									Remote r = Remote.getInstance();
 									try {
 										r.execute("power");
 									} catch (Exception e) {
-										Log.e("SUSHI:: MAIN:: ", e.getMessage());
+										MyLog.e("SUSHI:: MAIN:: ", e.getMessage());
 									}
 									r.disConnect();
 								}
@@ -371,7 +375,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			// toast.setGravity(Gravity.TOP|Gravity.LEFT, 400,700);
 			// toast.show();
 			// new CountDownLatch(1).countDown();
-			Log.i("SUSHI:: REMOTE", "THE KEY THAT IS PRESSED ON UI IS: " + key);
+			MyLog.i("SUSHI:: REMOTE", "THE KEY THAT IS PRESSED ON UI IS: " + key);
 			this.execute(key);
 		}
 	}
@@ -397,7 +401,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		Log.e("SUSHI:: DEVICE", "-" + "DOWN" + "-");
+		MyLog.e("SUSHI:: DEVICE", "-" + "DOWN" + "-");
 
 		return true;
 
@@ -459,7 +463,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
+		MyLog.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
 
 	}
 
@@ -488,7 +492,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		// direction = "up";
 		// return true;
 		// }
-		// Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
+		// MyLog.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
 
 		return false;
 		// return false;
@@ -499,17 +503,17 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		// Log.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
+		// MyLog.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
 
 	}
 
 	@Override
 	public boolean onSingleTapUp(MotionEvent e) {
 		long t = System.nanoTime();
-		Log.e("SUSHI:: MAIN", "Touched at: " + t);
+		MyLog.e("SUSHI:: MAIN", "Touched at: " + t);
 		if (this.lastTouchedTime > 1000
 				&& (t - this.lastTouchedTime) < this.doubleTapDistance) {
-			Log.e("SUSHI:: MAIN", "Double tap at: " + t);
+			MyLog.e("SUSHI:: MAIN", "Double tap at: " + t);
 			this.execute("enter");
 		}
 		this.lastTouchedTime = t;
@@ -549,7 +553,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 				// InputMethodManager im = (InputMethodManager)
 				// getSystemService(INPUT_METHOD_SERVICE);
 				// if (im.isAcceptingText()) {
-				// Log.e("YEA", "TESTING");
+				// MyLog.e("YEA", "TESTING");
 				// }
 			}
 
@@ -562,7 +566,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 					last = "";
 				long tz = System.nanoTime();
 				long zz = tz - this.lastKeyTouchedTime;
-				Log.e("Time: ", Long.toString(zz));
+				MyLog.e("Time: ", Long.toString(zz));
 
 				if (currentText.length() >= 1) {
 					old = currentText.substring(currentText.length() - 1);
@@ -586,11 +590,11 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 						this.lastKeyTouchedTime = tz;
 						xyz.execute(last);
 					}
-					Log.e("Keyboard: ", last);
+					MyLog.e("Keyboard: ", last);
 				}
 				if (newText.length() - currentText.length() == -1) {
 					xyz.execute("delete");
-					Log.e("Keyboard: ", "delete");
+					MyLog.e("Keyboard: ", "delete");
 				} else {
 				}
 
@@ -626,7 +630,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String newMessage = intent.getExtras().getString(EXTRA_MESSAGE);
-			Log.e("MESSAGE: ", newMessage);
+			MyLog.e("MESSAGE: ", newMessage);
 			// Waking up mobile if it is sleeping
 			WakeLocker.acquire(getApplicationContext());
 
@@ -654,7 +658,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			unregisterReceiver(mHandleMessageReceiver);
 			GCMRegistrar.onDestroy(this);
 		} catch (Exception e) {
-			Log.e("UnRegister Receiver Error", "> " + e.getMessage());
+			MyLog.e("UnRegister Receiver Error", "> " + e.getMessage());
 		}
 		super.onDestroy();
 	}

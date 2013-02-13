@@ -109,13 +109,13 @@ public final class CrashReportDataFactory {
 
         final ReportField[] fieldsList;
         if (customReportFields.length != 0) {
-            Log.d(LOG_TAG, "Using custom Report Fields");
+            MyLog.d(LOG_TAG, "Using custom Report Fields");
             fieldsList = customReportFields;
         } else if (config.mailTo() == null || "".equals(config.mailTo())) {
-            Log.d(LOG_TAG, "Using default Report Fields");
+            MyLog.d(LOG_TAG, "Using default Report Fields");
             fieldsList = ACRA.DEFAULT_REPORT_FIELDS;
         } else {
-            Log.d(LOG_TAG, "Using default Mail Report Fields");
+            MyLog.d(LOG_TAG, "Using default Mail Report Fields");
             fieldsList = ACRA.DEFAULT_MAIL_REPORT_FIELDS;
         }
 
@@ -334,7 +334,7 @@ public final class CrashReportDataFactory {
             if (prefs.getBoolean(ACRA.PREF_ENABLE_SYSTEM_LOGS, true)
             		&& (pm.hasPermission(Manifest.permission.READ_LOGS))
             			|| Compatibility.getAPILevel() >= 16) {
-                Log.i(ACRA.LOG_TAG, "READ_LOGS granted! ACRA can include LogCat and DropBox data.");
+                MyLog.i(ACRA.LOG_TAG, "READ_LOGS granted! ACRA can include LogCat and DropBox data.");
                 if (crashReportFields.contains(LOGCAT)) {
                     crashReportData.put(LOGCAT, LogCatCollector.collectLogCat(null));
                 }
@@ -349,7 +349,7 @@ public final class CrashReportDataFactory {
                             DropBoxCollector.read(context, ACRA.getConfig().additionalDropBoxTags()));
                 }
             } else {
-                Log.i(ACRA.LOG_TAG, "READ_LOGS not allowed. ACRA will not include LogCat and DropBox data.");
+                MyLog.i(ACRA.LOG_TAG, "READ_LOGS not allowed. ACRA will not include LogCat and DropBox data.");
             }
 
             // Application specific log file
@@ -369,11 +369,11 @@ public final class CrashReportDataFactory {
             }
 
         } catch (RuntimeException e) {
-            Log.e(LOG_TAG, "Error while retrieving crash data", e);
+            MyLog.e(LOG_TAG, "Error while retrieving crash data", e);
         } catch (FileNotFoundException e) {
-            Log.e(LOG_TAG, "Error : application log file " + ACRA.getConfig().applicationLogFile() + " not found.", e);
+            MyLog.e(LOG_TAG, "Error : application log file " + ACRA.getConfig().applicationLogFile() + " not found.", e);
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Error while reading application log file " + ACRA.getConfig().applicationLogFile() + ".", e);
+            MyLog.e(LOG_TAG, "Error while reading application log file " + ACRA.getConfig().applicationLogFile() + ".", e);
         }
 
         return crashReportData;

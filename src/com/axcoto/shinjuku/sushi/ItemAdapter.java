@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.axcoto.shinjuku.maki.Finder;
+import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.maki.Remote;
 
 import android.content.ClipData.Item;
@@ -70,7 +71,7 @@ public class ItemAdapter extends ArrayAdapter<DeviceItem> {
 			if (i != null) {
 				TextView tt = (TextView) v.findViewById(R.id.ipLabel);
 				String itemIp = i.getIp();
-				Log.i("MAKI:: DEVICE IP: ", i.getIp());
+				MyLog.i("MAKI:: DEVICE IP: ", i.getIp());
 				final ImageButton ib = (ImageButton) v.findViewById(R.id.imageDeviceStatus);
 				ib.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {		//disconnect whenever click on
@@ -86,14 +87,14 @@ public class ItemAdapter extends ArrayAdapter<DeviceItem> {
 				}
 				else {
 					if (connectTest(itemIp)) {						
-						Log.i("MAKI:: CONNECTED", "Connected to this device" + i.getIp());
+						MyLog.i("MAKI:: CONNECTED", "Connected to this device" + i.getIp());
 						ib.setImageResource(R.drawable.greencheck);
 						ib.setVisibility(View.VISIBLE);
 					}
 					else {						
 						ib.setImageResource(R.drawable.graycheck);
 						ib.setVisibility(View.VISIBLE);
-						Log.i("MAKI:: NOT CONNECTED", "Lost Connection to this device" + i.getIp());
+						MyLog.i("MAKI:: NOT CONNECTED", "Lost Connection to this device" + i.getIp());
 					}
 				}
 				//					else {

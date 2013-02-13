@@ -57,9 +57,9 @@ final class SettingsCollector {
                         result.append(key.getName()).append("=").append(value).append("\n");
                     }
                 } catch (IllegalArgumentException e) {
-                    Log.w(ACRA.LOG_TAG, "Error : ", e);
+                    MyLog.w(ACRA.LOG_TAG, "Error : ", e);
                 } catch (IllegalAccessException e) {
-                    Log.w(ACRA.LOG_TAG, "Error : ", e);
+                    MyLog.w(ACRA.LOG_TAG, "Error : ", e);
                 }
             }
         }
@@ -86,9 +86,9 @@ final class SettingsCollector {
                         result.append(key.getName()).append("=").append(value).append("\n");
                     }
                 } catch (IllegalArgumentException e) {
-                    Log.w(ACRA.LOG_TAG, "Error : ", e);
+                    MyLog.w(ACRA.LOG_TAG, "Error : ", e);
                 } catch (IllegalAccessException e) {
-                    Log.w(ACRA.LOG_TAG, "Error : ", e);
+                    MyLog.w(ACRA.LOG_TAG, "Error : ", e);
                 }
             }
         }

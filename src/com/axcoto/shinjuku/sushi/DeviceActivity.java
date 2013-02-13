@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.axcoto.shinjuku.maki.DeviceItem;
 import com.axcoto.shinjuku.maki.Finder;
 import com.axcoto.shinjuku.maki.ItemAdapter;
+import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.maki.Remote;
 
 public class DeviceActivity extends RootActivity implements OnGestureListener {
@@ -70,7 +71,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 		savedInstanceState.putStringArrayList("deviceIp", deviceIp);
 		// savedInstanceState.put
 		// etc.
-		Log.e("SUSHI: SAVED", "Saved Device Ip");
+		MyLog.e("SUSHI: SAVED", "Saved Device Ip");
 		super.onSaveInstanceState(savedInstanceState);
 	}
 
@@ -81,7 +82,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 		// This bundle has also been passed to onCreate.
 		ArrayList<String> ip = savedInstanceState
 				.getStringArrayList("deviceIp");
-		Log.e("SUSHI:: ==RESTORE", "From Restore. We had devices: " + ip.size());
+		MyLog.e("SUSHI:: ==RESTORE", "From Restore. We had devices: " + ip.size());
 
 		deviceIp = new ArrayList<String>();
 		devices = new ArrayList<DeviceItem>();
@@ -112,9 +113,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			br.close();
 			fos.close();
 		} catch (FileNotFoundException e) {
-			Log.e("SUSHI:: DEVICE", "Cannot find the file ");
+			MyLog.e("SUSHI:: DEVICE", "Cannot find the file ");
 		} catch (IOException e) {
-			Log.e("SUSHI:: DEVICE", "Cannot write data to the file ");
+			MyLog.e("SUSHI:: DEVICE", "Cannot write data to the file ");
 		}
 
 		// Okay, now we done we can skip it
@@ -130,7 +131,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 		setContentView(R.layout.activity_device);
 		listDevice = (ListView) findViewById(R.id.list_device);
 
-		Log.e("SUSHI:: DEVICE", "Create activity");
+		MyLog.e("SUSHI:: DEVICE", "Create activity");
 		final DeviceActivity t = this;
 		final Context context = this;
 		// waitingConnectBar.setVisibility(View.VISIBLE);
@@ -138,11 +139,11 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Log.i("SUSHI :: DEVICE: CLICKED", "Click ListItem Number "
+				MyLog.i("SUSHI :: DEVICE: CLICKED", "Click ListItem Number "
 						+ position);
 				final DeviceItem d = deviceAdapter.getItem(position);
-				Log.i("SUSHI:: DEVICE", "About to connect to " + d.getIp());
-				Log.i("SUSHI :: DEVICE", Integer.toString(view.getId()));
+				MyLog.i("SUSHI:: DEVICE", "About to connect to " + d.getIp());
+				MyLog.i("SUSHI :: DEVICE", Integer.toString(view.getId()));
 
 				try {
 					final int action = d.isConnected() ? ACTION_DISCONNECT
@@ -171,7 +172,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 								r = d.connect();
 							} catch (Exception e) {
 
-								Log.e("SUSHI:: DEVICE:: CONNECT_ERROR", e
+								MyLog.e("SUSHI:: DEVICE:: CONNECT_ERROR", e
 										.getStackTrace().toString());
 							}
 							return null;
@@ -207,9 +208,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 					// finish();
 					// startActivityForResult(i, 0x13343);
 				} catch (Exception e) {
-					Log.e("SUSHI:: DEVICE", e.getMessage());
+					MyLog.e("SUSHI:: DEVICE", e.getMessage());
 				}
-				Log.i("SUSHI :: DEVICE:: WAIT_CONNECT",
+				MyLog.i("SUSHI :: DEVICE:: WAIT_CONNECT",
 						"Waiting for device connection in background");
 
 			}
@@ -231,9 +232,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			}
 			fis.close();
 		} catch (FileNotFoundException e) {
-			Log.e("SUSHI:: DEVICE", "Device file has not existed yet.");
+			MyLog.e("SUSHI:: DEVICE", "Device file has not existed yet.");
 		} catch (IOException e) {
-			Log.e("SUSHI:: DEVICE", "Cannot read device file");
+			MyLog.e("SUSHI:: DEVICE", "Cannot read device file");
 		}
 		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
 		deviceAdapter.notifyDataSetChanged();
@@ -242,11 +243,11 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 		gestureScanner = new GestureDetector(this);
 
-		Log.i("SUSHI:: ", "RUN TO HERE");
+		MyLog.i("SUSHI:: ", "RUN TO HERE");
 		try {
-			Log.i("SUSHI:: CURRENT CONNECTED IP", Remote.getInstance().getIp());
+			MyLog.i("SUSHI:: CURRENT CONNECTED IP", Remote.getInstance().getIp());
 		} catch (Exception e) {
-			Log.i("Ignore", "IGNORE");
+			MyLog.i("Ignore", "IGNORE");
 		}
 	}
 
@@ -257,8 +258,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 		this.ipScanTo = sharedPref.getInt("ip_end", 253);
 		this.ipTimeoutPing = sharedPref.getInt("ping_time", 400);
 
-		Log.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanFrom);
-		Log.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanTo);
+		MyLog.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanFrom);
+		MyLog.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanTo);
 		showDialog(PROGRESS_DIALOG);
 	}
 
@@ -336,7 +337,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			Finder f = Finder.getInstance();
 			boolean res = f.resolve();
 			if (res == false) {
-				Log.e("Error: ", "no internet connection");
+				MyLog.e("Error: ", "no internet connection");
 				Message msg1 = mHandler.obtainMessage();
 				msg1.arg2 = 0;
 				msg1.arg1 = 120;
@@ -346,7 +347,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			else {
 				mState = STATE_RUNNING;
 
-				if (MainActivity.ENVIRONMENT == MainActivity.PHASE_DEVELOPMENT) {
+				if (MainActivity.ENVIRONMENT == MainActivity.PHASE_EMULATOR) {
 					maskIp = "192.168.0.";
 				} else {
 					maskIp = f.getMaskIpAddress() + ".";
@@ -354,7 +355,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 				DeviceActivity.ipMaskAdd = maskIp;
 
 				while (mState == STATE_RUNNING) {
-					Log.i("MaskIp=", maskIp + checkIp);
+					MyLog.i("MaskIp=", maskIp + checkIp);
 					try {
 						Message msg = mHandler.obtainMessage();
 						msg.arg2 = 0;
@@ -362,18 +363,18 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 						if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT,
 								DeviceActivity.ipTimeoutPing)) {
 							msg.arg2 = checkIp;
-							Log.e("MAKI::FINDER",
+							MyLog.e("MAKI::FINDER",
 									"Okay. We added the board to listview "
 											+ checkIp);
 						}
 
 						msg.arg1 = Math.round((checkIp - from) * 100
 								/ (to - from));
-						Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
+						MyLog.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
 						mHandler.sendMessage(msg);
 						checkIp++;
 					} catch (Exception e) {
-						Log.e("ERROR", "Thread Interrupted");
+						MyLog.e("ERROR", "Thread Interrupted");
 					}
 				}
 			}
@@ -405,7 +406,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		Log.e("SUSHI:: DEVICE", "-" + "DOWN" + "-");
+		MyLog.e("SUSHI:: DEVICE", "-" + "DOWN" + "-");
 
 		return true;
 
@@ -417,14 +418,14 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		// Log.e("SUSHI:: DEVICE", "-" + "FLING" + "-");
+		// MyLog.e("SUSHI:: DEVICE", "-" + "FLING" + "-");
 		return true;
 
 	}
 
 	@Override
 	public void onLongPress(MotionEvent e) {
-		Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
+		MyLog.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
 		Remote.getInstance().disConnect();
 	}
 
@@ -434,7 +435,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		// Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
+		// MyLog.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
 		//
 		// return true;
 		return false;
@@ -445,7 +446,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		// Log.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
+		// MyLog.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
 
 	}
 
@@ -454,7 +455,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		// Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
+		// MyLog.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
 		// return true;
 		return false;
 	}

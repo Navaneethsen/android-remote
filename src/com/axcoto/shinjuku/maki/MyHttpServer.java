@@ -35,7 +35,7 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 	public static MyHttpServer getInstance(int port, File docRoot)
 			throws IOException {
 		if (instance == null) {
-			Log.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
+			MyLog.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
 			instance = new MyHttpServer(port, docRoot);
 			MyHttpServer.docRoot = docRoot;
 			MyHttpServer.port = port;
@@ -45,14 +45,14 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 
 	public static MyHttpServer getInstance() throws IOException {
 		if (instance == null) {
-			Log.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
+			MyLog.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
 			instance = new MyHttpServer(port, docRoot);
 		}
 		return instance;
 	}
 
 	public static MyHttpServer start() throws IOException {
-		Log.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
+		MyLog.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
 		return instance = new MyHttpServer(port, docRoot);
 
 	}
@@ -69,7 +69,7 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 			Properties parms, Properties files) {
 		has_file = 0;
 
-		Log.e("MAKI: HTTP SERVER", method + " '" + uri + "' ");
+		MyLog.e("MAKI: HTTP SERVER", method + " '" + uri + "' ");
 
 		if (uri.equalsIgnoreCase("/upload.html")) {
 			has_file = 1;
@@ -94,11 +94,11 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 			myOut.println("  UPLOADED: '" + value + "' = '"
 					+ files.getProperty(value) + "'");
 
-			Log.e("MAKI: START_COPY_UPLOADED_FILE",
+			MyLog.e("MAKI: START_COPY_UPLOADED_FILE",
 					"Copy temp file to correct location");
 			try {
 				SongActivity.syncStatus = SongActivity.SYNC_RECEIVE_SONGBOOK;
-				Log.i("Sync Status: ", "STARTING TO WRITE SONGBOOK");
+				MyLog.i("Sync Status: ", "STARTING TO WRITE SONGBOOK");
 				in = new FileInputStream(new File(files.getProperty(value)
 						.toString()));
 				out = new FileOutputStream(docRoot.getAbsoluteFile() + "/"
@@ -122,15 +122,15 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 				out.close();
 				has_file = 2;
 				SongActivity.syncStatus = SongActivity.SYNC_PROCESS_SONGBOOK;
-				Log.i("Sync Status: ", "SONG BOOK RETRIEVED");
+				MyLog.i("Sync Status: ", "SONG BOOK RETRIEVED");
 			} catch (FileNotFoundException fnfe) {
-				Log.e("MAKI: SERVER", "File location is incorrect. Error:"
+				MyLog.e("MAKI: SERVER", "File location is incorrect. Error:"
 						+ fnfe.getMessage());
 			} catch (IOException ioe) {
-				Log.e("MAKI: SERVER",
+				MyLog.e("MAKI: SERVER",
 						"Cannot read/write to file. Error:" + ioe.getMessage());
 			} catch (Exception ex) {
-				Log.e("MAKI: SERVER",
+				MyLog.e("MAKI: SERVER",
 						"Unknow error when copying temp uploader file to correct location in docroot "
 								+ ex.getMessage());
 			}

@@ -98,7 +98,7 @@ class LogCatCollector {
             final Process process = Runtime.getRuntime().exec(commandLine.toArray(new String[commandLine.size()]));
             final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()), ACRAConstants.DEFAULT_BUFFER_SIZE_IN_BYTES);
 
-            Log.d(LOG_TAG, "Retrieving logcat output...");
+            MyLog.d(LOG_TAG, "Retrieving logcat output...");
             while (true) {
                 final String line = bufferedReader.readLine();
                 if (line == null) {
@@ -110,7 +110,7 @@ class LogCatCollector {
             }
 
         } catch (IOException e) {
-            Log.e(ACRA.LOG_TAG, "LogCatCollector.collectLogCat could not retrieve data.", e);
+            MyLog.e(ACRA.LOG_TAG, "LogCatCollector.collectLogCat could not retrieve data.", e);
         }
 
         return logcatBuf.toString();

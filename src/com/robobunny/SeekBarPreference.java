@@ -1,5 +1,6 @@
 package com.robobunny;
 
+import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.sushi.R;
 
 import android.content.Context;
@@ -65,7 +66,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
 				mInterval = Integer.parseInt(newInterval);
 		}
 		catch(Exception e) {
-			Log.e(TAG, "Invalid interval value", e);
+			MyLog.e(TAG, "Invalid interval value", e);
 		}
 		
 	}
@@ -90,7 +91,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
 		}
 		catch(Exception e)
 		{
-			Log.e(TAG, "Error creating seek bar preference", e);
+			MyLog.e(TAG, "Error creating seek bar preference", e);
 		}
 
 		return layout;
@@ -119,7 +120,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
 	        }
 		}
 		catch(Exception ex) {
-			Log.e(TAG, "Error binding view: " + ex.toString());
+			MyLog.e(TAG, "Error binding view: " + ex.toString());
 		}
 
 		updateView(view);
@@ -148,7 +149,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
 			
 		}
 		catch(Exception e) {
-			Log.e(TAG, "Error updating seek bar preference", e);
+			MyLog.e(TAG, "Error updating seek bar preference", e);
 		}
 		
 	}
@@ -206,7 +207,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
 				temp = (Integer)defaultValue;
 			}
 			catch(Exception ex) {
-				Log.e(TAG, "Invalid default value: " + defaultValue.toString());
+				MyLog.e(TAG, "Invalid default value: " + defaultValue.toString());
 			}
 			
 			persistInt(temp);

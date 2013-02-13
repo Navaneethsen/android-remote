@@ -31,7 +31,7 @@ public class RootActivity extends Activity {
 			// ShowScreenAddSite();
 
 			// Place code to handle Button-Click here.
-			// Log.e(Log.VERBOSE, "Lolz. Test event listenr");
+			// MyLog.e(MyLog.VERBOSE, "Lolz. Test event listenr");
 			/* Create an Intent to start * MySecondActivity. */
 			i = new Intent(this, DeviceActivity.class)
 					.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

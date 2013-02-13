@@ -44,17 +44,17 @@ final class CrashReportFinder {
      */
     public String[] getCrashReportFiles() {
         if (context == null) {
-            Log.e(LOG_TAG, "Trying to get ACRA reports but ACRA is not initialized.");
+            MyLog.e(LOG_TAG, "Trying to get ACRA reports but ACRA is not initialized.");
             return new String[0];
         }
 
         final File dir = context.getFilesDir();
         if (dir == null) {
-            Log.w(LOG_TAG, "Application files directory does not exist! The application may not be installed correctly. Please try reinstalling.");
+            MyLog.w(LOG_TAG, "Application files directory does not exist! The application may not be installed correctly. Please try reinstalling.");
             return new String[0];
         }
 
-        Log.d(LOG_TAG, "Looking for error files in " + dir.getAbsolutePath());
+        MyLog.d(LOG_TAG, "Looking for error files in " + dir.getAbsolutePath());
 
         // Filter for ".stacktrace" files
         final FilenameFilter filter = new FilenameFilter() {

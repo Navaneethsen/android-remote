@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.axcoto.shinjuku.maki.MyHttpServer;
+import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.maki.Remote;
 
 public class ConfigActivity extends PreferenceActivity {
@@ -31,10 +32,10 @@ public class ConfigActivity extends PreferenceActivity {
 						try {
 							if (serverPref.isChecked()) {
 								MyHttpServer s = MyHttpServer.getInstance();
-								Log.i("SUSHI:: CONFIG", "Stop the web server");
+								MyLog.i("SUSHI:: CONFIG", "Stop the web server");
 								s.close();
 							} else {
-								Log.i("SUSHI:: CONFIG",
+								MyLog.i("SUSHI:: CONFIG",
 										"Restart the web server");
 								MyHttpServer s = MyHttpServer.start();
 							}

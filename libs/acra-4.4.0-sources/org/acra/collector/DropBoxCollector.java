@@ -117,17 +117,17 @@ final class DropBoxCollector {
             return dropboxContent.toString();
 
         } catch (SecurityException e) {
-            Log.i(ACRA.LOG_TAG, "DropBoxManager not available.");
+            MyLog.i(ACRA.LOG_TAG, "DropBoxManager not available.");
         } catch (NoSuchMethodException e) {
-            Log.i(ACRA.LOG_TAG, "DropBoxManager not available.");
+            MyLog.i(ACRA.LOG_TAG, "DropBoxManager not available.");
         } catch (IllegalArgumentException e) {
-            Log.i(ACRA.LOG_TAG, "DropBoxManager not available.");
+            MyLog.i(ACRA.LOG_TAG, "DropBoxManager not available.");
         } catch (IllegalAccessException e) {
-            Log.i(ACRA.LOG_TAG, "DropBoxManager not available.");
+            MyLog.i(ACRA.LOG_TAG, "DropBoxManager not available.");
         } catch (InvocationTargetException e) {
-            Log.i(ACRA.LOG_TAG, "DropBoxManager not available.");
+            MyLog.i(ACRA.LOG_TAG, "DropBoxManager not available.");
         } catch (NoSuchFieldException e) {
-            Log.i(ACRA.LOG_TAG, "DropBoxManager not available.");
+            MyLog.i(ACRA.LOG_TAG, "DropBoxManager not available.");
         }
 
         return NO_RESULT;

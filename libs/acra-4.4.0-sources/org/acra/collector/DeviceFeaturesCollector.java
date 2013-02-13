@@ -55,7 +55,7 @@ final class DeviceFeaturesCollector {
                 result.append("\n");
             }
         } catch (Throwable e) {
-            Log.w(LOG_TAG, "Couldn't retrieve DeviceFeatures for " + ctx.getPackageName(), e);
+            MyLog.w(LOG_TAG, "Couldn't retrieve DeviceFeatures for " + ctx.getPackageName(), e);
             result.append("Could not retrieve data: ");
             result.append(e.getMessage());
         }

@@ -71,7 +71,7 @@ public class Finder {
 		this._to = 152;
 		this._maskIpAddress = "192.168.0.";
 		String myIp = _ipAddress;
-		Log.e("MAKI:", "My IP is" + myIp);
+		MyLog.e("MAKI:", "My IP is" + myIp);
 
 		for (int i = _from; i <= _to; i++) {
 			try {
@@ -79,14 +79,14 @@ public class Finder {
 				socket.connect(new InetSocketAddress(_maskIpAddress + i,
 						Remote.TCP_PORT), 10000);
 				socket.close();
-				Log.e("MAKI::FINDER", "Horay. We found out the board at: "
+				MyLog.e("MAKI::FINDER", "Horay. We found out the board at: "
 						+ _maskIpAddress + i);
 				socket.close();
 			} catch (IOException e) {
-				Log.e("MAKI::FINDER", "Badly. No board at " + _maskIpAddress
+				MyLog.e("MAKI::FINDER", "Badly. No board at " + _maskIpAddress
 						+ i);
 			} catch (Exception e) {
-				Log.e("MAKI::FINDER", "Horay. No board at " + _maskIpAddress
+				MyLog.e("MAKI::FINDER", "Horay. No board at " + _maskIpAddress
 						+ i);
 
 			}
@@ -99,12 +99,12 @@ public class Finder {
 			Socket socket = new Socket();
 			socket.connect(new InetSocketAddress(ip, port), timeout);
 			socket.close();
-			Log.i("MAKI::FINDER", "Horay. We found out the board at: " + ip);
+			MyLog.i("MAKI::FINDER", "Horay. We found out the board at: " + ip);
 			found = true;
 		} catch (IOException e) {
-			Log.w("MAKI::FINDER", "Badly. No board at " + ip);
+			MyLog.w("MAKI::FINDER", "Badly. No board at " + ip);
 		} catch (Exception e) {
-			Log.w("MAKI::FINDER", "Horay. No board at " + ip);
+			MyLog.w("MAKI::FINDER", "Horay. No board at " + ip);
 		}
 		return found;
 	}
@@ -130,20 +130,20 @@ public class Finder {
 							&& InetAddressUtils.isIPv4Address(inetAddress
 									.getHostAddress())) {
 						_ipAddress = inetAddress.getHostAddress();
-						// Log.e("ipAddress: ", _ipAddress);
+						// MyLog.e("ipAddress: ", _ipAddress);
 						String[] part = _ipAddress.split("\\.");
-						Log.e("MAKI", "Current IP of Device is " + _ipAddress);
-						Log.e("MAKI: Finder",
+						MyLog.e("MAKI", "Current IP of Device is " + _ipAddress);
+						MyLog.e("MAKI: Finder",
 								"Ip Part is " + Arrays.toString(part));
 						_maskIpAddress = part[0] + "." + part[1] + "."
 								+ part[2];
-						Log.i("_maskIpAddress", _maskIpAddress);
+						MyLog.i("_maskIpAddress", _maskIpAddress);
 					}
 				}
 			}
 			return true;
 		} catch (SocketException ex) {
-			Log.e("MAKI: FIND IP", ex.toString());
+			MyLog.e("MAKI: FIND IP", ex.toString());
 			return false;
 		}
 
