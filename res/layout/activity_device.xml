@@ -10,12 +10,19 @@
         android:layout_marginTop="@dimen/device_padding_top"
         android:onClick="scanDevice"
         android:text="@string/scan" />
+    <Button
+        android:id="@+id/btn_qrcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"     
+        android:onClick="qrcodescan"
+        android:text="qrcodescan" 
+        android:layout_below="@+id/btn_scan"/>
     
     <ListView
         android:id="@+id/list_device"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_scan" >
+        android:layout_below="@+id/btn_qrcode" >
 
     </ListView>
 

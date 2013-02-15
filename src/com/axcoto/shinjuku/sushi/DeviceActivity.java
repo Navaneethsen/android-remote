@@ -11,11 +11,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +38,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.axcoto.shinjuku.maki.DeviceItem;
@@ -60,7 +68,10 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 	static String ipMaskAdd = "";
 	AsyncTask<Integer, Void, Void> mConnectTask;
 	Remote r;
-
+	//Used for scan QR code to get IP address
+	static String qrcodestring = null;
+	static Boolean isresumefromqrcodescanner=false;
+	static String ipqrcodescan = null;
 	private GestureDetector gestureScanner;
 
 	@Override
@@ -71,7 +82,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 		savedInstanceState.putStringArrayList("deviceIp", deviceIp);
 		// savedInstanceState.put
 		// etc.
-		MyLog.e("SUSHI: SAVED", "Saved Device Ip");
+		Log.e("SUSHI: SAVED", "Saved Device Ip");
 		super.onSaveInstanceState(savedInstanceState);
 	}
 
@@ -82,7 +93,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 		// This bundle has also been passed to onCreate.
 		ArrayList<String> ip = savedInstanceState
 				.getStringArrayList("deviceIp");
-		MyLog.e("SUSHI:: ==RESTORE", "From Restore. We had devices: " + ip.size());
+		Log.e("SUSHI:: ==RESTORE", "From Restore. We had devices: " + ip.size());
 
 		deviceIp = new ArrayList<String>();
 		devices = new ArrayList<DeviceItem>();
@@ -96,6 +107,173 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			deviceAdapter.notifyDataSetChanged();
 			listDevice.setAdapter(deviceAdapter);
 		}
+	}
+	
+
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		Log.e("onResume", "onResume");
+		//onResume called after scan QR code
+		if (isresumefromqrcodescanner)
+		{
+			final Context context = this;
+			Boolean isipduplicate = false;
+			isresumefromqrcodescanner=false;
+			for (int i =0; i < deviceIp.size();i++)
+			{
+				//IP address existed in listView
+				if (ipqrcodescan.equalsIgnoreCase(deviceIp.get(i)))
+				{
+					isipduplicate = true;
+					AlertDialog.Builder downloadDialog = new AlertDialog.Builder(context);
+				    downloadDialog.setTitle("CeeNee player's ip address duplicate!");
+				    downloadDialog.setMessage("Click on the ip address to connect (If it disconnect)");
+				    downloadDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							//Nothing for you
+						}
+					});
+					downloadDialog.show();
+				}	
+			}
+			//Ip address not exist in listView
+			if (!isipduplicate)
+			{
+			deviceAdapter.add(new DeviceItem(ipqrcodescan));
+			deviceIp.add(ipqrcodescan);
+			saveDeviceList();
+			final DeviceItem d = new DeviceItem(ipqrcodescan);
+			try {
+				final int action = d.isConnected() ? ACTION_DISCONNECT
+						: ACTION_CONNECT;
+
+				mConnectTask = new AsyncTask<Integer, Void, Void>() {
+					ProgressDialog connectProgress;
+
+					@Override
+					protected void onPreExecute() {
+						connectProgress = ProgressDialog
+								.show(context,
+										"Connect Status",
+										"Trying to connect to CeeNee Media Player...",
+										true);
+					}
+
+					@Override
+					protected Void doInBackground(Integer... params) {
+
+						try {
+							// We need to close previous connection first.
+							if (action == ACTION_DISCONNECT) {
+								Remote.getInstance().disConnect();
+							}
+							r = d.connect();
+						} catch (Exception e) {
+
+							Log.e("SUSHI:: DEVICE:: CONNECT_ERROR", e
+									.getStackTrace().toString());
+						}
+						return null;
+					}
+
+					@Override
+					protected void onPostExecute(Void result) {
+						mConnectTask = null;
+						if (d.isConnected()) {
+							Toast.makeText(
+									getApplicationContext(),
+									"Click on the check mark to disconnect",
+									Toast.LENGTH_SHORT).show();
+							deviceAdapter.notifyDataSetChanged();
+							listDevice.setAdapter(deviceAdapter);
+							// Intent i = new Intent( t,
+							// MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+							// finish();
+							// startActivityForResult(i, 0x13343);
+
+						} else {
+							Toast.makeText(getApplicationContext(),
+									"Cannot connect to the device",
+									Toast.LENGTH_LONG).show();
+						}
+						connectProgress.dismiss();
+					}
+
+				};
+				mConnectTask.execute(action, null, null);
+				// Intent i = new Intent( t,
+				// MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				// finish();
+				// startActivityForResult(i, 0x13343);
+			} catch (Exception e) {
+				Log.e("SUSHI:: DEVICE", e.getMessage());
+			}
+			Log.i("SUSHI :: DEVICE:: WAIT_CONNECT",
+					"Waiting for device connection in background");
+			} //of if (!isipduplicate)
+		} //of if (isresumefromqrcodescanner)
+	}
+
+	/**Handle when user click button Scan to scan ip address using QRcode
+	 * 
+	 * @param v
+	 */
+	public void qrcodescan(View v) {
+	    Intent intent = new Intent("com.google.zxing.client.android.SCAN");	    
+	    intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+	    startActivityForResult(intent, 0);
+	} 
+	/**Convert JSONString to get ip address string
+	 * @param string got from scanner qrcode 
+	 * @return ip address string
+	 * @throws JSONException if JSON String true format, null if otherwise
+	 */
+	
+	public String convertqrcode(String string) throws JSONException{
+		String jsonstring = string;
+		JSONObject jsonobjectdata;
+		isresumefromqrcodescanner = true;
+		try {
+			jsonobjectdata= new JSONObject(jsonstring);
+		} catch (JSONException e) {
+			// TODO: handle exception
+			Log.i("QRcode scan","JSON object error:"+ e.toString());
+			return "0.0.0.0";
+		}
+		Log.i("QRcode scan",jsonobjectdata.getString("ip"));
+		return jsonobjectdata.getString("ip");
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+			if (resultCode == Activity.RESULT_OK) 
+			{
+	           if (qrcodestring.equalsIgnoreCase("0")) {
+	               Toast.makeText(this, "QR code is error", Toast.LENGTH_LONG).show();
+	           }
+	           else {
+	        	   Log.d("QRcode scan", "IP address "+qrcodestring);
+	               try {
+					ipqrcodescan= convertqrcode(qrcodestring);
+					MyLog.i("ip scanned: ", ipqrcodescan);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	           }
+	        } 
+	        else if (resultCode == Activity.RESULT_CANCELED) {
+	            Toast.makeText(this, "Problem with scan the QRcode\n  Scan progress was cancelled", 
+	            		Toast.LENGTH_LONG).show();
+	        }
 	}
 
 	public void saveDeviceList() {
@@ -113,9 +291,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			br.close();
 			fos.close();
 		} catch (FileNotFoundException e) {
-			MyLog.e("SUSHI:: DEVICE", "Cannot find the file ");
+			Log.e("SUSHI:: DEVICE", "Cannot find the file ");
 		} catch (IOException e) {
-			MyLog.e("SUSHI:: DEVICE", "Cannot write data to the file ");
+			Log.e("SUSHI:: DEVICE", "Cannot write data to the file ");
 		}
 
 		// Okay, now we done we can skip it
@@ -127,11 +305,13 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 		super.onCreate(savedInstanceState);
 		// We need to keep this on during device scanning
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
+		//keep screen oriention alway portrait after scan QRcode 
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		
 		setContentView(R.layout.activity_device);
 		listDevice = (ListView) findViewById(R.id.list_device);
 
-		MyLog.e("SUSHI:: DEVICE", "Create activity");
+		Log.e("SUSHI:: DEVICE", "Create activity");
 		final DeviceActivity t = this;
 		final Context context = this;
 		// waitingConnectBar.setVisibility(View.VISIBLE);
@@ -139,11 +319,11 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				MyLog.i("SUSHI :: DEVICE: CLICKED", "Click ListItem Number "
+				Log.i("SUSHI :: DEVICE: CLICKED", "Click ListItem Number "
 						+ position);
 				final DeviceItem d = deviceAdapter.getItem(position);
-				MyLog.i("SUSHI:: DEVICE", "About to connect to " + d.getIp());
-				MyLog.i("SUSHI :: DEVICE", Integer.toString(view.getId()));
+				Log.i("SUSHI:: DEVICE", "About to connect to " + d.getIp());
+				Log.i("SUSHI :: DEVICE", Integer.toString(view.getId()));
 
 				try {
 					final int action = d.isConnected() ? ACTION_DISCONNECT
@@ -172,7 +352,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 								r = d.connect();
 							} catch (Exception e) {
 
-								MyLog.e("SUSHI:: DEVICE:: CONNECT_ERROR", e
+								Log.e("SUSHI:: DEVICE:: CONNECT_ERROR", e
 										.getStackTrace().toString());
 							}
 							return null;
@@ -208,9 +388,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 					// finish();
 					// startActivityForResult(i, 0x13343);
 				} catch (Exception e) {
-					MyLog.e("SUSHI:: DEVICE", e.getMessage());
+					Log.e("SUSHI:: DEVICE", e.getMessage());
 				}
-				MyLog.i("SUSHI :: DEVICE:: WAIT_CONNECT",
+				Log.i("SUSHI :: DEVICE:: WAIT_CONNECT",
 						"Waiting for device connection in background");
 
 			}
@@ -232,9 +412,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			}
 			fis.close();
 		} catch (FileNotFoundException e) {
-			MyLog.e("SUSHI:: DEVICE", "Device file has not existed yet.");
+			Log.e("SUSHI:: DEVICE", "Device file has not existed yet.");
 		} catch (IOException e) {
-			MyLog.e("SUSHI:: DEVICE", "Cannot read device file");
+			Log.e("SUSHI:: DEVICE", "Cannot read device file");
 		}
 		deviceAdapter = new ItemAdapter(this, R.layout.device_item, devices);
 		deviceAdapter.notifyDataSetChanged();
@@ -243,11 +423,11 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 		gestureScanner = new GestureDetector(this);
 
-		MyLog.i("SUSHI:: ", "RUN TO HERE");
+		Log.i("SUSHI:: ", "RUN TO HERE");
 		try {
-			MyLog.i("SUSHI:: CURRENT CONNECTED IP", Remote.getInstance().getIp());
+			Log.i("SUSHI:: CURRENT CONNECTED IP", Remote.getInstance().getIp());
 		} catch (Exception e) {
-			MyLog.i("Ignore", "IGNORE");
+			Log.i("Ignore", "IGNORE");
 		}
 	}
 
@@ -258,8 +438,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 		this.ipScanTo = sharedPref.getInt("ip_end", 253);
 		this.ipTimeoutPing = sharedPref.getInt("ping_time", 400);
 
-		MyLog.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanFrom);
-		MyLog.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanTo);
+		Log.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanFrom);
+		Log.i("SUSHI: PREF", "IP FROM IS: " + this.ipScanTo);
 		showDialog(PROGRESS_DIALOG);
 	}
 
@@ -337,7 +517,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			Finder f = Finder.getInstance();
 			boolean res = f.resolve();
 			if (res == false) {
-				MyLog.e("Error: ", "no internet connection");
+				Log.e("Error: ", "no internet connection");
 				Message msg1 = mHandler.obtainMessage();
 				msg1.arg2 = 0;
 				msg1.arg1 = 120;
@@ -347,7 +527,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			else {
 				mState = STATE_RUNNING;
 
-				if (MainActivity.ENVIRONMENT == MainActivity.PHASE_EMULATOR) {
+				if (MainActivity.ENVIRONMENT == MainActivity.PHASE_DEVELOPMENT) {
 					maskIp = "192.168.0.";
 				} else {
 					maskIp = f.getMaskIpAddress() + ".";
@@ -355,7 +535,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 				DeviceActivity.ipMaskAdd = maskIp;
 
 				while (mState == STATE_RUNNING) {
-					MyLog.i("MaskIp=", maskIp + checkIp);
+					Log.i("MaskIp=", maskIp + checkIp);
 					try {
 						Message msg = mHandler.obtainMessage();
 						msg.arg2 = 0;
@@ -363,18 +543,18 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 						if (f.isPortOpen(maskIp + checkIp, Remote.TCP_PORT,
 								DeviceActivity.ipTimeoutPing)) {
 							msg.arg2 = checkIp;
-							MyLog.e("MAKI::FINDER",
+							Log.e("MAKI::FINDER",
 									"Okay. We added the board to listview "
 											+ checkIp);
 						}
 
 						msg.arg1 = Math.round((checkIp - from) * 100
 								/ (to - from));
-						MyLog.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
+						Log.e("MAKI::FINDER", "RUNNING THREAD " + msg.arg1);
 						mHandler.sendMessage(msg);
 						checkIp++;
 					} catch (Exception e) {
-						MyLog.e("ERROR", "Thread Interrupted");
+						Log.e("ERROR", "Thread Interrupted");
 					}
 				}
 			}
@@ -406,7 +586,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		MyLog.e("SUSHI:: DEVICE", "-" + "DOWN" + "-");
+		Log.e("SUSHI:: DEVICE", "-" + "DOWN" + "-");
 
 		return true;
 
@@ -418,14 +598,14 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		// MyLog.e("SUSHI:: DEVICE", "-" + "FLING" + "-");
+		// Log.e("SUSHI:: DEVICE", "-" + "FLING" + "-");
 		return true;
 
 	}
 
 	@Override
 	public void onLongPress(MotionEvent e) {
-		MyLog.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
+		Log.e("SUSHI:: DEVICE", "-" + "LONG PRESS" + "-");
 		Remote.getInstance().disConnect();
 	}
 
@@ -435,7 +615,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		// MyLog.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
+		// Log.e("SUSHI:: DEVICE", "-" + "SCROLL" + "-");
 		//
 		// return true;
 		return false;
@@ -446,7 +626,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		// MyLog.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
+		// Log.e("SUSHI:: DEVICE", "-" + "SHOW PRESS" + "-");
 
 	}
 
@@ -455,7 +635,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 
 	{
 
-		// MyLog.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
+		// Log.e("SUSHI:: DEVICE", "-" + "SINGLE TAP UP" + "-");
 		// return true;
 		return false;
 	}

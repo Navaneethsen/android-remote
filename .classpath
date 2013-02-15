@@ -4,5 +4,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="src" path="zXing/src"/>
+	<classpathentry exported="true" kind="lib" path="/home/dphan/Downloads/zxing-2.1/core/core.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
