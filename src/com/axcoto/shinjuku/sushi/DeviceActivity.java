@@ -486,10 +486,9 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			}
 			if (total >= 100) {
 				saveDeviceList();
-				progressDialog.setProgress(0); // clear the value to avoid cache
-												// for next appearance.
-				dismissDialog(PROGRESS_DIALOG);
 				progressThread.setState(ProgressThread.STATE_DONE);
+				removeDialog(PROGRESS_DIALOG);//instead of use dismissDialog(PROGRESS_DIALOG) 
+				//to avoid app force close when scan ip address
 			}
 		}
 	};
@@ -516,6 +515,18 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 		public void run() {
 			Finder f = Finder.getInstance();
 			boolean res = f.resolve();
+			progressDialog.setOnDismissListener(new 
+					DialogInterface.OnDismissListener() {
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					//cancel thread scan when progress dialog dismiss (press back key)
+					saveDeviceList();
+					progressThread.setState(ProgressThread.STATE_DONE);
+					removeDialog(PROGRESS_DIALOG);//instead of use dismissDialog(PROGRESS_DIALOG) 
+					//to avoid the overhead of saving and restoring it in the future
+				}
+			});
 			if (res == false) {
 				Log.e("Error: ", "no internet connection");
 				Message msg1 = mHandler.obtainMessage();
