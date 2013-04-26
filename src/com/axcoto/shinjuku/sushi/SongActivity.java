@@ -4,11 +4,13 @@ package com.axcoto.shinjuku.sushi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -18,11 +20,18 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings.Secure;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -33,6 +42,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -43,6 +53,8 @@ import com.axcoto.shinjuku.maki.Song;
 import com.axcoto.shinjuku.maki.SongAdapter;
 import com.axcoto.shinjuku.maki.Unicode;
 import com.axcoto.shinjuku.maki.XMLParser;
+import com.axcoto.shinjuku.sushi.BluetoothService;
+import com.axcoto.shinjuku.sushi.DeviceListActivity;
 
 public class SongActivity extends RootActivity {
 	private ListView songList;
@@ -79,7 +91,21 @@ public class SongActivity extends RootActivity {
 	private final long SEARCH_TRIGGER_DELAY_IN_MS = 1000;
 	private static String karaoke;
 	private String text;
-
+	//share song book
+	private BluetoothService mBTService = null;
+	private BluetoothAdapter mBluetoothAdapter = null;
+	private static final String TAG = "Bluetooth";
+	private static final int REQUEST_ENABLE_BT = 1;
+	private static final int REQUEST_CONNECT_DEVICE = 2;
+	public static String MAC_ADDRESS = "";
+	public static String myUUID;
+    // Message types sent from the BluetoothService Handler
+    public static final int MESSAGE_STATE_CHANGE = 1;
+    public static final int MESSAGE_READ = 2;
+    public static final int MESSAGE_WRITE = 3;
+    public static final int MESSAGE_DEVICE_NAME = 4;
+    public static final int MESSAGE_TOAST = 5;
+    
 	public ArrayList<Song> getSong(String location) {
 		try {
 			SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -144,6 +170,16 @@ public class SongActivity extends RootActivity {
 		songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item,
 				songs);
 		songList.setAdapter(songAdapter);
+		if (songList.getCount()>0)
+		{
+			//enable btn_share when load listview ok
+			Button btn_sharesong = (Button) findViewById(R.id.btn_share);
+			if (!btn_sharesong.isEnabled())
+			{
+				btn_sharesong.setEnabled(true);
+			}
+		}
+		
 		// We need to keep this on during device scanning--REMOVED FOR CRASH
 		// TEST
 		// getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -451,4 +487,111 @@ public class SongActivity extends RootActivity {
 			}
 		}
 	}
+	
+	public void click_share(View v) {
+		//share song book
+		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		//check bluetooth
+		if (mBluetoothAdapter == null)
+		{
+			Toast.makeText(getBaseContext(),"Bluetooth is not available", Toast.LENGTH_LONG).show();
+			Log.d("Bluetooth", "mBluetoothAdapter == null");
+			return;
+		}
+		
+		//bluetooth have support but not enable
+		if (!mBluetoothAdapter.isEnabled()) {
+			Log.d("Bluetooth", "!mBluetoothAdapter.isEnabled()");
+		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+		    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+		}
+		
+		if (mBluetoothAdapter.isEnabled()) {
+			// Ensure this device is discoverable by others
+//        	ensureDiscoverable(); //no need
+			
+			//show dialog scan devices
+			Intent serverIntent = new Intent(this, DeviceListActivity.class);
+            startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
+		}
+	}
+	
+//    private void ensureDiscoverable() {
+//        Log.d(TAG, "ensure discoverable");
+//        if (mBluetoothAdapter.getScanMode() !=
+//            BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
+//            Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+//            discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+//            startActivity(discoverableIntent);
+//        }
+//    }
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+        case REQUEST_CONNECT_DEVICE:
+            // When DeviceListActivity returns with a device to connect
+            if (resultCode == Activity.RESULT_OK) {
+            	String text = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+            	if (text.contains(":") || text.contains("-"))
+            	{
+            		MAC_ADDRESS = text;
+            		Log.d(TAG, "MAC_ADDRESS = " + MAC_ADDRESS);
+            		if (karaoke.equals("hd"))
+            			connectDevice(data, true);
+            		else {
+            			connectDevice(data, true);
+					}
+            	}
+            	else 
+            	{
+            		Toast.makeText(getBaseContext(), "Devices not found!", Toast.LENGTH_LONG).show();
+            	}
+            }
+            break;
+        case REQUEST_ENABLE_BT:
+            // When the request to enable Bluetooth returns
+        	if (resultCode == RESULT_CANCELED)
+			{
+				Toast.makeText(getBaseContext(), "Bluetooth was not enabled", Toast.LENGTH_LONG).show();
+			}
+        }
+	}
+	
+    private void connectDevice(Intent data, boolean secure) {
+        // Get the BluetoothDevice object
+        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(MAC_ADDRESS);
+        // Attempt to connect to the device
+        if (karaoke.equals("hd"))
+        	mBTService.connect(device, secure,"KaraokeDB.xml");
+        else {
+        	mBTService.connect(device, secure,"MP3KaraokeDB.xml");
+		}
+        if (mBTService.isIshandlefile())
+        {
+			File file;
+			if (karaoke.equals("hd"))
+        		file = getApplicationContext().getFileStreamPath("KaraokeDB.xml");
+			else {
+				file = getApplicationContext().getFileStreamPath("MP3KaraokeDB.xml");
+			}
+			if (file.exists())
+			{
+				songs = getSong(t.getLocation(karaoke));
+				for (Song s : songs) {
+					fullsong.add(s);
+				}
+				songAdapter = new SongAdapter(t, R.layout.song_item, songs);
+				songList.setAdapter(songAdapter);
+			}
+        }
+       
+    }
+    
+    public void getUUID() {
+	myUUID = UUID.randomUUID().toString();
+    }
 }
+	

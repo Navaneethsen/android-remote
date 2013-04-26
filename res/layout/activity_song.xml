@@ -100,6 +100,14 @@
 		        android:onClick="search"
 		        android:layout_weight="1"
 		        android:text="Search" />
+		    <Button
+		        android:id="@+id/btn_share"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:onClick="click_share"
+		        android:enabled="false"
+		        android:layout_weight="1"
+		        android:text="Share"  />
 		    
     	</TableRow>	
     </TableLayout>

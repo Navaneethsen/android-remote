@@ -12,6 +12,9 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    
 	
     <permission android:name="com.axcoto.shinjuku.sushi.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 	<uses-permission android:name="com.axcoto.shinjuku.sushi.permission.C2D_MESSAGE" /> 
@@ -85,6 +88,11 @@
         	</intent-filter>    
         </activity>
         
+        <activity android:name=".DeviceListActivity"
+                  android:label="@string/select_device"
+                  android:theme="@android:style/Theme.Dialog"
+                  android:configChanges="orientation|keyboardHidden" />
+        
         <activity android:name="com.google.zxing.client.android.CaptureActivity"
 		   android:screenOrientation="landscape"
 		   android:configChanges="orientation|keyboardHidden"
@@ -98,7 +106,6 @@
 		      <action android:name="com.google.zxing.client.android.SCAN"/>
 		      <category android:name="android.intent.category.DEFAULT"/>
 		    </intent-filter>
-    
 		</activity>
         
     </application>
