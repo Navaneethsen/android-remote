@@ -4,7 +4,6 @@ package com.axcoto.shinjuku.sushi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,31 +19,36 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.Settings.Secure;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.axcoto.shinjuku.maki.MyLog;
@@ -53,8 +57,6 @@ import com.axcoto.shinjuku.maki.Song;
 import com.axcoto.shinjuku.maki.SongAdapter;
 import com.axcoto.shinjuku.maki.Unicode;
 import com.axcoto.shinjuku.maki.XMLParser;
-import com.axcoto.shinjuku.sushi.BluetoothService;
-import com.axcoto.shinjuku.sushi.DeviceListActivity;
 
 public class SongActivity extends RootActivity {
 	private ListView songList;
@@ -540,9 +542,9 @@ public class SongActivity extends RootActivity {
             		MAC_ADDRESS = text;
             		Log.d(TAG, "MAC_ADDRESS = " + MAC_ADDRESS);
             		if (karaoke.equals("hd"))
-            			connectDevice(data, true);
+            			connectDevice(MAC_ADDRESS, true);
             		else {
-            			connectDevice(data, true);
+            			connectDevice(MAC_ADDRESS, true);
 					}
             	}
             	else 
@@ -560,25 +562,37 @@ public class SongActivity extends RootActivity {
         }
 	}
 	
-    private void connectDevice(Intent data, boolean secure) {
+    public void connectDevice(String Mac_address, boolean secure) {
         // Get the BluetoothDevice object
-        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(MAC_ADDRESS);
+        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(Mac_address);
+        Log.d(TAG, "device = " + device.toString());
+        Log.d(TAG, "MAC_ADDRESS = " + Mac_address);
         // Attempt to connect to the device
         if (karaoke.equals("hd"))
+        {
+        	Log.d(TAG, "mBTService.connect(device, secure,KaraokeDB.xml);");
         	mBTService.connect(device, secure,"KaraokeDB.xml");
-        else {
+        }
+        else if (karaoke.equals("mp3"))
+        {
+        	Log.d(TAG, "mBTService.connect(device, secure,MP3KaraokeDB.xml);");
         	mBTService.connect(device, secure,"MP3KaraokeDB.xml");
 		}
         if (mBTService.isIshandlefile())
         {
-			File file;
+			File file = null;
 			if (karaoke.equals("hd"))
+			{
+				Log.d(TAG, "if (karaoke.equals(hd))");
         		file = getApplicationContext().getFileStreamPath("KaraokeDB.xml");
-			else {
+			}
+			else if (karaoke.equals("mp3")){
+				Log.d(TAG, "if (karaoke.equals(mp3))");
 				file = getApplicationContext().getFileStreamPath("MP3KaraokeDB.xml");
 			}
 			if (file.exists())
 			{
+				Log.d(TAG, "if (file.exists())");
 				songs = getSong(t.getLocation(karaoke));
 				for (Song s : songs) {
 					fullsong.add(s);
