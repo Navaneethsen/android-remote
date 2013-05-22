@@ -4,7 +4,6 @@ package com.axcoto.shinjuku.sushi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,31 +19,36 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.Settings.Secure;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.axcoto.shinjuku.maki.MyLog;
@@ -53,8 +57,6 @@ import com.axcoto.shinjuku.maki.Song;
 import com.axcoto.shinjuku.maki.SongAdapter;
 import com.axcoto.shinjuku.maki.Unicode;
 import com.axcoto.shinjuku.maki.XMLParser;
-import com.axcoto.shinjuku.sushi.BluetoothService;
-import com.axcoto.shinjuku.sushi.DeviceListActivity;
 
 public class SongActivity extends RootActivity {
 	private ListView songList;
@@ -97,8 +99,12 @@ public class SongActivity extends RootActivity {
 	private static final String TAG = "Bluetooth";
 	private static final int REQUEST_ENABLE_BT = 1;
 	private static final int REQUEST_CONNECT_DEVICE = 2;
+	private static final int REQUEST_SEND_EMAIL = 10;
 	public static String MAC_ADDRESS = "";
 	public static String myUUID;
+	private static final int DLG_EXAMPLE1 = 0;
+    private static final int TEXT_ID = 0;
+    String aEmailList;
     // Message types sent from the BluetoothService Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
     public static final int MESSAGE_READ = 2;
@@ -489,31 +495,55 @@ public class SongActivity extends RootActivity {
 	}
 	
 	public void click_share(View v) {
-		//share song book
-		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-		//check bluetooth
-		if (mBluetoothAdapter == null)
-		{
-			Toast.makeText(getBaseContext(),"Bluetooth is not available", Toast.LENGTH_LONG).show();
-			Log.d("Bluetooth", "mBluetoothAdapter == null");
-			return;
-		}
 		
-		//bluetooth have support but not enable
-		if (!mBluetoothAdapter.isEnabled()) {
-			Log.d("Bluetooth", "!mBluetoothAdapter.isEnabled()");
-		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-		    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-		}
-		
-		if (mBluetoothAdapter.isEnabled()) {
-			// Ensure this device is discoverable by others
-//        	ensureDiscoverable(); //no need
+		AlertDialog.Builder aboutDialog = new AlertDialog.Builder(this);
+		aboutDialog.setTitle("Notice");
+		aboutDialog.setMessage("Please choose type to share song book");
+	    aboutDialog.setIcon(R.drawable.shareicon);
+		aboutDialog.setPositiveButton("By email", new DialogInterface.OnClickListener() {
 			
-			//show dialog scan devices
-			Intent serverIntent = new Intent(this, DeviceListActivity.class);
-            startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
-		}
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				//share song book by email
+				showDialog(DLG_EXAMPLE1);
+			}
+		});
+		aboutDialog.setNegativeButton("By bluetooth", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				//share song book by bluetooth
+				mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+				//check bluetooth
+				if (mBluetoothAdapter == null)
+				{
+					Toast.makeText(getBaseContext(),"Bluetooth is not available", Toast.LENGTH_LONG).show();
+					Log.d("Bluetooth", "mBluetoothAdapter == null");
+					return;
+				}
+				
+				//bluetooth have support but not enable
+				if (!mBluetoothAdapter.isEnabled()) {
+					Log.d("Bluetooth", "!mBluetoothAdapter.isEnabled()");
+				    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+				    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+				}
+				
+				if (mBluetoothAdapter.isEnabled()) {
+					// Ensure this device is discoverable by others
+//		        	ensureDiscoverable(); //no need
+					//show dialog scan devices
+					Intent serverIntent = new Intent(t, DeviceListActivity.class);
+		            startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
+				}
+			}
+		});
+		AlertDialog dialog = aboutDialog.show();
+		TextView messageText = (TextView)dialog.findViewById(android.R.id.message);
+		messageText.setGravity(Gravity.CENTER);
+		dialog.show();
 	}
 	
 //    private void ensureDiscoverable() {
@@ -540,9 +570,9 @@ public class SongActivity extends RootActivity {
             		MAC_ADDRESS = text;
             		Log.d(TAG, "MAC_ADDRESS = " + MAC_ADDRESS);
             		if (karaoke.equals("hd"))
-            			connectDevice(data, true);
+            			connectDevice(MAC_ADDRESS, true);
             		else {
-            			connectDevice(data, true);
+            			connectDevice(MAC_ADDRESS, true);
 					}
             	}
             	else 
@@ -557,28 +587,42 @@ public class SongActivity extends RootActivity {
 			{
 				Toast.makeText(getBaseContext(), "Bluetooth was not enabled", Toast.LENGTH_LONG).show();
 			}
+        case REQUEST_SEND_EMAIL:
+        		Toast.makeText(getBaseContext(), "Shared song book to email:" + aEmailList, Toast.LENGTH_LONG).show();
         }
 	}
 	
-    private void connectDevice(Intent data, boolean secure) {
+    public void connectDevice(String Mac_address, boolean secure) {
         // Get the BluetoothDevice object
-        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(MAC_ADDRESS);
+        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(Mac_address);
+        Log.d(TAG, "device = " + device.toString());
+        Log.d(TAG, "MAC_ADDRESS = " + Mac_address);
         // Attempt to connect to the device
         if (karaoke.equals("hd"))
+        {
+        	Log.d(TAG, "mBTService.connect(device, secure,KaraokeDB.xml);");
         	mBTService.connect(device, secure,"KaraokeDB.xml");
-        else {
+        }
+        else if (karaoke.equals("mp3"))
+        {
+        	Log.d(TAG, "mBTService.connect(device, secure,MP3KaraokeDB.xml);");
         	mBTService.connect(device, secure,"MP3KaraokeDB.xml");
 		}
         if (mBTService.isIshandlefile())
         {
-			File file;
+			File file = null;
 			if (karaoke.equals("hd"))
+			{
+				Log.d(TAG, "if (karaoke.equals(hd))");
         		file = getApplicationContext().getFileStreamPath("KaraokeDB.xml");
-			else {
+			}
+			else if (karaoke.equals("mp3")){
+				Log.d(TAG, "if (karaoke.equals(mp3))");
 				file = getApplicationContext().getFileStreamPath("MP3KaraokeDB.xml");
 			}
 			if (file.exists())
 			{
+				Log.d(TAG, "if (file.exists())");
 				songs = getSong(t.getLocation(karaoke));
 				for (Song s : songs) {
 					fullsong.add(s);
@@ -592,6 +636,113 @@ public class SongActivity extends RootActivity {
     
     public void getUUID() {
 	myUUID = UUID.randomUUID().toString();
+    }
+    
+    
+	//get mimetype text/xml
+//  getMimeType(file.getName());
+//  Log.e("", "mimeType 1 : " + mimeType);
+    
+    public static String getMimeType(String url)
+    {
+        String type = null;
+        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
+        if (extension != null) {
+            MimeTypeMap mime = MimeTypeMap.getSingleton();
+            type = mime.getMimeTypeFromExtension(extension);
+        }
+        return type;
+    }
+    
+    /**
+     * Called to create a dialog to be shown.
+     */
+    @Override
+    protected Dialog onCreateDialog(int id) {
+ 
+        switch (id) {
+            case DLG_EXAMPLE1:
+                return createExampleDialog();
+            default:
+                return null;
+        }
+    }
+ 
+    /**
+     * If a dialog has already been created,
+     * this is called to reset the dialog
+     * before showing it a 2nd time. Optional.
+     */
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+ 
+        switch (id) {
+            case DLG_EXAMPLE1:
+                // Clear the input box.
+                EditText text = (EditText) dialog.findViewById(TEXT_ID);
+                text.setText("");
+                break;
+        }
+    }
+ 
+    /**
+     * Create and return an example alert dialog with an edit text box.
+     */
+    private Dialog createExampleDialog() {
+ 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sharing song book by email");
+        builder.setMessage("Please input email address:");
+ 
+         // Use an EditText view to get user input.
+         final EditText input = new EditText(this);
+         input.setId(TEXT_ID);
+         builder.setView(input);
+ 
+        builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+ 
+            @SuppressLint("NewApi")
+			@Override
+            public void onClick(DialogInterface dialog, int whichButton) {
+                aEmailList = input.getText().toString();
+                Log.d(TAG, "email address: " + aEmailList);
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/xml");
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{aEmailList});
+                i.putExtra(Intent.EXTRA_SUBJECT, "Android remote share song book");
+                i.putExtra(Intent.EXTRA_TEXT   , "Song book file is in attachment");
+                
+                Uri uri;
+                String fname = "";
+                if (karaoke.equals("hd"))
+                {
+                	fname = "KaraokeDB.xml";
+                }
+                else if (karaoke.equals("mp3"))
+                {
+                	fname = "MP3KaraokeDB.xml";
+        		}
+                File f = new File(t.getFilesDir(),fname);
+                uri = Uri.fromFile(f);
+                i.putExtra(Intent.EXTRA_STREAM, uri);
+                
+                try {
+                    startActivityForResult(Intent.createChooser(i, "Send mail..."),REQUEST_SEND_EMAIL);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(t, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+ 
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+ 
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+ 
+        return builder.create();
     }
 }
 	

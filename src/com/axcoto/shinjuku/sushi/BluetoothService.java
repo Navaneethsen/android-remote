@@ -1,13 +1,9 @@
 package com.axcoto.shinjuku.sushi;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -110,8 +106,8 @@ public class BluetoothService {
     public synchronized void connect(BluetoothDevice device, boolean secure, String filekaraname) {
     	ishandlefile = true;
     	filetype = filekaraname;
-        if (D) Log.d(TAG, "connect to: " + device);
-
+        Log.d(TAG, " BluetoothService connect to: " + device);
+        
         // Cancel any thread attempting to make a connection
         if (mState == STATE_CONNECTING) {
             if (mConnectThread != null) {mConnectThread.cancel(); mConnectThread = null;}
@@ -137,7 +133,7 @@ public class BluetoothService {
      */
     public synchronized void connected(BluetoothSocket socket, BluetoothDevice
             device, final String socketType) {
-        if (D) Log.d(TAG, "connected, Socket Type:" + socketType);
+        if (D) Log.d(TAG, "BluetoothService connected, Socket Type:" + socketType);
 
         // Cancel the thread that completed the connection
         if (mConnectThread != null) {mConnectThread.cancel(); mConnectThread = null;}
@@ -415,6 +411,7 @@ public class BluetoothService {
     }
     
     public void sendfile(BluetoothSocket sock) throws IOException {
+    	Log.d(TAG, "sendfile(BluetoothSocket sock)");
     	File file = SongActivity.t.getFilesDir();
     	File myFile=new File(file, filetype);
         OutputStream os = sock.getOutputStream();
@@ -425,12 +422,13 @@ public class BluetoothService {
        	 os.write(buffer, 0, bytesRead);
         }
         os.flush();
-        os.close();
+//        os.close();
         fileIn.close();
 //        sock.close();
 	}
     
     public void receivefile(InputStream mmin) throws IOException {
+    	Log.d(TAG, "receivefile(InputStream mmin)");
     	// receive file
         File file = SongActivity.t.getFilesDir();
         file = new File(file,filetype);
