@@ -1,15 +1,23 @@
 package com.axcoto.shinjuku.sushi;
 
 //import java.util.Random;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.UUID;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -17,6 +25,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 
 import android.annotation.SuppressLint;
@@ -32,6 +41,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -288,11 +298,13 @@ public class SongActivity extends RootActivity {
 
 		});
 		songList.setOnItemClickListener(new OnItemClickListener() {
+			@SuppressLint({ "ResourceAsColor", "NewApi" })
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// MyLog.e("DEVICE: CLICKED", "Click ListItem Number " +
 				// position);
+				view.setBackgroundColor(R.color.Green);
 				Song s = songAdapter.getItem(position);
 				MyLog.i("SUSHI::SONG", "About to open " + s.getId() + " , name: "
 						+ s.getTitle());
@@ -493,7 +505,8 @@ public class SongActivity extends RootActivity {
 			}
 		}
 	}
-	
+	  
+	@SuppressWarnings("null")
 	public void click_share(View v) {
 		
 		AlertDialog.Builder aboutDialog = new AlertDialog.Builder(this);
@@ -506,6 +519,58 @@ public class SongActivity extends RootActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				//share song book by email
+				// convert file Karaoke .xml to file .txt
+                try {
+                	String fname = "";
+                    String filenametxt = "";
+                    if (karaoke.equals("hd"))
+                    {
+                    	fname = "KaraokeDB.xml";
+                    }
+                    else if (karaoke.equals("mp3"))
+                    {
+                    	fname = "MP3KaraokeDB.xml";
+            		}
+                    String[] part = fname.split("\\.");
+                    String sname = part[0];
+                    filenametxt = sname + ".txt";
+                    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+                    Document doc = docBuilder.parse (new File(t.getFilesDir() + "/" + fname));
+                    BufferedWriter out=new BufferedWriter(new FileWriter(Environment.getExternalStorageDirectory() + 
+                    		"/" + filenametxt));
+
+                    // normalize text representation
+                    doc.getDocumentElement ().normalize ();
+                    NodeList listOfitems = doc.getElementsByTagName("item");
+                    int totalitems = listOfitems.getLength();
+                    Log.e(TAG, "Total no of people : " + totalitems);
+                    out.write("\t\t\t CeeNee's KARAOKE LIST");
+                    out.newLine();
+                    out.newLine();
+                    for(int s=0; s < totalitems ; s++){
+	                    Node firstitemNode = listOfitems.item(s);
+	                    if(firstitemNode.getNodeType() == Node.ELEMENT_NODE){
+	                        Element firstPersonElement = (Element)firstitemNode;
+	                        out.write(firstPersonElement.getAttribute("id") + "\t" + 
+	                        firstPersonElement.getAttribute("name"));
+	                        out.newLine();
+	                    }//end of if clause
+                    }//end of for loop with s var
+                    out.flush();
+                    out.close();
+        	        }catch (SAXParseException err) {
+        	        System.out.println ("** Parsing error" + ", line " 
+        	             + err.getLineNumber () + ", uri " + err.getSystemId ());
+        	        System.out.println(" " + err.getMessage ());
+
+        	        }catch (SAXException e) {
+        	        Exception x = e.getException ();
+        	        ((x == null) ? e : x).printStackTrace ();
+
+        	        }catch (Throwable t) {
+        	        t.printStackTrace ();
+        	        }
 				showDialog(DLG_EXAMPLE1);
 			}
 		});
@@ -545,16 +610,6 @@ public class SongActivity extends RootActivity {
 		messageText.setGravity(Gravity.CENTER);
 		dialog.show();
 	}
-	
-//    private void ensureDiscoverable() {
-//        Log.d(TAG, "ensure discoverable");
-//        if (mBluetoothAdapter.getScanMode() !=
-//            BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-//            Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-//            discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-//            startActivity(discoverableIntent);
-//        }
-//    }
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -638,11 +693,6 @@ public class SongActivity extends RootActivity {
 	myUUID = UUID.randomUUID().toString();
     }
     
-    
-	//get mimetype text/xml
-//  getMimeType(file.getName());
-//  Log.e("", "mimeType 1 : " + mimeType);
-    
     public static String getMimeType(String url)
     {
         String type = null;
@@ -712,8 +762,8 @@ public class SongActivity extends RootActivity {
                 i.putExtra(Intent.EXTRA_SUBJECT, "Android remote share song book");
                 i.putExtra(Intent.EXTRA_TEXT   , "Song book file is in attachment");
                 
-                Uri uri;
                 String fname = "";
+                String filenametxt = "";
                 if (karaoke.equals("hd"))
                 {
                 	fname = "KaraokeDB.xml";
@@ -722,7 +772,12 @@ public class SongActivity extends RootActivity {
                 {
                 	fname = "MP3KaraokeDB.xml";
         		}
-                File f = new File(t.getFilesDir(),fname);
+                String[] part = fname.split("\\.");
+                String s = part[0];
+                filenametxt = s + ".txt";
+                
+                Uri uri;
+                File f = new File(Environment.getExternalStorageDirectory() + "/" + filenametxt);
                 uri = Uri.fromFile(f);
                 i.putExtra(Intent.EXTRA_STREAM, uri);
                 
@@ -744,5 +799,6 @@ public class SongActivity extends RootActivity {
  
         return builder.create();
     }
+
 }
 	
