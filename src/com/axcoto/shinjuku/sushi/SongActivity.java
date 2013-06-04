@@ -1,28 +1,25 @@
 package com.axcoto.shinjuku.sushi;
 
-//import java.util.Random;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.UUID;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -67,6 +64,15 @@ import com.axcoto.shinjuku.maki.Song;
 import com.axcoto.shinjuku.maki.SongAdapter;
 import com.axcoto.shinjuku.maki.Unicode;
 import com.axcoto.shinjuku.maki.XMLParser;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+
 
 public class SongActivity extends RootActivity {
 	private ListView songList;
@@ -519,58 +525,8 @@ public class SongActivity extends RootActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				//share song book by email
-				// convert file Karaoke .xml to file .txt
-                try {
-                	String fname = "";
-                    String filenametxt = "";
-                    if (karaoke.equals("hd"))
-                    {
-                    	fname = "KaraokeDB.xml";
-                    }
-                    else if (karaoke.equals("mp3"))
-                    {
-                    	fname = "MP3KaraokeDB.xml";
-            		}
-                    String[] part = fname.split("\\.");
-                    String sname = part[0];
-                    filenametxt = sname + ".txt";
-                    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-                    Document doc = docBuilder.parse (new File(t.getFilesDir() + "/" + fname));
-                    BufferedWriter out=new BufferedWriter(new FileWriter(Environment.getExternalStorageDirectory() + 
-                    		"/" + filenametxt));
-
-                    // normalize text representation
-                    doc.getDocumentElement ().normalize ();
-                    NodeList listOfitems = doc.getElementsByTagName("item");
-                    int totalitems = listOfitems.getLength();
-                    Log.e(TAG, "Total no of people : " + totalitems);
-                    out.write("\t\t\t CeeNee's KARAOKE LIST");
-                    out.newLine();
-                    out.newLine();
-                    for(int s=0; s < totalitems ; s++){
-	                    Node firstitemNode = listOfitems.item(s);
-	                    if(firstitemNode.getNodeType() == Node.ELEMENT_NODE){
-	                        Element firstPersonElement = (Element)firstitemNode;
-	                        out.write(firstPersonElement.getAttribute("id") + "\t" + 
-	                        firstPersonElement.getAttribute("name"));
-	                        out.newLine();
-	                    }//end of if clause
-                    }//end of for loop with s var
-                    out.flush();
-                    out.close();
-        	        }catch (SAXParseException err) {
-        	        System.out.println ("** Parsing error" + ", line " 
-        	             + err.getLineNumber () + ", uri " + err.getSystemId ());
-        	        System.out.println(" " + err.getMessage ());
-
-        	        }catch (SAXException e) {
-        	        Exception x = e.getException ();
-        	        ((x == null) ? e : x).printStackTrace ();
-
-        	        }catch (Throwable t) {
-        	        t.printStackTrace ();
-        	        }
+				// the first create file pdf to send 
+				createPDF();
 				showDialog(DLG_EXAMPLE1);
 			}
 		});
@@ -757,13 +713,14 @@ public class SongActivity extends RootActivity {
                 aEmailList = input.getText().toString();
                 Log.d(TAG, "email address: " + aEmailList);
                 Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("text/xml");
+                i.setType("message/rfc822");
+//                i.setType("application/pdf");
                 i.putExtra(Intent.EXTRA_EMAIL, new String[]{aEmailList});
                 i.putExtra(Intent.EXTRA_SUBJECT, "Android remote share song book");
                 i.putExtra(Intent.EXTRA_TEXT   , "Song book file is in attachment");
                 
                 String fname = "";
-                String filenametxt = "";
+                String filenamepdf = "";
                 if (karaoke.equals("hd"))
                 {
                 	fname = "KaraokeDB.xml";
@@ -774,10 +731,11 @@ public class SongActivity extends RootActivity {
         		}
                 String[] part = fname.split("\\.");
                 String s = part[0];
-                filenametxt = s + ".txt";
+                filenamepdf = s + ".pdf";
                 
                 Uri uri;
-                File f = new File(Environment.getExternalStorageDirectory() + "/" + filenametxt);
+                File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/iCeeNee" + "/" + filenamepdf);
+                Log.i(TAG, "file path pdf: " + Environment.getExternalStorageDirectory().getAbsolutePath() + "/iCeeNee" + "/" + filenamepdf);
                 uri = Uri.fromFile(f);
                 i.putExtra(Intent.EXTRA_STREAM, uri);
                 
@@ -800,5 +758,97 @@ public class SongActivity extends RootActivity {
         return builder.create();
     }
 
+    public void createPDF()
+    {
+//		get file name
+		String fname = "";
+		String filename = "";
+        if (karaoke.equals("hd"))
+        {
+        	fname = "KaraokeDB.xml";
+        }
+        else if (karaoke.equals("mp3"))
+        {
+        	fname = "MP3KaraokeDB.xml";
+		    }
+        String[] part = fname.split("\\.");
+        filename = part[0];
+        Log.i(TAG, "filename: " + filename);
+        
+    	com.lowagie.text.Document doc = new com.lowagie.text.Document(PageSize.A4,10.0f,10.0f,10.0f,10.0f);
+         try {
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/iCeeNee";
+            File dir = new File(path);
+                if(!dir.exists())
+                    dir.mkdirs();
+            File file = new File(dir, filename + ".pdf");
+            FileOutputStream fOut = new FileOutputStream(file);
+            PdfWriter.getInstance(doc, fOut);
+            //open the document
+            doc.open();
+            
+            Paragraph title = new Paragraph("Karaoke Song Book \n\n");
+            Font titleFont= new Font(Font.TIMES_ROMAN,20,Font.BOLD,harmony.java.awt.Color.RED);
+            title.setAlignment(Paragraph.ALIGN_CENTER);
+            title.setFont(titleFont);
+            doc.add(title);
+            
+            //add table to file pdf
+            PdfPTable table = new PdfPTable(2);
+            table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
+            PdfPCell c1 = new PdfPCell(new Phrase("ID"));
+            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+            table.addCell(c1);
+
+            c1 = new PdfPCell(new Phrase("Song Name"));
+            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+            table.addCell(c1);
+            
+//			read content file .xml to file .pdf
+            try {
+                DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+                Document filexml = docBuilder.parse (new File(t.getFilesDir() + "/" + fname));
+                // normalize text representation
+                filexml.getDocumentElement ().normalize ();
+                NodeList listOfitems = filexml.getElementsByTagName("item");
+                int totalitems = listOfitems.getLength();
+                Log.i(TAG, "Total no of songs : " + totalitems);
+                for(int s=0; s < totalitems ; s++){
+                    Node firstitemNode = listOfitems.item(s);
+                    if(firstitemNode.getNodeType() == Node.ELEMENT_NODE){
+                        Element firstSongElement = (Element)firstitemNode;
+                        table.addCell(firstSongElement.getAttribute("id"));
+                        table.addCell(firstSongElement.getAttribute("name"));
+                    }//end of if clause
+                }//end of for loop with s var
+    	        }catch (SAXParseException err) {
+	    	        Log.e (TAG,"** Parsing error" + ", line " 
+	    	             + err.getLineNumber () + ", uri " + err.getSystemId ());
+	    	        Log.e (TAG," " + err.getMessage ());
+
+    	        }catch (SAXException e) {
+    	        	Log.e (TAG,e.toString());
+
+    	        }catch (Throwable t) {
+    	        	Log.e (TAG,t.toString());
+    	        
+    	        }
+            	finally
+            	{
+            		doc.add(table);
+            		Log.i(TAG, "Added to pdf");
+            	}
+                 
+         } catch (DocumentException de) {
+             Log.e(TAG, "DocumentException:" + de);
+         } catch (IOException e) {
+             Log.e(TAG, "ioException:" + e);
+         }
+         finally
+         {
+             doc.close();
+         }
+    } 
 }
 	
