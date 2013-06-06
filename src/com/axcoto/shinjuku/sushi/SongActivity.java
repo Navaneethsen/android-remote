@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -127,7 +128,9 @@ public class SongActivity extends RootActivity {
     public static final int MESSAGE_WRITE = 3;
     public static final int MESSAGE_DEVICE_NAME = 4;
     public static final int MESSAGE_TOAST = 5;
-    
+    //new sync song book 
+    public static String errortoast = "";
+
 	public ArrayList<Song> getSong(String location) {
 		try {
 			SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -400,25 +403,28 @@ public class SongActivity extends RootActivity {
 		// else return "/storage/sdcard0/Ceenee/MP3KaraokeDB.xml";
 		// return "/data/data/com.axcoto.shinjuku.sushi/files/2mbKaraokeDB.xml";
 	}
-
+	
 	public void testButton(View v) throws ParserConfigurationException,
-			SAXException, IOException {
-		new ProgressTask().execute();
-	}
-
+		SAXException, IOException {
+			new ProgressTask().execute();
+		}
+	Newsyncsongbook newsync = new Newsyncsongbook();
+	Socket socketsync = null;
+	int ichecknum = 0;
+	String sfiletestpath = "";
+	String sipboard = MainActivity.sipaddress_connected;
 	private class ProgressTask extends AsyncTask<String, Void, Boolean> {
-		private long elapsed_time = 0;
-		private ProgressDialog dialog = new ProgressDialog(SongActivity.this);
-
+//	private long elapsed_time = 0;
+	private ProgressDialog dialog = new ProgressDialog(SongActivity.this);
+		
 		@Override
 		protected void onPreExecute() {
-			elapsed_time = System.currentTimeMillis();
+//			elapsed_time = System.currentTimeMillis();
 			dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			dialog.setMessage("SYNCING");
 			dialog.show();
-			syncStatus = SYNC_WAIT_UPLOAD;
 		}
-
+		
 		@Override
 		protected void onPostExecute(final Boolean success) {
 			if (dialog.isShowing()) {
@@ -426,63 +432,204 @@ public class SongActivity extends RootActivity {
 			}
 			songAdapter = new SongAdapter(t, R.layout.song_item, songs);
 			songList.setAdapter(songAdapter);
-
+		
 			if (success) {
-				// Toast.makeText(t, "DONE", Toast.LENGTH_LONG).show();
-			} else {
-				Toast.makeText(t, "No Songbook Found", Toast.LENGTH_LONG)
-						.show();
+				Log.i(TAG,"delete file path: " + sfiletestpath);
+				File file = new File(sfiletestpath);
+				file.delete();
 			}
+			else
+			{
+				Toast.makeText(getBaseContext(),errortoast, Toast.LENGTH_LONG).show();
+			}
+			
 		}
-
+		
 		@Override
 		protected Boolean doInBackground(String... params) {
-			Remote r = Remote.getInstance();
-			String locationType;
-			MyLog.i("Sync Status : ", Integer.toString(syncStatus));
-			// ToggleButton tb = (ToggleButton)
-			// findViewById(R.id.karaoke_switch);
-			try {
+			Log.i(TAG, "ip address of board: " + sipboard);
+			if (sipboard == "")
+			{
+				errortoast = "Please create connect to CeeNee  media player before sync song book!";
+				return false;
+			}
+			else
+			{
+				try {
+					socketsync =  newsync.connect(sipboard);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					Log.e(TAG, "IOException" + e.toString());
+					return false;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					Log.e(TAG, "Exception" + e.toString());
+					return false;
+				}
+				
+				if (socketsync == null)
+				{
+					Log.e(TAG,"socketsync == null");
+					return false;
+				}
+					
+				// get karaoke mode
+				String locationType;
 				if (karaoke.equals("hd")) {
 					locationType = "hd";
-					r.execute("sync_hd");
 				} else {
 					locationType = "mp3";
-					r.execute("sync_mp3");
 				}
-			} catch (IOException e) {
-				e.printStackTrace();
-				return false;
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-			boolean check = true;
-			while (check == true) {
-				if (syncStatus == SYNC_ERROR) {
-					songs = new ArrayList<Song>();
-					check = false;
+				
+				// send xml file to 
+				// form <iCeeNee ip="xxx.xxx.xxx.xxx" mode="hd"/>
+				String smyipadd = newsync.getLocalIpAddress();
+				String sxmlinfo = "<iCeeNee ip=\"" + smyipadd + "\" mode=\"" + locationType + "\"/>";
+				newsync.createfilestring(sxmlinfo);
+				Boolean issent = newsync.SendXMLinfotoboard(socketsync, sxmlinfo);
+				if (!issent)
+				{
+					errortoast = "Send XML message to CeeNee media player error!\nPlease try again! ";
 					return false;
-				} else if (syncStatus == SYNC_DONE) {
-					long t1 = System.currentTimeMillis();
-					songs = getSong(t.getLocation(locationType));
-					for (Song s : songs) {
-						fullsong.add(s);
-					}
-					long t2 = System.currentTimeMillis();
-					MyLog.i("Total TIME: ", Long.toString(t2 - t1));
-					check = false;
 				}
-				// Set timeout to 45 seconds.
-				if (System.currentTimeMillis() - this.elapsed_time > 1000 * 45) {
-					check = false;
-					syncStatus = SYNC_ERROR;
+				
+				//receive xml file to from board, write to Receive.xml  
+				sfiletestpath = t.getFilesDir() + "/Receive.xml";
+				MyLog.i(TAG, "file path Receive.xml: " + sfiletestpath);
+				Boolean isreceived = newsync.ReceiveXMLfilefromboard(socketsync, sfiletestpath);
+				if (!isreceived)
+				{
+					errortoast= "Received XML file from CeeNee media player error!\nPlease try again! ";
+					return false;
 				}
+				
+				//check Receive.xml
+				ichecknum = newsync.CheckReceiveXMLfile(sfiletestpath);
+				if (ichecknum == 1)
+				{
+					errortoast = "Haven't song book to get!\nPlease try again! ";
+					return false;
+				}
+				else if (ichecknum == 2)
+				{
+					errortoast = "Have too many song book on CeeNee media player!\nPlease try again! ";
+					return false;
+				}
+				else if (ichecknum == 3)
+				{
+					if (locationType == "hd")
+						try {
+							newsync.SavefiletoKaraoke(sfiletestpath, t.getFilesDir() + "/KaraokeDB.xml");
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							errortoast = "Thread receive song book is error!\nPlease try again! ";
+							return false;
+						}
+					else
+						try {
+							newsync.SavefiletoKaraoke(sfiletestpath, t.getFilesDir() + "/MP3KaraokeDB.xml");
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							errortoast = "Thread receive song book is error!\nPlease try again! ";
+							return false;
+						}
+				}
+				
+				//add song to listview
+				songs = getSong(t.getLocation(locationType));
+				for (Song s : songs) {
+					fullsong.add(s);
+				}
+				
+				return true;
 			}
-			return true;
 		}
+}
 
-	}
+//	public void testButton(View v) throws ParserConfigurationException,
+//			SAXException, IOException {
+//		new ProgressTask().execute();
+//	}
+//
+//	private class ProgressTask extends AsyncTask<String, Void, Boolean> {
+//		private long elapsed_time = 0;
+//		private ProgressDialog dialog = new ProgressDialog(SongActivity.this);
+//
+//		@Override
+//		protected void onPreExecute() {
+//			elapsed_time = System.currentTimeMillis();
+//			dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			dialog.setMessage("SYNCING");
+//			dialog.show();
+//			syncStatus = SYNC_WAIT_UPLOAD;
+//		}
+//
+//		@Override
+//		protected void onPostExecute(final Boolean success) {
+//			if (dialog.isShowing()) {
+//				dialog.dismiss();
+//			}
+//			songAdapter = new SongAdapter(t, R.layout.song_item, songs);
+//			songList.setAdapter(songAdapter);
+//
+//			if (success) {
+//				// Toast.makeText(getBaseContext(), "DONE", Toast.LENGTH_LONG).show();
+//			} else {
+//				Toast.makeText(getBaseContext(), "No Songbook Found", Toast.LENGTH_LONG)
+//						.show();
+//			}
+//		}
+//
+//		@Override
+//		protected Boolean doInBackground(String... params) {
+//			Remote r = Remote.getInstance();
+//			String locationType;
+//			MyLog.i("Sync Status : ", Integer.toString(syncStatus));
+//			// ToggleButton tb = (ToggleButton)
+//			// findViewById(R.id.karaoke_switch);
+//			try {
+//				if (karaoke.equals("hd")) {
+//					locationType = "hd";
+//					r.execute("sync_hd");
+//				} else {
+//					locationType = "mp3";
+//					r.execute("sync_mp3");
+//				}
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//				return false;
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				return false;
+//			}
+//			boolean check = true;
+//			while (check == true) {
+//				if (syncStatus == SYNC_ERROR) {
+//					songs = new ArrayList<Song>();
+//					check = false;
+//					return false;
+//				} else if (syncStatus == SYNC_DONE) {
+//					long t1 = System.currentTimeMillis();
+//					songs = getSong(t.getLocation(locationType));
+//					for (Song s : songs) {
+//						fullsong.add(s);
+//					}
+//					long t2 = System.currentTimeMillis();
+//					MyLog.i("Total TIME: ", Long.toString(t2 - t1));
+//					check = false;
+//				}
+//				// Set timeout to 45 seconds.
+//				if (System.currentTimeMillis() - this.elapsed_time > 1000 * 45) {
+//					check = false;
+//					syncStatus = SYNC_ERROR;
+//				}
+//			}
+//			return true;
+//		}
+//
+//	}
 
 	public void clickDelete(View v) {
 		this.execute("delete");

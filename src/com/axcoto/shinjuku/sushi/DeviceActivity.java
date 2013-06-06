@@ -368,6 +368,8 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 										Toast.LENGTH_SHORT).show();
 								deviceAdapter.notifyDataSetChanged();
 								listDevice.setAdapter(deviceAdapter);
+								
+								MainActivity.sipaddress_connected = d.getIp(); //save ip connected
 								// Intent i = new Intent( t,
 								// MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 								// finish();

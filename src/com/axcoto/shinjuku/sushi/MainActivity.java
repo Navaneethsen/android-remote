@@ -76,6 +76,9 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	// New 1
 
 	private String currentText = "";
+	
+	//new sync song book
+	public static String sipaddress_connected = "";
 
 	public File getHomeDir() {
 		return homeDir;
