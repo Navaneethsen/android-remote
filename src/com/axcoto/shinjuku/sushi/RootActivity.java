@@ -60,7 +60,7 @@ public class RootActivity extends Activity {
 			break;
 		case R.id.menu_about:
 			AlertDialogManager alert = new AlertDialogManager();
-			alert.showAlertDialog(this, "iCeeNee v"
+			alert.showAlertDialog(this, "iCeeNeeHD v"
 					+ CommonUtilities.RELEASE_VERSION,
 					"CeeNee Remote Control by Http://CeeNee.Com.", false);
 			break;
