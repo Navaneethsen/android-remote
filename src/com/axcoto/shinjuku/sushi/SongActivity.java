@@ -130,6 +130,7 @@ public class SongActivity extends RootActivity {
     public static final int MESSAGE_TOAST = 5;
     //new sync song book 
     public static String errortoast = "";
+    Button btn_sharesong;
 
 	public ArrayList<Song> getSong(String location) {
 		try {
@@ -173,6 +174,7 @@ public class SongActivity extends RootActivity {
 		// else
 		// setContentView(R.layout.activity_song_land);
 		fullsong = new ArrayList<Song>();
+		btn_sharesong = (Button) findViewById(R.id.btn_share);
 		SongActivity.t = this;
 		songList = (ListView) findViewById(R.id.song_list);
 		songList.setTextFilterEnabled(true);
@@ -198,7 +200,6 @@ public class SongActivity extends RootActivity {
 		if (songList.getCount()>0)
 		{
 			//enable btn_share when load listview ok
-			Button btn_sharesong = (Button) findViewById(R.id.btn_share);
 			if (!btn_sharesong.isEnabled())
 			{
 				btn_sharesong.setEnabled(true);
@@ -437,6 +438,14 @@ public class SongActivity extends RootActivity {
 				Log.i(TAG,"delete file path: " + sfiletestpath);
 				File file = new File(sfiletestpath);
 				file.delete();
+				if (songList.getCount()>0)
+				{
+					//enable btn_share when load listview ok
+					if (!btn_sharesong.isEnabled())
+					{
+						btn_sharesong.setEnabled(true);
+					}
+				}
 			}
 			else
 			{
