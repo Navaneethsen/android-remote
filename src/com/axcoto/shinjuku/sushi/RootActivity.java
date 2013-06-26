@@ -59,9 +59,15 @@ public class RootActivity extends Activity {
 			startActivityForResult(i, 0x13341);
 			break;
 		case R.id.menu_about:
+			//form 1.0.0-a1-b130623
+			//getResources().getText(R.string.none_found).toString();
+			String sversion_type = getResources().getText(R.string.version_type).toString();
+			String sversion_date = getResources().getText(R.string.version_date).toString();
+			String sandroid_version = getResources().getText(R.string.android_version).toString();
 			AlertDialogManager alert = new AlertDialogManager();
-			alert.showAlertDialog(this, "iCeeNeeHD v"
-					+ CommonUtilities.RELEASE_VERSION,
+			alert.showAlertDialog(this, "iCeeNee v"
+					+ sandroid_version + ".0-" + sversion_type 
+					+ "-b" + sversion_date,
 					"CeeNee Remote Control by Http://CeeNee.Com.", false);
 			break;
 		case R.id.menu_power:

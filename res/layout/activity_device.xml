@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"     
         android:onClick="qrcodescan"
         android:text="qrcodescan" 
+        android:visibility="invisible"
         android:layout_below="@+id/btn_scan"/>
     
     <ListView
