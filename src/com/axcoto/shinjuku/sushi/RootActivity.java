@@ -6,14 +6,20 @@ import com.axcoto.shinjuku.maki.Remote;
 import com.axcoto.shinjuku.sushi.R.id;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+import android.widget.TextView;
+
 import com.axcoto.shinjuku.sushi.*;
 
 public class RootActivity extends Activity {
@@ -61,14 +67,36 @@ public class RootActivity extends Activity {
 		case R.id.menu_about:
 			//form 1.0.0-a1-b130623
 			//getResources().getText(R.string.none_found).toString();
-			String sversion_type = getResources().getText(R.string.version_type).toString();
-			String sversion_date = getResources().getText(R.string.version_date).toString();
+//			String sversion_type = getResources().getText(R.string.version_type).toString();
+//			String sversion_date = getResources().getText(R.string.version_date).toString();
 			String sandroid_version = getResources().getText(R.string.android_version).toString();
-			AlertDialogManager alert = new AlertDialogManager();
-			alert.showAlertDialog(this, "iCeeNee v"
-					+ sandroid_version + ".0-" + sversion_type 
-					+ "-b" + sversion_date,
-					"CeeNee Remote Control by Http://CeeNee.Com.", false);
+			AlertDialog.Builder aboutDialog = new AlertDialog.Builder(this);
+			aboutDialog.setTitle("iCeeNee v"+ sandroid_version + ".0");
+			aboutDialog.setMessage("CeeNee Remote Control by Http://CeeNee.Com.");
+			aboutDialog.setIcon(R.drawable.about_icon);
+			
+			aboutDialog.setPositiveButton("Visit Website", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					Intent browse = new Intent( Intent.ACTION_VIEW , Uri.parse("https://ceenee.com/") );
+				    startActivity( browse );
+				}
+			});
+			aboutDialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					//nothing
+				}
+			});
+			
+			AlertDialog dialog = aboutDialog.show();
+			TextView messageText = (TextView)dialog.findViewById(android.R.id.message);
+			messageText.setGravity(Gravity.CENTER);
+			dialog.show();
 			break;
 		case R.id.menu_power:
 			Remote r = Remote.getInstance();
