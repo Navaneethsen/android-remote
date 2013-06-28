@@ -16,3 +16,6 @@ gen/
 *.orig
 # Local configuration file (sdk path, etc)
 local.properties
+# IDE file. Ignore it.
+.idea
+*.iml
