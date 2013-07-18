@@ -55,9 +55,9 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public final static int PHASE_DEVELOPMENT = 2;
 	public final static int PHASE_PRODUCTION = 3;
 
-//	public final static int ENVIRONMENT = PHASE_EMULATOR;
+	public final static int ENVIRONMENT = PHASE_EMULATOR;
 //	public final static int ENVIRONMENT = PHASE_DEVELOPMENT;
-	 public final static int ENVIRONMENT = PHASE_PRODUCTION;
+//	 public final static int ENVIRONMENT = PHASE_PRODUCTION;
 
 	public String remote;
 	final int PORT = 5320;
@@ -86,6 +86,8 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);

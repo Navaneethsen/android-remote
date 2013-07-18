@@ -73,7 +73,12 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-
+/**
+ * Song book hanlder. 
+ * Songbook is an XML file is stored at by defau
+ * @author kureikain
+ *
+ */
 public class SongActivity extends RootActivity {
 	private ListView songList;
 	private EditText ed;
@@ -148,6 +153,7 @@ public class SongActivity extends RootActivity {
 			songs = myXMLHandler.getSongs();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			MyLog.i("SONGBOOK_NOT_FOUND", "SONG BOOK DON'T EXIST. IGNORE");
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -311,7 +317,7 @@ public class SongActivity extends RootActivity {
 					int position, long id) {
 				// MyLog.e("DEVICE: CLICKED", "Click ListItem Number " +
 				// position);
-				view.setBackgroundColor(R.color.Green);
+				view.setBackgroundColor(getResources().getColor(R.color.Green));
 				Song s = songAdapter.getItem(position);
 				MyLog.i("SUSHI::SONG", "About to open " + s.getId() + " , name: "
 						+ s.getTitle());

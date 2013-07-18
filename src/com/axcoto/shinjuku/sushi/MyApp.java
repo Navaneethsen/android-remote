@@ -7,14 +7,18 @@ import org.acra.*;
 import org.acra.annotation.*;
 import android.app.Application;
 
-@ReportsCrashes(formKey = "dEZHZ0VQYWdTUV9MQnVkOUIySW9QbXc6MQ") 
+@ReportsCrashes(formKey = "", // will not be used
+formUri = "http://qceeneer.herokuapp.com/api/submit_acra_report",
+formUriBasicAuthLogin = "ceenee", // optional
+formUriBasicAuthPassword = "ceenee", // optional
+mode = ReportingInteractionMode.TOAST,
+resToastText = R.string.crash_toast_text
+) 
 public class MyApp extends Application {
 	
   @Override
   public void onCreate() {
-    // The following line triggers the initialization of ACRA
-    ACRA.init(this);
-    super.onCreate();
-    
+	  super.onCreate();
+	  ACRA.init(this);
   }
 }	

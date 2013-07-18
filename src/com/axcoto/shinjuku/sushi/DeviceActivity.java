@@ -539,12 +539,12 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			// f.resolve();
 			else {
 				mState = STATE_RUNNING;
-
-				if (MainActivity.ENVIRONMENT == MainActivity.PHASE_DEVELOPMENT) {
-					maskIp = "192.168.0.";
-				} else {
+				
+				maskIp = "192.168.0.";
+				if (MainActivity.ENVIRONMENT == MainActivity.PHASE_PRODUCTION) {
 					maskIp = f.getMaskIpAddress() + ".";
 				}
+				
 				DeviceActivity.ipMaskAdd = maskIp;
 
 				while (mState == STATE_RUNNING) {
