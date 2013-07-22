@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" 
+    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.maki"    
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
     android:background="@color/Black">
@@ -112,7 +113,7 @@
     	</TableRow>	
     </TableLayout>
     
-    <ListView
+    <com.axcoto.shinjuku.maki.ListView
         android:id="@+id/song_list"
         android:layout_below="@id/tableLayout234"
         android:layout_width="match_parent"
@@ -124,8 +125,7 @@
         android:focusableInTouchMode="false"
         android:smoothScrollbar="true"
         android:cacheColorHint="@color/Black"        
-        android:scrollbarStyle="insideInset">        
-    </ListView>
-
+        android:scrollbarStyle="insideInset">
+    </com.axcoto.shinjuku.maki.ListView>        
     
 </RelativeLayout>

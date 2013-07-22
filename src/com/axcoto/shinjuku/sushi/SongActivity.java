@@ -16,6 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -43,7 +44,6 @@ import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
@@ -54,16 +54,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.maki.Remote;
 import com.axcoto.shinjuku.maki.Song;
 import com.axcoto.shinjuku.maki.SongAdapter;
+import com.axcoto.shinjuku.maki.SongbookTransporter;
 import com.axcoto.shinjuku.maki.Unicode;
 import com.axcoto.shinjuku.maki.XMLParser;
+import com.axcoto.shinjuku.maki.ListView;
+import com.axcoto.shinjuku.maki.ListView.OnItemDoubleTapLister;
+//import android.widget.ListView;
+
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
@@ -296,27 +299,11 @@ public class SongActivity extends RootActivity {
 		// initDb();
 		MyLog.e("SUSHI:: DEVICE", "Create activity");
 		final SongActivity t = this;
-		songList.setOnItemLongClickListener(new OnItemLongClickListener() {
-			public View v;
-
+		
+		songList.setOnItemDoubleClickListener(new OnItemDoubleTapLister() {
 			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-
-				Toast.makeText(getApplicationContext(),
-						songAdapter.getItem(arg2).getTitle(), Toast.LENGTH_LONG)
-						.show();
-				return true;
-			}
-
-		});
-		songList.setOnItemClickListener(new OnItemClickListener() {
-			@SuppressLint({ "ResourceAsColor", "NewApi" })
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// MyLog.e("DEVICE: CLICKED", "Click ListItem Number " +
-				// position);
+			public void OnDoubleTap(AdapterView<?> parent, View view, int position,
+					long id) {
 				view.setBackgroundColor(getResources().getColor(R.color.Green));
 				Song s = songAdapter.getItem(position);
 				MyLog.i("SUSHI::SONG", "About to open " + s.getId() + " , name: "
@@ -349,7 +336,69 @@ public class SongActivity extends RootActivity {
 					e.printStackTrace();
 				}
 			}
+			
+			@Override
+			public void OnSingleTap(AdapterView<?> parent, View view, int position,
+					long id) {
+				 MyLog.i("SONG: SINGLE CLICK", "selected song");
+			}
 		});
+
+		songList.setOnItemLongClickListener(new OnItemLongClickListener() {
+			public View v;
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+
+				Toast.makeText(getApplicationContext(),
+						songAdapter.getItem(arg2).getTitle(), Toast.LENGTH_LONG)
+						.show();
+				return true;
+			}
+		});
+		
+//		songList.setOnItemClickListener(new OnItemClickListener() {
+//			@SuppressLint({ "ResourceAsColor", "NewApi" })
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view,
+//					int position, long id) {
+//				// MyLog.e("DEVICE: CLICKED", "Click ListItem Number " +
+//				// position);
+//				view.setBackgroundColor(getResources().getColor(R.color.Green));
+//				Song s = songAdapter.getItem(position);
+//				MyLog.i("SUSHI::SONG", "About to open " + s.getId() + " , name: "
+//						+ s.getTitle());
+//				String songid = s.getId();
+//				if (songid.length() == 0)
+//					throw new NullPointerException("empty id");
+//				for (int i = 0; i < songid.length(); i++) {
+//					try {
+//						MyLog.i("Pressed: ", songid.substring(0 + i, 1 + i));
+//						r.execute(songid.substring(0 + i, 1 + i));
+//					} catch (IOException e) {
+//						MyLog.e("IOException: ", "I0Exception");
+//						e.printStackTrace();
+//					} catch (NullPointerException e) {
+//						MyLog.e("Weird NullPointException: ",
+//								songid.substring(0 + i, 1 + i));
+//					} catch (Exception e) {
+//						MyLog.e("Exception: ", "Exception");
+//						e.printStackTrace();
+//					}
+//				}
+//				try {
+//					r.execute("enter");
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+		
 		// getSong(this.getLocation());
 		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
 		// songAdapter.notifyDataSetChanged();
@@ -388,7 +437,7 @@ public class SongActivity extends RootActivity {
 	// public void onSaveInstanceState(Bundle savedInstanceState) {
 	// savedInstanceState.putString("MyText", edtMyText.getText().toString());
 	// }
-	//
+	
 	public void search(View v) {
 		textlength = ed.getText().length();
 		songAdapter.getFilter().filter(ed.getText().toString());
@@ -527,10 +576,18 @@ public class SongActivity extends RootActivity {
 		}
 	}
 	  
-	@SuppressWarnings("null")
+	
 	public void click_share(View v) {
-		createPDF();
-		showDialog(DLG_EXAMPLE1);
+//		createPDF();
+//		showDialog(DLG_EXAMPLE1);
+		
+		try {
+			SongbookTransporter p = new SongbookTransporter("Email");
+			p.send();
+		} catch (Exception e) {
+			MyLog.i("SONGBOOK_SHARE", e.getMessage());
+		}
+		
 //		AlertDialog.Builder aboutDialog = new AlertDialog.Builder(this);
 //		aboutDialog.setTitle("Notice");
 //		aboutDialog.setMessage("Please choose type to share song book");
