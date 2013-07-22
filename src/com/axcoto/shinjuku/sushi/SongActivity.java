@@ -77,12 +77,15 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
- * Song book hanlder. 
- * Songbook is an XML file is stored at by defau
+ * Song book activity. 
+ * Song book is an XML file is stored at by default at /files directory of app
+ * Once load, the activity will setup even handle, and process song in background.
+ *  
+ * @see Activity#getFilesDir()
  * @author kureikain
  *
  */
-public class SongActivity extends RootActivity {
+public class SongActivity extends RootActivity implements OnKeyListener, OnItemDoubleTapLister, OnItemLongClickListener {
 	private ListView songList;
 	private EditText ed;
 	int textlength = 0;
@@ -136,7 +139,37 @@ public class SongActivity extends RootActivity {
     public static final int MESSAGE_DEVICE_NAME = 4;
     public static final int MESSAGE_TOAST = 5;
 	Button btn_sharesong;
-    
+	public Remote remote;
+	
+	/**
+	 * Load song book task.
+	 * We should return some progess here
+	 * @author kureikain
+	 *
+	 */
+	private class FetchSongsTask extends AsyncTask <String, Integer, Integer> {
+		ProgressDialog connectProgress;
+		protected void onPreExecute() {
+			connectProgress = ProgressDialog
+					.show(t,
+							"Loading songs...",
+							"Please wait, song boosk is processing...",
+							true);	
+		}
+		protected Integer doInBackground(String... urls) {
+	         songs = getSong(getLocation(karaoke.equals("hd")? "hd":"mp3"));
+	         return songs.size();
+	     }
+
+		 protected void onPostExecute(Integer result) {
+			 songAdapter = new SongAdapter(t, R.layout.song_item, songs);
+	         songList.setAdapter(songAdapter);
+	         songAdapter.notifyDataSetChanged();
+	         connectProgress.hide();
+	         MyLog.i("FETCH_SONG", "Finish fetching a number of songs:" + songs.size());
+	     }
+	}
+	
 	public ArrayList<Song> getSong(String location) {
 		try {
 			SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -174,97 +207,45 @@ public class SongActivity extends RootActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// if (getResources().getConfiguration().orientation==
-		// Configuration.ORIENTATION_PORTRAIT)
 		setContentView(R.layout.activity_song);
-		// else
-		// setContentView(R.layout.activity_song_land);
+		
 		fullsong = new ArrayList<Song>();
 		btn_sharesong = (Button) findViewById(R.id.btn_share);
 		SongActivity.t = this;
+		remote = Remote.getInstance();
+		if (arr_sort == null) arr_sort = new ArrayList<Song>();
 		songList = (ListView) findViewById(R.id.song_list);
-		songList.setTextFilterEnabled(true);
-		final Remote r = Remote.getInstance();
-		// ToggleButton tb = (ToggleButton) findViewById(R.id.karaoke_switch);
-		SharedPreferences sharedPref = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		karaoke = sharedPref.getString("listPref", "hd");
-		// if (songs == null || songs.size() == 0)
-		// {
-		if (karaoke.equals("hd"))
-			songs = getSong(t.getLocation("hd"));
-		else
-			songs = getSong(t.getLocation("mp3"));
-
-		// }
-		MyLog.i("Location", t.getFilesDir().toString());
-		if (arr_sort == null)
-			arr_sort = new ArrayList<Song>();
-		songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item,
-				songs);
-		songList.setAdapter(songAdapter);
-		if (songList.getCount()>0)
-		{
-			//enable btn_share when load listview ok
-			if (!btn_sharesong.isEnabled())
-			{
-				btn_sharesong.setEnabled(true);
-			}
-		}
+		MyLog.i("SongBook_Location", t.getFilesDir().toString());
 		
-		// We need to keep this on during device scanning--REMOVED FOR CRASH
-		// TEST
-		// getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-		this.autosearch = sharedPref.getBoolean("auto_search", true);
+		this.loadConfiguration();
+		this.setUpEventHandler();
+		this.loadSong();
+	}
+	
+	/**
+	 * Load song in background and show a progess bar. Once done, reload song view list.
+	 */
+	private void loadSong() {
+		File f = new File(getLocation(karaoke.equals("hd")? "hd":"mp3"));
+		if (f.exists()) {
+			new FetchSongsTask().execute(f.getAbsolutePath());	
+		}
+	}
+	
+	private void loadConfiguration() {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		karaoke = sharedPref.getString("listPref", "hd");
+		autosearch = sharedPref.getBoolean("auto_search", true);
+	}
+	
+	private void setUpEventHandler() {
+		songList.setTextFilterEnabled(true);
+		if (songList.getCount()>0 && !btn_sharesong.isEnabled()) btn_sharesong.setEnabled(true);
+		
 		ed = (EditText) findViewById(R.id.cmd_songsearch);
 		int AndroidVersion = android.os.Build.VERSION.SDK_INT;
 		if (AndroidVersion < 16) {
-			ed.setOnKeyListener(new OnKeyListener() {
-				@Override
-				public boolean onKey(View v, int keyCode, KeyEvent event) {
-					if ((event.getAction() == KeyEvent.ACTION_DOWN)
-							&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
-						InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-						if (im.isAcceptingText())
-							im.hideSoftInputFromWindow(ed.getWindowToken(), 0);
-						if (autosearch == false) {
-							textlength = ed.getText().length();
-							arr_sort.clear();
-							for (int i = 0; i < songs.size(); i++) {
-								if (textlength <= songs.get(i).getTitle()
-										.length()) {
-									if (Unicode
-											.convert(songs.get(i).getTitle())
-											.toLowerCase()
-											.contains(
-													Unicode.convert(ed
-															.getText()
-															.toString()
-															.toLowerCase()))) {
-										arr_sort.add(songs.get(i));
-									}
-								}
-							}
-							songAdapter = new SongAdapter(SongActivity.this,
-									R.layout.song_item, arr_sort);
-							songList.setAdapter(songAdapter);
-						}
-						try {
-							r.execute("enter");
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						return true;
-					}
-					return false;
-				}
-
-			});
+			ed.setOnKeyListener(this);
 		}
 
 		if (autosearch == true) {
@@ -296,165 +277,156 @@ public class SongActivity extends RootActivity {
 			});
 		}
 
-		// initDb();
-		MyLog.e("SUSHI:: DEVICE", "Create activity");
-		final SongActivity t = this;
-		
-		songList.setOnItemDoubleClickListener(new OnItemDoubleTapLister() {
-			@Override
-			public void OnDoubleTap(AdapterView<?> parent, View view, int position,
-					long id) {
-				view.setBackgroundColor(getResources().getColor(R.color.Green));
-				Song s = songAdapter.getItem(position);
-				MyLog.i("SUSHI::SONG", "About to open " + s.getId() + " , name: "
-						+ s.getTitle());
-				String songid = s.getId();
-				if (songid.length() == 0)
-					throw new NullPointerException("empty id");
-				for (int i = 0; i < songid.length(); i++) {
-					try {
-						MyLog.i("Pressed: ", songid.substring(0 + i, 1 + i));
-						r.execute(songid.substring(0 + i, 1 + i));
-					} catch (IOException e) {
-						MyLog.e("IOException: ", "I0Exception");
-						e.printStackTrace();
-					} catch (NullPointerException e) {
-						MyLog.e("Weird NullPointException: ",
-								songid.substring(0 + i, 1 + i));
-					} catch (Exception e) {
-						MyLog.e("Exception: ", "Exception");
-						e.printStackTrace();
-					}
-				}
-				try {
-					r.execute("enter");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			@Override
-			public void OnSingleTap(AdapterView<?> parent, View view, int position,
-					long id) {
-				 MyLog.i("SONG: SINGLE CLICK", "selected song");
-			}
-		});
-
-		songList.setOnItemLongClickListener(new OnItemLongClickListener() {
-			public View v;
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-
-				Toast.makeText(getApplicationContext(),
-						songAdapter.getItem(arg2).getTitle(), Toast.LENGTH_LONG)
-						.show();
-				return true;
-			}
-		});
-		
-//		songList.setOnItemClickListener(new OnItemClickListener() {
-//			@SuppressLint({ "ResourceAsColor", "NewApi" })
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view,
-//					int position, long id) {
-//				// MyLog.e("DEVICE: CLICKED", "Click ListItem Number " +
-//				// position);
-//				view.setBackgroundColor(getResources().getColor(R.color.Green));
-//				Song s = songAdapter.getItem(position);
-//				MyLog.i("SUSHI::SONG", "About to open " + s.getId() + " , name: "
-//						+ s.getTitle());
-//				String songid = s.getId();
-//				if (songid.length() == 0)
-//					throw new NullPointerException("empty id");
-//				for (int i = 0; i < songid.length(); i++) {
-//					try {
-//						MyLog.i("Pressed: ", songid.substring(0 + i, 1 + i));
-//						r.execute(songid.substring(0 + i, 1 + i));
-//					} catch (IOException e) {
-//						MyLog.e("IOException: ", "I0Exception");
-//						e.printStackTrace();
-//					} catch (NullPointerException e) {
-//						MyLog.e("Weird NullPointException: ",
-//								songid.substring(0 + i, 1 + i));
-//					} catch (Exception e) {
-//						MyLog.e("Exception: ", "Exception");
-//						e.printStackTrace();
-//					}
-//				}
-//				try {
-//					r.execute("enter");
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-		
-		// getSong(this.getLocation());
-		songAdapter = new SongAdapter(this, R.layout.song_item, songs);
-		// songAdapter.notifyDataSetChanged();
-		songList.setAdapter(songAdapter);
+		songList.setOnItemDoubleClickListener(this);
+		songList.setOnItemLongClickListener(this);
 	}
 
-	// public void onToggle(View v) throws ParserConfigurationException,
-	// SAXException, IOException {
-	// ToggleButton tb = (ToggleButton) v;
-	// if (tb.getText().equals("HD")) {
-	// MyLog.i("Location::" ,t.getLocation("hd"));
-	// songs =getSong(t.getLocation("hd"));
-	// }
-	// else {
-	// MyLog.i("Location::",t.getLocation("mp3"));
-	// songs = getSong(t.getLocation("mp3"));
-	// }
-	// songAdapter = new SongAdapter(this, R.layout.song_item, songs);
-	// songList.setAdapter(songAdapter);
-	// }
-
-	// @Override
-	// public void onConfigurationChanged(Configuration newConfig) {
-	// super.onConfigurationChanged(newConfig);
-	//
-	// // Checks the orientation of the screen
-	// if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-	// setContentView(R.layout.activity_song_land);
-	// // Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-	// } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-	// setContentView(R.layout.activity_song);
-	// // Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-	// }
-	// }
-
-	// public void onSaveInstanceState(Bundle savedInstanceState) {
-	// savedInstanceState.putString("MyText", edtMyText.getText().toString());
-	// }
 	
+	/**
+	 * Input handler for song book searching textfield.
+	 * 
+	 * @see OnKeyListener
+	 */
+	@Override
+	public boolean onKey(View v, int keyCode, KeyEvent event) {
+		if ((event.getAction() == KeyEvent.ACTION_DOWN)
+				&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
+			InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+			if (im.isAcceptingText())
+				im.hideSoftInputFromWindow(ed.getWindowToken(), 0);
+			if (autosearch == false) {
+				textlength = ed.getText().length();
+				arr_sort.clear();
+				for (int i = 0; i < songs.size(); i++) {
+					if (textlength <= songs.get(i).getTitle()
+							.length()) {
+						if (Unicode
+								.convert(songs.get(i).getTitle())
+								.toLowerCase()
+								.contains(
+										Unicode.convert(ed
+												.getText()
+												.toString()
+												.toLowerCase()))) {
+							arr_sort.add(songs.get(i));
+						}
+					}
+				}
+				songAdapter = new SongAdapter(SongActivity.this,
+						R.layout.song_item, arr_sort);
+				songList.setAdapter(songAdapter);
+			}
+			try {
+				remote.execute("enter");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Even handle when double on SongList.
+	 * 
+	 * @see OnItemDoubleTapLister
+	 * @param parent adapter view
+	 * @param current view
+	 * @param position
+	 * @param id
+	 */
+	@Override
+	public void OnDoubleTap(AdapterView<?> parent, View view, int position,
+			long id) {
+		view.setBackgroundColor(getResources().getColor(R.color.Green));
+		Song s = songAdapter.getItem(position);
+		MyLog.i("SUSHI::SONG", "About to open " + s.getId() + " , name: "
+				+ s.getTitle());
+		String songid = s.getId();
+		if (songid.length() == 0) throw new NullPointerException("empty id");
+		
+		for (int i = 0; i < songid.length(); i++) {
+			try {
+				MyLog.i("Pressed: ", songid.substring(0 + i, 1 + i));
+				remote.execute(songid.substring(0 + i, 1 + i));
+			} catch (IOException e) {
+				MyLog.e("IOException: ", "I0Exception");
+				e.printStackTrace();
+			} catch (NullPointerException e) {
+				MyLog.e("Weird NullPointException: ",
+						songid.substring(0 + i, 1 + i));
+			} catch (Exception e) {
+				MyLog.e("Exception: ", "Exception");
+				e.printStackTrace();
+			}
+		}
+		try {
+			remote.execute("enter");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Even handle when double on SongList.
+	 * 
+	 * @see OnItemDoubleTapLister
+	 */
+	@Override
+	public void OnSingleTap(AdapterView<?> parent, View view, int position,long id) {
+		 MyLog.i("SONG: SINGLE CLICK", "selected song");
+	}	
+
+	/**
+	 * Long press on a list view item. We will show its full song name here.
+	 * 
+	 * @see OnItemLongClickListener
+	 * @param AdapterView of song list
+	 * @param Viewe
+	 * @param selected item index
+	 * @param arg3
+	 * @return
+	 */
+	@Override
+	public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		Toast.makeText(getApplicationContext(),
+				songAdapter.getItem(arg2).getTitle(), Toast.LENGTH_LONG)
+				.show();
+		return true;
+	}
+	
+	/**
+	 * Search through song list with filter of songAdaper
+	 * @param v
+	 */
 	public void search(View v) {
 		textlength = ed.getText().length();
 		songAdapter.getFilter().filter(ed.getText().toString());
 		// songAdapter.notifyDataSetChanged();
 		songList.setAdapter(songAdapter);
 	}
-
+	
+	/**
+	 * Find song book database location. The song book is stored under Files dir of application
+	 * @see Activity#getFilesDir() 
+	 * @param databaseName
+	 * @return string to XML song book
+	 */
 	public String getLocation(String databaseName) {
 		if (databaseName.equals("hd")) {
 			MyLog.e("Location", t.getFilesDir().toString());
 			return t.getFilesDir() + "/KaraokeDB.xml";
 		}
-		// return "/storage/sdcard0/Ceenee/KaraokeDB.xml";
 		else
 			return t.getFilesDir() + "/MP3KaraokeDB.xml";
-		// else return "/storage/sdcard0/Ceenee/MP3KaraokeDB.xml";
-		// return "/data/data/com.axcoto.shinjuku.sushi/files/2mbKaraokeDB.xml";
 	}
 
 	public void testButton(View v) throws ParserConfigurationException,
