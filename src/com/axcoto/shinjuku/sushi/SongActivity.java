@@ -58,9 +58,9 @@ import android.widget.Toast;
 
 import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.maki.Remote;
+import com.axcoto.shinjuku.maki.ShareKit;
 import com.axcoto.shinjuku.maki.Song;
 import com.axcoto.shinjuku.maki.SongAdapter;
-import com.axcoto.shinjuku.maki.SongbookTransporter;
 import com.axcoto.shinjuku.maki.Unicode;
 import com.axcoto.shinjuku.maki.XMLParser;
 import com.axcoto.shinjuku.maki.ListView;
@@ -582,10 +582,12 @@ public class SongActivity extends RootActivity {
 //		showDialog(DLG_EXAMPLE1);
 		
 		try {
-			SongbookTransporter p = new SongbookTransporter("Email");
+			ShareKit p = ShareKit.getInstance("Email");
+			p.setActivity(this);
 			p.send();
 		} catch (Exception e) {
-			MyLog.i("SONGBOOK_SHARE", e.getMessage());
+			e.printStackTrace();
+			Log.i("SHARE_EMAIL", e.getStackTrace().toString());
 		}
 		
 //		AlertDialog.Builder aboutDialog = new AlertDialog.Builder(this);

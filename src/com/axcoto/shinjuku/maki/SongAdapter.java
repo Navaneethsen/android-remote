@@ -36,7 +36,6 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable{
 			super(context, textViewResourceId, objects);			
 			this.objects = new ArrayList<Song> (objects);
 			this.fitems = new ArrayList<Song> (objects);
-
 		}
 
 		/*
