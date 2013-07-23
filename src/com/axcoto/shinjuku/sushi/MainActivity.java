@@ -136,6 +136,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 		if (this.isOnline()) {
+			MyLog.i("SUSHI_MAIN#ONPOSTCREATE", "Running");
 			this.startServer();
 			this.gcmHandle();
 		} else {

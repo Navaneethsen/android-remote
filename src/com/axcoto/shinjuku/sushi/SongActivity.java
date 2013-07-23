@@ -50,7 +50,6 @@ import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -165,8 +164,93 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			 songAdapter = new SongAdapter(t, R.layout.song_item, songs);
 	         songList.setAdapter(songAdapter);
 	         songAdapter.notifyDataSetChanged();
+	         songList.setTextFilterEnabled(true);
+	         btn_sharesong.setEnabled(true);
 	         connectProgress.hide();
 	         MyLog.i("FETCH_SONG", "Finish fetching a number of songs:" + songs.size());
+	     }
+	}
+	
+	/**
+	 * Load song book task.
+	 * We should return some progess here
+	 * @author kureikain
+	 *
+	 */
+	private class PdfRenderTask extends AsyncTask <String, Boolean, Boolean> {
+		ProgressDialog connectProgress;
+		protected void onPreExecute() {
+			connectProgress = ProgressDialog
+					.show(t,
+							"Rendering PDF...",
+							"Please wait, PDF is rendering...",
+							true);	
+		}
+		
+		/**
+		 * Input a XML file and try to render it in PDF
+		 */
+		protected Boolean doInBackground(String... songbook) {
+			String[] part = songbook[0].split("\\.");
+	        String filename = part[0];
+	        MyLog.i(TAG, "filename: " + filename);
+	        
+	    	com.lowagie.text.Document doc = new com.lowagie.text.Document(PageSize.A4,10.0f,10.0f,10.0f,10.0f);
+	         try {
+	        	File dir = new File(t.getFilesDir() + "/pdf/");
+	            if(!dir.exists()) dir.mkdirs();
+	            File file = new File(dir, filename + ".pdf");
+	            FileOutputStream fOut = new FileOutputStream(file);
+	            PdfWriter.getInstance(doc, fOut);
+	            doc.open();
+	            
+	            Paragraph title = new Paragraph("Karaoke Song Book \n\n");
+	            Font titleFont= new Font(Font.TIMES_ROMAN,20,Font.BOLD,harmony.java.awt.Color.RED);
+	            title.setAlignment(Paragraph.ALIGN_CENTER);
+	            title.setFont(titleFont);
+	            doc.add(title);
+	            
+	            PdfPTable table = new PdfPTable(2);
+	            table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
+	            PdfPCell c1 = new PdfPCell(new Phrase("Song Number"));
+	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+	            table.addCell(c1);
+
+	            c1 = new PdfPCell(new Phrase("Song Name"));
+	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+	            table.addCell(c1);
+	            
+	            
+	         } catch (DocumentException de) {
+	             Log.e(TAG, "DocumentException:" + de);
+	             return false;
+	         } catch (IOException e) {
+	             Log.e(TAG, "ioException:" + e);
+	             return false;
+	         }
+	         finally
+	         {
+	             doc.close();
+	         }
+	         return true;
+	     }
+
+		 protected void onPostExecute(Boolean result) {
+			 connectProgress.hide();	
+			 if (result) {
+				 MyLog.i("PDF_CREAEING", "SUccess");
+				try {
+						ShareKit p = ShareKit.getInstance("Email");
+						p.setActivity(t);
+						p.send();
+				} catch (Exception e) {
+						e.printStackTrace();
+						Log.i("SHARE_EMAIL", e.getStackTrace().toString());
+				}
+				 
+			 } else {
+				 MyLog.e("PDF_CREAEING", "Failt");
+			 }
 	     }
 	}
 	
@@ -312,9 +396,9 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 						}
 					}
 				}
-				songAdapter = new SongAdapter(SongActivity.this,
-						R.layout.song_item, arr_sort);
+				songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
 				songList.setAdapter(songAdapter);
+				songAdapter.notifyDataSetChanged();
 			}
 			try {
 				remote.execute("enter");
@@ -410,8 +494,8 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	public void search(View v) {
 		textlength = ed.getText().length();
 		songAdapter.getFilter().filter(ed.getText().toString());
-		// songAdapter.notifyDataSetChanged();
-		songList.setAdapter(songAdapter);
+//		songList.setAdapter(songAdapter);
+		songAdapter.notifyDataSetChanged();		
 	}
 	
 	/**
@@ -550,68 +634,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	  
 	
 	public void click_share(View v) {
-//		createPDF();
-//		showDialog(DLG_EXAMPLE1);
-		
-		try {
-			ShareKit p = ShareKit.getInstance("Email");
-			p.setActivity(this);
-			p.send();
-		} catch (Exception e) {
-			e.printStackTrace();
-			Log.i("SHARE_EMAIL", e.getStackTrace().toString());
-		}
-		
-//		AlertDialog.Builder aboutDialog = new AlertDialog.Builder(this);
-//		aboutDialog.setTitle("Notice");
-//		aboutDialog.setMessage("Please choose type to share song book");
-//	    aboutDialog.setIcon(R.drawable.shareicon);
-//		aboutDialog.setPositiveButton("By email", new DialogInterface.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				// TODO Auto-generated method stub
-//				//share song book by email
-//				// the first create file pdf to send 
-//				createPDF();
-//				showDialog(DLG_EXAMPLE1);
-//			}
-//		});
-//		aboutDialog.setNegativeButton("By bluetooth", new DialogInterface.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				// TODO Auto-generated method stub
-//				//share song book by bluetooth
-//				mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-//				//check bluetooth
-//				if (mBluetoothAdapter == null)
-//				{
-//					Toast.makeText(getBaseContext(),"Bluetooth is not available", Toast.LENGTH_LONG).show();
-//					Log.d("Bluetooth", "mBluetoothAdapter == null");
-//					return;
-//				}
-//				
-//				//bluetooth have support but not enable
-//				if (!mBluetoothAdapter.isEnabled()) {
-//					Log.d("Bluetooth", "!mBluetoothAdapter.isEnabled()");
-//				    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-//				    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-//				}
-//				
-//				if (mBluetoothAdapter.isEnabled()) {
-//					// Ensure this device is discoverable by others
-////		        	ensureDiscoverable(); //no need
-//					//show dialog scan devices
-//					Intent serverIntent = new Intent(t, DeviceListActivity.class);
-//		            startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
-//				}
-//			}
-//		});
-//		AlertDialog dialog = aboutDialog.show();
-//		TextView messageText = (TextView)dialog.findViewById(android.R.id.message);
-//		messageText.setGravity(Gravity.CENTER);
-//		dialog.show();
+		new PdfRenderTask().execute(karaoke);
 	}
 
 	@Override
@@ -805,97 +828,5 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
         return builder.create();
     }
 
-    public void createPDF()
-    {
-//		get file name
-		String fname = "";
-		String filename = "";
-        if (karaoke.equals("hd"))
-        {
-        	fname = "KaraokeDB.xml";
-        }
-        else if (karaoke.equals("mp3"))
-        {
-        	fname = "MP3KaraokeDB.xml";
-		    }
-        String[] part = fname.split("\\.");
-        filename = part[0];
-        Log.i(TAG, "filename: " + filename);
-        
-    	com.lowagie.text.Document doc = new com.lowagie.text.Document(PageSize.A4,10.0f,10.0f,10.0f,10.0f);
-         try {
-            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/iCeeNee";
-            File dir = new File(path);
-                if(!dir.exists())
-                    dir.mkdirs();
-            File file = new File(dir, filename + ".pdf");
-            FileOutputStream fOut = new FileOutputStream(file);
-            PdfWriter.getInstance(doc, fOut);
-            //open the document
-            doc.open();
-            
-            Paragraph title = new Paragraph("Karaoke Song Book \n\n");
-            Font titleFont= new Font(Font.TIMES_ROMAN,20,Font.BOLD,harmony.java.awt.Color.RED);
-            title.setAlignment(Paragraph.ALIGN_CENTER);
-            title.setFont(titleFont);
-            doc.add(title);
-            
-            //add table to file pdf
-            PdfPTable table = new PdfPTable(2);
-            table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
-            PdfPCell c1 = new PdfPCell(new Phrase("ID"));
-            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-            table.addCell(c1);
-
-            c1 = new PdfPCell(new Phrase("Song Name"));
-            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-            table.addCell(c1);
-            
-//			read content file .xml to file .pdf
-            try {
-                DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-                Document filexml = docBuilder.parse (new File(t.getFilesDir() + "/" + fname));
-                // normalize text representation
-                filexml.getDocumentElement ().normalize ();
-                NodeList listOfitems = filexml.getElementsByTagName("item");
-                int totalitems = listOfitems.getLength();
-                Log.i(TAG, "Total no of songs : " + totalitems);
-                for(int s=0; s < totalitems ; s++){
-                    Node firstitemNode = listOfitems.item(s);
-                    if(firstitemNode.getNodeType() == Node.ELEMENT_NODE){
-                        Element firstSongElement = (Element)firstitemNode;
-                        table.addCell(firstSongElement.getAttribute("id"));
-                        table.addCell(firstSongElement.getAttribute("name"));
-                    }//end of if clause
-                }//end of for loop with s var
-    	        }catch (SAXParseException err) {
-	    	        Log.e (TAG,"** Parsing error" + ", line " 
-	    	             + err.getLineNumber () + ", uri " + err.getSystemId ());
-	    	        Log.e (TAG," " + err.getMessage ());
-
-    	        }catch (SAXException e) {
-    	        	Log.e (TAG,e.toString());
-
-    	        }catch (Throwable t) {
-    	        	Log.e (TAG,t.toString());
-    	        
-    	        }
-            	finally
-            	{
-            		doc.add(table);
-            		Log.i(TAG, "Added to pdf");
-            	}
-                 
-         } catch (DocumentException de) {
-             Log.e(TAG, "DocumentException:" + de);
-         } catch (IOException e) {
-             Log.e(TAG, "ioException:" + e);
-         }
-         finally
-         {
-             doc.close();
-         }
-    } 
 }
 	

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="lib/droidText.0.4.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="/Users/kureikain/Documents/workspace/iCeeNee/ext_libs/additionnal.jar"/>
+	<classpathentry kind="lib" path="/Users/kureikain/Documents/workspace/iCeeNee/ext_libs/activation.jar"/>
+	<classpathentry kind="lib" path="/Users/kureikain/Documents/workspace/iCeeNee/ext_libs/mail.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
