@@ -17,10 +17,13 @@ import android.widget.Toast;
 import com.provider.MailSender;
 import com.provider.JSSEProvider;
 import com.axcoto.shinjuku.maki.ShareKit;
+import com.axcoto.shinjuku.maki.ShareKitFactory;
 
-public class ShareEmail extends ShareKit {
-	public ShareEmail(String _type) throws Exception {
-		super(_type);
+public class ShareEmail implements ShareKit {
+	protected Activity parentActivity;
+	
+	public void setActivity(Activity a) {
+		parentActivity =a;
 	}
 	
 	@Override
@@ -106,5 +109,6 @@ public class ShareEmail extends ShareKit {
 //        return builder.create();
 		return null;
 	}
+
 	
 }

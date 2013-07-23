@@ -57,6 +57,7 @@ import android.widget.Toast;
 
 import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.maki.Remote;
+import com.axcoto.shinjuku.maki.ShareKitFactory;
 import com.axcoto.shinjuku.maki.ShareKit;
 import com.axcoto.shinjuku.maki.Song;
 import com.axcoto.shinjuku.maki.SongAdapter;
@@ -199,7 +200,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	         try {
 	        	File dir = new File(t.getFilesDir() + "/pdf/");
 	            if(!dir.exists()) dir.mkdirs();
-	            File file = new File(dir, filename + ".pdf");
+	            File file = new File(dir, "ceenee_songbook.pdf");
 	            FileOutputStream fOut = new FileOutputStream(file);
 	            PdfWriter.getInstance(doc, fOut);
 	            doc.open();
@@ -240,14 +241,12 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			 if (result) {
 				 MyLog.i("PDF_CREAEING", "SUccess");
 				try {
-						ShareKit p = ShareKit.getInstance("Email");
-						p.setActivity(t);
-						p.send();
+					ShareKit s = ShareKitFactory.getInstance("email");
+					s.execute();
 				} catch (Exception e) {
-						e.printStackTrace();
-						Log.i("SHARE_EMAIL", e.getStackTrace().toString());
+					e.printStackTrace();
+					Log.i("SHARE_EMAIL", e.getStackTrace().toString());
 				}
-				 
 			 } else {
 				 MyLog.e("PDF_CREAEING", "Failt");
 			 }
@@ -634,7 +633,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	  
 	
 	public void click_share(View v) {
-		new PdfRenderTask().execute(karaoke);
+		new PdfRenderTask().execute(t.getLocation(karaoke));
 	}
 
 	@Override
@@ -728,105 +727,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
             type = mime.getMimeTypeFromExtension(extension);
         }
         return type;
-    }
-    
-    /**
-     * Called to create a dialog to be shown.
-     */
-    @Override
-    protected Dialog onCreateDialog(int id) {
- 
-        switch (id) {
-            case DLG_EXAMPLE1:
-                return createExampleDialog();
-            default:
-                return null;
-        }
-    }
- 
-    /**
-     * If a dialog has already been created,
-     * this is called to reset the dialog
-     * before showing it a 2nd time. Optional.
-     */
-    @Override
-    protected void onPrepareDialog(int id, Dialog dialog) {
- 
-        switch (id) {
-            case DLG_EXAMPLE1:
-                // Clear the input box.
-                EditText text = (EditText) dialog.findViewById(TEXT_ID);
-                text.setText("");
-                break;
-        }
-    }
- 
-    /**
-     * Create and return an example alert dialog with an edit text box.
-     */
-    private Dialog createExampleDialog() {
- 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Sharing song book by email");
-        builder.setMessage("Please input email address:");
- 
-         // Use an EditText view to get user input.
-         final EditText input = new EditText(this);
-         input.setId(TEXT_ID);
-         builder.setView(input);
- 
-        builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
- 
-            @SuppressLint("NewApi")
-			@Override
-            public void onClick(DialogInterface dialog, int whichButton) {
-                aEmailList = input.getText().toString();
-                Log.d(TAG, "email address: " + aEmailList);
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("message/rfc822");
-//                i.setType("application/pdf");
-                i.putExtra(Intent.EXTRA_EMAIL, new String[]{aEmailList});
-                i.putExtra(Intent.EXTRA_SUBJECT, "Android remote share song book");
-                i.putExtra(Intent.EXTRA_TEXT   , "Song book file is in attachment");
-                
-                String fname = "";
-                String filenamepdf = "";
-                if (karaoke.equals("hd"))
-                {
-                	fname = "KaraokeDB.xml";
-                }
-                else if (karaoke.equals("mp3"))
-                {
-                	fname = "MP3KaraokeDB.xml";
-        		}
-                String[] part = fname.split("\\.");
-                String s = part[0];
-                filenamepdf = s + ".pdf";
-                
-                Uri uri;
-                File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/iCeeNee" + "/" + filenamepdf);
-                Log.i(TAG, "file path pdf: " + Environment.getExternalStorageDirectory().getAbsolutePath() + "/iCeeNee" + "/" + filenamepdf);
-                uri = Uri.fromFile(f);
-                i.putExtra(Intent.EXTRA_STREAM, uri);
-                
-                try {
-                    startActivityForResult(Intent.createChooser(i, "Send mail..."),REQUEST_SEND_EMAIL);
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(t, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
- 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
- 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
- 
-        return builder.create();
-    }
+    } 
 
 }
 	
