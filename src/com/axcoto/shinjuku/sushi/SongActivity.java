@@ -241,7 +241,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			 if (result) {
 				 MyLog.i("PDF_CREAEING", "SUccess");
 				try {
-					ShareKit s = ShareKitFactory.getInstance("email");
+					ShareKit s = ShareKitFactory.getInstance(t, "email");
 					s.execute();
 				} catch (Exception e) {
 					e.printStackTrace();

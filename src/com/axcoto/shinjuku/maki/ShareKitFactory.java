@@ -24,6 +24,7 @@ public class ShareKitFactory {
 		
 		if (_type.equalsIgnoreCase("email")) {
 			transporter = new ShareEmail();
+//			transporter.set
 		} else {
 			throw new Exception("We have not suppoted this transport method");
 		}

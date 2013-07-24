@@ -1,4 +1,4 @@
-package com.provider;
+package com.axcoto.shinjuku.sushi;
 
 import javax.activation.DataHandler;   
 import javax.activation.DataSource;
@@ -13,6 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;   
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeBodyPart;
+import javax.mail.Authenticator;
 
 import java.io.ByteArrayInputStream;   
 import java.io.IOException;   
@@ -22,7 +23,7 @@ import java.security.Security;
 import java.util.Properties;  
 
 
-public class MailSender extends javax.mail.Authenticator {   
+public class MailSender extends Authenticator {   
     private String mailhost = "smtp.gmail.com";   
     private String user;   
     private String password;   

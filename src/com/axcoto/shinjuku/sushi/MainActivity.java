@@ -5,50 +5,45 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.concurrent.CountDownLatch;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+//import android.widget.LinearLayout;
+//import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
+//import android.widget.ToggleButton;
 
 import com.google.android.gcm.GCMRegistrar;
 
-import com.axcoto.shinjuku.maki.MyHttpServer;
+//import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.maki.Remote;
 
-import static com.axcoto.shinjuku.sushi.CommonUtilities.DISPLAY_MESSAGE_ACTION;
+//import static com.axcoto.shinjuku.sushi.CommonUtilities.DISPLAY_MESSAGE_ACTION;
 import static com.axcoto.shinjuku.sushi.CommonUtilities.EXTRA_MESSAGE;
 import static com.axcoto.shinjuku.sushi.CommonUtilities.SENDER_ID;
-import android.app.Activity;
 import android.app.AlertDialog;
 
 import android.content.Intent;
-import android.content.IntentFilter;
+
 
 public class MainActivity extends RootActivity implements OnGestureListener {
 	public final static int PHASE_EMULATOR = 1;
@@ -136,9 +131,22 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 		if (this.isOnline()) {
-			MyLog.i("SUSHI_MAIN#ONPOSTCREATE", "Running");
-			this.startServer();
-			this.gcmHandle();
+//			MyLog.i("SUSHI_MAIN#ONPOSTCREATE", "Running");
+//			this.startServer();
+//			
+//			//Temporary disable gcm for speed to avoid initalize it when developing
+//			this.gcmHandle();
+			
+			MailSender sender = new MailSender("ceeneeinc@gmail.com", "CeeNee95134");
+            try {
+            	sender.sendMail("This is Subject",   
+                        "This is Body",   
+                        "ceeneeinc@gmail.com",   
+                        "vinh.nguyen@gmail.com");
+            } catch (Exception e) {
+            	e.printStackTrace();
+            }
+            
 		} else {
 			alert.showAlertDialog(MainActivity.this,
 					"Internet Connection Error",
@@ -157,14 +165,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			boolean mExternalStorageWriteable = false;
 			String state = Environment.getExternalStorageState();
 			MyLog.i("SUSHI:: MAIN :: HomeDir is", homeDir.toString());
-			// For simplicity. use internal storage for now
-			// if (Environment.MEDIA_MOUNTED.equals(state)) {
-			// // We can read and write the media
-			// mExternalStorageAvailable = mExternalStorageWriteable = true;
-			// homeDir = this.getExternalFilesDir(null);
-			// };
-
-			MyHttpServer ht = MyHttpServer.getInstance(PORT, homeDir);
 			File file = this.getFileStreamPath("file-upload.html");
 			if (file.exists()) {
 				MyLog.i("MAKI: SERVER",
@@ -172,8 +172,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 			} else {
 				this.copyAssets();
 			}
-		} catch (IOException e) {
-			MyLog.e("MAKI:: SERVER:: IOError", "The docroot is not valid");
 		} catch (Exception e) {
 			MyLog.e("MAKI:: SERVER:: GENERAL ERROR", e.getMessage());
 		}
