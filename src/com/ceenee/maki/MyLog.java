@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.maki;
+package com.ceenee.maki;
 
 import android.util.Log;
 import com.axcoto.shinjuku.sushi.MainActivity;

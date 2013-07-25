@@ -1,23 +1,17 @@
-package com.axcoto.shinjuku.maki;
+package com.ceenee.maki;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import com.axcoto.shinjuku.sushi.R;
-import com.axcoto.shinjuku.sushi.R.drawable;
-import com.axcoto.shinjuku.sushi.R.id;
-import com.axcoto.shinjuku.sushi.R.layout;
 
-import android.content.ClipData.Item;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**

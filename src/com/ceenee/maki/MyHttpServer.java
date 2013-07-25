@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.maki;
+package com.ceenee.maki;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

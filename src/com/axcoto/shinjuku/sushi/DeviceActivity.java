@@ -41,11 +41,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.axcoto.shinjuku.maki.DeviceItem;
-import com.axcoto.shinjuku.maki.Finder;
-import com.axcoto.shinjuku.maki.ItemAdapter;
-import com.axcoto.shinjuku.maki.MyLog;
-import com.axcoto.shinjuku.maki.Remote;
+import com.ceenee.maki.DeviceItem;
+import com.ceenee.maki.Finder;
+import com.ceenee.maki.ItemAdapter;
+import com.ceenee.maki.MyLog;
+import com.ceenee.maki.Remote;
 
 public class DeviceActivity extends RootActivity implements OnGestureListener {
 	final public String DEVICE_FILENAME = "device";

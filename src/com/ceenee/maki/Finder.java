@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.maki;
+package com.ceenee.maki;
 
 import java.io.IOException;
 import java.lang.reflect.Array;

@@ -12,9 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.axcoto.shinjuku.maki.MyHttpServer;
-import com.axcoto.shinjuku.maki.MyLog;
-import com.axcoto.shinjuku.maki.Remote;
+import com.ceenee.maki.MyHttpServer;
+import com.ceenee.maki.MyLog;
+import com.ceenee.maki.Remote;
 
 public class ConfigActivity extends PreferenceActivity {
 

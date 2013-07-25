@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.maki;
+package com.ceenee.maki.sharekit;
 
 public interface ShareKit {
 	/**

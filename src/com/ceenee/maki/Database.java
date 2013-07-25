@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.maki;
+package com.ceenee.maki;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

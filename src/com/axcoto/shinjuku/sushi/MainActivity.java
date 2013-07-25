@@ -35,8 +35,8 @@ import android.widget.Toast;
 import com.google.android.gcm.GCMRegistrar;
 
 //import com.axcoto.shinjuku.maki.MyHttpServer;
-import com.axcoto.shinjuku.maki.MyLog;
-import com.axcoto.shinjuku.maki.Remote;
+import com.ceenee.maki.MyLog;
+import com.ceenee.maki.Remote;
 
 //import static com.axcoto.shinjuku.sushi.CommonUtilities.DISPLAY_MESSAGE_ACTION;
 import static com.axcoto.shinjuku.sushi.CommonUtilities.EXTRA_MESSAGE;

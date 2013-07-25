@@ -2,8 +2,6 @@ package com.axcoto.shinjuku.sushi;
 
 import java.io.IOException;
 
-import com.axcoto.shinjuku.maki.MyLog;
-import com.axcoto.shinjuku.maki.Remote;
 import com.axcoto.shinjuku.sushi.R.id;
 
 import android.app.Activity;
@@ -23,6 +21,8 @@ import android.view.inputmethod.InputConnection;
 import android.widget.TextView;
 
 import com.axcoto.shinjuku.sushi.*;
+import com.ceenee.maki.MyLog;
+import com.ceenee.maki.Remote;
 
 public class RootActivity extends Activity {
 	

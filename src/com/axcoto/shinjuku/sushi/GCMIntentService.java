@@ -22,8 +22,9 @@ import com.google.android.gcm.GCMBaseIntentService;
  
 import static com.axcoto.shinjuku.sushi.CommonUtilities.SENDER_ID;
 import static com.axcoto.shinjuku.sushi.CommonUtilities.displayMessage;
-import com.axcoto.shinjuku.maki.IdRegister; 
-import com.axcoto.shinjuku.maki.MyLog;
+
+import com.ceenee.maki.IdRegister;
+import com.ceenee.maki.MyLog;
 
 public class GCMIntentService extends GCMBaseIntentService {
  

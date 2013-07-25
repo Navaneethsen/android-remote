@@ -1,7 +1,7 @@
 /**
  * Parse through the XML file and push it to the sqlite database
  */
-package com.axcoto.shinjuku.maki;
+package com.ceenee.maki;
 
 import java.util.ArrayList;
 import org.xml.sax.Attributes;
@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.axcoto.shinjuku.sushi.SongActivity;
+import com.ceenee.maki.songs.Song;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;

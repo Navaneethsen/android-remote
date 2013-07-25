@@ -7,11 +7,11 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.axcoto.shinjuku.maki.Remote;
 import com.axcoto.shinjuku.sushi.ConfigActivity;
 import com.axcoto.shinjuku.sushi.DeviceActivity;
 import com.axcoto.shinjuku.sushi.MainActivity;
 import com.axcoto.shinjuku.sushi.SongActivity;
+import com.ceenee.maki.Remote;
 
 public class ActivityNavigator {
 	protected static ActivityNavigator _instance;

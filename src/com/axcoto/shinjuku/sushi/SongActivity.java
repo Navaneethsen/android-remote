@@ -3,6 +3,7 @@ package com.axcoto.shinjuku.sushi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -41,17 +42,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.axcoto.shinjuku.maki.ListView;
-import com.axcoto.shinjuku.maki.ListView.OnItemDoubleTapLister;
-import com.axcoto.shinjuku.maki.MyLog;
-import com.axcoto.shinjuku.maki.Remote;
-import com.axcoto.shinjuku.maki.ShareKit;
-import com.axcoto.shinjuku.maki.ShareKitFactory;
-import com.axcoto.shinjuku.maki.Song;
-import com.axcoto.shinjuku.maki.SongAdapter;
-import com.axcoto.shinjuku.maki.Unicode;
-import com.axcoto.shinjuku.maki.XMLParser;
+import com.ceenee.maki.ListView;
+import com.ceenee.maki.MyLog;
+import com.ceenee.maki.Remote;
+import com.ceenee.maki.Unicode;
+import com.ceenee.maki.XMLParser;
+import com.ceenee.maki.ListView.OnItemDoubleTapLister;
+import com.ceenee.maki.sharekit.ShareKit;
+import com.ceenee.maki.sharekit.ShareKitFactory;
+import com.ceenee.maki.songs.Song;
+import com.ceenee.maki.songs.SongAdapter;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
 //import android.widget.ListView;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
 
 //import com.lowagie.text.DocumentException;
 //import com.lowagie.text.Font;
@@ -125,6 +134,27 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	Button btn_sharesong;
 	public Remote remote;
 	
+	private class SearchSongsTask extends AsyncTask <String, Integer, Integer> {
+		ProgressDialog connectProgress;
+		protected void onPreExecute() {
+			connectProgress = ProgressDialog
+					.show(t,
+							"Searching...",
+							"Please wait, searching through song books...",
+							true);	
+		}
+		protected Integer doInBackground(String... urls) {
+			songAdapter.getFilter().filter(ed.getText().toString());
+	        return songAdapter.getCount();
+	     }
+
+		protected void onPostExecute(Integer numberOfSong) {
+//			songList.setAdapter(songAdapter);
+			songAdapter.notifyDataSetChanged();
+			connectProgress.hide();			
+		}
+	}
+	
 	/**
 	 * Load song book task.
 	 * We should return some progess here
@@ -176,54 +206,66 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 		 * Input a XML file and try to render it in PDF
 		 */
 		protected Boolean doInBackground(String... songbook) {
-//			String[] part = songbook[0].split("\\.");
-//	        String filename = part[0];
-//	        MyLog.i(TAG, "filename: " + filename);
-//	        
-//	    	com.lowagie.text.Document doc = new com.lowagie.text.Document(PageSize.A4,10.0f,10.0f,10.0f,10.0f);
-//	         try {
-//	        	File dir = new File(t.getFilesDir() + "/pdf/");
-//	            if(!dir.exists()) dir.mkdirs();
-//	            File file = new File(dir, "ceenee_songbook.pdf");
-//	            FileOutputStream fOut = new FileOutputStream(file);
-//	            PdfWriter.getInstance(doc, fOut);
-//	            doc.open();
-//	            
-//	            Paragraph title = new Paragraph("Karaoke Song Book \n\n");
-//	            Font titleFont= new Font(Font.TIMES_ROMAN,20,Font.BOLD,harmony.java.awt.Color.RED);
-//	            title.setAlignment(Paragraph.ALIGN_CENTER);
-//	            title.setFont(titleFont);
-//	            doc.add(title);
-//	            
-//	            PdfPTable table = new PdfPTable(2);
-//	            table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
-//	            PdfPCell c1 = new PdfPCell(new Phrase("Song Number"));
-//	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-//	            table.addCell(c1);
-//
-//	            c1 = new PdfPCell(new Phrase("Song Name"));
-//	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-//	            table.addCell(c1);
-//	            
-//	            
-//	         } catch (DocumentException de) {
-//	             Log.e(TAG, "DocumentException:" + de);
-//	             return false;
-//	         } catch (IOException e) {
-//	             Log.e(TAG, "ioException:" + e);
-//	             return false;
-//	         }
-//	         finally
-//	         {
-//	             doc.close();
-//	         }
+			String[] part = songbook[0].split("\\.");
+	        String filename = part[0];
+	        MyLog.i(TAG, "filename: " + filename);
+	        
+	    	com.lowagie.text.Document doc = new com.lowagie.text.Document(PageSize.A4,10.0f,10.0f,10.0f,10.0f);
+	         try {
+	        	File dir = new File(t.getFilesDir() + "/pdf/");
+	            if(!dir.exists()) dir.mkdirs();
+	            File file = new File(dir, "ceenee_songbook.pdf");
+	            FileOutputStream fOut = new FileOutputStream(file);
+	            PdfWriter.getInstance(doc, fOut);
+	            doc.open();
+	            
+	            Paragraph title = new Paragraph("Karaoke Song Book \n\n");
+	            Font titleFont= new Font(Font.TIMES_ROMAN,20,Font.BOLD,harmony.java.awt.Color.RED);
+	            title.setAlignment(Paragraph.ALIGN_CENTER);
+	            title.setFont(titleFont);
+	            doc.add(title);
+	            
+	            PdfPTable table = new PdfPTable(2);
+	            
+	            table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
+	            PdfPCell c1 = new PdfPCell(new Phrase("Song Number"));
+	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+	            table.addCell(c1);
+	            
+	            c1 = new PdfPCell(new Phrase("Song Name"));
+	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+	            table.addCell(c1);
+	            
+	            Integer quantity = songs.size();
+	            for (Integer index=0; index<quantity; index++) {
+	            	table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
+		            PdfPCell c = new PdfPCell(new Phrase("Song Number"));
+		            c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+		            table.addCell(c);
+		            
+		            c = new PdfPCell(new Phrase("Song Name"));
+		            c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+		            table.addCell(c);
+	            }
+	            
+	         } catch (DocumentException de) {
+	             Log.e(TAG, "DocumentException:" + de);
+	             return false;
+	         } catch (IOException e) {
+	             Log.e(TAG, "ioException:" + e);
+	             return false;
+	         }
+	         finally
+	         {
+	             doc.close();
+	         }
 	         return true;
 	     }
 
 		 protected void onPostExecute(Boolean result) {
 			 connectProgress.hide();	
 			 if (result) {
-				 MyLog.i("PDF_CREAEING", "SUccess");
+				 MyLog.i("PDF_CREAEING", "Success");
 				try {
 					ShareKit s = ShareKitFactory.getInstance(t, "email");
 					s.execute();
@@ -489,9 +531,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	public void clickSearch(View v) {
 		MyLog.i("SONG_SEARCH", "Start to search song");
 		textlength = ed.getText().length();
-		songAdapter.getFilter().filter(ed.getText().toString());
-//		songList.setAdapter(songAdapter);
-		songAdapter.notifyDataSetChanged();		
+		new SearchSongsTask().execute(ed.getText().toString());
 	}
 	
 	/**

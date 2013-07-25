@@ -1,8 +1,9 @@
-package com.axcoto.shinjuku.maki;
+package com.ceenee.maki.sharekit;
 
 import android.app.Activity;
-import com.axcoto.shinjuku.maki.ShareEmail;
-import com.axcoto.shinjuku.maki.ShareKit;
+
+import com.ceenee.maki.sharekit.ShareEmail;
+import com.ceenee.maki.sharekit.ShareKit;
 
 public class ShareKitFactory {
 	public static ShareKit getInstance(Activity parent, String _type) throws Exception{

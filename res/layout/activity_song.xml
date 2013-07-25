@@ -113,7 +113,7 @@
     	</TableRow>	
     </TableLayout>
     
-    <com.axcoto.shinjuku.maki.ListView
+    <com.ceenee.maki.ListView
         android:id="@+id/song_list"
         android:layout_below="@id/tableLayout234"
         android:layout_width="match_parent"
@@ -126,6 +126,6 @@
         android:smoothScrollbar="true"
         android:cacheColorHint="@color/Black"        
         android:scrollbarStyle="insideInset">
-    </com.axcoto.shinjuku.maki.ListView>        
+    </com.ceenee.maki.ListView>
     
 </RelativeLayout>

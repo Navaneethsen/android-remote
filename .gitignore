@@ -19,3 +19,4 @@ local.properties
 # IDE file. Ignore it.
 .idea
 *.iml
+\.settings

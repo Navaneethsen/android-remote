@@ -22,7 +22,7 @@ import java.util.Random;
 import android.content.Context;
 import android.util.Log;
 
-import com.axcoto.shinjuku.maki.MyLog;
+import com.ceenee.maki.MyLog;
 import com.google.android.gcm.GCMRegistrar;
 
 public final class ServerUtilities {

@@ -1,10 +1,7 @@
 package com.axcoto.shinjuku.sushi;
 
 import java.io.IOException;
-
-import android.util.Log;
-
-import com.axcoto.shinjuku.maki.Remote;
+import com.ceenee.maki.Remote;
 
 public class DeviceItem {
 	String ip;

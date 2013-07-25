@@ -1,22 +1,11 @@
-package com.axcoto.shinjuku.maki;
+package com.ceenee.maki;
  
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
- 
 import android.content.Context;
-import android.util.Log;
  
 public class IdRegister {
 	String id;

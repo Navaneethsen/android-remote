@@ -3,9 +3,9 @@ package com.axcoto.shinjuku.sushi;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.axcoto.shinjuku.maki.Finder;
-import com.axcoto.shinjuku.maki.MyLog;
-import com.axcoto.shinjuku.maki.Remote;
+import com.ceenee.maki.Finder;
+import com.ceenee.maki.MyLog;
+import com.ceenee.maki.Remote;
 
 import android.content.ClipData.Item;
 import android.content.Context;

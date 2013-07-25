@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.maki;
+package com.ceenee.maki;
 
 public class Unicode {
 	public static String convert(String input) {
