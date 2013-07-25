@@ -3,20 +3,11 @@ package com.ceenee.maki.songs;
 import java.util.ArrayList;
 
 import com.axcoto.shinjuku.sushi.R;
-import com.axcoto.shinjuku.sushi.R.drawable;
-import com.axcoto.shinjuku.sushi.R.id;
-import com.axcoto.shinjuku.sushi.R.layout;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Unicode;
-
-import android.content.ClipData.Item;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnLongClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
@@ -28,8 +19,7 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable {
 	private ArrayList<Song> objects;
 	private ArrayList<Song> fitems;
 	private SongFilter filter;
-	private final Song mLock = new Song();
-
+	
 	/*
 	 * here we must override the constructor for ArrayAdapter the only variable
 	 * we care about now is ArrayList<Item> objects, because it is the list of
