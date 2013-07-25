@@ -7,13 +7,7 @@ import java.util.ArrayList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import com.axcoto.shinjuku.sushi.SongActivity;
 import com.ceenee.maki.songs.Song;
-
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class XMLParser extends DefaultHandler {
 	Boolean currentElement = false;
@@ -24,15 +18,8 @@ public class XMLParser extends DefaultHandler {
 	ArrayList<Song> list;
 
 	public XMLParser() {
-		// SQLiteDatabase conn = db.getDatabase();
-		// conn.execSQL("DELETE FROM hd");
-		// conn.execSQL("DELETE FROM mp3");
 		list = new ArrayList<Song>();
 	}
-
-	// public Db getSongs() {
-	// return db;
-	// }
 
 	public ArrayList<Song> getSongs() {
 		return list;
@@ -46,15 +33,7 @@ public class XMLParser extends DefaultHandler {
 		currentValue = "";
 		currentId = attributes.getValue("id");
 		String temp = attributes.getValue("name");
-		if ((temp != null) && temp.contains("."))
-			currentName = temp.substring(0, temp.lastIndexOf("."));
-		// currentName = temp.substring(0,temp.lastIndexOf("."));
-		if (qName.equals("Karaoke")) {
-		}
-		if (qName.equals("item")) {
-			// song = new Song();
-		}
-
+		if ((temp != null) && temp.contains(".")) currentName = temp.substring(0, temp.lastIndexOf("."));
 	}
 
 	@Override
@@ -65,11 +44,6 @@ public class XMLParser extends DefaultHandler {
 
 		/** set value */
 		if (qName.equalsIgnoreCase("item")) {
-			// SQLiteDatabase conn = db.getDatabase();
-			// ContentValues v = new ContentValues();
-			// v.put("id", currentId);
-			// v.put("title", currentName);
-			// conn.insert("hd", null, v);
 			list.add(new Song(currentId, currentName));
 		} else {
 		}

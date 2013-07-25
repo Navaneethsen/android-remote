@@ -1,14 +1,9 @@
 package com.ceenee.maki.sharekit;
 
-import java.io.File;
-
-
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
-
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.sharekit.ShareKit;
 

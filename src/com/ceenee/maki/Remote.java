@@ -6,7 +6,6 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -16,11 +15,6 @@ import java.net.UnknownHostException;
 import java.nio.channels.IllegalBlockingModeException;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.axcoto.shinjuku.sushi.ServerUtilities;
-
-import android.os.AsyncTask;
-import android.util.Log;
 
 /**
  * Remote class. A virtual mapping between the android remote key and the
