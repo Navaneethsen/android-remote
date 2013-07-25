@@ -3,21 +3,12 @@ package com.axcoto.shinjuku.maki;
 import java.io.File;
 
 
-import android.annotation.SuppressLint;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
-import android.util.Log;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.provider.MailSender;
-import com.provider.JSSEProvider;
 import com.axcoto.shinjuku.maki.ShareKit;
-import com.axcoto.shinjuku.maki.ShareKitFactory;
 
 public class ShareEmail implements ShareKit {
 	protected Activity parentActivity;
@@ -29,15 +20,22 @@ public class ShareEmail implements ShareKit {
 	@Override
 	public boolean execute() {
 		try {   
-            com.provider.MailSender sender = new com.provider.MailSender("ceeneeinc@gmail.com", "CeeNee95134");
-            sender.sendMail("This is Subject",   
-                    "This is Body",   
-                    "ceeneeinc@gmail.com",   
-                    "vinh.nguyen@gmail.com");   
+			Intent i = new Intent(android.content.Intent.ACTION_SENDTO);
+            i.setType("text/plain");
             
+            String uriText = "mailto:" + Uri.encode("email@gmail.com") + 
+                    "?subject=" + Uri.encode("the subject") + 
+                    "&body=" + Uri.encode("the body of the message")  
+                    ;
+            Uri uri = Uri.parse(uriText);
+
+            i.setData(uri);
+            this.parentActivity.startActivity(Intent.createChooser(i, "Send mail..."));                
+
         } catch (Exception e) {   
-            MyLog.e("SendMail", e.getMessage(), e);   
+            MyLog.e("SONGBOOK_EMAIL", e.getMessage(), e);   
         } 
+		
 		return false;
 	}
 	

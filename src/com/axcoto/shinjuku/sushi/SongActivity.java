@@ -3,7 +3,6 @@ package com.axcoto.shinjuku.sushi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,35 +10,22 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -55,26 +41,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.axcoto.shinjuku.maki.ListView;
+import com.axcoto.shinjuku.maki.ListView.OnItemDoubleTapLister;
 import com.axcoto.shinjuku.maki.MyLog;
 import com.axcoto.shinjuku.maki.Remote;
-import com.axcoto.shinjuku.maki.ShareKitFactory;
 import com.axcoto.shinjuku.maki.ShareKit;
+import com.axcoto.shinjuku.maki.ShareKitFactory;
 import com.axcoto.shinjuku.maki.Song;
 import com.axcoto.shinjuku.maki.SongAdapter;
 import com.axcoto.shinjuku.maki.Unicode;
 import com.axcoto.shinjuku.maki.XMLParser;
-import com.axcoto.shinjuku.maki.ListView;
-import com.axcoto.shinjuku.maki.ListView.OnItemDoubleTapLister;
 //import android.widget.ListView;
 
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Font;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Phrase;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfWriter;
+//import com.lowagie.text.DocumentException;
+//import com.lowagie.text.Font;
+//import com.lowagie.text.PageSize;
+//import com.lowagie.text.Paragraph;
+//import com.lowagie.text.Phrase;
+//import com.lowagie.text.pdf.PdfPCell;
+//import com.lowagie.text.pdf.PdfPTable;
+//import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * Song book activity. 
@@ -129,9 +115,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	private static final int REQUEST_SEND_EMAIL = 10;
 	public static String MAC_ADDRESS = "";
 	public static String myUUID;
-	private static final int DLG_EXAMPLE1 = 0;
-    private static final int TEXT_ID = 0;
-    String aEmailList;
+	String aEmailList;
     // Message types sent from the BluetoothService Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
     public static final int MESSAGE_READ = 2;
@@ -153,7 +137,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			connectProgress = ProgressDialog
 					.show(t,
 							"Loading songs...",
-							"Please wait, song boosk is processing...",
+							"Please wait, song book is being processing...",
 							true);	
 		}
 		protected Integer doInBackground(String... urls) {
@@ -192,47 +176,47 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 		 * Input a XML file and try to render it in PDF
 		 */
 		protected Boolean doInBackground(String... songbook) {
-			String[] part = songbook[0].split("\\.");
-	        String filename = part[0];
-	        MyLog.i(TAG, "filename: " + filename);
-	        
-	    	com.lowagie.text.Document doc = new com.lowagie.text.Document(PageSize.A4,10.0f,10.0f,10.0f,10.0f);
-	         try {
-	        	File dir = new File(t.getFilesDir() + "/pdf/");
-	            if(!dir.exists()) dir.mkdirs();
-	            File file = new File(dir, "ceenee_songbook.pdf");
-	            FileOutputStream fOut = new FileOutputStream(file);
-	            PdfWriter.getInstance(doc, fOut);
-	            doc.open();
-	            
-	            Paragraph title = new Paragraph("Karaoke Song Book \n\n");
-	            Font titleFont= new Font(Font.TIMES_ROMAN,20,Font.BOLD,harmony.java.awt.Color.RED);
-	            title.setAlignment(Paragraph.ALIGN_CENTER);
-	            title.setFont(titleFont);
-	            doc.add(title);
-	            
-	            PdfPTable table = new PdfPTable(2);
-	            table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
-	            PdfPCell c1 = new PdfPCell(new Phrase("Song Number"));
-	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-	            table.addCell(c1);
-
-	            c1 = new PdfPCell(new Phrase("Song Name"));
-	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-	            table.addCell(c1);
-	            
-	            
-	         } catch (DocumentException de) {
-	             Log.e(TAG, "DocumentException:" + de);
-	             return false;
-	         } catch (IOException e) {
-	             Log.e(TAG, "ioException:" + e);
-	             return false;
-	         }
-	         finally
-	         {
-	             doc.close();
-	         }
+//			String[] part = songbook[0].split("\\.");
+//	        String filename = part[0];
+//	        MyLog.i(TAG, "filename: " + filename);
+//	        
+//	    	com.lowagie.text.Document doc = new com.lowagie.text.Document(PageSize.A4,10.0f,10.0f,10.0f,10.0f);
+//	         try {
+//	        	File dir = new File(t.getFilesDir() + "/pdf/");
+//	            if(!dir.exists()) dir.mkdirs();
+//	            File file = new File(dir, "ceenee_songbook.pdf");
+//	            FileOutputStream fOut = new FileOutputStream(file);
+//	            PdfWriter.getInstance(doc, fOut);
+//	            doc.open();
+//	            
+//	            Paragraph title = new Paragraph("Karaoke Song Book \n\n");
+//	            Font titleFont= new Font(Font.TIMES_ROMAN,20,Font.BOLD,harmony.java.awt.Color.RED);
+//	            title.setAlignment(Paragraph.ALIGN_CENTER);
+//	            title.setFont(titleFont);
+//	            doc.add(title);
+//	            
+//	            PdfPTable table = new PdfPTable(2);
+//	            table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
+//	            PdfPCell c1 = new PdfPCell(new Phrase("Song Number"));
+//	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+//	            table.addCell(c1);
+//
+//	            c1 = new PdfPCell(new Phrase("Song Name"));
+//	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+//	            table.addCell(c1);
+//	            
+//	            
+//	         } catch (DocumentException de) {
+//	             Log.e(TAG, "DocumentException:" + de);
+//	             return false;
+//	         } catch (IOException e) {
+//	             Log.e(TAG, "ioException:" + e);
+//	             return false;
+//	         }
+//	         finally
+//	         {
+//	             doc.close();
+//	         }
 	         return true;
 	     }
 
@@ -292,13 +276,13 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_song);
 		
+		ed = (EditText) findViewById(R.id.cmd_songsearch);
 		fullsong = new ArrayList<Song>();
 		btn_sharesong = (Button) findViewById(R.id.btn_share);
 		SongActivity.t = this;
 		remote = Remote.getInstance();
 		if (arr_sort == null) arr_sort = new ArrayList<Song>();
 		songList = (ListView) findViewById(R.id.song_list);
-		MyLog.i("SongBook_Location", t.getFilesDir().toString());
 		
 		this.loadConfiguration();
 		this.setUpEventHandler();
@@ -309,75 +293,88 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	 * Load song in background and show a progess bar. Once done, reload song view list.
 	 */
 	private void loadSong() {
+		MyLog.i("SongBook_Location", t.getFilesDir().toString());
 		File f = new File(getLocation(karaoke.equals("hd")? "hd":"mp3"));
-		if (f.exists()) {
-			new FetchSongsTask().execute(f.getAbsolutePath());	
-		}
+		if (f.exists()) new FetchSongsTask().execute(f.getAbsolutePath());	
 	}
 	
+	/**
+	 * Load configuration form sharedPreference
+	 * 
+	 */
 	private void loadConfiguration() {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		karaoke = sharedPref.getString("listPref", "hd");
 		autosearch = sharedPref.getBoolean("auto_search", true);
 	}
 	
+	/**
+	 * Setup event handler once the view is created.
+	 */
 	private void setUpEventHandler() {
 		songList.setTextFilterEnabled(true);
 		if (songList.getCount()>0 && !btn_sharesong.isEnabled()) btn_sharesong.setEnabled(true);
 		
-		ed = (EditText) findViewById(R.id.cmd_songsearch);
-		int AndroidVersion = android.os.Build.VERSION.SDK_INT;
-		if (AndroidVersion < 16) {
-			ed.setOnKeyListener(this);
-		}
-
 		if (autosearch == true) {
-
-			ed.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable s) {
-					if (ed.getText().toString().equals("")) {
-						// songAdapter = new SongAdapter(SongActivity.this,
-						// R.layout.song_item, songs);
-						songAdapter.getFilter().filter(ed.getText().toString());
-						songList.setAdapter(songAdapter);
-					} else {
-						songAdapter.getFilter().filter(s.toString());
-						// songAdapter.notifyDataSetChanged();
-						songList.setAdapter(songAdapter);
-					}
-				}
-
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-				}
-			});
+			int AndroidVersion = android.os.Build.VERSION.SDK_INT;
+			if (AndroidVersion < 16) {
+				ed.setOnKeyListener(this);
+			} else {
+				this.setUpAutoSearch();
+			}
 		}
 
 		songList.setOnItemDoubleClickListener(this);
 		songList.setOnItemLongClickListener(this);
 	}
 
+	/**
+	 * In SDK>16, use this method to handle text change.
+	 * This method sets up a listener for auto searching song book once user type on search field
+	 * 
+	 * @see this{@link #onKey(View, int, KeyEvent)}
+	 * @see this{@link #setUpEventHandler()}
+	 */
+	private void setUpAutoSearch() {
+		ed.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void afterTextChanged(Editable s) {
+				if (ed.getText().toString().equals("")) {
+					// songAdapter = new SongAdapter(SongActivity.this,
+					// R.layout.song_item, songs);
+					songAdapter.getFilter().filter(ed.getText().toString());
+					songList.setAdapter(songAdapter);
+				} else {
+					songAdapter.getFilter().filter(s.toString());
+					// songAdapter.notifyDataSetChanged();
+					songList.setAdapter(songAdapter);
+				}
+			}
+
+			public void beforeTextChanged(CharSequence s, int start,
+					int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+					int before, int count) {
+			}
+		});
+	}
 	
 	/**
-	 * Input handler for song book searching textfield.
+	 * In SDK>16, use this method to handle text change.
+	 * This method sets up a listener for auto searching song book once user type on search field
 	 * 
+	 * @see this{@link #setUpAutoSearch()}
 	 * @see OnKeyListener
 	 */
 	@Override
 	public boolean onKey(View v, int keyCode, KeyEvent event) {
-		if ((event.getAction() == KeyEvent.ACTION_DOWN)
-				&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
+		if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 			InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-			if (im.isAcceptingText())
-				im.hideSoftInputFromWindow(ed.getWindowToken(), 0);
-			if (autosearch == false) {
+			if (im.isAcceptingText()) im.hideSoftInputFromWindow(ed.getWindowToken(), 0);
+			if (autosearch == true) {
 				textlength = ed.getText().length();
 				arr_sort.clear();
 				for (int i = 0; i < songs.size(); i++) {
@@ -423,8 +420,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	 * @param id
 	 */
 	@Override
-	public void OnDoubleTap(AdapterView<?> parent, View view, int position,
-			long id) {
+	public void OnDoubleTap(AdapterView<?> parent, View view, int position, long id) {
 		view.setBackgroundColor(getResources().getColor(R.color.Green));
 		Song s = songAdapter.getItem(position);
 		MyLog.i("SUSHI::SONG", "About to open " + s.getId() + " , name: "
@@ -490,7 +486,8 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	 * Search through song list with filter of songAdaper
 	 * @param v
 	 */
-	public void search(View v) {
+	public void clickSearch(View v) {
+		MyLog.i("SONG_SEARCH", "Start to search song");
 		textlength = ed.getText().length();
 		songAdapter.getFilter().filter(ed.getText().toString());
 //		songList.setAdapter(songAdapter);
@@ -512,8 +509,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			return t.getFilesDir() + "/MP3KaraokeDB.xml";
 	}
 
-	public void testButton(View v) throws ParserConfigurationException,
-			SAXException, IOException {
+	public void clickSync(View v) throws ParserConfigurationException, SAXException, IOException {
 		new ProgressTask().execute();
 	}
 
@@ -539,18 +535,9 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			songList.setAdapter(songAdapter);
 
 			if (success) {
-				// Toast.makeText(t, "DONE", Toast.LENGTH_LONG).show();
-				if (songList.getCount()>0)
-				{
-					//enable btn_share when load listview ok
-					if (!btn_sharesong.isEnabled())
-					{
-						btn_sharesong.setEnabled(true);
-					}
-				}
+				btn_sharesong.setEnabled(songList.getCount()>0);
 			} else {
-				Toast.makeText(t, "No Songbook Found", Toast.LENGTH_LONG)
-						.show();
+				Toast.makeText(t, "No Songbook Found. Try to create songbook on CeeNee player and sync again.", Toast.LENGTH_LONG).show();
 			}
 		}
 
@@ -559,8 +546,6 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			Remote r = Remote.getInstance();
 			String locationType;
 			MyLog.i("Sync Status : ", Integer.toString(syncStatus));
-			// ToggleButton tb = (ToggleButton)
-			// findViewById(R.id.karaoke_switch);
 			try {
 				if (karaoke.equals("hd")) {
 					locationType = "hd";
@@ -630,9 +615,14 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			}
 		}
 	}
-	  
 	
-	public void click_share(View v) {
+	/**
+	 * Sharing song book handler.
+	 * This will generate a PDF song book from XML file. Next, it invokes an intent for email sending.
+	 * All are run on an async task to avoid UI block. 
+	 * @param v
+	 */
+	public void clickShare(View v) {
 		new PdfRenderTask().execute(t.getLocation(karaoke));
 	}
 

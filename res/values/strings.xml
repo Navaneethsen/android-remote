@@ -59,10 +59,11 @@
     <string name="select_device">select a device to connect</string>
     <string name="none_paired">No devices have been paired</string>
     <string name="none_found">No devices found</string>
-    <string name="scanning">Scanning for devices...</string>
+    <string name="scanning">Scanning for devices&#8230;</string>
     <string name="version_type">a1</string>
     <string name="version_date">130626</string>
     <string name="android_version">1.1</string>
     <string name="crash_toast_text">Oops, iCeeNee crashed. A report is send to CeeNee team for analyzing.</string>
+    <string name="song_sync">Sync</string>
    	
 </resources>

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -130,23 +131,13 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
+		MyLog.i("SUSHI_MAIN#ONPOSTCREATE", "Running");
+		
 		if (this.isOnline()) {
-//			MyLog.i("SUSHI_MAIN#ONPOSTCREATE", "Running");
+			//Temporary disable gcm for speed to avoid initalize it when developing			
 //			this.startServer();
-//			
-//			//Temporary disable gcm for speed to avoid initalize it when developing
 //			this.gcmHandle();
-			
-			MailSender sender = new MailSender("ceeneeinc@gmail.com", "CeeNee95134");
-            try {
-            	sender.sendMail("This is Subject",   
-                        "This is Body",   
-                        "ceeneeinc@gmail.com",   
-                        "vinh.nguyen@gmail.com");
-            } catch (Exception e) {
-            	e.printStackTrace();
-            }
-            
+			            
 		} else {
 			alert.showAlertDialog(MainActivity.this,
 					"Internet Connection Error",

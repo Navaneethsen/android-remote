@@ -5,13 +5,13 @@
     android:layout_height="fill_parent" >
 
      <Button
-        android:id="@+id/cmd_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="1dp"
-        android:onClick="testButton"      
-        android:text="Sync"/>
+         android:id="@+id/cmd_test"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_marginRight="1dp"
+         android:onClick="clickSync"
+         android:text="@string/song_sync" />
          
     <Button
         android:id="@+id/cmd_delete"
@@ -95,14 +95,14 @@
 		        android:id="@+id/cmd_extra_search"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:onClick="search"
+		        android:onClick="clickSearch"
 		        android:layout_weight="1"
 		        android:text="Search" />
 		    <Button
 		        android:id="@+id/btn_share"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:onClick="click_share"
+		        android:onClick="clickShare"
 		        android:enabled="false"
 		        android:layout_weight="1"
 		        android:text="Share" />

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="1dp"
-        android:onClick="testButton"      
+        android:onClick="clickSync"      
         android:text="Sync"/>
          
     <Button
@@ -98,14 +98,14 @@
 		        android:id="@+id/cmd_extra_search"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:onClick="search"
+		        android:onClick="clickSearch"
 		        android:layout_weight="1"
 		        android:text="Search" />
 		    <Button
 		        android:id="@+id/btn_share"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:onClick="click_share"
+		        android:onClick="clickShare"
 		        android:enabled="false"
 		        android:layout_weight="1"
 		        android:text="Share"  />
