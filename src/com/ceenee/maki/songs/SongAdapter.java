@@ -151,7 +151,4 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable {
 
 	}
 	
-	public void export() {
-		
-	}
 }

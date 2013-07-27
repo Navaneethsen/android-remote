@@ -50,8 +50,10 @@ import com.ceenee.maki.XMLParser;
 import com.ceenee.maki.ListView.OnItemDoubleTapLister;
 import com.ceenee.maki.sharekit.ShareKit;
 import com.ceenee.maki.sharekit.ShareKitFactory;
+import com.ceenee.maki.songs.Export;
 import com.ceenee.maki.songs.Song;
 import com.ceenee.maki.songs.SongAdapter;
+import com.ceenee.maki.songs.SongBook;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
@@ -61,15 +63,7 @@ import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-
-//import com.lowagie.text.DocumentException;
-//import com.lowagie.text.Font;
-//import com.lowagie.text.PageSize;
-//import com.lowagie.text.Paragraph;
-//import com.lowagie.text.Phrase;
-//import com.lowagie.text.pdf.PdfPCell;
-//import com.lowagie.text.pdf.PdfPTable;
-//import com.lowagie.text.pdf.PdfWriter;
+import com.ceenee.maki.songs.Export.OnExportListener;
 
 /**
  * Song book activity. 
@@ -80,12 +74,15 @@ import com.lowagie.text.pdf.PdfWriter;
  * @author kureikain
  *
  */
-public class SongActivity extends RootActivity implements OnKeyListener, OnItemDoubleTapLister, OnItemLongClickListener {
+public class SongActivity extends RootActivity implements 
+	OnKeyListener
+	, OnItemDoubleTapLister
+	, OnItemLongClickListener
+	, OnExportListener {
 	private ListView songList;
 	private EditText ed;
 	int textlength = 0;
 	private SongAdapter songAdapter;
-	public static ArrayList<Song> songs = new ArrayList<Song>();
 	public static ArrayList<Song> fullsong = new ArrayList<Song>();
 	public ArrayList<String> songId;
 	public ArrayList<String> songTitle;
@@ -111,10 +108,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	public static final int SYNC_ERROR = 6;
 	public static final int SYNC_TIMEMOUT = 7;
 	public static SongActivity t;
-	private final int TRIGGER_SEARCH = 1;
-	private final long SEARCH_TRIGGER_DELAY_IN_MS = 1000;
 	private static String karaoke;
-	private String text;
 	//share song book
 	private BluetoothService mBTService = null;
 	private BluetoothAdapter mBluetoothAdapter = null;
@@ -133,6 +127,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
     public static final int MESSAGE_TOAST = 5;
 	Button btn_sharesong;
 	public Remote remote;
+	private SongBook songbook;
 	
 	private class SearchSongsTask extends AsyncTask <String, Integer, Integer> {
 		ProgressDialog connectProgress;
@@ -155,6 +150,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 		}
 	}
 	
+	
 	/**
 	 * Load song book task.
 	 * We should return some progess here
@@ -171,153 +167,29 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 							true);	
 		}
 		protected Integer doInBackground(String... urls) {
-	         songs = getSong(getLocation(karaoke.equals("hd")? "hd":"mp3"));
-	         return songs.size();
+			songbook.load(getLocation(karaoke.equals("hd")? "hd":"mp3"));
+	        return songbook.songs.size();
 	     }
 
 		 protected void onPostExecute(Integer result) {
-			 songAdapter = new SongAdapter(t, R.layout.song_item, songs);
+			 songAdapter = new SongAdapter(t, R.layout.song_item, songbook.songs);
 	         songList.setAdapter(songAdapter);
 	         songAdapter.notifyDataSetChanged();
 	         songList.setTextFilterEnabled(true);
 	         btn_sharesong.setEnabled(true);
 	         connectProgress.hide();
-	         MyLog.i("FETCH_SONG", "Finish fetching a number of songs:" + songs.size());
+	         MyLog.i("FETCH_SONG", "Finish fetching a number of songs:" + songbook.songs.size());
 	     }
 	}
 	
-	/**
-	 * Load song book task.
-	 * We should return some progess here
-	 * @author kureikain
-	 *
-	 */
-	private class PdfRenderTask extends AsyncTask <String, Boolean, Boolean> {
-		ProgressDialog connectProgress;
-		protected void onPreExecute() {
-			connectProgress = ProgressDialog
-					.show(t,
-							"Rendering PDF...",
-							"Please wait, PDF is rendering...",
-							true);	
-		}
-		
-		/**
-		 * Input a XML file and try to render it in PDF
-		 */
-		protected Boolean doInBackground(String... songbook) {
-			String[] part = songbook[0].split("\\.");
-	        String filename = part[0];
-	        MyLog.i(TAG, "filename: " + filename);
-	        
-	    	com.lowagie.text.Document doc = new com.lowagie.text.Document(PageSize.A4,10.0f,10.0f,10.0f,10.0f);
-	         try {
-	        	File dir = new File(t.getFilesDir() + "/pdf/");
-	            if(!dir.exists()) dir.mkdirs();
-	            File file = new File(dir, "ceenee_songbook.pdf");
-	            FileOutputStream fOut = new FileOutputStream(file);
-	            PdfWriter.getInstance(doc, fOut);
-	            doc.open();
-	            
-	            Paragraph title = new Paragraph("Karaoke Song Book \n\n");
-	            Font titleFont= new Font(Font.TIMES_ROMAN,20,Font.BOLD,harmony.java.awt.Color.RED);
-	            title.setAlignment(Paragraph.ALIGN_CENTER);
-	            title.setFont(titleFont);
-	            doc.add(title);
-	            
-	            PdfPTable table = new PdfPTable(2);
-	            
-	            table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
-	            PdfPCell c1 = new PdfPCell(new Phrase("Song Number"));
-	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-	            table.addCell(c1);
-	            
-	            c1 = new PdfPCell(new Phrase("Song Name"));
-	            c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-	            table.addCell(c1);
-	            
-	            Integer quantity = songs.size();
-	            for (Integer index=0; index<quantity; index++) {
-	            	table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
-		            PdfPCell c = new PdfPCell(new Phrase("Song Number"));
-		            c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-		            table.addCell(c);
-		            
-		            c = new PdfPCell(new Phrase("Song Name"));
-		            c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-		            table.addCell(c);
-	            }
-	            
-	         } catch (DocumentException de) {
-	             Log.e(TAG, "DocumentException:" + de);
-	             return false;
-	         } catch (IOException e) {
-	             Log.e(TAG, "ioException:" + e);
-	             return false;
-	         }
-	         finally
-	         {
-	             doc.close();
-	         }
-	         return true;
-	     }
-
-		 protected void onPostExecute(Boolean result) {
-			 connectProgress.hide();	
-			 if (result) {
-				 MyLog.i("PDF_CREAEING", "Success");
-				try {
-					ShareKit s = ShareKitFactory.getInstance(t, "email");
-					s.execute();
-				} catch (Exception e) {
-					e.printStackTrace();
-					Log.i("SHARE_EMAIL", e.getStackTrace().toString());
-				}
-			 } else {
-				 MyLog.e("PDF_CREAEING", "Failt");
-			 }
-	     }
-	}
-	
-	public ArrayList<Song> getSong(String location) {
-		try {
-			SAXParserFactory spf = SAXParserFactory.newInstance();
-			SAXParser sp;
-			sp = spf.newSAXParser();
-			XMLReader xr;
-			xr = sp.getXMLReader();
-			XMLParser myXMLHandler = new XMLParser();
-			xr.setContentHandler(myXMLHandler);
-			InputStream inStream;
-			inStream = new FileInputStream(new File(location));
-			Reader reader;
-			reader = new InputStreamReader(inStream, "UTF-8");
-			InputSource is = new InputSource(reader);
-			is.setEncoding("UTF-8");
-			xr.parse(is);
-			songs = myXMLHandler.getSongs();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			MyLog.i("SONGBOOK_NOT_FOUND", "SONG BOOK DON'T EXIST. IGNORE");
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return songs;
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		progressDialog = new ProgressDialog(this);
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_song);
 		
+		songbook = new SongBook();
 		ed = (EditText) findViewById(R.id.cmd_songsearch);
 		fullsong = new ArrayList<Song>();
 		btn_sharesong = (Button) findViewById(R.id.btn_share);
@@ -419,18 +291,18 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			if (autosearch == true) {
 				textlength = ed.getText().length();
 				arr_sort.clear();
-				for (int i = 0; i < songs.size(); i++) {
-					if (textlength <= songs.get(i).getTitle()
+				for (int i = 0; i <songbook.songs.size(); i++) {
+					if (textlength <= songbook.songs.get(i).getTitle()
 							.length()) {
 						if (Unicode
-								.convert(songs.get(i).getTitle())
+								.convert(songbook.songs.get(i).getTitle())
 								.toLowerCase()
 								.contains(
 										Unicode.convert(ed
 												.getText()
 												.toString()
 												.toLowerCase()))) {
-							arr_sort.add(songs.get(i));
+							arr_sort.add(songbook.songs.get(i));
 						}
 					}
 				}
@@ -550,10 +422,10 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	}
 
 	public void clickSync(View v) throws ParserConfigurationException, SAXException, IOException {
-		new ProgressTask().execute();
+		new SyncTask().execute();
 	}
 
-	private class ProgressTask extends AsyncTask<String, Void, Boolean> {
+	private class SyncTask extends AsyncTask<String, Void, Boolean> {
 		private long elapsed_time = 0;
 		private ProgressDialog dialog = new ProgressDialog(SongActivity.this);
 
@@ -571,7 +443,7 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			if (dialog.isShowing()) {
 				dialog.dismiss();
 			}
-			songAdapter = new SongAdapter(t, R.layout.song_item, songs);
+			songAdapter = new SongAdapter(t, R.layout.song_item,songbook.songs);
 			songList.setAdapter(songAdapter);
 
 			if (success) {
@@ -604,13 +476,13 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			boolean check = true;
 			while (check == true) {
 				if (syncStatus == SYNC_ERROR) {
-					songs = new ArrayList<Song>();
 					check = false;
 					return false;
 				} else if (syncStatus == SYNC_DONE) {
 					long t1 = System.currentTimeMillis();
-					songs = getSong(t.getLocation(locationType));
-					for (Song s : songs) {
+					songbook.load(t.getLocation(locationType));
+					
+					for (Song s :songbook.songs) {
 						fullsong.add(s);
 					}
 					long t2 = System.currentTimeMillis();
@@ -658,12 +530,16 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 	
 	/**
 	 * Sharing song book handler.
-	 * This will generate a PDF song book from XML file. Next, it invokes an intent for email sending.
+	 * This will generate a PDF song book from XML file. Next, it invokes an intent for email sending once generating is done.
 	 * All are run on an async task to avoid UI block. 
 	 * @param v
 	 */
 	public void clickShare(View v) {
-		new PdfRenderTask().execute(t.getLocation(karaoke));
+		Export e = new Export(this, "pdf");
+		e.setParam("source", t.getLocation(karaoke));
+		e.setParam("to", t.getFilesDir() + "export_ceenee_songbook.pdf");
+		e.setOnExportListener(this);
+		e.run();    	
 	}
 
 	@Override
@@ -733,11 +609,12 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
 			if (file.exists())
 			{
 				Log.d(TAG, "if (file.exists())");
-				songs = getSong(t.getLocation(karaoke));
-				for (Song s : songs) {
+				songbook.load(t.getLocation(karaoke));
+				
+				for (Song s :songbook.songs) {
 					fullsong.add(s);
 				}
-				songAdapter = new SongAdapter(t, R.layout.song_item, songs);
+				songAdapter = new SongAdapter(t, R.layout.song_item,songbook.songs);
 				songList.setAdapter(songAdapter);
 			}
         }
@@ -757,7 +634,33 @@ public class SongActivity extends RootActivity implements OnKeyListener, OnItemD
             type = mime.getMimeTypeFromExtension(extension);
         }
         return type;
-    } 
+    }
+
+    /**
+     * Run before start to share songbook
+     * @see Export.OnExportListener
+     */
+	@Override	
+	public void beforeRun() {
+		// TODO Auto-generated method stub		
+		progressDialog = ProgressDialog.show(this, "Sharing...", "Song books is generating");
+	}
+	
+	/** 
+	 * Now, the export task is done. Invoke sending script.
+     * @see Export.OnExportListener
+     */
+	@Override
+	public void whenDone() {
+		MyLog.i("SHARE_EMAIL", "Exporting finished. Now ceate intent to send email");
+		try {
+			ShareKitFactory.getInstance(this, "email").execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.i("SHARE_EMAIL", e.getStackTrace().toString());
+		}		
+		progressDialog.hide();
+	} 
 
 }
 	

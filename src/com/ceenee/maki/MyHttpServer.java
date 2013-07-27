@@ -1,7 +1,6 @@
 package com.ceenee.maki;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,7 +13,6 @@ import java.util.Properties;
 
 import com.axcoto.shinjuku.sushi.SongActivity;
 
-import android.util.Log;
 
 interface SongBookUploader {
 	public void upload();

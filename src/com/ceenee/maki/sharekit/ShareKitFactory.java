@@ -10,8 +10,7 @@ public class ShareKitFactory {
 		ShareKit transporter;
 		
 		if (_type.equalsIgnoreCase("email")) {
-			transporter = new ShareEmail();
-//			transporter.set
+			transporter = new ShareEmail(parent);
 		} else {
 			throw new Exception("We have not suppoted this transport method");
 		}
