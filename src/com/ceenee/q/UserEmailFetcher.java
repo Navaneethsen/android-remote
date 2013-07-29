@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;

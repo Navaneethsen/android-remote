@@ -1,12 +1,12 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 /**
  * Server Utilities (For GCM)
  */
 
-import static com.axcoto.shinjuku.sushi.CommonUtilities.SERVER_URL;
-import static com.axcoto.shinjuku.sushi.CommonUtilities.TAG;
-import static com.axcoto.shinjuku.sushi.CommonUtilities.displayMessage;
+import static com.ceenee.q.CommonUtilities.SERVER_URL;
+import static com.ceenee.q.CommonUtilities.TAG;
+import static com.ceenee.q.CommonUtilities.displayMessage;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,6 +23,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.ceenee.maki.MyLog;
+import com.ceenee.q.R;
 import com.google.android.gcm.GCMRegistrar;
 
 public final class ServerUtilities {

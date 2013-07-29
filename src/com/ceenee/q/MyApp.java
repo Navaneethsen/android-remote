@@ -1,10 +1,13 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 /**
  * MyApp main class for ARCA crash report
  */
 import org.acra.*;
 import org.acra.annotation.*;
+
+import com.ceenee.q.R;
+
 import android.app.Application;
 
 @ReportsCrashes(formKey = "", // will not be used

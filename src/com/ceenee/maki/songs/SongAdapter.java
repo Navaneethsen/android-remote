@@ -2,9 +2,10 @@ package com.ceenee.maki.songs;
 
 import java.util.ArrayList;
 
-import com.axcoto.shinjuku.sushi.R;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Unicode;
+import com.ceenee.q.R;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

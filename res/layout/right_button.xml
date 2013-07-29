@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
+    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.ceenee.q"
     >
 
-    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+    <com.ceenee.q.RemoteKeyButton
         android:id="@+id/cmd_delete"
         style="@style/RemoteButtonRight"
         android:src="@drawable/glyphicons_197_remove"
@@ -14,28 +14,28 @@
         remotecontrol:remote_key_name="delete"      />
 
 
-    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+    <com.ceenee.q.RemoteKeyButton
         android:id="@+id/cmd_fast_backward"
         style="@style/RemoteButtonRight"
         android:onClick="onRemoteClick"
         remotecontrol:remote_key_name="prev"
         android:src="@drawable/glyphicons_171_fast_backward" />
 
-    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+    <com.ceenee.q.RemoteKeyButton
         android:id="@+id/cmd_fast_forward"
         style="@style/RemoteButtonRight"
         android:onClick="onRemoteClick"
         remotecontrol:remote_key_name="next"
         android:src="@drawable/glyphicons_177_fast_forward" />
 
-    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+    <com.ceenee.q.RemoteKeyButton
         android:id="@+id/cmd_return"
         style="@style/RemoteButtonRight"
         android:onClick="onRemoteClick"
         remotecontrol:remote_key_name="return"
         android:src="@drawable/glyphicons_221_unshare" />
 
-    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+    <com.ceenee.q.RemoteKeyButton
         android:id="@+id/cmd_timeseek"
         style="@style/RemoteButtonRight"
         android:onClick="onRemoteClick"

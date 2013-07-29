@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 /**
  * Common Utilities (For GCM)
@@ -26,7 +26,7 @@ public final class CommonUtilities {
     static final String TAG = "iCeeNee";
  
     static final String DISPLAY_MESSAGE_ACTION =
-            "com.axcoto.shinjuku.sushi.DISPLAY_MESSAGE";
+            "com.ceenee.q.DISPLAY_MESSAGE";
  
     static final String EXTRA_MESSAGE = "message";
  

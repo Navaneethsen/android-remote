@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 import java.io.IOException;
 
@@ -7,11 +7,12 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.axcoto.shinjuku.sushi.ConfigActivity;
-import com.axcoto.shinjuku.sushi.DeviceActivity;
-import com.axcoto.shinjuku.sushi.MainActivity;
-import com.axcoto.shinjuku.sushi.SongActivity;
 import com.ceenee.maki.Remote;
+import com.ceenee.q.ConfigActivity;
+import com.ceenee.q.DeviceActivity;
+import com.ceenee.q.MainActivity;
+import com.ceenee.q.R;
+import com.ceenee.q.SongActivity;
 
 public class ActivityNavigator {
 	protected static ActivityNavigator _instance;

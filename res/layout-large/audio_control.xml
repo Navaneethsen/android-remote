@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
+    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.ceenee.q"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible" >
@@ -25,7 +25,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1">
  	      
- 	      <com.axcoto.shinjuku.sushi.RemoteKeyButton
+ 	      <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_voldown"
 	         android:layout_weight="1"
 	         android:layout_marginTop="2dp"
@@ -37,7 +37,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@android:color/transparent" />
      
-     	 <com.axcoto.shinjuku.sushi.RemoteKeyButton
+     	 <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_volup"
 	         android:layout_weight="1"
 	         android:layout_marginTop="2dp"
@@ -57,7 +57,7 @@
          android:layout_height="fill_parent"
          android:layout_weight="1">
      	
-     	<com.axcoto.shinjuku.sushi.RemoteKeyButton
+     	<com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_mute"
 	         android:layout_weight="1"
 	         android:layout_marginLeft="2dp"
@@ -70,7 +70,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@android:color/transparent" />
    
-     	<com.axcoto.shinjuku.sushi.RemoteKeyButton
+     	<com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_audio"
 	         android:layout_weight="1"
 	         android:layout_width="fill_parent"

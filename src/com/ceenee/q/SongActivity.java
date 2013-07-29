@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -64,6 +64,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.ceenee.maki.songs.Export.OnExportListener;
+import com.ceenee.q.R;
 
 /**
  * Song book activity. 
@@ -642,7 +643,6 @@ public class SongActivity extends RootActivity implements
      */
 	@Override	
 	public void beforeRun() {
-		// TODO Auto-generated method stub		
 		progressDialog = ProgressDialog.show(this, "Sharing...", "Song books is generating");
 	}
 	

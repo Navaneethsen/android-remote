@@ -1,8 +1,7 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 import java.io.IOException;
 
-import com.axcoto.shinjuku.sushi.R.id;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,9 +19,10 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.TextView;
 
-import com.axcoto.shinjuku.sushi.*;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Remote;
+import com.ceenee.q.*;
+import com.ceenee.q.R.id;
 
 public class RootActivity extends Activity {
 	

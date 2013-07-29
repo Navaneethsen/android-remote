@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>    
 <LinearLayout	    
 	    xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
+		xmlns:remotecontrol="http://schemas.android.com/apk/res/com.ceenee.q"
 	    android:id="@+id/LinearLayout01"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
@@ -13,7 +13,7 @@
 			    android:background="@drawable/screen_background"
 			    android:orientation="horizontal" >	    
 		
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/cmd_power"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
 			        android:src="@android:color/transparent"
 			        remotecontrol:remote_key_name="power" />
 		
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/cmd_menu"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
 			        android:src="@android:color/transparent"
 			        remotecontrol:remote_key_name="menu" />
 		
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/cmd_home"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
 			        android:src="@android:color/transparent"
 			        remotecontrol:remote_key_name="home" />
 		
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/cmd_return"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
 			        android:src="@android:color/transparent"
 			        remotecontrol:remote_key_name="return" />
 		
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/cmd_eject"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
 			        android:layout_marginTop="15dp"
 			        layout="@layout/extra" />
 		
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/enter"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
 			        android:visibility="visible"
 			        remotecontrol:remote_key_name="enter" />
 		
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/audio_control"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
 			        android:src="@drawable/normal_audio"
 			        remotecontrol:remote_key_name="audio_control" />
 		
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/playback"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
 			        android:src="@drawable/normal_playback"
 			        remotecontrol:remote_key_name="playback" />			    			   
 		
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/search_button"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -178,7 +178,7 @@
 			        <requestFocus />
 			    </EditText>
 			    
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/settings"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
 			        remotecontrol:remote_key_name="settings" />
 			    
 			    
-			    <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			    <com.ceenee.q.RemoteKeyButton
 			        android:id="@+id/etc"
 			        android:layout_width="50dp"
 			        android:layout_height="50dp"

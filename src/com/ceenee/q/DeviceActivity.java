@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -46,6 +46,7 @@ import com.ceenee.maki.Finder;
 import com.ceenee.maki.ItemAdapter;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Remote;
+import com.ceenee.q.R;
 
 public class DeviceActivity extends RootActivity implements OnGestureListener {
 	final public String DEVICE_FILENAME = "device";

@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 import java.io.File;
 
@@ -37,10 +37,11 @@ import com.google.android.gcm.GCMRegistrar;
 //import com.axcoto.shinjuku.maki.MyHttpServer;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Remote;
+import com.ceenee.q.R;
 
-//import static com.axcoto.shinjuku.sushi.CommonUtilities.DISPLAY_MESSAGE_ACTION;
-import static com.axcoto.shinjuku.sushi.CommonUtilities.EXTRA_MESSAGE;
-import static com.axcoto.shinjuku.sushi.CommonUtilities.SENDER_ID;
+//import static com.ceenee.q.CommonUtilities.DISPLAY_MESSAGE_ACTION;
+import static com.ceenee.q.CommonUtilities.EXTRA_MESSAGE;
+import static com.ceenee.q.CommonUtilities.SENDER_ID;
 import android.app.AlertDialog;
 
 import android.content.Intent;
@@ -182,7 +183,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		// GCMRegistrar.unregister(getApplicationContext());
 
 		File f = new File(this.getFilesDir(),
-				com.axcoto.shinjuku.sushi.CommonUtilities.REGID_FILENAME);
+				com.ceenee.q.CommonUtilities.REGID_FILENAME);
 		if (f.exists()) {
 			// We don't need to register the device
 			return;

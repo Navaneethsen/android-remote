@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,7 +18,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.axcoto.shinjuku.sushi.SongActivity;
+import com.ceenee.q.SongActivity;
 
 public class BluetoothService {
 	// Debugging

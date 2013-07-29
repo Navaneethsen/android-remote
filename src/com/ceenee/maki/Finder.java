@@ -12,7 +12,7 @@ import java.util.Enumeration;
 
 import org.apache.http.conn.util.InetAddressUtils;
 
-import com.axcoto.shinjuku.sushi.DeviceActivity;
+import com.ceenee.q.DeviceActivity;
 
 import android.util.Log;
 import android.widget.Toast;

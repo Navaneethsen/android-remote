@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
+    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.ceenee.q"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="gone" >
@@ -14,7 +14,7 @@
 	        android:background="@android:color/transparent"
 	        android:src="@drawable/extra_title" />  
 	        
-     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+     <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_timeseek"
 	         android:layout_below="@id/extra_title"	
 	         android:layout_marginTop="5dp"         
@@ -26,7 +26,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@drawable/seek_button" />
      
-     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+     <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_info"
 	         android:layout_below="@id/extra_title"
 	         android:layout_marginTop="5dp" 	         
@@ -39,7 +39,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@drawable/info_button" />
      
-     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+     <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_bookmark"
 	         android:layout_below="@id/extra_title"	 
 	         android:layout_marginTop="5dp"         
@@ -52,7 +52,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@drawable/bookmark_button" />
      
-     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+     <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_tvmode"
 	         android:layout_below="@id/extra_title"	    
 	         android:layout_marginTop="5dp"      
@@ -65,7 +65,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@drawable/tv_button" />
      
-     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+     <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_red"
 	         android:layout_below="@id/cmd_timeseek"	         
 	         android:layout_width="wrap_content"
@@ -77,7 +77,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@drawable/red_button" />
      
-     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+     <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_green"
 	         android:layout_below="@id/cmd_timeseek"	         
 	         android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@drawable/green_button" />
      
-     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+     <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_yellow"
 	         android:layout_below="@id/cmd_timeseek"	         
 	         android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@drawable/yellow_button" />
      
-     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+     <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_blue"
 	         android:layout_below="@id/cmd_timeseek"	         
 	         android:layout_width="wrap_content"

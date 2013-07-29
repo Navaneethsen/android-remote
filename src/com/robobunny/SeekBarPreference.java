@@ -1,7 +1,7 @@
 package com.robobunny;
 
-import com.axcoto.shinjuku.sushi.R;
 import com.ceenee.maki.MyLog;
+import com.ceenee.q.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;

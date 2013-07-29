@@ -1,6 +1,8 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 import java.util.Set;
+
+import com.ceenee.q.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;

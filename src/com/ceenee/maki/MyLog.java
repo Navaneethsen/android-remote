@@ -1,7 +1,8 @@
 package com.ceenee.maki;
 
 import android.util.Log;
-import com.axcoto.shinjuku.sushi.MainActivity;
+
+import com.ceenee.q.MainActivity;
 
 /**
  * Custom Log for iCeeNee 

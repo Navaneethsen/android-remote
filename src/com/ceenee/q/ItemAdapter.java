@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.ceenee.maki.Finder;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Remote;
+import com.ceenee.q.R;
 
 import android.content.ClipData.Item;
 import android.content.Context;

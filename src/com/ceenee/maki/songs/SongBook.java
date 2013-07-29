@@ -22,9 +22,14 @@ import com.ceenee.maki.XMLParser;
 import com.ceenee.maki.songs.Song;
 
 public class SongBook {
-	protected String[] _songs;
-	protected String[] _songAlphabet;
+//	protected String[] _songs;
+//	protected String[] _songAlphabet;
+	
 	public ArrayList<Song> songs = new ArrayList<Song>();
+	
+	public void setSong(ArrayList<Song> s) {
+		songs = s;
+	}
 	
 	public ArrayList<Song> load(String location) {
 		try {

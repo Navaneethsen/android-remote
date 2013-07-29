@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.axcoto.shinjuku.sushi"
+    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.ceenee.q"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:visibility= "visible" >
@@ -21,7 +21,7 @@
          android:background="@android:color/transparent" >
          
 
-	     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	     <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_rev"
 	         android:layout_width="wrap_content"
 	         android:layout_height="fill_parent"
@@ -34,7 +34,7 @@
 	         android:src="@android:color/transparent"
 	         remotecontrol:remote_key_name="prev" />
 	     
-	      <com.axcoto.shinjuku.sushi.RemoteKeyButton
+	      <com.ceenee.q.RemoteKeyButton
 	         android:id="@+id/cmd_forward"
 	         android:layout_width="wrap_content"
 	         android:layout_height="fill_parent"
@@ -65,7 +65,7 @@
 	             android:layout_height="fill_parent" 
 	             android:layout_marginBottom ="1dp"	             
 	             android:layout_weight = "1">
-			     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			     <com.ceenee.q.RemoteKeyButton
 				         android:id="@+id/cmd_pause"
 				         android:layout_width="0px"
 				         android:layout_height="fill_parent"
@@ -76,7 +76,7 @@
 				         remotecontrol:remote_key_name="pause"	      
 				         android:src="@android:color/transparent" />
 
-			     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			     <com.ceenee.q.RemoteKeyButton
 			         android:id="@+id/cmd_play"
 			         android:layout_width="0px"
 			         android:layout_height="fill_parent"
@@ -88,7 +88,7 @@
 			         android:src="@android:color/transparent"
 			         remotecontrol:remote_key_name="play" />
 			     
-			     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			     <com.ceenee.q.RemoteKeyButton
 				         android:id="@+id/cmd_stop"
 				         android:layout_width="0px"
 				         android:layout_height="fill_parent"
@@ -106,7 +106,7 @@
 	             android:layout_height="fill_parent"
 	             android:layout_marginTop="1dp"
 	             android:layout_weight = "1">
-			     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			     <com.ceenee.q.RemoteKeyButton
 				         android:id="@+id/cmd_fast_backward"
 				         android:layout_width="0px"
 				         android:layout_height="fill_parent"
@@ -117,7 +117,7 @@
 				         remotecontrol:remote_key_name="rewind"     
 				         android:src="@android:color/transparent" />
 			     
-			     <com.axcoto.shinjuku.sushi.RemoteKeyButton
+			     <com.ceenee.q.RemoteKeyButton
 				         android:id="@+id/cmd_fast_forward"
 				         android:layout_width="0px"
 				         android:layout_height="fill_parent"

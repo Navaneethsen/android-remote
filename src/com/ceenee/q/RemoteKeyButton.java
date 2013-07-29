@@ -1,4 +1,6 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
+
+import com.ceenee.q.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;

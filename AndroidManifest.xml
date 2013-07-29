@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.axcoto.shinjuku.sushi"
+    package="com.ceenee.q"
     android:versionCode="2"
     android:versionName="@string/android_version" >
 
@@ -17,8 +17,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     
 	
-    <permission android:name="com.axcoto.shinjuku.sushi.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-	<uses-permission android:name="com.axcoto.shinjuku.sushi.permission.C2D_MESSAGE" /> 
+    <permission android:name="com.ceenee.q.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<uses-permission android:name="com.ceenee.q.permission.C2D_MESSAGE" /> 
 	
 	<!-- App receives GCM messages. -->
 	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -46,14 +46,14 @@
 		  <intent-filter>
 		    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 		    <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-		    <category android:name="com.axcoto.shinjuku.sushi" />
+		    <category android:name="com.ceenee.q" />
 		  </intent-filter>
 		</receiver>
 	
-		<service android:name=".GCMIntentService" />
+		<service android:name="com.ceenee.q.GCMIntentService" />
 		
         <activity
-            android:name=".MainActivity"            
+            android:name="com.ceenee.q.MainActivity"            
             android:label="@string/title_activity_main" 
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:configChanges="orientation|screenSize">
@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".DeviceActivity" 
+        <activity android:name="com.ceenee.q.DeviceActivity" 
             android:label="@string/title_activity_device"
             android:configChanges="orientation|screenSize">
         	<intent-filter> 
@@ -73,7 +73,7 @@
         	</intent-filter>    
         </activity>
 
-        <activity android:name=".SongActivity" android:label="@string/title_activity_song"
+        <activity android:name="com.ceenee.q.SongActivity" android:label="@string/title_activity_song"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"
             android:configChanges="orientation|screenSize|keyboardHidden">
           	<intent-filter> 
@@ -82,14 +82,14 @@
         	</intent-filter>    
         </activity>
         
-        <activity android:name=".ConfigActivity" android:label="@string/title_activity_option">
+        <activity android:name="com.ceenee.q.ConfigActivity" android:label="@string/title_activity_option">
         	<intent-filter> 
         	    <action android:name="android.intent.action.VIEW" /> 
         	    <category android:name="android.intent.category.DEFAULT" /> 
         	</intent-filter>    
         </activity>
         
-        <activity android:name=".DeviceListActivity"
+        <activity android:name="com.ceenee.q.DeviceListActivity"
                   android:label="@string/select_device"
                   android:theme="@android:style/Theme.Dialog"
                   android:configChanges="orientation|keyboardHidden" />

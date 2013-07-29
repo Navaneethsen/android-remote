@@ -1,4 +1,4 @@
-package com.axcoto.shinjuku.sushi;
+package com.ceenee.q;
 
 /**
  * GCM Intent Service (For GCM)
@@ -20,11 +20,12 @@ import android.util.Log;
  
 import com.google.android.gcm.GCMBaseIntentService;
  
-import static com.axcoto.shinjuku.sushi.CommonUtilities.SENDER_ID;
-import static com.axcoto.shinjuku.sushi.CommonUtilities.displayMessage;
+import static com.ceenee.q.CommonUtilities.SENDER_ID;
+import static com.ceenee.q.CommonUtilities.displayMessage;
 
 import com.ceenee.maki.IdRegister;
 import com.ceenee.maki.MyLog;
+import com.ceenee.q.R;
 
 public class GCMIntentService extends GCMBaseIntentService {
  

@@ -3,7 +3,7 @@ package com.ceenee.maki;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.axcoto.shinjuku.sushi.R;
+import com.ceenee.q.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

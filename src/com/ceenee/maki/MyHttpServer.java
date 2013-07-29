@@ -11,7 +11,7 @@ import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.Properties;
 
-import com.axcoto.shinjuku.sushi.SongActivity;
+import com.ceenee.q.SongActivity;
 
 
 interface SongBookUploader {
