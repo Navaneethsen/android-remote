@@ -1,23 +1,11 @@
 package com.ceenee.q;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.UUID;
-
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -46,23 +34,12 @@ import com.ceenee.maki.ListView;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Remote;
 import com.ceenee.maki.Unicode;
-import com.ceenee.maki.XMLParser;
 import com.ceenee.maki.ListView.OnItemDoubleTapLister;
-import com.ceenee.maki.sharekit.ShareKit;
 import com.ceenee.maki.sharekit.ShareKitFactory;
 import com.ceenee.maki.songs.Export;
 import com.ceenee.maki.songs.Song;
 import com.ceenee.maki.songs.SongAdapter;
 import com.ceenee.maki.songs.SongBook;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Font;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-//import android.widget.ListView;
-import com.lowagie.text.Phrase;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfWriter;
 import com.ceenee.maki.songs.Export.OnExportListener;
 import com.ceenee.q.R;
 

@@ -21,6 +21,7 @@ import com.ceenee.maki.songs.PdfExport;
  */
 public class Export {
 	public interface ExportDriver {
+		public void setActivity(Activity a);		
 		public boolean execute(String source, String target) throws Exception;
 		public boolean execute(SongBook songbook, String target) throws Exception;
 	}
@@ -76,6 +77,7 @@ public class Export {
 		
 		if (type.equalsIgnoreCase("pdf")) {
 			driver = new PdfExport();
+			driver.setActivity(parent);
 		}
 		taskWorker = new TaskWorker();
 	}

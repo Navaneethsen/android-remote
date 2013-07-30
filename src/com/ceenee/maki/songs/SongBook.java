@@ -8,16 +8,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
-
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.XMLParser;
 import com.ceenee.maki.songs.Song;
@@ -78,6 +74,14 @@ public class SongBook {
 			e.printStackTrace();
 		}
 		return songs;
+	}
+	
+	/**
+	 * Return the quantity of song in this song book
+	 * @return size of song book
+	 */
+	public int getSize() {
+		return songs.size();
 	}
 	
 }
