@@ -21,7 +21,8 @@ import com.ceenee.maki.songs.PdfExport;
  */
 public class Export {
 	public interface ExportDriver {
-		public boolean execute(String source, String target);
+		public boolean execute(String source, String target) throws Exception;
+		public boolean execute(SongBook songbook, String target) throws Exception;
 	}
 
 	public interface OnExportListener {
@@ -35,6 +36,7 @@ public class Export {
 	protected Hashtable<String, String> params;
 	public OnExportListener onExportListener;
 	protected TaskWorker taskWorker;
+	public SongBook songbook;
 	
 	/**
 	 * Setter method
@@ -46,12 +48,26 @@ public class Export {
 	}
 	
 	/**
-	 * Set parameter for export task 
+	 * Assign songbook that will be exported.
+	 * 
+	 * @param b
+	 */
+	public void setSongBook(SongBook b) {
+		songbook = b;
+	}
+	
+	/**
+	 * Set parameter for export task.
+	 * An exporting task should have 
 	 * @param name
 	 * @param value
 	 */
 	public void setParam(String n, String v) {
 		params.put(n, v);
+	}
+	
+	public Export() throws Exception{
+		throw new IllegalArgumentException("You need to provide Acitivty and an export format: pdf, txt..");
 	}
 	
 	public Export(Activity parent, String type) {
@@ -64,7 +80,7 @@ public class Export {
 		taskWorker = new TaskWorker();
 	}
 
-	private class TaskWorker extends AsyncTask <Hashtable<String, String>, Boolean, Boolean> {
+	private class TaskWorker extends AsyncTask <String, Boolean, Boolean> {
 		ProgressDialog connectProgress;
 		
 		protected void onPreExecute() {
@@ -83,8 +99,14 @@ public class Export {
 		 * Input a XML file and try to render it in PDF
 		 */
 		@Override
-		protected Boolean doInBackground(Hashtable<String, String>... taskParams) {
-			return driver.execute(taskParams[0].get("source"), taskParams[0].get("to"));
+		protected Boolean doInBackground(String... to) {
+			Boolean result = true;
+			try {
+				result = driver.execute(songbook, to[0]);
+			} catch (Exception e) {
+				MyLog.e("SONGBOOK_EXPORT", "Cannot exporting song book.");
+			}
+			return result;
 	     }
 		
 		/**
@@ -114,8 +136,13 @@ public class Export {
 
 	}
 	
-	public void run() {
-		taskWorker.execute(params);
+	/**
+	 * Run the task.
+	 * 
+	 * @param to
+	 */
+	public void run(String to) {
+		taskWorker.execute(to);
 	}
 	
 }

@@ -13,7 +13,6 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.ceenee.maki.songs.Export.ExportDriver;
-import android.content.Context;
 
 public class PdfExport implements ExportDriver {
 	/**
@@ -24,12 +23,13 @@ public class PdfExport implements ExportDriver {
 	 */
 	String TAG = "PDF_EXPORT";
 	
+	public boolean execute(String source, String target) throws Exception {
+		throw new Exception("Not implemeted yet");
+	}
+	
 	@Override
-	public boolean execute(String source, String target) {
-		String[] part = source.split("\\.");
-        String filename = part[0];
-        MyLog.i(TAG, "filename: " + filename);
-        
+	public boolean execute(SongBook songbook, String target)  {
+		
     	com.lowagie.text.Document doc = new com.lowagie.text.Document(PageSize.A4,10.0f,10.0f,10.0f,10.0f);
          try {
         	FileOutputStream fOut = new FileOutputStream(target);
@@ -53,17 +53,18 @@ public class PdfExport implements ExportDriver {
             c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
             table.addCell(c1);
             
-//            Integer quantity = songs.size();
-//            for (Integer index=0; index<quantity; index++) {
-//            	table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
-//	            PdfPCell c = new PdfPCell(new Phrase("Song Number"));
-//	            c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-//	            table.addCell(c);
-//	            
-//	            c = new PdfPCell(new Phrase("Song Name"));
-//	            c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-//	            table.addCell(c);
-//            }
+            Integer quantity = songbook.songs.size();
+            for (Integer index=0; index<quantity; index++) {
+            	table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
+	            PdfPCell c = new PdfPCell(new Phrase("Song Number"));
+	            c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+	            table.addCell(c);
+	            
+	            c = new PdfPCell(new Phrase("Song Name"));
+	            c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+	            table.addCell(c);
+            }
+            doc.add(table);
             
          } catch (DocumentException de) {
              MyLog.e(TAG, "DocumentException:" + de);

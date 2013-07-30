@@ -537,10 +537,9 @@ public class SongActivity extends RootActivity implements
 	 */
 	public void clickShare(View v) {
 		Export e = new Export(this, "pdf");
-		e.setParam("source", t.getLocation(karaoke));
-		e.setParam("to", t.getFilesDir() + "export_ceenee_songbook.pdf");
+		e.songbook = songbook;
 		e.setOnExportListener(this);
-		e.run();    	
+		e.run(t.getFilesDir() + "/export_ceenee_songbook.pdf");    	
 	}
 
 	@Override

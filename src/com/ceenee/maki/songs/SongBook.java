@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -22,15 +23,29 @@ import com.ceenee.maki.XMLParser;
 import com.ceenee.maki.songs.Song;
 
 public class SongBook {
-//	protected String[] _songs;
-//	protected String[] _songAlphabet;
+	protected ArrayList<String> songAlphabet;
 	
 	public ArrayList<Song> songs = new ArrayList<Song>();
 	
+	/**
+	 * Setter method
+	 * 
+	 * @param s
+	 */
 	public void setSong(ArrayList<Song> s) {
 		songs = s;
 	}
 	
+	public SongBook() {
+		songAlphabet = new ArrayList<String>();
+	}
+	
+	/**
+	 * Process XML songbook into an Array.
+	 * 
+	 * @param location
+	 * @return
+	 */
 	public ArrayList<Song> load(String location) {
 		try {
 			SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -64,6 +79,5 @@ public class SongBook {
 		}
 		return songs;
 	}
-	
 	
 }
