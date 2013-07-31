@@ -1,5 +1,7 @@
 package com.ceenee.maki.songs;
 
+import harmony.java.awt.Color;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -92,13 +94,13 @@ public class PdfExport implements ExportDriver {
         byte[] buffer = new byte[inputStream.available()];
         inputStream.read(buffer);
         BaseFont arial = BaseFont.createFont("arial.ttf", BaseFont.IDENTITY_H, true, false, buffer, null);
-        paraFont = new Font(arial, 12);
+        paraFont = new Font(arial, 13);
         
         inputStream = activity.getResources().openRawResource(R.raw.archisticosimple);
         buffer = new byte[inputStream.available()];
         inputStream.read(buffer);
         BaseFont archistico = BaseFont.createFont("archisticosimple.ttf", BaseFont.IDENTITY_H, true, false, buffer, null);
-        headerFont = new Font(archistico, 12);
+        headerFont = new Font(archistico, 15);
 	}
 	
 	@Override
@@ -106,7 +108,8 @@ public class PdfExport implements ExportDriver {
 		songbook = _songbook;
 		try {
 			doc = new Document(PageSize.A4,10.0f,10.0f,10.0f,10.0f);
-	        FileOutputStream fOut = new FileOutputStream(target);
+//	        FileOutputStream fOut = new FileOutputStream(target);
+	        FileOutputStream fOut = activity.openFileOutput("export_ceenee_songbook.pdf", android.content.Context.MODE_WORLD_READABLE);
         	PdfWriter.getInstance(doc, fOut);
             doc.open();
             this.prepareFont();
@@ -171,15 +174,21 @@ public class PdfExport implements ExportDriver {
 			return false;
 		} 
         PdfPCell c1 = new PdfPCell(new Phrase(initChar, headerFont));
-        
+        c1.setBorder(0);
+        c1.setBackgroundColor(new Color(237, 247, 255));	
         c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
         header.addCell(c1);
         
         c1 = new PdfPCell(new Phrase("CeeNee Karaoke Songbook", headerFont));
         c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+        c1.setBorder(0);
+        c1.setBorderWidthRight(1);
+        c1.setBorderColorRight(new Color(0, 0, 0));
+        
         header.addCell(c1);
         
         c1 = new PdfPCell();
+        c1.setBorder(0);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.pdf_icon);
         bitmap.compress(Bitmap.CompressFormat.PNG /* FileType */,
@@ -208,22 +217,42 @@ public class PdfExport implements ExportDriver {
 		table = new PdfPTable(2);
         try {
         	table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
+        	int line = 0;
             for (Integer index=page * SONG_PER_PAGE; index<(page+1)*SONG_PER_PAGE; index++) {
-            	table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
-                Song song = songbook.songs.get(index);
-            	PdfPCell c = new PdfPCell(new Phrase(song.getId(), paraFont));
-                c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-                table.addCell(c);
+            	line++;
+//            	table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
+            	Song song = songbook.songs.get(index);
+            	
+                PdfPCell c = new PdfPCell(new Phrase(song.getId(), paraFont));
+                styleCell(c, line);
+            	table.addCell(c);
                 
                 c = new PdfPCell(new Phrase(song.getTitle(), paraFont));
-                c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+                styleCell(c, line);
                 table.addCell(c);
             }
+            
             doc.add(table);	        	
         } catch (Exception e) {
         	return false;
         }
         return true;
+	}
+	
+	/**
+	 * Style a cell for song row. Set background, set height, set alignment ...
+	 * 
+	 * @param cell to style
+	 * @param row number which this cell belongs to.
+	 */
+	protected void styleCell(PdfPCell c, int index) {
+		c.setBorder(0);
+        c.setFixedHeight(13);
+        if (index % 2 == 0) {
+        	c.setBackgroundColor(new Color(237, 247, 255));
+        }
+        
+        c.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
 	}
 	
 	/**
@@ -234,14 +263,13 @@ public class PdfExport implements ExportDriver {
 		PdfPTable table;
     	PdfPCell c1;
 		
-		table = new PdfPTable(2);
-        table.setWidthPercentage(new float[]{50,475}, PageSize.A4);
-        c1 = new PdfPCell(new Phrase("Page" + pageIndex));
-        c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
-        table.addCell(c1);
-        
-        c1 = new PdfPCell(new Phrase("http://ceenee.com"));
-        c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+		table = new PdfPTable(1);
+        table.setWidthPercentage(new float[]{525}, PageSize.A4);
+        c1 = new PdfPCell(new Phrase("Page " + pageIndex + " | http://ceenee.com"));
+        c1.setBorder(0);
+        c1.setBorderWidthTop(1);
+        c1.setBorderColorTop(new Color(10, 10, 10));
+        c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_RIGHT);
         table.addCell(c1);
         
         doc.add(table);
