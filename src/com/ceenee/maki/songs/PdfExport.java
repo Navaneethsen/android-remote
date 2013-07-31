@@ -30,8 +30,8 @@ import com.ceenee.q.R;
 
 public class PdfExport implements ExportDriver {
 	/**
-	 * Load song book task.
-	 * We should return some progess here
+	 * Load song book task.rogress
+	 * We should return some  here
 	 * @author kureikain
 	 *
 	 */
@@ -42,11 +42,45 @@ public class PdfExport implements ExportDriver {
 	protected Document doc;
 	protected Font paraFont, headerFont;
 	
+	public class EmptySongException extends Exception {
+		private static final long serialVersionUID = 1L;
+
+		public EmptySongException(String s) {
+			super(s);
+		}
+	}
+	
+	
+	/**
+	 * Set current activity which are calling this task.
+	 * @param current activity 
+	 */
 	public void setActivity(Activity a) {
 		activity = a;
 	}
+	
+	/**
+	 * Setter method for this{@link #songbook}
+	 * 
+	 * @param s
+	 */
+	public void setSongBook(SongBook s) {
+		songbook = s;
+	}
+	
+	/**
+	 * Take the song book file name in XML format and render to PDF from there. 
+	 * 
+	 * @param path to xml song book
+	 * @param path to where to save pdf file
+	 */
 	public boolean execute(String source, String target) throws Exception {
-		throw new Exception("Not implemeted yet");
+		SongBook s = new SongBook();
+		songbook.load(source);
+		if (songbook.getSize()>0) {
+			return this.execute(s, target);	
+		}
+		throw new EmptySongException("Songbook is empty");
 	}
 	
 	public PdfExport() {

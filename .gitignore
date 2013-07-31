@@ -2,7 +2,7 @@
 *.apk
 *.ap_
 *.db
-.DS_Store
+\.DS_Store
 # files for the dex VM
 *.dex
 
