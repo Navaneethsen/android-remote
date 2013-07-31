@@ -28,6 +28,10 @@ public class Export {
 
 	public interface OnExportListener {
 		public void beforeRun();
+		
+		/**
+		 * This method is only called once the exporting is successful
+		 */
 		public void whenDone();
 	};
 	
@@ -116,23 +120,15 @@ public class Export {
 		 * 
 		 */
 		 protected void onPostExecute(Boolean result) {
-			 if (onExportListener==null) {
-				 connectProgress.hide();	
-				 
-				 if (result) {
-					 MyLog.i("PDF_CREAEING", "Success");
-					try {
-						ShareKit s = ShareKitFactory.getInstance(activity, "email");
-						s.execute();
-					} catch (Exception e) {
-						e.printStackTrace();
-						Log.i("SHARE_EMAIL", e.getStackTrace().toString());
-					}
+			 if (result) {
+				 if (onExportListener==null) {
+					 connectProgress.hide();	
+					 MyLog.i("PDF_CREATING", "Success to generate file. However, no listene is implemented yet. Let implement onExportLisnterner");
 				 } else {
-					 MyLog.e("PDF_CREAEING", "Failt");
+					 onExportListener.whenDone();
 				 }
 			 } else {
-				 onExportListener.whenDone();
+				 MyLog.e("PDF_CREAEING", "Failt");
 			 }
 	     }
 

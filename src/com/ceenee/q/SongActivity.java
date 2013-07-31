@@ -70,6 +70,7 @@ public class SongActivity extends RootActivity implements
 	private boolean autosearch;
 
 	static final int PROGRESS_DIALOG = 0;
+	static final String EXPORT_SONGBOOK_FILENAME = "ceenee_karaoke_song_book.pdf";
 
 	/**
 	 * Status constant when syncing song book
@@ -509,14 +510,15 @@ public class SongActivity extends RootActivity implements
 	/**
 	 * Sharing song book handler.
 	 * This will generate a PDF song book from XML file. Next, it invokes an intent for email sending once generating is done.
-	 * All are run on an async task to avoid UI block. 
+	 * All are run on an async task to avoid UI block.
+	 * Genrated songbook ideally will be store in files folder of app. 
 	 * @param v
 	 */
 	public void clickShare(View v) {
 		Export e = new Export(this, "pdf");
 		e.songbook = songbook;
 		e.setOnExportListener(this);
-		e.run(t.getFilesDir() + "/export_ceenee_songbook.pdf");    	
+		e.run(EXPORT_SONGBOOK_FILENAME);    	
 	}
 
 	@Override
@@ -625,12 +627,13 @@ public class SongActivity extends RootActivity implements
 	/** 
 	 * Now, the export task is done. Invoke sending script.
      * @see Export.OnExportListener
+     * @see this{@link #clickShare(View)}
      */
 	@Override
 	public void whenDone() {
 		MyLog.i("SHARE_EMAIL", "Exporting finished. Now ceate intent to send email");
 		try {
-			ShareKitFactory.getInstance(this, "email").execute();
+			ShareKitFactory.getInstance(this, "email").execute( this.getFilesDir() + "/" + EXPORT_SONGBOOK_FILENAME );
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.i("SHARE_EMAIL", e.getStackTrace().toString());

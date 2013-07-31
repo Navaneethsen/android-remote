@@ -21,7 +21,7 @@ public class ShareEmail implements ShareKit {
 	}
 	
 	@Override
-	public boolean execute() {
+	public boolean execute(String filePathToShare) {
 		try {   
 //			Intent intent = new Intent(android.content.Intent.ACTION_SENDTO);
 			Intent intent = new Intent(android.content.Intent.ACTION_SEND);
@@ -35,11 +35,11 @@ public class ShareEmail implements ShareKit {
 //			Uri uri = Uri.parse(uriText);			
 //			intent.setData(uri);
 			
-			intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"email@gmail.com"});
+//			intent.putExtra(Intent.EXTRA_EMAIL, new String[] {""});
             intent.putExtra(Intent.EXTRA_SUBJECT, "Sharing CeeNee Karaoke Song Book");
-            intent.putExtra(Intent.EXTRA_TEXT, "Check out the PDf for the song book.\nSent from QCeeNee on Android.\nYou may need a PDF reader to view this song book");
+            intent.putExtra(Intent.EXTRA_TEXT, "Check out the PDf for the song book.\n\n\nSent from QCeeNee on Android.\n\n\nYou may need a PDF reader to view this song book");
             
-            File f = new File( parentActivity.getFilesDir() + "/export_ceenee_songbook.pdf");
+            File f = new File(filePathToShare);
             MyLog.i("PDF_ATTACH", "File path is " + f.getAbsolutePath());
             Uri uri = Uri.fromFile(f);
             intent.putExtra(Intent.EXTRA_STREAM, uri);

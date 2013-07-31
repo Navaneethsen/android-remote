@@ -4,5 +4,5 @@ public interface ShareKit {
 	/**
 	 * Sharing actually happens here.
 	 */
-	public boolean execute();	
+	public boolean execute(String filePathToShare);	
 }
