@@ -1,1 +1,1 @@
- adb push KaraokeDB.xml /data/data/com.axcoto.shinjuku.sushi/files
+ adb push KaraokeDB.xml /data/data/com.ceenee.q/files
