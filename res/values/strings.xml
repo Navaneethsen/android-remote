@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">iCeeNee</string>
+    <string name="app_name">QCeeNee</string>
     <string name="hello_world">Hello world!</string>
     
     <string name="menu_config">Options</string>
@@ -8,7 +8,7 @@
     <string name="menu_songs">Song Book</string>
 	<string name="menu_control">Remote</string>
     
-    <string name="title_activity_main">iCeeNee</string>
+    <string name="title_activity_main">QCeeNee</string>
     <string name="title_activity_device">Device List</string>
     
     <string name="title_activity_song">Song Book</string>
@@ -63,7 +63,7 @@
     <string name="version_type">a1</string>
     <string name="version_date">130626</string>
     <string name="android_version">1.1</string>
-    <string name="crash_toast_text">Oops, iCeeNee crashed. A report is send to CeeNee team for analyzing.</string>
+    <string name="crash_toast_text">Oops, QCeeNee crashed. A report is send to CeeNee team for analyzing.</string>
     <string name="song_sync">Sync</string>
    	
 </resources>
