@@ -27,19 +27,16 @@ import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 //import android.widget.LinearLayout;
-//import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-//import android.widget.ToggleButton;
 
 import com.google.android.gcm.GCMRegistrar;
 
-//import com.axcoto.shinjuku.maki.MyHttpServer;
+import com.ceenee.maki.MyHttpServer;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Remote;
 import com.ceenee.q.R;
 
-//import static com.ceenee.q.CommonUtilities.DISPLAY_MESSAGE_ACTION;
 import static com.ceenee.q.CommonUtilities.EXTRA_MESSAGE;
 import static com.ceenee.q.CommonUtilities.SENDER_ID;
 import android.app.AlertDialog;
@@ -52,13 +49,11 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	public final static int PHASE_DEVELOPMENT = 2;
 	public final static int PHASE_PRODUCTION = 3;
 
-	public final static int ENVIRONMENT = PHASE_EMULATOR;
-//	public final static int ENVIRONMENT = PHASE_DEVELOPMENT;
+//	public final static int ENVIRONMENT = PHASE_EMULATOR;
+	public final static int ENVIRONMENT = PHASE_DEVELOPMENT;
 //	 public final static int ENVIRONMENT = PHASE_PRODUCTION;
 
 	public String remote;
-	final int PORT = 5320;
-	protected File homeDir;
 	int count = 0;
 	private GestureDetector gestureScanner;
 
@@ -77,10 +72,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	//new sync song book
 	public static String sipaddress_connected = "";
 
-	public File getHomeDir() {
-		return homeDir;
-	}
-
+	@SuppressWarnings("unused")
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -123,53 +115,41 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 				}
 			});
 		}
+		
+		MyLog.i("SUSHI_MAIN#ONPOSTCREATE", "Running");
+		if (this.isOnline()) {
+			MyHttpServer.prepareDocRoot(this);
+//			this.gcmHandle();
+//			new AsyncInit().execute();
+		} else {
+			alert.showAlertDialog(MainActivity.this,
+					"Internet Connection Error",
+					"Please connect to working Internet connection", false);
+		}
+		
 	}
 
 	protected boolean isOnline() {
 		cd = new ConnectionDetector(getApplicationContext());
 		return cd.isConnectingToInternet();
 	}
+	
+	protected class AsyncInit extends AsyncTask<Void, Void, Void> {
+	     protected void onPostExecute(Long result) {
+	         MyLog.i("QCEENEE_ASYNC_INIT", "Successfully to initalize gcm and sync server");
+	     }
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			MainActivity.this.gcmHandle();
+	    	return null;
+		}
+	 }
 
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		MyLog.i("SUSHI_MAIN#ONPOSTCREATE", "Running");
-		
-		if (this.isOnline()) {
-			//Temporary disable gcm for speed to avoid initalize it when developing			
-//			this.startServer();
-//			this.gcmHandle();
-			            
-		} else {
-			alert.showAlertDialog(MainActivity.this,
-					"Internet Connection Error",
-					"Please connect to working Internet connection", false);
-		}
 	}
-
-	/**
-	 * We run a embedded web server on port 5320 for song book syncing. The
-	 * docroot of web server is homedirectory of app
-	 */
-	private void startServer() {
-		try {
-			homeDir = this.getFilesDir();
-			boolean mExternalStorageAvailable = false;
-			boolean mExternalStorageWriteable = false;
-			String state = Environment.getExternalStorageState();
-			MyLog.i("SUSHI:: MAIN :: HomeDir is", homeDir.toString());
-			File file = this.getFileStreamPath("file-upload.html");
-			if (file.exists()) {
-				MyLog.i("MAKI: SERVER",
-						"initialize app before so we don't need to copy the file for web server");
-			} else {
-				this.copyAssets();
-			}
-		} catch (Exception e) {
-			MyLog.e("MAKI:: SERVER:: GENERAL ERROR", e.getMessage());
-		}
-
-	}
-
+	
 	/**
 	 * gcmHandling
 	 */
@@ -219,51 +199,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 				};
 				mRegisterTask.execute(null, null, null);
 			}
-		}
-	}
-
-	private void copyAssets() {
-		MyLog.e("MAKI:: MAIN:: ASSET COPY",
-				"Start to copy asset for the first initialization of app");
-		AssetManager assetManager = getAssets();
-		String[] files = null;
-		try {
-			files = assetManager.list("");
-		} catch (IOException e) {
-			MyLog.e("SUSHI:: MAINACTIVITY:: ERROR", e.getMessage());
-		}
-
-		for (String filename : files) {
-			if ("images".equals(filename) || "sounds".equals(filename)
-					|| "webkit".equals(filename)) {
-				continue;
-			}
-			InputStream in = null;
-			OutputStream out = null;
-			try {
-				in = assetManager.open(filename);
-				out = openFileOutput(filename, Context.MODE_PRIVATE); // new
-																		// FileOutputStream("/sdcard/"
-																		// +
-																		// filename);
-				copyFile(in, out);
-				in.close();
-				in = null;
-				out.flush();
-				out.close();
-				out = null;
-			} catch (Exception e) {
-				MyLog.e("MAKI:: MAIN ACITIVITY", "Cannot copy asset: " + filename
-						+ ". Error: " + e.getMessage());
-			}
-		}
-	}
-
-	private void copyFile(InputStream in, OutputStream out) throws IOException {
-		byte[] buffer = new byte[1024];
-		int read;
-		while ((read = in.read(buffer)) != -1) {
-			out.write(buffer, 0, read);
 		}
 	}
 

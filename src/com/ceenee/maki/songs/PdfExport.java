@@ -183,7 +183,7 @@ public class PdfExport implements ExportDriver {
         c1.setVerticalAlignment(com.lowagie.text.Element.ALIGN_MIDDLE);
         header.addCell(c1);
         
-        c1 = new PdfPCell(new Phrase("Karaoke Songbook", headerFont));
+        c1 = new PdfPCell(new Phrase(title, headerFont));
         c1.setFixedHeight(70f);
         c1.setHorizontalAlignment(com.lowagie.text.Element.ALIGN_CENTER);
         c1.setVerticalAlignment(com.lowagie.text.Element.ALIGN_MIDDLE);

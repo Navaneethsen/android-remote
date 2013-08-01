@@ -49,24 +49,6 @@ public class Finder {
 	}
 
 	public void execute() {
-		// int startPortRange = 0;
-		// int stopPortRange = 0;
-		//
-		// startPortRange = Integer.parseInt("2");
-		// stopPortRange = Integer.parseInt("253");
-		//
-		// for (int i = startPortRange; i <= stopPortRange; i++) {
-		// try {
-		// Socket ServerSok = new Socket("127.0.0.1", i);
-		//
-		// System.out.println("Port in use: " + i);
-		//
-		// ServerSok.close();
-		// } catch (Exception e) {
-		// }
-		// System.out.println("Port not in use: " + i);
-		// }
-
 		this._from = 148;
 		this._to = 152;
 		this._maskIpAddress = "192.168.0.";
@@ -152,10 +134,4 @@ public class Finder {
 	public String getMaskIpAddress() {
 		return _maskIpAddress;
 	}
-
-	// public class GetIPAddress {
-	// InetAddress thisIp =InetAddress.getLocalHost();
-	// System.out.println("IP:"+thisIp.getHostAddress());
-	// }
-
 }

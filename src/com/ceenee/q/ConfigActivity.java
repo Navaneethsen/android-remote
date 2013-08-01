@@ -32,13 +32,12 @@ public class ConfigActivity extends PreferenceActivity {
 							Object newValue) {
 						try {
 							if (serverPref.isChecked()) {
-								MyHttpServer s = MyHttpServer.getInstance();
+								MyHttpServer.close();
 								MyLog.i("SUSHI:: CONFIG", "Stop the web server");
-								s.close();
 							} else {
 								MyLog.i("SUSHI:: CONFIG",
 										"Restart the web server");
-								MyHttpServer s = MyHttpServer.start();
+								MyHttpServer.start();
 							}
 							return true;
 						} catch (Exception e) {

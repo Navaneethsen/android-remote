@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ceenee.maki.ListView;
+import com.ceenee.maki.MyHttpServer;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Remote;
 import com.ceenee.maki.Unicode;
@@ -410,6 +411,12 @@ public class SongActivity extends RootActivity implements
 
 		@Override
 		protected void onPreExecute() {
+			try {
+				MyHttpServer.start();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			elapsed_time = System.currentTimeMillis();
 			dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			dialog.setMessage("SYNCING");
@@ -430,6 +437,7 @@ public class SongActivity extends RootActivity implements
 			} else {
 				Toast.makeText(t, "No Songbook Found. Try to create songbook on CeeNee player and sync again.", Toast.LENGTH_LONG).show();
 			}
+			MyHttpServer.close();
 		}
 
 		@Override

@@ -542,7 +542,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 				mState = STATE_RUNNING;
 				
 				maskIp = "192.168.0.";
-				if (MainActivity.ENVIRONMENT == MainActivity.PHASE_PRODUCTION) {
+				if (MainActivity.ENVIRONMENT == MainActivity.PHASE_PRODUCTION || MainActivity.ENVIRONMENT == MainActivity.PHASE_DEVELOPMENT) {
 					maskIp = f.getMaskIpAddress() + ".";
 				}
 				
