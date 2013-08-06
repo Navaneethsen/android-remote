@@ -6,7 +6,9 @@ import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Unicode;
 import com.ceenee.q.R;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +22,14 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable {
 	private ArrayList<Song> objects;
 	private ArrayList<Song> fitems;
 	private SongFilter filter;
+	public Context context;
 	
 	/*
 	 * here we must override the constructor for ArrayAdapter the only variable
 	 * we care about now is ArrayList<Item> objects, because it is the list of
 	 * objects we want to display.
 	 */
-	public SongAdapter(Context context, int textViewResourceId,
-			ArrayList<Song> objects) {
+	public SongAdapter(Context context, int textViewResourceId, ArrayList<Song> objects) {
 		super(context, textViewResourceId, objects);
 		this.objects = new ArrayList<Song>(objects);
 		this.fitems = new ArrayList<Song>(objects);
@@ -79,16 +81,6 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable {
 			TextView title = (TextView) v.findViewById(R.id.songTitle);
 			if (title != null) {
 				title.setText(i.getTitle());
-				// title.setSelected(true);
-
-				// title.setOnLongClickListener(new OnLongClickListener() {
-				//
-				// @Override
-				// public boolean onLongClick(View v) {
-				// v.setSelected(true);
-				// return false;
-				// }
-				// });
 			}
 		}
 		// the view must be returned to our activity
@@ -105,10 +97,10 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable {
 	private class SongFilter extends Filter {
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
+			
 			FilterResults results = new FilterResults();
-			String prefix = Unicode
-					.convert(constraint.toString().toLowerCase());
-
+			String prefix = Unicode.convert(constraint.toString().toLowerCase());
+			
 			if (prefix == null || prefix.length() == 0) {
 				ArrayList<Song> list = new ArrayList<Song>(objects);
 				results.values = list;
@@ -131,25 +123,25 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable {
 				results.values = nlist;
 				results.count = nlist.size();
 			}
+			
 			return results;
 		}
 
-		@SuppressWarnings("unchecked")
 		@Override
-		protected void publishResults(CharSequence constraint,
-				FilterResults results) {
-			fitems = (ArrayList<Song>) results.values;
-			int count = fitems.size();
-			// setNotifyOnChange(true);
-			clear();
-			for (int i = 0; i < count; i++) {
-				Song pkmn = (Song) fitems.get(i);
-				// MyLog.e("Added: ", pkmn.getTitle());
-				add(pkmn);
+		protected void publishResults(CharSequence constraint, FilterResults results) {			
+			if (results.values instanceof ArrayList<?>) {
+				ArrayList<Song> result = (ArrayList<Song>) results.values;
+				int count = result.size();
+				// setNotifyOnChange(true);
+				clear();
+				for (int i = 0; i < count; i++) {
+					Song pkmn = (Song) result.get(i);
+					// MyLog.e("Added: ", pkmn.getTitle());
+					add(pkmn);
+				}
+				MyLog.i("Total songs: ", Integer.toString(count));	
 			}
-			MyLog.i("Total songs: ", Integer.toString(count));
 		}
-
 	}
 	
 }

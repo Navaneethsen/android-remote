@@ -18,13 +18,7 @@ import android.content.res.AssetManager;
 import com.ceenee.q.SongActivity;
 
 
-interface SongBookUploader {
-	public void upload();
-
-	public void response();
-}
-
-public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
+public class MyHttpServer extends NanoHTTPD {
 	public static final String MIME_JSON = "application/json";
 	private static int has_file = 0;
 	protected static MyHttpServer instance = null;
@@ -33,6 +27,15 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 	protected static int port;
 	InputStream in;
 	OutputStream out;
+	protected OnBookSyncListener onBookSyncListener;
+	
+	public interface OnBookSyncListener {
+		public void onReadyReceiveBook();
+		public void onReceivedBook(String songbook);
+		public void onSyncFail(Exception e);
+		public void onFinishSyncing();
+		public void onProcessBook();
+	}
 
 	/**
 	 * We run a embedded web server on port 5320 for song book syncing. The
@@ -41,7 +44,7 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 	public static void prepareDocRoot(Activity activity) {
 		try {
 			DOC_ROOT = activity.getFilesDir();
-			MyLog.i("SUSHI:: MAIN :: HomeDir is", DOC_ROOT.toString());
+			MyLog.i("SUSHI:: MAIN :: HOMEDIR", DOC_ROOT.toString());
 			File file = activity.getFileStreamPath("file-upload.html");
 			if (file.exists()) {
 				MyLog.i("MAKI: SERVER", "initialize app before so we don't need to copy the file for web server");
@@ -57,8 +60,7 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 	 * Copy asset for Docroot of http from android resource system into DOCROOT
 	 */
 	public static void copyAssets(Activity activity) {
-		MyLog.e("MAKI:: MAIN:: ASSET COPY",
-				"Start to copy asset for the first initialization of app");
+		MyLog.i("SERVER_ASSET_COPY", "Start to copy asset for the first initialization of app");
 		AssetManager assetManager = activity.getAssets();
 		String[] files = null;
 		try {
@@ -68,18 +70,15 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 		}
 
 		for (String filename : files) {
-			if ("images".equals(filename) || "sounds".equals(filename)
-					|| "webkit".equals(filename)) {
+			if ("images".equals(filename) || "sounds".equals(filename) || "webkit".equals(filename)) {
 				continue;
 			}
 			InputStream in = null;
 			OutputStream out = null;
 			try {
+				MyLog.i("SERVER_ASSET_COPY", "Start to copy " + filename);
 				in = assetManager.open(filename);
-				out = activity.openFileOutput(filename, Context.MODE_PRIVATE); // new
-																		// FileOutputStream("/sdcard/"
-																		// +
-																		// filename);
+				out = activity.openFileOutput(filename, Context.MODE_PRIVATE);
 				copyFile(in, out);
 				in.close();
 				in = null;
@@ -129,6 +128,10 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 	public MyHttpServer() throws IOException {
 		super(5320, new File("."));
 	}
+	
+	public void setOnBookSyncListener(OnBookSyncListener e) {
+		onBookSyncListener = e;
+	}
 
 	public Response serve(String uri, String method, Properties header,
 			Properties parms, Properties files) {
@@ -159,16 +162,19 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 			myOut.println("  UPLOADED: '" + value + "' = '"
 					+ files.getProperty(value) + "'");
 
-			MyLog.e("MAKI: START_COPY_UPLOADED_FILE",
-					"Copy temp file to correct location");
+			MyLog.i("MAKI: START_COPY_UPLOADED_FILE", "Copy temp file to correct location");
 			try {
-				SongActivity.syncStatus = SongActivity.SYNC_RECEIVE_SONGBOOK;
+				this.onBookSyncListener.onReadyReceiveBook();
+				
 				MyLog.i("Sync Status: ", "STARTING TO WRITE SONGBOOK");
 				in = new FileInputStream(new File(files.getProperty(value)
 						.toString()));
 				out = new FileOutputStream(DOC_ROOT.getAbsoluteFile() + "/"
 						+ parms.getProperty("upload1").toString());
-
+				
+				MyLog.i("SYNC_TEMPFILE", files.getProperty(value).toString());
+				MyLog.i("SYNC_WRITE_TO", DOC_ROOT.getAbsoluteFile() + "/" + parms.getProperty("upload1").toString());
+				
 				BufferedInputStream bis = new BufferedInputStream(in);
 
 				byte[] buffer = new byte[1024];
@@ -186,8 +192,11 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 				in.close();
 				out.close();
 				has_file = 2;
-				SongActivity.syncStatus = SongActivity.SYNC_PROCESS_SONGBOOK;
+				this.onBookSyncListener.onProcessBook();
 				MyLog.i("Sync Status: ", "SONG BOOK RETRIEVED");
+				if (this.onBookSyncListener !=null) {
+					this.onBookSyncListener.onReceivedBook(DOC_ROOT.getAbsoluteFile() + "/" + parms.getProperty("upload1").toString());
+				}
 			} catch (FileNotFoundException fnfe) {
 				MyLog.e("MAKI: SERVER", "File location is incorrect. Error:"
 						+ fnfe.getMessage());
@@ -201,10 +210,10 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 			}
 		}
 		if (has_file == 2) {
-			SongActivity.syncStatus = SongActivity.SYNC_DONE;
+			this.onBookSyncListener.onFinishSyncing();
 			has_file = 0;
 		} else {
-			SongActivity.syncStatus = SongActivity.SYNC_ERROR;
+			this.onBookSyncListener.onSyncFail(new Exception(""));
 			has_file = 0;
 		}
 		if (uri.equalsIgnoreCase("/info.html")) {
@@ -226,15 +235,6 @@ public class MyHttpServer extends NanoHTTPD implements SongBookUploader {
 		}
 
 		return serveFile(uri, header, DOC_ROOT, true);
-
-	}
-
-	public void upload() {
-
-	}
-
-	public void response() {
-
 	}
 
 	public static void close() {

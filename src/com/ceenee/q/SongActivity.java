@@ -28,10 +28,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter.FilterListener;
 import android.widget.Toast;
 
 import com.ceenee.maki.ListView;
 import com.ceenee.maki.MyHttpServer;
+import com.ceenee.maki.MyHttpServer.OnBookSyncListener;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Remote;
 import com.ceenee.maki.Unicode;
@@ -53,10 +55,13 @@ import com.ceenee.q.R;
  * @author kureikain
  *
  */
+
 public class SongActivity extends RootActivity implements 
 	OnKeyListener
 	, OnItemDoubleTapLister
 	, OnItemLongClickListener
+	, FilterListener
+	, OnBookSyncListener
 	, OnExportListener {
 	private ListView songList;
 	private EditText ed;
@@ -108,28 +113,6 @@ public class SongActivity extends RootActivity implements
 	Button btn_sharesong;
 	public Remote remote;
 	private SongBook songbook;
-	
-	private class SearchSongsTask extends AsyncTask <String, Integer, Integer> {
-		ProgressDialog connectProgress;
-		protected void onPreExecute() {
-			connectProgress = ProgressDialog
-					.show(t,
-							"Searching...",
-							"Please wait, searching through song books...",
-							true);	
-		}
-		protected Integer doInBackground(String... urls) {
-			songAdapter.getFilter().filter(ed.getText().toString());
-	        return songAdapter.getCount();
-	     }
-
-		protected void onPostExecute(Integer numberOfSong) {
-//			songList.setAdapter(songAdapter);
-			songAdapter.notifyDataSetChanged();
-			connectProgress.hide();			
-		}
-	}
-	
 	
 	/**
 	 * Load song book task.
@@ -383,7 +366,10 @@ public class SongActivity extends RootActivity implements
 	public void clickSearch(View v) {
 		MyLog.i("SONG_SEARCH", "Start to search song");
 		textlength = ed.getText().length();
-		new SearchSongsTask().execute(ed.getText().toString());
+		showProgressDialog("Searching...", "Please wait, searching through song books...");
+		if (songAdapter != null && songbook !=null && songbook.getSize()>0) {
+			songAdapter.getFilter().filter(ed.getText().toString(), this);	
+		}
 	}
 	
 	/**
@@ -412,7 +398,7 @@ public class SongActivity extends RootActivity implements
 		@Override
 		protected void onPreExecute() {
 			try {
-				MyHttpServer.start();
+				MyHttpServer.start().setOnBookSyncListener(t);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -629,7 +615,7 @@ public class SongActivity extends RootActivity implements
      */
 	@Override	
 	public void beforeRun() {
-		progressDialog = ProgressDialog.show(this, "Sharing...", "Song books is generating");
+		showProgressDialog("Sharing...", "Song books is generating");
 	}
 	
 	/** 
@@ -646,8 +632,82 @@ public class SongActivity extends RootActivity implements
 			e.printStackTrace();
 			Log.i("SHARE_EMAIL", e.getStackTrace().toString());
 		}		
-		progressDialog.hide();
+		hideProgressDialog();
 	} 
+	
+	/**
+	 * Show a dialog progress on song activity when doing some background job
+	 * @param title
+	 * @param message
+	 */
+	public void showProgressDialog(String title, String message) {
+		progressDialog = ProgressDialog.show(this, title, message);
+	}
+	
+	/**
+	 * Hide the dialog that is shown by showProgressDialog
+	 * @see this{@link #showProgressDialog(String, String)}
+	 */
+	public void hideProgressDialog() {
+		progressDialog.hide();
+	}
 
+	@Override
+	public void onFilterComplete(int arg0) {
+		MyLog.i("SONG_SEARCH", "Finish searchig song list");
+		hideProgressDialog();
+		
+	}
+
+	
+	@Override
+	/**
+	 * @see MyHttpServer#OnBookSyncListener
+	 * 
+	 * This method is invoked by MyHttpServer once it is ready to receive the song book. 
+	 */
+	public void onReadyReceiveBook() { 
+		SongActivity.syncStatus = SongActivity.SYNC_RECEIVE_SONGBOOK;
+	}
+	
+	@Override
+	/**
+	 * @see MyHttpServer#OnBookSyncListener
+	 * 
+	 * This method is invoked by MyHttpServer once it received song book. Song book file name is sent as parameter
+	 */
+	public void onReceivedBook(String songbook) {
+		SongActivity.syncStatus = SongActivity.SYNC_RECEIVE_SONGBOOK;
+	}
+	
+	@Override
+	/**
+	 * @see MyHttpServer#OnBookSyncListener
+	 * 
+	 * This method is invoked by MyHttpServer once an error occurs.
+	 */
+	public void onSyncFail(Exception e) {
+		SongActivity.syncStatus = SongActivity.SYNC_ERROR;
+	}
+	
+	@Override
+	/**
+	 * @see MyHttpServer#OnBookSyncListener
+	 * 
+	 * This method is invoked by MyHttpServer once an request is finished.
+	 */
+	public void onFinishSyncing() {
+		SongActivity.syncStatus = SongActivity.SYNC_DONE;
+	}
+	
+	@Override
+	/**
+	 * @see MyHttpServer#OnBookSyncListener
+	 * 
+	 * This method is invoked by MyHttpServer once an request is finished.
+	 */
+	public void onProcessBook() {
+		SongActivity.syncStatus = SongActivity.SYNC_PROCESS_SONGBOOK;
+	}
 }
 	
