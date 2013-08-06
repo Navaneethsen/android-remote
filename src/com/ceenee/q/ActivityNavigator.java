@@ -1,11 +1,12 @@
 package com.ceenee.q;
 
 import java.io.IOException;
-
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.ceenee.maki.Remote;
 import com.ceenee.q.ConfigActivity;
@@ -13,6 +14,7 @@ import com.ceenee.q.DeviceActivity;
 import com.ceenee.q.MainActivity;
 import com.ceenee.q.R;
 import com.ceenee.q.SongActivity;
+import com.ceenee.maki.AppInfo;
 
 public class ActivityNavigator {
 	protected static ActivityNavigator _instance;
@@ -36,6 +38,15 @@ public class ActivityNavigator {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent i;
 		switch (item.getItemId()) {
+		case R.id.menu_about:
+			String version;
+			version = new String(AppInfo.VERSION);
+			AlertDialog.Builder aboutDialog = new AlertDialog.Builder(_currentActivity);
+			aboutDialog.setTitle("QCeeNee v" + version);
+			aboutDialog.setMessage("Copyright (c) 2013. Developed by CeeNee. Http://CeeNee.Com");
+			aboutDialog.show();
+			break;
+			
 		case R.id.menu_device:
 			if (_currentActivity instanceof DeviceActivity) {
 				return false;
