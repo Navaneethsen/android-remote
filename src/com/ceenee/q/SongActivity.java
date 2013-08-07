@@ -67,7 +67,6 @@ public class SongActivity extends RootActivity implements
 	private EditText ed;
 	int textlength = 0;
 	private SongAdapter songAdapter;
-	public static ArrayList<Song> fullsong = new ArrayList<Song>();
 	public ArrayList<String> songId;
 	public ArrayList<String> songTitle;
 	private static ArrayList<Song> arr_sort = new ArrayList<Song>();
@@ -154,7 +153,6 @@ public class SongActivity extends RootActivity implements
 		
 		songbook = new SongBook();
 		ed = (EditText) findViewById(R.id.cmd_songsearch);
-		fullsong = new ArrayList<Song>();
 		btn_sharesong = (Button) findViewById(R.id.btn_share);
 		SongActivity.t = this;
 		remote = Remote.getInstance();
@@ -197,7 +195,7 @@ public class SongActivity extends RootActivity implements
 			if (AndroidVersion < 16) {
 				ed.setOnKeyListener(this);
 			} else {
-				this.setUpAutoSearch();
+				this.setUpAutoSearchSDK16Up();
 			}
 		}
 
@@ -212,13 +210,11 @@ public class SongActivity extends RootActivity implements
 	 * @see this{@link #onKey(View, int, KeyEvent)}
 	 * @see this{@link #setUpEventHandler()}
 	 */
-	private void setUpAutoSearch() {
+	private void setUpAutoSearchSDK16Up() {
 		ed.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (ed.getText().toString().equals("")) {
-					// songAdapter = new SongAdapter(SongActivity.this,
-					// R.layout.song_item, songs);
 					songAdapter.getFilter().filter(ed.getText().toString());
 					songList.setAdapter(songAdapter);
 				} else {
@@ -240,7 +236,8 @@ public class SongActivity extends RootActivity implements
 	}
 	
 	/**
-	 * In SDK>16, use this method to handle text change.
+	 * In SDK<16, use this method to handle text change.
+	 * 
 	 * This method sets up a listener for auto searching song book once user type on search field
 	 * 
 	 * @see this{@link #setUpAutoSearch()}
@@ -251,28 +248,12 @@ public class SongActivity extends RootActivity implements
 		if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 			InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 			if (im.isAcceptingText()) im.hideSoftInputFromWindow(ed.getWindowToken(), 0);
+			
 			if (autosearch == true) {
-				textlength = ed.getText().length();
-				arr_sort.clear();
-				for (int i = 0; i <songbook.songs.size(); i++) {
-					if (textlength <= songbook.songs.get(i).getTitle()
-							.length()) {
-						if (Unicode
-								.convert(songbook.songs.get(i).getTitle())
-								.toLowerCase()
-								.contains(
-										Unicode.convert(ed
-												.getText()
-												.toString()
-												.toLowerCase()))) {
-							arr_sort.add(songbook.songs.get(i));
-						}
-					}
-				}
-				songAdapter = new SongAdapter(SongActivity.this, R.layout.song_item, arr_sort);
+				songAdapter.getFilter().filter(ed.getText().toString());
 				songList.setAdapter(songAdapter);
-				songAdapter.notifyDataSetChanged();
 			}
+			
 			try {
 				remote.execute("enter");
 			} catch (IOException e) {
@@ -364,16 +345,19 @@ public class SongActivity extends RootActivity implements
 	 * @param v
 	 */
 	public void clickSearch(View v) {
-		MyLog.i("SONG_SEARCH", "Start to search song");
 		textlength = ed.getText().length();
-		showProgressDialog("Searching...", "Please wait, searching through song books...");
-		if (songAdapter != null && songbook !=null && songbook.getSize()>0) {
+		MyLog.i("SongActivity: CURRENT SONG BOOK SIZE", Integer.toString(songbook.getSize()));
+//		if (songAdapter != null && songbook !=null && songbook.getSize()>0) {
+		if (songbook.isLoad()) {
+			MyLog.i("SONG_SEARCH", "Start to search song");			
+			showProgressDialog("Searching...", "Please wait, searching through song books...");
 			songAdapter.getFilter().filter(ed.getText().toString(), this);	
 		}
 	}
 	
 	/**
-	 * Find song book database location. The song book is stored under Files dir of application
+	 * Find song book database location. The song book is stored under Files dir of application.
+	 * Example: /data/data/com.ceenee/q/files/KaraokeDB.xml
 	 * @see Activity#getFilesDir() 
 	 * @param databaseName
 	 * @return string to XML song book
@@ -394,32 +378,29 @@ public class SongActivity extends RootActivity implements
 	private class SyncTask extends AsyncTask<String, Void, Boolean> {
 		private long elapsed_time = 0;
 		private ProgressDialog dialog = new ProgressDialog(SongActivity.this);
-
+		
 		@Override
 		protected void onPreExecute() {
 			try {
 				MyHttpServer.start().setOnBookSyncListener(t);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			elapsed_time = System.currentTimeMillis();
 			dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			dialog.setMessage("SYNCING");
+			dialog.setMessage("Please wait..Song book is syncing.");
 			dialog.show();
 			syncStatus = SYNC_WAIT_UPLOAD;
 		}
 
 		@Override
-		protected void onPostExecute(final Boolean success) {
+		protected void onPostExecute(Boolean success) {
 			if (dialog.isShowing()) {
 				dialog.dismiss();
 			}
-			songAdapter = new SongAdapter(t, R.layout.song_item,songbook.songs);
-			songList.setAdapter(songAdapter);
-
+			
 			if (success) {
-				btn_sharesong.setEnabled(songList.getCount()>0);
+				loadSong();
 			} else {
 				Toast.makeText(t, "No Songbook Found. Try to create songbook on CeeNee player and sync again.", Toast.LENGTH_LONG).show();
 			}
@@ -429,9 +410,10 @@ public class SongActivity extends RootActivity implements
 		@Override
 		protected Boolean doInBackground(String... params) {
 			Remote r = Remote.getInstance();
-			String locationType;
+			
 			MyLog.i("Sync Status : ", Integer.toString(syncStatus));
 			try {
+				String locationType;
 				if (karaoke.equals("hd")) {
 					locationType = "hd";
 					r.execute("sync_hd");
@@ -450,16 +432,10 @@ public class SongActivity extends RootActivity implements
 			while (check == true) {
 				if (syncStatus == SYNC_ERROR) {
 					check = false;
+					MyLog.e("Sync error", "e");
 					return false;
 				} else if (syncStatus == SYNC_DONE) {
-					long t1 = System.currentTimeMillis();
-					songbook.load(t.getLocation(locationType));
-					
-					for (Song s :songbook.songs) {
-						fullsong.add(s);
-					}
-					long t2 = System.currentTimeMillis();
-					MyLog.i("Total TIME: ", Long.toString(t2 - t1));
+					MyLog.i("SYNC", "Finish syncing succesfully");
 					check = false;
 				}
 				// Set timeout to 45 seconds.
@@ -468,7 +444,7 @@ public class SongActivity extends RootActivity implements
 					syncStatus = SYNC_ERROR;
 				}
 			}
-			return true;
+			return syncStatus == SYNC_DONE;
 		}
 
 	}
@@ -567,30 +543,6 @@ public class SongActivity extends RootActivity implements
         	Log.d(TAG, "mBTService.connect(device, secure,MP3KaraokeDB.xml);");
         	mBTService.connect(device, secure,"MP3KaraokeDB.xml");
 		}
-        if (mBTService.isIshandlefile())
-        {
-			File file = null;
-			if (karaoke.equals("hd"))
-			{
-				Log.d(TAG, "if (karaoke.equals(hd))");
-        		file = getApplicationContext().getFileStreamPath("KaraokeDB.xml");
-			}
-			else if (karaoke.equals("mp3")){
-				Log.d(TAG, "if (karaoke.equals(mp3))");
-				file = getApplicationContext().getFileStreamPath("MP3KaraokeDB.xml");
-			}
-			if (file.exists())
-			{
-				Log.d(TAG, "if (file.exists())");
-				songbook.load(t.getLocation(karaoke));
-				
-				for (Song s :songbook.songs) {
-					fullsong.add(s);
-				}
-				songAdapter = new SongAdapter(t, R.layout.song_item,songbook.songs);
-				songList.setAdapter(songAdapter);
-			}
-        }
        
     }
     
@@ -653,12 +605,13 @@ public class SongActivity extends RootActivity implements
 	}
 
 	@Override
+	/**
+	 * @see FilterListener
+	 */
 	public void onFilterComplete(int arg0) {
 		MyLog.i("SONG_SEARCH", "Finish searchig song list");
 		hideProgressDialog();
-		
 	}
-
 	
 	@Override
 	/**
@@ -676,7 +629,7 @@ public class SongActivity extends RootActivity implements
 	 * 
 	 * This method is invoked by MyHttpServer once it received song book. Song book file name is sent as parameter
 	 */
-	public void onReceivedBook(String songbook) {
+	public void onReceivedBook(String songBookPath) {
 		SongActivity.syncStatus = SongActivity.SYNC_RECEIVE_SONGBOOK;
 	}
 	

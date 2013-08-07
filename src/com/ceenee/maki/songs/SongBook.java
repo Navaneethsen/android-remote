@@ -22,7 +22,15 @@ public class SongBook {
 	protected ArrayList<String> songAlphabet;
 	
 	public ArrayList<Song> songs = new ArrayList<Song>();
+	protected Boolean loaded;
 	
+	/**
+	 * Return true if the song book has ever get load. Other wise return no.
+	 * @return
+	 */
+	public Boolean isLoad() {
+		return loaded;
+	}
 	/**
 	 * Setter method
 	 * 
@@ -60,18 +68,16 @@ public class SongBook {
 			xr.parse(is);
 			songs = myXMLHandler.getSongs();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			MyLog.i("SONGBOOK_NOT_FOUND", "SONG BOOK DON'T EXIST. IGNORE");
-			e.printStackTrace();
+			e.printStackTrace();			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			this.loaded = songs.size() > 0;
 		}
 		return songs;
 	}

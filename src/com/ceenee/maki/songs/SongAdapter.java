@@ -29,10 +29,10 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable {
 	 * we care about now is ArrayList<Item> objects, because it is the list of
 	 * objects we want to display.
 	 */
-	public SongAdapter(Context context, int textViewResourceId, ArrayList<Song> objects) {
-		super(context, textViewResourceId, objects);
-		this.objects = new ArrayList<Song>(objects);
-		this.fitems = new ArrayList<Song>(objects);
+	public SongAdapter(Context context, int textViewResourceId, ArrayList<Song> _objects) {
+		super(context, textViewResourceId, _objects);
+		this.objects = new ArrayList<Song>(_objects);	
+		this.fitems = new ArrayList<Song>(_objects);	
 	}
 
 	/*
@@ -66,8 +66,8 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable {
 		 * 
 		 * Therefore, i refers to the current Item object.
 		 */
-		Song i = fitems.get(position);
-
+		Song i = this.getItem(position);
+		
 		if (i != null) {
 
 			// This is how you obtain a reference to the TextViews.
@@ -97,39 +97,39 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable {
 	private class SongFilter extends Filter {
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
-			
 			FilterResults results = new FilterResults();
 			String prefix = Unicode.convert(constraint.toString().toLowerCase());
+			MyLog.i("SONGADAPTER::: FILTER", "Start to search the songs");
 			
 			if (prefix == null || prefix.length() == 0) {
 				ArrayList<Song> list = new ArrayList<Song>(objects);
 				results.values = list;
 				results.count = list.size();
 			} else {
-				final ArrayList<Song> list = new ArrayList<Song>(objects);
-				final ArrayList<Song> nlist = new ArrayList<Song>();
-				int count = list.size();
+				/**
+				 * Iterate every items in fitems and put matched items into filteredList
+				 */
+				ArrayList<Song> filteredList = new ArrayList<Song>();
+				int count = objects.size();
 
 				for (int i = 0; i < count; i++) {
-					final Song pkmn = list.get(i);
-					final String value = Unicode.convert(pkmn.getTitle()
-							.toLowerCase());
-
+					Song pkmn = fitems.get(i);					
+					String value = Unicode.convert(pkmn.getTitle().toLowerCase());
 					if (value.contains(prefix)) {
-						// MyLog.i("Value+Prefix: ", value +",,"+prefix);
-						nlist.add(pkmn);
+						filteredList.add(pkmn);
 					}
 				}
-				results.values = nlist;
-				results.count = nlist.size();
+				results.values = filteredList;
+				results.count = filteredList.size();
 			}
-			
 			return results;
 		}
 
 		@Override
 		protected void publishResults(CharSequence constraint, FilterResults results) {			
 			if (results.values instanceof ArrayList<?>) {
+				MyLog.i("MAKI: SONG_ADAPTER: FILTER", "Find out " + Integer.toString(results.count) + "song") ;
+				
 				ArrayList<Song> result = (ArrayList<Song>) results.values;
 				int count = result.size();
 				// setNotifyOnChange(true);
@@ -141,6 +141,9 @@ public class SongAdapter extends ArrayAdapter<Song> implements Filterable {
 				}
 				MyLog.i("Total songs: ", Integer.toString(count));	
 			}
+			
+			MyLog.i("OBJECT COUNT", Integer.toString(objects.size()));
+			MyLog.i("OBJECT COUNT", Integer.toString(fitems.size()));
 		}
 	}
 	
