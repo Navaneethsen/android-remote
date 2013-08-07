@@ -30,6 +30,7 @@ public class RootActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ActivityNavigator m = ActivityNavigator.getInstance();
+		MyLog.i("ROOTACTIVITY: SET CURRENT", this.toString());
 		m.setCurrentActivity(this);
 	}
 	

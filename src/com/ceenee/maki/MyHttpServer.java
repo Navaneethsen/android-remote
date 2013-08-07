@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import com.ceenee.bento.Dumper;
 import com.ceenee.q.SongActivity;
 
 
@@ -44,7 +45,7 @@ public class MyHttpServer extends NanoHTTPD {
 	public static void prepareDocRoot(Activity activity) {
 		try {
 			DOC_ROOT = activity.getFilesDir();
-			MyLog.i("SUSHI:: MAIN :: HOMEDIR", DOC_ROOT.toString());
+			MyLog.i("SUSHI:: MAIN :: HOMEDIR", DOC_ROOT.getAbsolutePath());
 			File file = activity.getFileStreamPath("file-upload.html");
 			if (file.exists()) {
 				MyLog.i("MAKI: SERVER", "initialize app before so we don't need to copy the file for web server");
@@ -106,14 +107,11 @@ public class MyHttpServer extends NanoHTTPD {
 		}
 	}
 
-	public static MyHttpServer getInstance(int port, File docRoot)
-			throws IOException {
-		if (instance == null) {
-			MyLog.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
-			instance = new MyHttpServer(port, docRoot);
-			DOC_ROOT = docRoot;
-			MyHttpServer.port = port;
-		}
+	public static MyHttpServer getInstance(int port, File docRoot) throws IOException {
+		MyLog.e("MAKI: NANO", "SERVER started with docRoot: " + docRoot);
+		instance = new MyHttpServer(port, docRoot);
+		DOC_ROOT = docRoot;
+		MyHttpServer.port = port;
 		return instance;
 	}
 	
@@ -152,23 +150,23 @@ public class MyHttpServer extends NanoHTTPD {
 		e = parms.propertyNames();
 		while (e.hasMoreElements()) {
 			String value = (String) e.nextElement();
-			myOut.println("  PRM: '" + value + "' = '"
-					+ parms.getProperty(value) + "'");
+			myOut.println("  PRM: '" + value + "' = '" + parms.getProperty(value) + "'");
 		}
 		e = files.propertyNames();
-
+		
+		files.list(myOut);
+		
+		MyLog.i("MAKI: SERVER: PARAMS", Dumper.dump(files));
+		
 		while (e.hasMoreElements()) {
 			String value = (String) e.nextElement();
-			myOut.println("  UPLOADED: '" + value + "' = '"
-					+ files.getProperty(value) + "'");
-
+			MyLog.i("MAKI: SERVER: UPLOADED", "FILE PATH: " + value + "=" + files.getProperty(value));
 			MyLog.i("MAKI: START_COPY_UPLOADED_FILE", "Copy temp file to correct location");
 			try {
 				this.onBookSyncListener.onReadyReceiveBook();
 				
 				MyLog.i("Sync Status: ", "STARTING TO WRITE SONGBOOK");
-				in = new FileInputStream(new File(files.getProperty(value)
-						.toString()));
+				in = new FileInputStream(new File(files.getProperty(value).toString()));
 				out = new FileOutputStream(DOC_ROOT.getAbsoluteFile() + "/"
 						+ parms.getProperty("upload1").toString());
 				
@@ -178,15 +176,9 @@ public class MyHttpServer extends NanoHTTPD {
 				BufferedInputStream bis = new BufferedInputStream(in);
 
 				byte[] buffer = new byte[1024];
-				// int read;
-				// while ((read = in.read(buffer)) != -1) {
-				// out.write(buffer, 0, read);
-				// }
 				int length;
 				while ((length = in.read(buffer)) > 0) {
-
 					out.write(buffer, 0, length);
-
 				}
 
 				in.close();
@@ -197,6 +189,10 @@ public class MyHttpServer extends NanoHTTPD {
 				if (this.onBookSyncListener !=null) {
 					this.onBookSyncListener.onReceivedBook(DOC_ROOT.getAbsoluteFile() + "/" + parms.getProperty("upload1").toString());
 				}
+				
+				//We need to remove temporary file ;)
+				File f = new File(files.getProperty(value));
+				f.delete();
 			} catch (FileNotFoundException fnfe) {
 				MyLog.e("MAKI: SERVER", "File location is incorrect. Error:"
 						+ fnfe.getMessage());
@@ -209,15 +205,15 @@ public class MyHttpServer extends NanoHTTPD {
 								+ ex.getMessage());
 			}
 		}
+		
 		if (has_file == 2) {
 			this.onBookSyncListener.onFinishSyncing();
 			has_file = 0;
 		} else {
-			this.onBookSyncListener.onSyncFail(new Exception(""));
+			this.onBookSyncListener.onSyncFail(new Exception("Weird. We received no file."));
 			has_file = 0;
 		}
 		if (uri.equalsIgnoreCase("/info.html")) {
-
 			String msg = "<html><body><h1>Hello server</h1>\n";
 			if (parms.getProperty("username") == null)
 				msg += "<form action='?' method='get'>\n"

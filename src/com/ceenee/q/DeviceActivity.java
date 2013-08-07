@@ -41,6 +41,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ceenee.maki.AppInfo;
 import com.ceenee.maki.DeviceItem;
 import com.ceenee.maki.Finder;
 import com.ceenee.maki.ItemAdapter;
@@ -542,7 +543,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 				mState = STATE_RUNNING;
 				
 				maskIp = "192.168.0.";
-				if (MainActivity.ENVIRONMENT == MainActivity.PHASE_PRODUCTION || MainActivity.ENVIRONMENT == MainActivity.PHASE_DEVELOPMENT) {
+				if (AppInfo.ENVIRONMENT == AppInfo.PHASE_PRODUCTION || AppInfo.ENVIRONMENT == AppInfo.PHASE_DEVELOPMENT) {
 					maskIp = f.getMaskIpAddress() + ".";
 				}
 				

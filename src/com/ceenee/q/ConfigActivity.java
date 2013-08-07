@@ -51,6 +51,7 @@ public class ConfigActivity extends PreferenceActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		ActivityNavigator.getInstance().setCurrentActivity(this);
 		return ActivityNavigator.getInstance().onCreateOptionsMenu(menu);
 	}
 

@@ -11,12 +11,22 @@ import com.ceenee.q.MainActivity;
 public class MyLog {
 
 	/**
+	 * In Production mode, we cannot output the log due to Google Play Store term.
+	 * This function check whether the app is running in production mode.
+	 *  
+	 * @return true if we should output the log
+	 */
+	public static Boolean isLogVisible() {
+		return AppInfo.ENVIRONMENT != AppInfo.PHASE_PRODUCTION;
+	}
+	
+	/**
 	 * Calling Log.e
 	 * @param tag tag String
 	 * @param content content String
 	 */
 	public static void e(String tag, String content) {
-		if (MainActivity.ENVIRONMENT != MainActivity.PHASE_PRODUCTION) {
+		if (isLogVisible()) {
 			Log.e(tag, content);
 		}
 	}
@@ -27,7 +37,7 @@ public class MyLog {
 	 * @param content content String
 	 */
 	public static void i(String tag, String content) {
-		if (MainActivity.ENVIRONMENT != MainActivity.PHASE_PRODUCTION) {
+		if (isLogVisible()) {
 			Log.i(tag, content);
 		}
 	}
@@ -38,7 +48,7 @@ public class MyLog {
 	 * @param content content String
 	 */
 	public static void w(String tag, String content) {
-		if (MainActivity.ENVIRONMENT != MainActivity.PHASE_PRODUCTION) {
+		if (isLogVisible()) {
 			Log.w(tag, content);
 		}	
 	}
@@ -49,7 +59,7 @@ public class MyLog {
 	 * @param content content String
 	 */
 	public static void d(String tag, String content) {
-		if (MainActivity.ENVIRONMENT != MainActivity.PHASE_PRODUCTION) {
+		if (isLogVisible()) {
 			Log.d(tag, content);
 		}		
 	}
@@ -60,7 +70,7 @@ public class MyLog {
 	 * @param content content String
 	 */
 	public static void v(String tag, String content) {
-		if (MainActivity.ENVIRONMENT != MainActivity.PHASE_PRODUCTION) {
+		if (isLogVisible()) {
 			Log.v(tag, content);
 		}		
 	}
@@ -72,7 +82,7 @@ public class MyLog {
 	 * @param e exception
 	 */
 	public static void e(String tag, String content, Exception e) {
-		if (MainActivity.ENVIRONMENT != MainActivity.PHASE_PRODUCTION) {
+		if (isLogVisible()) {
 			Log.e(tag, content,e);
 		}		
 	}

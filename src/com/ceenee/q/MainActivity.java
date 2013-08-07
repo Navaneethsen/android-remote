@@ -45,14 +45,6 @@ import android.content.Intent;
 
 
 public class MainActivity extends RootActivity implements OnGestureListener {
-	public final static int PHASE_EMULATOR = 1;
-	public final static int PHASE_DEVELOPMENT = 2;
-	public final static int PHASE_PRODUCTION = 3;
-
-//	public final static int ENVIRONMENT = PHASE_EMULATOR;
-	public final static int ENVIRONMENT = PHASE_DEVELOPMENT;
-//	 public final static int ENVIRONMENT = PHASE_PRODUCTION;
-
 	public String remote;
 	int count = 0;
 	private GestureDetector gestureScanner;
@@ -72,7 +64,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 	//new sync song book
 	public static String sipaddress_connected = "";
 
-	@SuppressWarnings("unused")
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,10 +72,6 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setTextListener();
-		if (ENVIRONMENT != PHASE_PRODUCTION)
-		{
-			Toast.makeText(this, "Oops, you are using the developing version. Please contact CeeNee to have the correct version updated", Toast.LENGTH_LONG).show();
-		}
 		gestureScanner = new GestureDetector(this);
 
 		final Remote r = Remote.getInstance();
