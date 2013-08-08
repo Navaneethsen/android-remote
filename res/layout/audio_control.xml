@@ -26,7 +26,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1">
  	      
- 	      <com.ceenee.q.RemoteKeyButton
+ 	      <com.ceenee.q.hd.RemoteKeyButton
 	         android:id="@+id/cmd_voldown"
 	         android:layout_weight="1"
 	         android:layout_marginTop="2dp"
@@ -38,7 +38,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@android:color/transparent" />
      
-     	 <com.ceenee.q.RemoteKeyButton
+     	 <com.ceenee.q.hd.RemoteKeyButton
 	         android:id="@+id/cmd_volup"
 	         android:layout_weight="1"
 	         android:layout_marginTop="2dp"
@@ -58,7 +58,7 @@
          android:layout_height="fill_parent"
          android:layout_weight="1">
      	
-     	<com.ceenee.q.RemoteKeyButton
+     	<com.ceenee.q.hd.RemoteKeyButton
 	         android:id="@+id/cmd_mute"
 	         android:layout_weight="1"
 	         android:layout_marginLeft="2dp"
@@ -71,7 +71,7 @@
 	         android:onClick="onRemoteClick"
 	         android:src="@android:color/transparent" />
    
-     	<com.ceenee.q.RemoteKeyButton
+     	<com.ceenee.q.hd.RemoteKeyButton
 	         android:id="@+id/cmd_audio"
 	         android:layout_weight="1"
 	         android:layout_width="fill_parent"

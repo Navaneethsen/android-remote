@@ -6,7 +6,7 @@
     android:gravity="left"
     android:orientation="vertical" >
 
-    <com.ceenee.q.RemoteKeyButton
+    <com.ceenee.q.hd.RemoteKeyButton
         android:id="@+id/cmd_menu"
         style="@style/RemoteButtonLeft"
         android:onClick="onRemoteClick"
@@ -15,28 +15,28 @@
         
          />
 
-    <com.ceenee.q.RemoteKeyButton
+    <com.ceenee.q.hd.RemoteKeyButton
         android:id="@+id/cmd_volup"
         style="@style/RemoteButtonLeft"
         android:onClick="onRemoteClick"
         remotecontrol:remote_key_name="volup"
         android:src="@drawable/glyphicons_184_volume_up" />
 
-    <com.ceenee.q.RemoteKeyButton
+    <com.ceenee.q.hd.RemoteKeyButton
         android:id="@+id/cmd_voldown"
         style="@style/RemoteButtonLeft"
         android:onClick="onRemoteClick"
         remotecontrol:remote_key_name="voldown"
         android:src="@drawable/glyphicons_183_volume_down" />
 
-    <com.ceenee.q.RemoteKeyButton
+    <com.ceenee.q.hd.RemoteKeyButton
         android:id="@+id/cmd_home"
         style="@style/RemoteButtonLeft"
         android:onClick="onRemoteClick"
         remotecontrol:remote_key_name="home"
         android:src="@drawable/glyphicons_020_home" />
 
-    <com.ceenee.q.RemoteKeyButton
+    <com.ceenee.q.hd.RemoteKeyButton
         android:id="@+id/cmd_info"
         style="@style/RemoteButtonLeft"
         android:onClick="onRemoteClick"

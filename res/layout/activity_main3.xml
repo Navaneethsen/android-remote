@@ -19,7 +19,7 @@
 			    android:background="@drawable/screen_background"
 			    android:orientation="horizontal" >	    
 		
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/cmd_power"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
 			        android:src="@android:color/transparent"
 			        remotecontrol:remote_key_name="power" />
 		
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/cmd_menu"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
 			        android:src="@android:color/transparent"
 			        remotecontrol:remote_key_name="menu" />
 		
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/cmd_home"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
 			        android:src="@android:color/transparent"
 			        remotecontrol:remote_key_name="home" />
 		
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/cmd_return"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
 			        android:src="@android:color/transparent"
 			        remotecontrol:remote_key_name="return" />
 		
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/cmd_eject"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
 			        android:layout_marginTop="20dp"
 			        layout="@layout/extra" />
 		
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/enter"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
 			        android:visibility="visible"
 			        remotecontrol:remote_key_name="enter" />
 		
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/audio_control"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
 			        android:src="@drawable/normal_audio"
 			        remotecontrol:remote_key_name="audio_control" />
 		
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/playback"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
 			        android:src="@drawable/normal_playback"
 			        remotecontrol:remote_key_name="playback" />			   			   
 		
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/search_button"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -184,7 +184,7 @@
 			        <requestFocus />
 			    </EditText>
 			    
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/settings"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
 			        remotecontrol:remote_key_name="settings" />
 			    
 			    
-			    <com.ceenee.q.RemoteKeyButton
+			    <com.ceenee.q.hd.RemoteKeyButton
 			        android:id="@+id/etc"
 			        android:layout_width="50dp"
 			        android:layout_height="50dp"

@@ -1,4 +1,4 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 import java.io.File;
 
@@ -34,11 +34,11 @@ import com.google.android.gcm.GCMRegistrar;
 
 import com.ceenee.maki.MyHttpServer;
 import com.ceenee.maki.MyLog;
-import com.ceenee.maki.Remote;
 import com.ceenee.q.R;
+import com.ceenee.remote.Remote;
 
-import static com.ceenee.q.CommonUtilities.EXTRA_MESSAGE;
-import static com.ceenee.q.CommonUtilities.SENDER_ID;
+import static com.ceenee.q.hd.CommonUtilities.EXTRA_MESSAGE;
+import static com.ceenee.q.hd.CommonUtilities.SENDER_ID;
 import android.app.AlertDialog;
 
 import android.content.Intent;
@@ -150,7 +150,7 @@ public class MainActivity extends RootActivity implements OnGestureListener {
 		// GCMRegistrar.unregister(getApplicationContext());
 
 		File f = new File(this.getFilesDir(),
-				com.ceenee.q.CommonUtilities.REGID_FILENAME);
+				com.ceenee.q.hd.CommonUtilities.REGID_FILENAME);
 		if (f.exists()) {
 			// We don't need to register the device
 			return;

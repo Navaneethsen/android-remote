@@ -1,7 +1,8 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 import java.io.IOException;
-import com.ceenee.maki.Remote;
+
+import com.ceenee.remote.Remote;
 
 public class DeviceItem {
 	String ip;

@@ -1,4 +1,4 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,7 +18,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ceenee.q.SongActivity;
+import com.ceenee.q.hd.SongActivity;
 
 public class BluetoothService {
 	// Debugging

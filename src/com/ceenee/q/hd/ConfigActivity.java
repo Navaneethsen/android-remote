@@ -1,4 +1,4 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 import java.io.IOException;
 
@@ -14,8 +14,8 @@ import android.view.MenuItem;
 
 import com.ceenee.maki.MyHttpServer;
 import com.ceenee.maki.MyLog;
-import com.ceenee.maki.Remote;
 import com.ceenee.q.R;
+import com.ceenee.remote.Remote;
 
 public class ConfigActivity extends PreferenceActivity {
 

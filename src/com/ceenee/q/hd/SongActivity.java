@@ -1,4 +1,4 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +35,6 @@ import com.ceenee.maki.ListView;
 import com.ceenee.maki.MyHttpServer;
 import com.ceenee.maki.MyHttpServer.OnBookSyncListener;
 import com.ceenee.maki.MyLog;
-import com.ceenee.maki.Remote;
 import com.ceenee.maki.Unicode;
 import com.ceenee.maki.ListView.OnItemDoubleTapLister;
 import com.ceenee.maki.sharekit.ShareKitFactory;
@@ -45,6 +44,7 @@ import com.ceenee.maki.songs.SongAdapter;
 import com.ceenee.maki.songs.SongBook;
 import com.ceenee.maki.songs.Export.OnExportListener;
 import com.ceenee.q.R;
+import com.ceenee.remote.Remote;
 
 /**
  * Song book activity. 

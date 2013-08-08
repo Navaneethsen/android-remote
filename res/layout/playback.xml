@@ -21,7 +21,7 @@
          android:background="@android:color/transparent" >
          
 
-	     <com.ceenee.q.RemoteKeyButton
+	     <com.ceenee.q.hd.RemoteKeyButton
 	         android:id="@+id/cmd_rev"
 	         android:layout_width="wrap_content"
 	         android:layout_height="fill_parent"
@@ -34,7 +34,7 @@
 	         android:src="@android:color/transparent"
 	         remotecontrol:remote_key_name="prev" />
 	     
-	      <com.ceenee.q.RemoteKeyButton
+	      <com.ceenee.q.hd.RemoteKeyButton
 	         android:id="@+id/cmd_forward"
 	         android:layout_width="wrap_content"
 	         android:layout_height="fill_parent"
@@ -65,7 +65,7 @@
 	             android:layout_height="fill_parent" 
 	             android:layout_marginBottom ="1dp"	             
 	             android:layout_weight = "1">
-			     <com.ceenee.q.RemoteKeyButton
+			     <com.ceenee.q.hd.RemoteKeyButton
 				         android:id="@+id/cmd_pause"
 				         android:layout_width="0px"
 				         android:layout_height="fill_parent"
@@ -76,7 +76,7 @@
 				         remotecontrol:remote_key_name="pause"	      
 				         android:src="@android:color/transparent" />
 
-			     <com.ceenee.q.RemoteKeyButton
+			     <com.ceenee.q.hd.RemoteKeyButton
 			         android:id="@+id/cmd_play"
 			         android:layout_width="0px"
 			         android:layout_height="fill_parent"
@@ -88,7 +88,7 @@
 			         android:src="@android:color/transparent"
 			         remotecontrol:remote_key_name="play" />
 			     
-			     <com.ceenee.q.RemoteKeyButton
+			     <com.ceenee.q.hd.RemoteKeyButton
 				         android:id="@+id/cmd_stop"
 				         android:layout_width="0px"
 				         android:layout_height="fill_parent"
@@ -106,7 +106,7 @@
 	             android:layout_height="fill_parent"
 	             android:layout_marginTop="1dp"
 	             android:layout_weight = "1">
-			     <com.ceenee.q.RemoteKeyButton
+			     <com.ceenee.q.hd.RemoteKeyButton
 				         android:id="@+id/cmd_fast_backward"
 				         android:layout_width="0px"
 				         android:layout_height="fill_parent"
@@ -117,7 +117,7 @@
 				         remotecontrol:remote_key_name="rewind"     
 				         android:src="@android:color/transparent" />
 			     
-			     <com.ceenee.q.RemoteKeyButton
+			     <com.ceenee.q.hd.RemoteKeyButton
 				         android:id="@+id/cmd_fast_forward"
 				         android:layout_width="0px"
 				         android:layout_height="fill_parent"

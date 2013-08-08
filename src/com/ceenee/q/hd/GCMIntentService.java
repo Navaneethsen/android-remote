@@ -1,4 +1,4 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 /**
  * GCM Intent Service (For GCM)
@@ -20,8 +20,8 @@ import android.util.Log;
  
 import com.google.android.gcm.GCMBaseIntentService;
  
-import static com.ceenee.q.CommonUtilities.SENDER_ID;
-import static com.ceenee.q.CommonUtilities.displayMessage;
+import static com.ceenee.q.hd.CommonUtilities.SENDER_ID;
+import static com.ceenee.q.hd.CommonUtilities.displayMessage;
 
 import com.ceenee.maki.IdRegister;
 import com.ceenee.maki.MyLog;

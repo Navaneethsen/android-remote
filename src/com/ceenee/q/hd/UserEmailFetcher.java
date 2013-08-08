@@ -1,4 +1,4 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;

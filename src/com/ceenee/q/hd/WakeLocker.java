@@ -1,4 +1,4 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 import android.content.Context;
 import android.os.PowerManager;

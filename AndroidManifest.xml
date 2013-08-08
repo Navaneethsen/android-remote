@@ -50,10 +50,10 @@
 		  </intent-filter>
 		</receiver>
 	
-		<service android:name="com.ceenee.q.GCMIntentService" />
+		<service android:name="com.ceenee.q.hd.GCMIntentService" />
 		
         <activity
-            android:name="com.ceenee.q.MainActivity"            
+            android:name="com.ceenee.q.hd.MainActivity"            
             android:label="@string/title_activity_main" 
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:configChanges="orientation|screenSize">
@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.ceenee.q.DeviceActivity" 
+        <activity android:name="com.ceenee.q.hd.DeviceActivity" 
             android:label="@string/title_activity_device"
             android:configChanges="orientation|screenSize">
         	<intent-filter> 
@@ -73,7 +73,7 @@
         	</intent-filter>    
         </activity>
 
-        <activity android:name="com.ceenee.q.SongActivity" android:label="@string/title_activity_song"
+        <activity android:name="com.ceenee.q.hd.SongActivity" android:label="@string/title_activity_song"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"
             android:configChanges="orientation|screenSize|keyboardHidden">
           	<intent-filter> 
@@ -82,14 +82,14 @@
         	</intent-filter>    
         </activity>
         
-        <activity android:name="com.ceenee.q.ConfigActivity" android:label="@string/title_activity_option">
+        <activity android:name="com.ceenee.q.hd.ConfigActivity" android:label="@string/title_activity_option">
         	<intent-filter> 
         	    <action android:name="android.intent.action.VIEW" /> 
         	    <category android:name="android.intent.category.DEFAULT" /> 
         	</intent-filter>    
         </activity>
         
-        <activity android:name="com.ceenee.q.DeviceListActivity"
+        <activity android:name="com.ceenee.q.hd.DeviceListActivity"
                   android:label="@string/select_device"
                   android:theme="@android:style/Theme.Dialog"
                   android:configChanges="orientation|keyboardHidden" />

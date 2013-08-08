@@ -1,12 +1,12 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 /**
  * Server Utilities (For GCM)
  */
 
-import static com.ceenee.q.CommonUtilities.SERVER_URL;
-import static com.ceenee.q.CommonUtilities.TAG;
-import static com.ceenee.q.CommonUtilities.displayMessage;
+import static com.ceenee.q.hd.CommonUtilities.SERVER_URL;
+import static com.ceenee.q.hd.CommonUtilities.TAG;
+import static com.ceenee.q.hd.CommonUtilities.displayMessage;
 
 import java.io.IOException;
 import java.io.OutputStream;

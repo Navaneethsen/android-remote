@@ -1,4 +1,4 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 import java.io.IOException;
 import android.app.Activity;
@@ -8,12 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.ceenee.maki.Remote;
-import com.ceenee.q.ConfigActivity;
-import com.ceenee.q.DeviceActivity;
-import com.ceenee.q.MainActivity;
 import com.ceenee.q.R;
-import com.ceenee.q.SongActivity;
+import com.ceenee.q.hd.ConfigActivity;
+import com.ceenee.q.hd.DeviceActivity;
+import com.ceenee.q.hd.MainActivity;
+import com.ceenee.q.hd.SongActivity;
+import com.ceenee.remote.Remote;
 import com.ceenee.maki.AppInfo;
 
 public class ActivityNavigator {

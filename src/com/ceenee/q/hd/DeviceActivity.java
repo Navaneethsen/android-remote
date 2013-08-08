@@ -1,4 +1,4 @@
-package com.ceenee.q;
+package com.ceenee.q.hd;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -46,8 +46,8 @@ import com.ceenee.maki.DeviceItem;
 import com.ceenee.maki.Finder;
 import com.ceenee.maki.ItemAdapter;
 import com.ceenee.maki.MyLog;
-import com.ceenee.maki.Remote;
 import com.ceenee.q.R;
+import com.ceenee.remote.Remote;
 
 public class DeviceActivity extends RootActivity implements OnGestureListener {
 	final public String DEVICE_FILENAME = "device";
@@ -483,8 +483,7 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 			progressDialog.setProgress(total);
 			if (msg.arg2 > 0) {
 
-				String ip = DeviceActivity.ipMaskAdd
-						+ Integer.toString(msg.arg2);
+				String ip = DeviceActivity.ipMaskAdd + Integer.toString(msg.arg2);
 				deviceAdapter.add(new DeviceItem(ip));
 				deviceIp.add(ip);
 			}
@@ -538,7 +537,6 @@ public class DeviceActivity extends RootActivity implements OnGestureListener {
 				msg1.arg1 = 120;
 				mHandler.sendMessage(msg1);
 			}
-			// f.resolve();
 			else {
 				mState = STATE_RUNNING;
 				
