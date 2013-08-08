@@ -21,7 +21,7 @@ public class IdRegister {
 	
 	public boolean perform() {
 		try {
-			FileOutputStream fos = context.openFileOutput(com.ceenee.q.CommonUtilities.REGID_FILENAME, Context.MODE_PRIVATE);
+			FileOutputStream fos = context.openFileOutput(com.ceenee.q.hd.CommonUtilities.REGID_FILENAME, Context.MODE_PRIVATE);
 			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(fos));			
 			br.write(id);
 			br.flush();

@@ -1,6 +1,6 @@
 package com.ceenee.q.hd;
 
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;

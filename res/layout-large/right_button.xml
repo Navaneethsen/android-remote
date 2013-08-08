@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.ceenee.q"
+    xmlns:remotecontrol="http://schemas.android.com/apk/res/com.ceenee.q.hd"
     >
 
     <com.ceenee.q.hd.RemoteKeyButton

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>    
 <LinearLayout	    
 	    xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:remotecontrol="http://schemas.android.com/apk/res/com.ceenee.q"
+		xmlns:remotecontrol="http://schemas.android.com/apk/res/com.ceenee.q.hd"
 	    android:id="@+id/LinearLayout01"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"

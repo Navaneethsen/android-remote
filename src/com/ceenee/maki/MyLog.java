@@ -2,7 +2,7 @@ package com.ceenee.maki;
 
 import android.util.Log;
 
-import com.ceenee.q.MainActivity;
+import com.ceenee.q.hd.MainActivity;
 
 /**
  * Custom Log for iCeeNee 

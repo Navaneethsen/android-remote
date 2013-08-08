@@ -2,7 +2,7 @@ package com.ceenee.q.hd;
 
 import java.util.Set;
 
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;

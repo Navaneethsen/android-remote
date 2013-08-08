@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 import com.ceenee.q.hd.ConfigActivity;
 import com.ceenee.q.hd.DeviceActivity;
 import com.ceenee.q.hd.MainActivity;
@@ -52,7 +52,7 @@ public class ActivityNavigator {
 			
 			version = new String(AppInfo.VERSION);
 			AlertDialog.Builder aboutDialog = new AlertDialog.Builder(_currentActivity);
-			aboutDialog.setTitle("QCeeNee v" + version + "-" + AppInfo.ENVIRONMENT);
+			aboutDialog.setTitle(version + "-" + AppInfo.ENVIRONMENT);
 			aboutDialog.setMessage("Copyright (c) 2013. Developed by CeeNee. Http://CeeNee.Com.");
 			aboutDialog.show();
 			break;

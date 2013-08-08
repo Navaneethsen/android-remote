@@ -1,28 +1,28 @@
 package com.ceenee.q.hd;
 
-import java.io.IOException;
+//import java.io.IOException;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
+//import android.app.AlertDialog;
+//import android.content.DialogInterface;
+//import android.content.Intent;
+//import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.view.Gravity;
+//import android.support.v4.app.FragmentActivity;
+//import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputConnection;
-import android.widget.TextView;
+//import android.view.MotionEvent;
+//import android.view.View;
+//import android.view.inputmethod.EditorInfo;
+//import android.view.inputmethod.InputConnection;
+//import android.widget.TextView;
 
 import com.ceenee.maki.MyLog;
-import com.ceenee.q.R.id;
-import com.ceenee.q.hd.*;
-import com.ceenee.remote.Remote;
+//import com.ceenee.q.hd.R; //.id;
+//import com.ceenee.q.hd.*;
+//import com.ceenee.remote.Remote;
 
 public class RootActivity extends Activity {
 	

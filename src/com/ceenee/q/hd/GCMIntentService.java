@@ -25,7 +25,7 @@ import static com.ceenee.q.hd.CommonUtilities.displayMessage;
 
 import com.ceenee.maki.IdRegister;
 import com.ceenee.maki.MyLog;
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 
 public class GCMIntentService extends GCMBaseIntentService {
  

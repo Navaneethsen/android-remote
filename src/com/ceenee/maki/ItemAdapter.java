@@ -3,7 +3,8 @@ package com.ceenee.maki;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
+import com.ceenee.remote.Remote;
 
 import android.content.Context;
 import android.view.LayoutInflater;

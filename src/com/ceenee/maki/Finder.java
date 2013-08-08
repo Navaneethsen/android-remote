@@ -12,19 +12,20 @@ import java.util.Enumeration;
 
 import org.apache.http.conn.util.InetAddressUtils;
 
-import com.ceenee.q.DeviceActivity;
+import com.ceenee.q.hd.DeviceActivity;
+import com.ceenee.remote.Remote;
 
 import android.util.Log;
 import android.widget.Toast;
 
 public class Finder {
-
+	protected boolean isResolved = false;
 	protected Integer _from;
 	protected Integer _to;
-	protected String _maskIpAddress;
-	protected String _ipAddress;
+	protected String _maskIpAddress; //mask IP Address of the phone
+	protected String _ipAddress; //current ip address of the phone.
 	protected static Finder instance = null;
-
+	
 	public void setFrom(int from) {
 		this._from = from;
 	}
@@ -33,6 +34,12 @@ public class Finder {
 		this._from = from;
 	}
 
+	/**
+	 * Get an unique instance of Finder class.
+	 * Finder class helps to discovery ip address of phone and ip address of the board.
+	 * 
+	 * @return Finder
+	 */
 	public static Finder getInstance() {
 		if (instance == null) {
 			synchronized (Finder.class) {
@@ -43,11 +50,15 @@ public class Finder {
 		}
 		return instance;
 	}
-
+	
+	/**
+	 * Construct method
+	 */
 	public Finder() {
-		// this.resolve();
+		this.isResolved = false;
 	}
 
+	
 	public void execute() {
 		this._from = 148;
 		this._to = 152;
@@ -75,6 +86,13 @@ public class Finder {
 		}
 	}
 
+	/**
+	 * Check if the port is open at a specified IP address. 
+	 * @param target ip address to check
+	 * @param target port
+	 * @param a value in milisecond to waiting for respond before ignoring it
+	 * @return true if the port is open and vice versa.
+	 */
 	public boolean isPortOpen(String ip, int port, int timeout) {
 		boolean found = false;
 		try {
@@ -96,9 +114,9 @@ public class Finder {
 	}
 
 	/*
-	 * Get phone ip and mask address. maskIpAddress is without "." notation
+	 * Get phone ip and mask address. maskIpAddress is the phone ipaddress without "." notation
 	 * 
-	 * @return void
+	 * @return true if successfully to find the ips.
 	 */
 	public boolean resolve() {
 		try {
@@ -123,15 +141,36 @@ public class Finder {
 					}
 				}
 			}
+			isResolved = true;
 			return true;
 		} catch (SocketException ex) {
 			MyLog.e("MAKI: FIND IP", ex.toString());
+			isResolved = false;
 			return false;
 		}
 
 	}
 
+	/**
+	 * @see this{@link #resolve()}
+	 * 
+	 * @return mask ip address of the phone.
+	 */
 	public String getMaskIpAddress() {
-		return _maskIpAddress;
+		if (isResolved) {
+			return _maskIpAddress;
+		}
+		return null;
+	}
+	
+	/**
+	 * @see this{@link #resolve()}
+	 * @return current ip address of the phone
+	 */
+	public String getPhoneAddress() {
+		if (isResolved) {
+			return _ipAddress;
+		}
+		return null;
 	}
 }

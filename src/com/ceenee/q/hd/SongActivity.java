@@ -43,7 +43,7 @@ import com.ceenee.maki.songs.Song;
 import com.ceenee.maki.songs.SongAdapter;
 import com.ceenee.maki.songs.SongBook;
 import com.ceenee.maki.songs.Export.OnExportListener;
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 import com.ceenee.remote.Remote;
 
 /**

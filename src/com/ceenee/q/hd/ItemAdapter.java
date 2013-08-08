@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import com.ceenee.maki.Finder;
 import com.ceenee.maki.MyLog;
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 import com.ceenee.remote.Remote;
 
 import android.content.ClipData.Item;

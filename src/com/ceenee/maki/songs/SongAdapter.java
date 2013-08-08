@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Unicode;
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 
 import android.app.ProgressDialog;
 import android.content.Context;

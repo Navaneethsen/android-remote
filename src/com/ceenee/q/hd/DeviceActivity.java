@@ -46,7 +46,7 @@ import com.ceenee.maki.DeviceItem;
 import com.ceenee.maki.Finder;
 import com.ceenee.maki.ItemAdapter;
 import com.ceenee.maki.MyLog;
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 import com.ceenee.remote.Remote;
 
 public class DeviceActivity extends RootActivity implements OnGestureListener {

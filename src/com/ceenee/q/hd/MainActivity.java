@@ -34,7 +34,7 @@ import com.google.android.gcm.GCMRegistrar;
 
 import com.ceenee.maki.MyHttpServer;
 import com.ceenee.maki.MyLog;
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 import com.ceenee.remote.Remote;
 
 import static com.ceenee.q.hd.CommonUtilities.EXTRA_MESSAGE;

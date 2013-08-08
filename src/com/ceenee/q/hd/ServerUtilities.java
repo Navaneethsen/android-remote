@@ -23,7 +23,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.ceenee.maki.MyLog;
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 import com.google.android.gcm.GCMRegistrar;
 
 public final class ServerUtilities {

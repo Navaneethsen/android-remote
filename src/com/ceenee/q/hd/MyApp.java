@@ -6,7 +6,7 @@ package com.ceenee.q.hd;
 import org.acra.*;
 import org.acra.annotation.*;
 
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 
 import android.app.Application;
 

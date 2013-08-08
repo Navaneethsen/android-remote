@@ -23,7 +23,7 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.Document;
 import com.ceenee.maki.songs.Export.ExportDriver;
-import com.ceenee.q.R;
+import com.ceenee.q.hd.R;
 
 public class PdfExport implements ExportDriver {
 	/**
