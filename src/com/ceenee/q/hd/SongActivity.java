@@ -33,7 +33,8 @@ import android.widget.Toast;
 
 import com.ceenee.maki.ListView;
 import com.ceenee.maki.MyHttpServer;
-import com.ceenee.maki.MyHttpServer.OnBookSyncListener;
+import com.ceenee.sync.OnSyncListener;
+import com.ceenee.sync.Sync;
 import com.ceenee.maki.MyLog;
 import com.ceenee.maki.Unicode;
 import com.ceenee.maki.ListView.OnItemDoubleTapLister;
@@ -44,6 +45,7 @@ import com.ceenee.maki.songs.SongAdapter;
 import com.ceenee.maki.songs.SongBook;
 import com.ceenee.maki.songs.Export.OnExportListener;
 import com.ceenee.q.hd.R;
+import com.ceenee.remote.CommandSync;
 import com.ceenee.remote.Remote;
 
 /**
@@ -61,7 +63,7 @@ public class SongActivity extends RootActivity implements
 	, OnItemDoubleTapLister
 	, OnItemLongClickListener
 	, FilterListener
-	, OnBookSyncListener
+	, OnSyncListener
 	, OnExportListener {
 	private ListView songList;
 	private EditText ed;
@@ -92,7 +94,7 @@ public class SongActivity extends RootActivity implements
 	public static final int SYNC_ERROR = 6;
 	public static final int SYNC_TIMEMOUT = 7;
 	public static SongActivity t;
-	private static String karaoke;
+	private static String karaoke; //Karaoke Mode, can be HD or Mp3.
 	//share song book
 	private BluetoothService mBTService = null;
 	private BluetoothAdapter mBluetoothAdapter = null;
@@ -267,6 +269,7 @@ public class SongActivity extends RootActivity implements
 		}
 		return false;
 	}
+
 	
 	/**
 	 * Even handle when double on SongList.
@@ -356,36 +359,34 @@ public class SongActivity extends RootActivity implements
 	}
 	
 	/**
-	 * Find song book database location. The song book is stored under Files dir of application.
-	 * Example: /data/data/com.ceenee/q/files/KaraokeDB.xml
+	 * Return the song book location of current Karaoke mode.
+	 * The song book is stored under Files dir of application.
+	 * Example: /data/data/com.ceenee/q/files/KaraokeDB.xml for Karaohe mode.
+	 * 
 	 * @see Activity#getFilesDir() 
 	 * @param databaseName
 	 * @return string to XML song book
 	 */
 	public String getLocation(String databaseName) {
-		if (databaseName.equals("hd")) {
-			MyLog.e("Location", t.getFilesDir().toString());
-			return t.getFilesDir() + "/KaraokeDB.xml";
-		}
-		else
-			return t.getFilesDir() + "/MP3KaraokeDB.xml";
+		return t.getFilesDir() + ( databaseName.equals("hd")? "/KaraokeDB.xml":"/MP3KaraokeDB.xml");
 	}
-
-	public void clickSync(View v) throws ParserConfigurationException, SAXException, IOException {
+	
+	/**
+	 * When user clicked on Sync button, we will run the syncing with an AsyncTask
+	 * 
+	 * @param v
+	 * @throws ParserConfigurationException
+	 */
+	public void clickSync(View v) {
 		new SyncTask().execute();
 	}
 
 	private class SyncTask extends AsyncTask<String, Void, Boolean> {
 		private long elapsed_time = 0;
 		private ProgressDialog dialog = new ProgressDialog(SongActivity.this);
-		
+		Sync worker;
 		@Override
 		protected void onPreExecute() {
-			try {
-				MyHttpServer.start().setOnBookSyncListener(t);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			elapsed_time = System.currentTimeMillis();
 			dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			dialog.setMessage("Please wait..Song book is syncing.");
@@ -404,23 +405,23 @@ public class SongActivity extends RootActivity implements
 			} else {
 				Toast.makeText(t, "No Songbook Found. Try to create songbook on CeeNee player and sync again.", Toast.LENGTH_LONG).show();
 			}
-			MyHttpServer.close();
 		}
 
 		@Override
 		protected Boolean doInBackground(String... params) {
 			Remote r = Remote.getInstance();
-			
 			MyLog.i("Sync Status : ", Integer.toString(syncStatus));
 			try {
-				String locationType;
-				if (karaoke.equals("hd")) {
-					locationType = "hd";
-					r.execute("sync_hd");
-				} else {
-					locationType = "mp3";
-					r.execute("sync_mp3");
-				}
+				r.execute("sync_" + karaoke);
+				CommandSync c = (CommandSync) r.getCommander("Sync");
+				worker = new Sync(Remote.getInstance().getIp());
+				worker
+					.setOnBookSyncListener(t)
+					.setPlayerIp(Remote.getInstance().getIp())
+					.setSyncTo(t.getLocation(karaoke))
+					.setCommand(c.compileCommand());
+				worker.start();
+//				return worker.result().
 			} catch (IOException e) {
 				e.printStackTrace();
 				return false;
@@ -430,6 +431,9 @@ public class SongActivity extends RootActivity implements
 			}
 			boolean check = true;
 			while (check == true) {
+				
+				MyLog.i("SYNCING LOOP", "Running this at "  + new Long(System.currentTimeMillis()).toString());
+				
 				if (syncStatus == SYNC_ERROR) {
 					check = false;
 					MyLog.e("Sync error", "e");
@@ -628,6 +632,7 @@ public class SongActivity extends RootActivity implements
 	 * @see MyHttpServer#OnBookSyncListener
 	 * 
 	 * This method is invoked by MyHttpServer once it received song book. Song book file name is sent as parameter
+	 * This method can be used to copy the song book to correct location.
 	 */
 	public void onReceivedBook(String songBookPath) {
 		SongActivity.syncStatus = SongActivity.SYNC_RECEIVE_SONGBOOK;

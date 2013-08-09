@@ -19,6 +19,7 @@ import java.util.Map;
 
 import com.ceenee.maki.Finder;
 import com.ceenee.maki.MyLog;
+import com.ceenee.remote.Command.NotSupportCommandException;
 
 /**
  * Remote class. A virtual mapping between the android remote key and the
@@ -372,11 +373,12 @@ public class Remote {
 			String[] commandRoute = part[1].split("#");
 			MyLog.i("REMOTE: REMOTE", "COMMAND TO RUN" + commandRoute[0]);
 			
-			Command c = commander.get(commandRoute[0]);
 			try {
+				Command c = commander.get(commandRoute[0]);
 				if (c == null) {
 					c = Command.getCommand(commandRoute[0]);
 				}
+				
 				if (commandRoute.length >=2) {
 					MyLog.i("REMOTE: REMOTE", "COMMAND TO RUN" + commandRoute[1]);
 					if (commandRoute[1].contains(",")) {
@@ -410,6 +412,36 @@ public class Remote {
 			return true;
 		}
 		
+	}
+	
+	/**
+	 * Get the command worker of a specified command. A command worker is a class that actually run the code to execute 
+	 * the command. 
+	 * For example, class CommandSync is the worker of "Sync" Command. When we run Sync command. CommandSync will be initialized and run.
+	 * 
+	 * This command worker is initialized for only one time and will be re-used. 
+	 * 
+	 * @see Command
+	 * @see Command#execute
+	 * @see CommandSync
+	 * @param String command name
+	 * @return Command worker that executes this command.
+	 */
+	public Command getCommander(String commandName)  {
+		Command c = commander.get(commandName);
+		try {
+			if (c == null) {
+				c = Command.getCommand(commandName);
+				commander.put(commandName, c);
+			}
+		} catch (NotSupportCommandException e1) {
+			e1.printStackTrace();
+			MyLog.i("REMOTE: EXECUTE", "Command not found: " + commandName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			MyLog.i("REMOTE: EXECUTE", "Command not found: " + commandName);
+		} 
+		return c;
 	}
 
 	/**

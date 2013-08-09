@@ -20,7 +20,7 @@ abstract class Command {
 //	protected Hashtable<String, String> params = new Hashtable<String, String>();
 	protected String[] params; 
 	
-	public class NotSupportCommandException extends Exception {
+	public static class NotSupportCommandException extends Exception {
 		/**
 		 * 
 		 */
@@ -36,12 +36,12 @@ abstract class Command {
 	}
 	
 	
-	public static Command getCommand(String command) throws Exception {
-		Command c;
+	public static Command getCommand(String command) throws NotSupportCommandException, Exception {
+		Command c = null;
 		if (command.equalsIgnoreCase("Sync")) {
 			c = new CommandSync();
 		} else {
-			throw new Exception("We are not support this yet");
+			throw new NotSupportCommandException("We are not support this yet");
 		}
 		return c;
 	}
