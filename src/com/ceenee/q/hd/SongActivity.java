@@ -382,12 +382,10 @@ public class SongActivity extends RootActivity implements
 	}
 
 	private class SyncTask extends AsyncTask<String, Void, Boolean> {
-		private long elapsed_time = 0;
 		private ProgressDialog dialog = new ProgressDialog(SongActivity.this);
 		Sync worker;
 		@Override
 		protected void onPreExecute() {
-			elapsed_time = System.currentTimeMillis();
 			dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			dialog.setMessage("Please wait..Song book is syncing.");
 			dialog.show();
@@ -399,7 +397,6 @@ public class SongActivity extends RootActivity implements
 			if (dialog.isShowing()) {
 				dialog.dismiss();
 			}
-			
 			if (success) {
 				loadSong();
 			} else {
@@ -421,32 +418,12 @@ public class SongActivity extends RootActivity implements
 					.setSyncTo(t.getLocation(karaoke))
 					.setCommand(c.compileCommand());
 				worker.start();
-//				return worker.result().
 			} catch (IOException e) {
 				e.printStackTrace();
 				return false;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
-			}
-			boolean check = true;
-			while (check == true) {
-				
-				MyLog.i("SYNCING LOOP", "Running this at "  + new Long(System.currentTimeMillis()).toString());
-				
-				if (syncStatus == SYNC_ERROR) {
-					check = false;
-					MyLog.e("Sync error", "e");
-					return false;
-				} else if (syncStatus == SYNC_DONE) {
-					MyLog.i("SYNC", "Finish syncing succesfully");
-					check = false;
-				}
-				// Set timeout to 45 seconds.
-				if (System.currentTimeMillis() - this.elapsed_time > 1000 * 45) {
-					check = false;
-					syncStatus = SYNC_ERROR;
-				}
 			}
 			return syncStatus == SYNC_DONE;
 		}

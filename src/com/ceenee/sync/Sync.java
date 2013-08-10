@@ -53,7 +53,8 @@ public class Sync {
 	protected String command; //The command we are going to send to the board.
 	protected String playerIp; //IP Address of the board
 	protected String syncTo; //Write the file to this location
-
+	protected boolean isSyncSuccessful; //Does the song syncing succesfully?
+	
 	/**
 	 * This listener will be invoked during syncing process.
 	 * This methd is chainable.
@@ -153,55 +154,78 @@ public class Sync {
 		this.command = command;
 		clientSocket = new Socket();
 	}
-
+	
+	/**
+	 * Start syncing process. Connect to the board. Send sign command and get response.
+	 * Parse this response. 
+	 * We will call multiple delegate method at this point.
+	 * 
+	 * @return
+	 */
 	public boolean start() {
+		this.isSyncSuccessful = false;
+		
 		if (!this.connect(playerIp)) {
-			this.onBookSyncListener.onSyncFail(new Exception(
-					"Cannot connect to the board"));
+			if (this.onBookSyncListener !=null) {
+				this.onBookSyncListener.onSyncFail(new Exception("Cannot connect to the board"));
+			}
+			return this.isSyncSuccessful;
 		}
 
 		try {
 			outToServer.writeChars(command);
 			MyLog.i("iCeeNee New sync song book ", "ReceiveXMLfilefromboard");
-			BufferedInputStream in = new BufferedInputStream(
-					clientSocket.getInputStream());
+			BufferedInputStream in = new BufferedInputStream(clientSocket.getInputStream());
 			// FileOutputStream fileout = new FileOutputStream();
-			this.onBookSyncListener.onReadyReceiveBook();
+			if (this.onBookSyncListener !=null) {
+				this.onBookSyncListener.onReadyReceiveBook();
+			}
 			byte[] bytebuffer = new byte[1024];
 			int bytesRead = 0;
 			
 			FileOutputStream songBookFileWriter = new FileOutputStream(syncTo);
 			MyLog.i("SYNC_WRITE_TO", syncTo);
-
-			this.onBookSyncListener.onProcessBook();			
+			
+			if (this.onBookSyncListener !=null) {
+				this.onBookSyncListener.onProcessBook();
+			}
+			String firstBlock = "";
 			while ((bytesRead = in.read(bytebuffer)) > 0) {
+				if (firstBlock == "") {
+					firstBlock = new String(bytebuffer, "UTF-8");
+					MyLog.i("SYNC: REMOTE", "This is the first block" + firstBlock);
+				}
 				songBookFileWriter.write(bytebuffer, 0, bytesRead);
 			}
 			songBookFileWriter.flush();
 			songBookFileWriter.close();
-			in.close();
-			MyLog.i("Sync Status: ", "SONG BOOK RETRIEVED");
-			if (this.onBookSyncListener !=null) {
-				this.onBookSyncListener.onReceivedBook(syncTo);
-			}
 			in.close();// also close socket
-			this.onBookSyncListener.onFinishSyncing();
-			clientSocket.close();	
+			
+			if (firstBlock.contains("error=\"1\"")) {
+				if (this.onBookSyncListener !=null) {
+					this.onBookSyncListener.onSyncFail(new Exception("No Song Book."));
+				}
+			} else {
+				MyLog.i("Sync Status: ", "SONG BOOK RETRIEVED");
+				if (this.onBookSyncListener !=null) {
+					this.onBookSyncListener.onReceivedBook(syncTo);
+					this.onBookSyncListener.onFinishSyncing();
+				}
+				this.isSyncSuccessful = true;
+			}
+			clientSocket.close();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			MyLog.e(TAG, "IOException: " + e.toString());
-			return false;
-			
-		} finally {
-			try {
-				clientSocket.close();	
-			} catch (Exception e) {
-				e.printStackTrace();
-				MyLog.e("SOCKET: ERROR", "Cannot close socket");
-			}				
 		}
-		
-		return false;
+		return this.isSyncSuccessful;
 	}
 
+	/**
+	 * @return true if last sync is successfully. 
+	 */
+	public boolean isSyncSuccessful() {
+		return this.isSyncSuccessful;
+	}
 }

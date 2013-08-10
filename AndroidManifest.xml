@@ -42,18 +42,18 @@
         android:theme="@style/AppTheme" 
         android:name="MyApp">
         
-	   <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
+	   	<receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
 		  <intent-filter>
 		    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 		    <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-		    <category android:name="com.ceenee.q" />
+		    <category android:name="com.ceenee.q.hd" />
 		  </intent-filter>
 		</receiver>
 	
 		<service android:name="com.ceenee.q.hd.GCMIntentService" />
 		
         <activity
-            android:name="com.ceenee.q.hd.MainActivity"            
+            android:name=".MainActivity"            
             android:label="@string/title_activity_main" 
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:configChanges="orientation|screenSize">

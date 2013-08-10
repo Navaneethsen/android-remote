@@ -17,7 +17,7 @@ import android.content.res.AssetManager;
 
 import com.ceenee.bento.Dumper;
 import com.ceenee.q.hd.SongActivity;
-
+import com.ceenee.sync.OnSyncListener;
 
 public class MyHttpServer extends NanoHTTPD {
 	public static final String MIME_JSON = "application/json";
@@ -28,16 +28,8 @@ public class MyHttpServer extends NanoHTTPD {
 	protected static int port;
 	InputStream in;
 	OutputStream out;
-	protected OnBookSyncListener onBookSyncListener;
+	protected OnSyncListener onBookSyncListener;
 	
-	public interface OnBookSyncListener {
-		public void onReadyReceiveBook();
-		public void onReceivedBook(String songbook);
-		public void onSyncFail(Exception e);
-		public void onFinishSyncing();
-		public void onProcessBook();
-	}
-
 	/**
 	 * We run a embedded web server on port 5320 for song book syncing. The
 	 * docroot of web server is homedirectory of app. So, we just prepare some document for it
@@ -127,7 +119,7 @@ public class MyHttpServer extends NanoHTTPD {
 		super(5320, new File("."));
 	}
 	
-	public void setOnBookSyncListener(OnBookSyncListener e) {
+	public void setOnBookSyncListener(OnSyncListener e) {
 		onBookSyncListener = e;
 	}
 
